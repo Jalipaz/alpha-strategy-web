@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "cta": "Comenzar"
+  },
+  "hero": {
+    "tagline": "Consultora Internacional",
+    "headline1": "No solo construimos marcas.",
+    "headline2": "Construimos oportunidades.",
+    "sub": "Estrategia empresarial, marketing digital y desarrollo profesional para impulsar un crecimiento real en mercados globales.",
+    "cta1": "Ver Servicios",
+    "cta2": "Hablar con un Experto"
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Un enfoque triple único que impulsa empresas y profesionales hacia el éxito internacional.",
+    "items": [
+      {
+        "icon": "BarChart3",
+        "title": "Estrategia & Consultoría",
+        "desc": "Diagnóstico empresarial, planes de crecimiento, internacionalización y optimización de modelos de negocio.",
+        "tags": ["Diagnóstico", "Planes de Crecimiento", "Internacionalización", "Optimización"]
+      },
+      {
+        "icon": "Megaphone",
+        "title": "Marketing Digital",
+        "desc": "Gestión de redes sociales, creación de contenido estratégico, branding premium, campañas Meta Ads y Google Ads.",
+        "tags": ["Redes Sociales", "Contenido", "Branding", "Pauta Digital"]
+      },
+      {
+        "icon": "Zap",
+        "title": "Automatización & Ventas",
+        "desc": "Automatización de agenda para clínicas, embudos de conversión, scripts de atención y captación de leads.",
+        "tags": ["Automatización", "Embudos", "Leads", "Scripts"]
+      },
+      {
+        "icon": "Globe",
+        "title": "Expansión Comercial",
+        "desc": "Estrategias B2B, entrada a mercados internacionales y alianzas estratégicas en Latinoamérica, EE.UU. y Europa.",
+        "tags": ["B2B", "Expansión", "Alianzas", "Nuevos Mercados"]
+      },
+      {
+        "icon": "GraduationCap",
+        "title": "Desarrollo Profesional",
+        "desc": "Consultoría de marca personal, optimización de LinkedIn, preparación para entrevistas y networking estratégico.",
+        "tags": ["Marca Personal", "LinkedIn", "Networking", "Coaching"]
+      },
+      {
+        "icon": "Languages",
+        "title": "Capacitación en Idiomas",
+        "desc": "Clases personalizadas de inglés con enfoque práctico en negocios, entrevistas y entornos internacionales.",
+        "tags": ["Inglés", "Inglés de Negocios", "Entrevistas", "Profesionales"]
+      }
+    ]
+  },
+  "about": {
+    "title": "Sobre Alpha Strategy Group",
+    "subtitle": "Más que una agencia. Un ecosistema de crecimiento global.",
+    "body": "Alpha Strategy Group es una consultora internacional con sede en Miami, con presencia en Latinoamérica, Estados Unidos y Europa. Nos especializamos en estrategia empresarial, marketing digital y desarrollo profesional — integrando tres dimensiones estratégicas para generar un crecimiento real y medible.",
+    "pillars": [
+      { "label": "Crecimiento Empresarial", "value": "Escala tu empresa en mercados globales" },
+      { "label": "Posicionamiento Digital", "value": "Construye una presencia de marca premium" },
+      { "label": "Desarrollo Profesional", "value": "Accede a oportunidades de alto nivel" }
+    ],
+    "methodology": {
+      "title": "Nuestra Metodología",
+      "steps": ["Diagnóstico", "Estrategia", "Ejecución", "Optimización", "Escalamiento"]
+    }
+  },
+  "contact": {
+    "title": "¿Listo para Crecer?",
+    "subtitle": "Construyamos tu próxima oportunidad juntos.",
+    "whatsapp": "Escríbenos por WhatsApp",
+    "form": {
+      "name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "company": "Empresa (opcional)",
+      "message": "¿Cómo podemos ayudarte?",
+      "submit": "Enviar Mensaje"
+    },
+    "info": {
+      "location": "Miami, Florida, EE.UU.",
+      "reach": "Latinoamérica · Estados Unidos · Europa"
+    }
+  },
+  "footer": {
+    "tagline": "No solo construimos marcas — construimos oportunidades.",
+    "rights": "Todos los derechos reservados."
+  }
+}

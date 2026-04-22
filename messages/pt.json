@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "about": "Sobre",
+    "contact": "Contato",
+    "cta": "Começar"
+  },
+  "hero": {
+    "tagline": "Consultoria Internacional",
+    "headline1": "Não apenas construímos marcas.",
+    "headline2": "Construímos oportunidades.",
+    "sub": "Estratégia empresarial, marketing digital e desenvolvimento profissional para impulsionar um crescimento real em mercados globais.",
+    "cta1": "Ver Serviços",
+    "cta2": "Falar com um Especialista"
+  },
+  "services": {
+    "title": "Nossos Serviços",
+    "subtitle": "Um foco triplo único que impulsiona empresas e profissionais rumo ao sucesso internacional.",
+    "items": [
+      {
+        "icon": "BarChart3",
+        "title": "Estratégia & Consultoria",
+        "desc": "Diagnóstico empresarial, planos de crescimento, internacionalização e otimização de modelos de negócio.",
+        "tags": ["Diagnóstico", "Planos de Crescimento", "Internacionalização", "Otimização"]
+      },
+      {
+        "icon": "Megaphone",
+        "title": "Marketing Digital",
+        "desc": "Gestão de redes sociais, criação de conteúdo estratégico, branding premium, campanhas Meta Ads e Google Ads.",
+        "tags": ["Redes Sociais", "Conteúdo", "Branding", "Anúncios"]
+      },
+      {
+        "icon": "Zap",
+        "title": "Automação & Vendas",
+        "desc": "Automação de agenda para clínicas, funis de conversão, scripts de atendimento e captação de leads.",
+        "tags": ["Automação", "Funis", "Leads", "Scripts"]
+      },
+      {
+        "icon": "Globe",
+        "title": "Expansão Comercial",
+        "desc": "Estratégias B2B, entrada em mercados internacionais e parcerias estratégicas na América Latina, EUA e Europa.",
+        "tags": ["B2B", "Expansão", "Parcerias", "Novos Mercados"]
+      },
+      {
+        "icon": "GraduationCap",
+        "title": "Desenvolvimento Profissional",
+        "desc": "Consultoria de marca pessoal, otimização de LinkedIn, preparação para entrevistas e networking estratégico.",
+        "tags": ["Marca Pessoal", "LinkedIn", "Networking", "Coaching"]
+      },
+      {
+        "icon": "Languages",
+        "title": "Treinamento em Idiomas",
+        "desc": "Aulas personalizadas de inglês com foco prático em negócios, entrevistas e ambientes internacionais.",
+        "tags": ["Inglês", "Inglês para Negócios", "Entrevistas", "Profissionais"]
+      }
+    ]
+  },
+  "about": {
+    "title": "Sobre a Alpha Strategy Group",
+    "subtitle": "Mais do que uma agência. Um ecossistema de crescimento global.",
+    "body": "A Alpha Strategy Group é uma consultoria internacional sediada em Miami, com presença na América Latina, nos Estados Unidos e na Europa. Somos especializados em estratégia empresarial, marketing digital e desenvolvimento profissional — integrando três dimensões estratégicas para gerar crescimento real e mensurável.",
+    "pillars": [
+      { "label": "Crescimento Empresarial", "value": "Escale sua empresa em mercados globais" },
+      { "label": "Posicionamento Digital", "value": "Construa uma presença de marca premium" },
+      { "label": "Desenvolvimento Profissional", "value": "Acesse oportunidades de alto nível" }
+    ],
+    "methodology": {
+      "title": "Nossa Metodologia",
+      "steps": ["Diagnóstico", "Estratégia", "Execução", "Otimização", "Escalamento"]
+    }
+  },
+  "contact": {
+    "title": "Pronto para Crescer?",
+    "subtitle": "Vamos construir sua próxima oportunidade juntos.",
+    "whatsapp": "Fale conosco pelo WhatsApp",
+    "form": {
+      "name": "Nome Completo",
+      "email": "Endereço de E-mail",
+      "company": "Empresa (opcional)",
+      "message": "Como podemos ajudá-lo?",
+      "submit": "Enviar Mensagem"
+    },
+    "info": {
+      "location": "Miami, Florida, EUA",
+      "reach": "América Latina · Estados Unidos · Europa"
+    }
+  },
+  "footer": {
+    "tagline": "Não apenas construímos marcas — construímos oportunidades.",
+    "rights": "Todos os direitos reservados."
+  }
+}

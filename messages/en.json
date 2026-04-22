@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Get Started"
+  },
+  "hero": {
+    "tagline": "International Consulting Firm",
+    "headline1": "We Don't Just Build Brands.",
+    "headline2": "We Build Opportunities.",
+    "sub": "Business strategy, digital marketing, and professional development to drive measurable growth in global markets.",
+    "cta1": "Explore Services",
+    "cta2": "Talk to an Expert"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "A unique triple focus that powers businesses and professionals toward global success.",
+    "items": [
+      {
+        "icon": "BarChart3",
+        "title": "Strategy & Consulting",
+        "desc": "Business diagnostics, growth plans, international expansion, and business model optimization.",
+        "tags": ["Diagnosis", "Growth Plans", "Internationalization", "Optimization"]
+      },
+      {
+        "icon": "Megaphone",
+        "title": "Digital Marketing",
+        "desc": "Social media management, strategic content creation, premium branding, Meta Ads and Google Ads campaigns.",
+        "tags": ["Social Media", "Content", "Branding", "Paid Ads"]
+      },
+      {
+        "icon": "Zap",
+        "title": "Automation & Sales",
+        "desc": "Appointment automation for clinics, conversion funnels, customer service scripts, and lead generation.",
+        "tags": ["Automation", "Funnels", "Lead Gen", "Scripts"]
+      },
+      {
+        "icon": "Globe",
+        "title": "Business Expansion",
+        "desc": "B2B strategies, international market entry, strategic partnerships across Latin America, US, and Europe.",
+        "tags": ["B2B", "Expansion", "Partnerships", "Market Entry"]
+      },
+      {
+        "icon": "GraduationCap",
+        "title": "Professional Development",
+        "desc": "Personal branding consulting, LinkedIn optimization, interview preparation, and strategic networking.",
+        "tags": ["Personal Brand", "LinkedIn", "Networking", "Coaching"]
+      },
+      {
+        "icon": "Languages",
+        "title": "Language Training",
+        "desc": "Personalized English classes with a practical focus on business, interviews, and international environments.",
+        "tags": ["English", "Business English", "Interviews", "Professionals"]
+      }
+    ]
+  },
+  "about": {
+    "title": "About Alpha Strategy Group",
+    "subtitle": "More than an agency. A global growth ecosystem.",
+    "body": "Alpha Strategy Group is an international consulting firm headquartered in Miami, with presence across Latin America, the United States, and Europe. We specialize in business strategy, digital marketing, and professional development — integrating three strategic dimensions to drive real, measurable growth.",
+    "pillars": [
+      { "label": "Business Growth", "value": "Scale your company in global markets" },
+      { "label": "Digital Positioning", "value": "Build a premium brand presence online" },
+      { "label": "Professional Development", "value": "Unlock high-level career opportunities" }
+    ],
+    "methodology": {
+      "title": "Our Methodology",
+      "steps": ["Diagnosis", "Strategy", "Execution", "Optimization", "Scaling"]
+    }
+  },
+  "contact": {
+    "title": "Ready to Grow?",
+    "subtitle": "Let's build your next opportunity together.",
+    "whatsapp": "Message us on WhatsApp",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "company": "Company (optional)",
+      "message": "How can we help you?",
+      "submit": "Send Message"
+    },
+    "info": {
+      "location": "Miami, Florida, USA",
+      "reach": "Latin America · United States · Europe"
+    }
+  },
+  "footer": {
+    "tagline": "We don't just build brands — we build opportunities.",
+    "rights": "All rights reserved."
+  }
+}

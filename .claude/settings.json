@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npx.cmd\" skills add remotion-dev/skills 2>&1)",
+      "Read(//c/Program Files/nodejs/**)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; & \"C:\\\\Program Files\\\\nodejs\\\\npx.cmd\" skills add remotion-dev/skills 2>&1)",
+      "Read(//c/Users/alipa/AppData/Local/Temp/claude/c--Users-alipa-alpha-strategy-web/b513744b-d963-4710-95af-8cea5240acf3/tasks/**)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; & \"C:\\\\Program Files\\\\nodejs\\\\npx.cmd\" skills add remotion-dev/skills -y -g 2>&1)",
+      "Read(//c/Users/alipa/.claude/plugins/cache/marketingskills/marketing-skills/9125d8216e38/skills/__TRACKED_VAR__/**)",
+      "mcp__canva__list-brand-kits",
+      "mcp__canva__generate-design",
+      "mcp__canva__create-design-from-candidate",
+      "mcp__canva__search-designs",
+      "mcp__canva__create-folder",
+      "mcp__canva__move-item-to-folder",
+      "Bash(npx skills *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('link'\\) || k.toLowerCase\\(\\).includes\\('share'\\) || k.toLowerCase\\(\\).includes\\('social'\\)\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\alipa\\alpha-strategy-web\\resultados\\social"
+    ]
+  }
+}

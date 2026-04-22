@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import pptx; print\\('pptx available'\\)\")",
+      "Bash(py --version)",
+      "PowerShell(& \"C:\\\\Users\\\\alipa\\\\improve_pptx.ps1\" 2>&1)",
+      "WebSearch"
+    ]
+  }
+}

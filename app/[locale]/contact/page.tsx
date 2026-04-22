@@ -2,26 +2,47 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin, Globe, MessageCircle, Send, CheckCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID = 'service_lz1to1c';
+const EMAILJS_TEMPLATE_ID = 'template_pz0x5k8';
+const EMAILJS_PUBLIC_KEY = '7Ls4seAxfJtuDhr8O';
 
 export default function ContactPage() {
   const t = useTranslations('contact');
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [focused, setFocused] = useState<string | null>(null);
+
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `Hello Alpha Strategy Group!\n\nName: ${form.name}\nEmail: ${form.email}${form.company ? `\nCompany: ${form.company}` : ''}\n\n${form.message}`
-    );
-    window.open(`https://wa.me/1XXXXXXXXXX?text=${msg}`, '_blank');
-    setSent(true);
+    setSending(true);
+    setError('');
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: form.name,
+        email: form.email,
+        company: form.company || 'N/A',
+        message: form.message,
+      });
+      setSent(true);
+    } catch {
+      setError('Something went wrong. Please try again or contact us via WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   }
 
   const inputStyle = (name: string): React.CSSProperties => ({
@@ -170,25 +191,29 @@ export default function ContactPage() {
                     onBlur={() => setFocused(null)}
                   />
                 </div>
+                {error && (
+                  <p style={{ color: '#FF6B35', fontSize: '14px', textAlign: 'center' }}>{error}</p>
+                )}
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={sending}
+                  whileHover={{ scale: sending ? 1 : 1.02 }}
+                  whileTap={{ scale: sending ? 1 : 0.98 }}
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-                    background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
+                    background: sending ? 'rgba(255,107,53,0.5)' : 'linear-gradient(135deg, #FF6B35, #E91E8C)',
                     color: '#fff',
                     padding: '16px 32px',
                     borderRadius: '10px',
                     fontWeight: 700,
                     fontSize: '16px',
                     border: 'none',
-                    cursor: 'pointer',
+                    cursor: sending ? 'not-allowed' : 'pointer',
                     width: '100%',
                     boxShadow: '0 8px 24px rgba(255,107,53,0.3)',
                   }}
                 >
-                  <Send size={18} /> {t('form.submit')}
+                  <Send size={18} /> {sending ? 'Sending...' : t('form.submit')}
                 </motion.button>
               </form>
             )}

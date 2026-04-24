@@ -7,7 +7,7 @@ import { MapPin, Globe, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const EMAILJS_SERVICE_ID = 'service_2y5hqth';
-const EMAILJS_TEMPLATE_ID = 'template_pz0x5k8';
+const EMAILJS_TEMPLATE_ID = 'template_otmekli';
 const EMAILJS_PUBLIC_KEY = '7Ls4seAxfJtuDhr8O';
 
 export default function ContactPage() {

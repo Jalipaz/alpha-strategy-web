@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 
-const WA_NUMBER = '1XXXXXXXXXX'; // TODO: replace with real number
+const WA_NUMBER = '59175025505';
 
 export default function FloatingWhatsApp() {
   const [expanded, setExpanded] = useState(false);

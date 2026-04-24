@@ -551,7 +551,7 @@ export default function HomePage() {
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <a
-                href="https://wa.me/1XXXXXXXXXX"
+                href="https://wa.me/59175025505"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

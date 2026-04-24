@@ -229,7 +229,7 @@ export default function ContactPage() {
           >
             {/* WhatsApp */}
             <motion.a
-              href="https://wa.me/1XXXXXXXXXX"
+              href="https://wa.me/59175025505"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4, boxShadow: '0 12px 32px rgba(37,211,102,0.2)' }}

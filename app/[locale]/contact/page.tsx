@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { MapPin, Globe, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
-const EMAILJS_SERVICE_ID = 'service_lz1to1c';
+const EMAILJS_SERVICE_ID = 'service_2y5hqth';
 const EMAILJS_TEMPLATE_ID = 'template_pz0x5k8';
 const EMAILJS_PUBLIC_KEY = '7Ls4seAxfJtuDhr8O';
 
@@ -38,7 +38,8 @@ export default function ContactPage() {
         message: form.message,
       });
       setSent(true);
-    } catch {
+    } catch (err) {
+      console.error('EmailJS error:', err);
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
       setSending(false);

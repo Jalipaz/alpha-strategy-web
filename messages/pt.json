@@ -86,6 +86,21 @@
       "reach": "América Latina · Estados Unidos · Europa"
     }
   },
+  "webDesign": {
+    "badge": "Design & Desenvolvimento Web",
+    "title": "Criamos o Seu Site",
+    "subtitle": "Profissional, rápido e projetado para converter — sua marca merece um site que trabalhe tão duro quanto você.",
+    "features": [
+      { "title": "Design Personalizado", "desc": "Visual único alinhado à identidade da sua marca." },
+      { "title": "Mobile-First", "desc": "Perfeito em qualquer dispositivo — celular, tablet e desktop." },
+      { "title": "SEO Otimizado", "desc": "Estrutura amigável ao Google desde o primeiro dia." },
+      { "title": "Rápido e Seguro", "desc": "Carregamento ultrarrápido e certificado SSL incluído." },
+      { "title": "Fácil de Gerenciar", "desc": "Painel de administração simples para você manter o controle." },
+      { "title": "Multilíngue", "desc": "Inglês, Espanhol e Português — falamos o seu mercado." }
+    ],
+    "cta": "Quero Meu Site",
+    "types": ["Landing Pages", "Sites Corporativos", "E-Commerce", "Portfólios", "Sistemas de Agendamento"]
+  },
   "footer": {
     "tagline": "Não apenas construímos marcas — construímos oportunidades.",
     "rights": "Todos os direitos reservados."

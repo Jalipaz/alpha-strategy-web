@@ -86,6 +86,21 @@
       "reach": "Latin America · United States · Europe"
     }
   },
+  "webDesign": {
+    "badge": "Web Design & Development",
+    "title": "We Build Your Website",
+    "subtitle": "Professional, fast, and built to convert — your brand deserves a site that works as hard as you do.",
+    "features": [
+      { "title": "Custom Design", "desc": "Unique look and feel tailored to your brand identity." },
+      { "title": "Mobile-First", "desc": "Flawless on every screen — phone, tablet, and desktop." },
+      { "title": "SEO-Optimized", "desc": "Built to rank. Google-friendly structure from day one." },
+      { "title": "Fast & Secure", "desc": "Lightning load times and SSL encryption included." },
+      { "title": "Easy to Manage", "desc": "Simple admin panel so you stay in control." },
+      { "title": "Bilingual Ready", "desc": "English, Spanish, and Portuguese — we speak your market." }
+    ],
+    "cta": "Get Your Website",
+    "types": ["Landing Pages", "Corporate Sites", "E-Commerce", "Portfolios", "Booking Systems"]
+  },
   "footer": {
     "tagline": "We don't just build brands — we build opportunities.",
     "rights": "All rights reserved."

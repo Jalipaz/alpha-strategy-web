@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Strategy Group — Proposta Comercial Brasil 2026</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #09111f;
+      --bg2:        #0f1d30;
+      --navy:       #152842;
+      --gold:       #D4AF37;
+      --gold-light: #F0C840;
+      --gold-dim:   rgba(212,175,55,0.18);
+      --white:      #EDF2FA;
+      --muted:      #8A9BBE;
+      --accent:     #2563EB;
+      --grad-gold:  linear-gradient(135deg, #D4AF37, #F0C840);
+      --grad-navy:  linear-gradient(135deg, #09111f, #152842);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
+
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--grad-gold); transition: width 0.35s ease; z-index: 9999; }
+
+    .slide-deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    @media (min-width: 769px) {
+      .slide-deck { max-width: calc(100vh * 16 / 9); max-height: calc(100vw * 9 / 16); margin: auto; position: absolute; inset: 0; }
+    }
+
+    .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 56px 72px; opacity: 0; visibility: hidden; transition: opacity 0.4s ease; background: var(--bg); overflow: hidden; }
+    .slide.active { opacity: 1; visibility: visible; }
+    .slide-content { width: 100%; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; overflow: hidden; }
+
+    .nav-controls { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 18px; z-index: 9999; background: rgba(9,17,31,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.2); padding: 8px 20px; border-radius: 40px; }
+    .nav-btn { background: var(--gold-dim); border: 1px solid rgba(212,175,55,0.3); color: var(--gold); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px; transition: all 0.2s; }
+    .nav-btn:hover { background: var(--gold); color: var(--bg); }
+    .slide-counter { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+
+    .slide-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); opacity: 0.85; }
+    .slide-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(30px, 5vw, 64px); font-weight: 700; line-height: 1.1; background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .slide-subtitle { font-size: clamp(14px, 1.8vw, 20px); color: var(--muted); font-weight: 400; line-height: 1.55; max-width: 720px; text-align: center; }
+    h2.section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px, 3.5vw, 42px); font-weight: 700; line-height: 1.15; color: var(--white); }
+    h2.section-title span { color: var(--gold); }
+
+    .gold-line { width: 56px; height: 3px; background: var(--grad-gold); border-radius: 2px; }
+
+    .card { background: var(--bg2); border: 1px solid rgba(212,175,55,0.15); border-radius: 14px; padding: 24px 28px; transition: border-color 0.2s; }
+    .card:hover { border-color: rgba(212,175,55,0.45); }
+    .card-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .card-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(13px, 1.5vw, 17px); font-weight: 600; color: var(--white); margin-bottom: 6px; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; width: 100%; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; width: 100%; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; width: 100%; }
+
+    .pain-quote { border-left: 3px solid var(--gold); padding: 10px 18px; background: rgba(212,175,55,0.06); border-radius: 0 8px 8px 0; font-size: clamp(13px, 1.4vw, 16px); color: var(--white); font-style: italic; line-height: 1.5; }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
+
+    .deliverable-list { list-style: none; width: 100%; display: flex; flex-direction: column; gap: 8px; }
+    .deliverable-list li { display: flex; align-items: flex-start; gap: 10px; font-size: clamp(12px, 1.3vw, 15px); color: var(--white); line-height: 1.45; }
+    .deliverable-list li::before { content: '✦'; color: var(--gold); font-size: 10px; margin-top: 3px; flex-shrink: 0; }
+
+    .price-tag { display: inline-block; background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family: 'Space Grotesk', sans-serif; font-size: clamp(18px, 2.2vw, 26px); font-weight: 700; }
+
+    .tier-card { background: var(--bg2); border: 1px solid rgba(212,175,55,0.15); border-radius: 16px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+    .tier-card.popular { border-color: var(--gold); transform: scale(1.04); }
+    .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--grad-gold); color: var(--bg); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 12px; border-radius: 20px; }
+    .tier-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(13px, 1.5vw, 17px); font-weight: 600; color: var(--white); }
+    .tier-price { font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 2.5vw, 30px); font-weight: 700; background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tier-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .tier-list li { font-size: clamp(10px, 1.1vw, 13px); color: var(--muted); display: flex; gap: 7px; align-items: flex-start; line-height: 1.4; }
+    .tier-list li::before { content: '•'; color: var(--gold); flex-shrink: 0; }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; width: 100%; align-items: start; }
+    .split-left { display: flex; flex-direction: column; gap: 16px; }
+    .split-right { display: flex; flex-direction: column; gap: 12px; }
+
+    .diff-table { width: 100%; border-collapse: collapse; }
+    .diff-table th { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 8px 14px; text-align: left; border-bottom: 1px solid rgba(212,175,55,0.2); }
+    .diff-table td { font-size: clamp(11px, 1.2vw, 14px); color: var(--white); padding: 10px 14px; line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .diff-table tr:hover td { background: rgba(212,175,55,0.04); }
+    .check { color: var(--gold); font-weight: 700; }
+    .cross { color: #4A5568; }
+
+    .cta-btn { display: inline-block; background: var(--grad-gold); color: var(--bg); font-family: 'Space Grotesk', sans-serif; font-size: clamp(14px, 1.6vw, 18px); font-weight: 700; padding: 14px 40px; border-radius: 50px; cursor: pointer; border: none; transition: opacity 0.2s; }
+    .cta-btn:hover { opacity: 0.88; }
+
+    .steps { display: flex; gap: 20px; width: 100%; }
+    .step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+    .step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--gold-dim); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--gold); }
+    .step-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(12px, 1.4vw, 16px); font-weight: 600; color: var(--white); }
+    .step-body { font-size: clamp(10px, 1.1vw, 13px); color: var(--muted); line-height: 1.5; }
+
+    .contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; width: 100%; }
+    .contact-card { background: var(--bg2); border: 1px solid rgba(212,175,55,0.2); border-radius: 14px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+    .contact-icon { font-size: 32px; }
+    .contact-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .contact-value { font-size: clamp(12px, 1.3vw, 15px); color: var(--white); }
+
+    .bg-circle { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%); pointer-events: none; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.93); } to { opacity: 1; transform: scale(1); } }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 24px rgba(212,175,55,0.25); } 50% { box-shadow: 0 0 48px rgba(212,175,55,0.55); } }
+    .slide.active .anim-fade-up  { animation: fadeUp  0.6s ease-out forwards; }
+    .slide.active .anim-scale    { animation: scaleIn 0.5s ease-out forwards; }
+    .slide.active .anim-delay-1  { animation-delay: 0.1s;  opacity: 0; }
+    .slide.active .anim-delay-2  { animation-delay: 0.22s; opacity: 0; }
+    .slide.active .anim-delay-3  { animation-delay: 0.34s; opacity: 0; }
+    .slide.active .anim-delay-4  { animation-delay: 0.46s; opacity: 0; }
+    .slide.active .anim-delay-5  { animation-delay: 0.58s; opacity: 0; }
+
+    @media (max-width: 768px) {
+      .slide { padding: 32px 24px; }
+      .grid-3, .grid-4 { grid-template-columns: repeat(2,1fr); }
+      .split, .grid-2, .pain-grid, .contact-grid { grid-template-columns: 1fr; gap: 14px; }
+      .steps { flex-direction: column; gap: 14px; }
+      .tier-card.popular { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="slide-deck">
+
+  <!-- SLIDE 1 — CAPA -->
+  <div class="slide active" style="background: radial-gradient(ellipse at 30% 50%, rgba(21,40,66,0.9) 0%, var(--bg) 65%);">
+    <div class="bg-circle" style="width:600px;height:600px;top:-150px;right:-180px;"></div>
+    <div class="bg-circle" style="width:350px;height:350px;bottom:-80px;left:-80px;"></div>
+    <div class="slide-content" style="gap:28px;text-align:center;">
+      <p class="slide-label anim-fade-up anim-delay-1">Proposta Comercial · Brasil 2026</p>
+      <h1 class="slide-title anim-fade-up anim-delay-2" style="font-size:clamp(38px,7vw,80px);">
+        Alpha Strategy<br/>Group
+      </h1>
+      <div class="gold-line anim-fade-up anim-delay-3" style="width:80px;"></div>
+      <p class="slide-subtitle anim-fade-up anim-delay-4">
+        Estratégia · Marketing Digital B2B · Empregabilidade<br/>
+        <span style="color:var(--gold);">Resultados reais para empresas e profissionais brasileiros</span>
+      </p>
+      <div class="anim-fade-up anim-delay-5" style="display:flex;gap:24px;justify-content:center;margin-top:10px;flex-wrap:wrap;">
+        <span style="font-size:12px;color:var(--muted);letter-spacing:1.5px;">🇺🇸 Sede nos EUA</span>
+        <span style="color:rgba(212,175,55,0.3);">|</span>
+        <span style="font-size:12px;color:var(--muted);letter-spacing:1.5px;">🌎 Bilingue EN / ES</span>
+        <span style="color:rgba(212,175,55,0.3);">|</span>
+        <span style="font-size:12px;color:var(--muted);letter-spacing:1.5px;">🚀 Expansão Internacional</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — QUEM SOMOS -->
+  <div class="slide">
+    <div class="slide-content" style="gap:24px;">
+      <p class="slide-label anim-fade-up anim-delay-1">Nossa Identidade</p>
+      <h2 class="section-title anim-fade-up anim-delay-2">Quem <span>Somos</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <div class="split anim-fade-up anim-delay-3">
+        <div class="split-left">
+          <p style="font-size:clamp(13px,1.4vw,16px);color:var(--muted);line-height:1.7;">
+            Somos uma agência de consultoria e marketing estratégico com sede nos
+            <strong style="color:var(--white);">Estados Unidos</strong>,
+            com atuação ativa no Brasil, Espanha e LATAM.
+            <br/><br/>
+            Ajudamos empresas e profissionais a crescerem com
+            <strong style="color:var(--gold);">estratégia, execução digital e formação profissional</strong>
+            — tudo integrado, com total responsabilidade pelos resultados.
+          </p>
+          <div style="display:flex;gap:20px;margin-top:4px;">
+            <div style="text-align:center;">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3</div>
+              <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Mercados</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">2</div>
+              <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Idiomas</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;background:var(--grad-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5+</div>
+              <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Serviços</div>
+            </div>
+          </div>
+        </div>
+        <div class="split-right">
+          <div class="card" style="padding:18px 22px;">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;">🎯 Missão</div>
+            <p style="font-size:clamp(12px,1.2vw,14px);color:var(--muted);line-height:1.5;">Ajudar pequenas empresas e profissionais a crescerem operacional e comercialmente com estratégia real e resultados mensuráveis.</p>
+          </div>
+          <div class="card" style="padding:18px 22px;">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;">💡 Valores</div>
+            <p style="font-size:clamp(12px,1.2vw,14px);color:var(--white);">
+              <strong style="color:var(--gold-light);">Responsabilidade</strong> · Entregamos o que prometemos.<br/>
+              <strong style="color:var(--gold-light);">Dedicação</strong> · Comprometimento total com seus resultados.
+            </p>
+          </div>
+          <div class="card" style="padding:18px 22px;">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;">⭐ Posicionamento</div>
+            <p style="font-size:clamp(12px,1.2vw,14px);color:var(--muted);">Autoridade · Crescimento · Confiança · Resultados</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — O DESAFIO (PAS) -->
+  <div class="slide" style="background: radial-gradient(ellipse at 70% 30%, rgba(37,99,235,0.06) 0%, var(--bg) 60%);">
+    <div class="slide-content" style="gap:22px;">
+      <p class="slide-label anim-fade-up anim-delay-1">O Mercado Brasileiro</p>
+      <h2 class="section-title anim-fade-up anim-delay-2">O desafio das <span>empresas brasileiras</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <p class="slide-subtitle anim-fade-up anim-delay-3" style="margin-bottom:4px;">
+        O Brasil tem mais de 20 milhões de empresas ativas. Mas crescer de forma consistente no digital ainda é um desafio para a maioria.
+      </p>
+      <div class="pain-grid anim-fade-up anim-delay-4">
+        <div class="pain-quote">"Trabalho muito, mas meu negócio não avança."</div>
+        <div class="pain-quote">"Tenho Instagram, mas não converte em clientes."</div>
+        <div class="pain-quote">"Quero crescer no LinkedIn, mas não sei por onde começar."</div>
+        <div class="pain-quote">"Preciso internacionalizar, mas parece impossível."</div>
+      </div>
+      <div class="anim-fade-up anim-delay-5" style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:12px;padding:16px 24px;text-align:center;width:100%;">
+        <p style="font-size:clamp(13px,1.5vw,17px);color:var(--white);line-height:1.5;">
+          <strong style="color:var(--gold);">A solução não é trabalhar mais —</strong> é ter a estratégia certa, a execução adequada e um parceiro que responde pelos seus resultados.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — SERVIÇOS OVERVIEW -->
+  <div class="slide">
+    <div class="slide-content" style="gap:22px;">
+      <p class="slide-label anim-fade-up anim-delay-1">Portfólio</p>
+      <h2 class="section-title anim-fade-up anim-delay-2">Nossos serviços para o <span>Brasil</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <div class="grid-4 anim-fade-up anim-delay-3">
+        <div class="card" style="text-align:center;padding:22px 16px;">
+          <span class="card-icon">📱</span>
+          <div class="card-title">Marketing Digital B2B</div>
+          <div style="font-size:clamp(11px,1.1vw,13px);color:var(--gold);font-weight:600;margin-top:8px;">$300–$900 USD/mês</div>
+        </div>
+        <div class="card" style="text-align:center;padding:22px 16px;">
+          <span class="card-icon">💼</span>
+          <div class="card-title">Mentoria de Empregabilidade</div>
+          <div style="font-size:clamp(11px,1.1vw,13px);color:var(--gold);font-weight:600;margin-top:8px;">$100–$400 USD</div>
+        </div>
+        <div class="card" style="text-align:center;padding:22px 16px;">
+          <span class="card-icon">🧠</span>
+          <div class="card-title">Consultoria Estratégica</div>
+          <div style="font-size:clamp(11px,1.1vw,13px);color:var(--gold);font-weight:600;margin-top:8px;">a partir de $1,000 USD</div>
+        </div>
+        <div class="card" style="text-align:center;padding:22px 16px;">
+          <span class="card-icon">🗣️</span>
+          <div class="card-title">Formação em Idiomas</div>
+          <div style="font-size:clamp(11px,1.1vw,13px);color:var(--gold);font-weight:600;margin-top:8px;">a partir de $100 USD</div>
+        </div>
+      </div>
+      <p class="slide-subtitle anim-fade-up anim-delay-4" style="font-size:clamp(12px,1.3vw,15px);">
+        Cada serviço pode ser contratado individualmente ou como <strong style="color:var(--gold);">sistema integrado de crescimento</strong>. Flexibilidade total: por hora, por projeto ou mensalidade.
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — MARKETING DIGITAL B2B -->
+  <div class="slide">
+    <div class="slide-content" style="gap:18px;">
+      <div style="display:flex;align-items:center;gap:14px;align-self:flex-start;">
+        <span style="font-size:32px;">📱</span>
+        <div>
+          <p class="slide-label anim-fade-up anim-delay-1">Serviço #1</p>
+          <h2 class="section-title anim-fade-up anim-delay-2" style="font-size:clamp(20px,3vw,36px);">Marketing Digital <span>B2B</span></h2>
+        </div>
+      </div>
+      <div class="split anim-fade-up anim-delay-3" style="gap:32px;">
+        <div>
+          <p style="font-size:clamp(12px,1.3vw,15px);color:var(--muted);line-height:1.65;margin-bottom:16px;">
+            Gestão completa da sua presença digital com foco em geração de leads qualificados. Instagram, LinkedIn e Meta Ads gerenciados por especialistas — com relatórios claros e metas definidas.
+          </p>
+          <ul class="deliverable-list">
+            <li>Gestão de Instagram + LinkedIn</li>
+            <li>12–16 posts por mês (conteúdo estratégico)</li>
+            <li>Gestão de Meta Ads (a partir do tier $800)</li>
+            <li>Relatório quinzenal de resultados</li>
+            <li>Estratégia de captação de leads</li>
+            <li>Otimização contínua de campanhas</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card" style="padding:20px 22px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Investimento Mensal</div>
+            <div class="price-tag">$300 – $900 USD/mês</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">Até $1,500 USD para empresas médias com ads</div>
+          </div>
+          <div class="card" style="padding:18px 22px;">
+            <div style="font-size:12px;color:var(--gold);font-weight:600;margin-bottom:8px;">Para quem é?</div>
+            <ul class="deliverable-list">
+              <li>Empresas B2B com 1–50 colaboradores</li>
+              <li>Negócios sem equipe de marketing interna</li>
+              <li>Empresas que querem gerar leads de forma previsível</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 — MENTORIA DE EMPREGABILIDADE -->
+  <div class="slide" style="background: radial-gradient(ellipse at 20% 60%, rgba(37,99,235,0.08) 0%, var(--bg) 55%);">
+    <div class="slide-content" style="gap:18px;">
+      <div style="display:flex;align-items:center;gap:14px;align-self:flex-start;">
+        <span style="font-size:32px;">💼</span>
+        <div>
+          <p class="slide-label anim-fade-up anim-delay-1">Serviço #2</p>
+          <h2 class="section-title anim-fade-up anim-delay-2" style="font-size:clamp(20px,3vw,36px);">Mentoria de <span>Empregabilidade</span></h2>
+        </div>
+      </div>
+      <div class="split anim-fade-up anim-delay-3" style="gap:32px;">
+        <div>
+          <p style="font-size:clamp(12px,1.3vw,15px);color:var(--muted);line-height:1.65;margin-bottom:16px;">
+            Posicionamento profissional para quem quer se destacar no mercado de trabalho — seja no Brasil, na América Latina ou internacionalmente. Marca pessoal forte, LinkedIn otimizado e entrevistas dominadas.
+          </p>
+          <ul class="deliverable-list">
+            <li>Otimização de LinkedIn e currículo</li>
+            <li>2–3 sessões de preparação para entrevistas</li>
+            <li>Estratégia de posicionamento profissional</li>
+            <li>Orientação para expansão internacional (se aplicável)</li>
+            <li>Plano de networking personalizado</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card" style="padding:20px 22px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Investimento</div>
+            <div class="price-tag">$100 – $400 USD</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">Conforme nível de personalização</div>
+          </div>
+          <div class="card" style="padding:18px 22px;border-color:rgba(212,175,55,0.35);">
+            <div style="font-size:12px;color:var(--gold);font-weight:700;margin-bottom:8px;">🌎 Diferencial único</div>
+            <p style="font-size:clamp(11px,1.2vw,14px);color:var(--muted);line-height:1.55;">
+              Nosso time opera nos EUA e conhece o mercado internacional de dentro — podemos preparar você para oportunidades no Brasil, LATAM e além.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 — CONSULTORIA ESTRATÉGICA -->
+  <div class="slide">
+    <div class="slide-content" style="gap:18px;">
+      <div style="display:flex;align-items:center;gap:14px;align-self:flex-start;">
+        <span style="font-size:32px;">🧠</span>
+        <div>
+          <p class="slide-label anim-fade-up anim-delay-1">Serviço #3</p>
+          <h2 class="section-title anim-fade-up anim-delay-2" style="font-size:clamp(20px,3vw,36px);">Consultoria <span>Estratégica</span></h2>
+        </div>
+      </div>
+      <div class="split anim-fade-up anim-delay-3" style="gap:32px;">
+        <div>
+          <p style="font-size:clamp(12px,1.3vw,15px);color:var(--muted);line-height:1.65;margin-bottom:16px;">
+            Diagnóstico empresarial completo e plano de ação com KPIs claros. Ideal para empresas que querem crescer de forma estruturada ou se preparar para expansão internacional.
+          </p>
+          <ul class="deliverable-list">
+            <li>Diagnóstico empresarial completo</li>
+            <li>Identificação de problemas e oportunidades</li>
+            <li>Plano de ação com KPIs e prazos</li>
+            <li>Preparação para expansão internacional (se aplicável)</li>
+            <li>Suporte por e-mail entre sessões</li>
+            <li>Relatório executivo final</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card" style="padding:20px 22px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Investimento</div>
+            <div class="price-tag">a partir de $1,000 USD</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">Escala conforme escopo do projeto</div>
+          </div>
+          <div class="card" style="padding:18px 22px;">
+            <div style="font-size:12px;color:var(--gold);font-weight:600;margin-bottom:8px;">Para quem é?</div>
+            <ul class="deliverable-list">
+              <li>Empresas com receita mas sem sistemas claros</li>
+              <li>Negócios que querem se expandir para EUA ou Europa</li>
+              <li>Empreendedores que precisam de direção estratégica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 — FORMAÇÃO EM IDIOMAS -->
+  <div class="slide">
+    <div class="slide-content" style="gap:18px;">
+      <div style="display:flex;align-items:center;gap:14px;align-self:flex-start;">
+        <span style="font-size:32px;">🗣️</span>
+        <div>
+          <p class="slide-label anim-fade-up anim-delay-1">Serviço #4</p>
+          <h2 class="section-title anim-fade-up anim-delay-2" style="font-size:clamp(20px,3vw,36px);">Formação em <span>Idiomas</span></h2>
+        </div>
+      </div>
+      <p class="slide-subtitle anim-fade-up anim-delay-3" style="text-align:left;font-size:clamp(12px,1.3vw,15px);">
+        Inglês e espanhol profissional para o mercado de trabalho global. Três níveis adaptados ao seu objetivo e ritmo.
+      </p>
+      <div class="grid-3 anim-fade-up anim-delay-4">
+        <div class="tier-card">
+          <div class="tier-name">Básico</div>
+          <div class="tier-price">$100 – $150 USD</div>
+          <ul class="tier-list">
+            <li>Avaliação de nível inicial</li>
+            <li>8–10 sessões de 60 min</li>
+            <li>Material de estudo digital</li>
+            <li>Gramática, vocabulário e conversação básica</li>
+            <li>Certificado de conclusão</li>
+          </ul>
+        </div>
+        <div class="tier-card popular">
+          <div class="popular-badge">MAIS POPULAR</div>
+          <div class="tier-name">Intermediário</div>
+          <div class="tier-price">$120 – $220 USD</div>
+          <ul class="tier-list">
+            <li>10–12 sessões de 60 min</li>
+            <li>Comunicação profissional e de negócios</li>
+            <li>Simulações de reuniões e apresentações</li>
+            <li>Feedback escrito personalizado</li>
+            <li>Vocabulário por setor profissional</li>
+          </ul>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">Premium</div>
+          <div class="tier-price">$150 – $300 USD</div>
+          <ul class="tier-list">
+            <li>Tudo do plano Intermediário</li>
+            <li>Simulações reais: negociação e entrevistas</li>
+            <li>Análise de pronúncia e fluência (gravado)</li>
+            <li>Plano de melhoria personalizado</li>
+            <li>Acesso direto ao coach (WhatsApp/Slack)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 — POR QUE ALPHA STRATEGY -->
+  <div class="slide">
+    <div class="slide-content" style="gap:20px;">
+      <p class="slide-label anim-fade-up anim-delay-1">Diferenciais</p>
+      <h2 class="section-title anim-fade-up anim-delay-2">Por que <span>Alpha Strategy Group?</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <div class="anim-fade-up anim-delay-3" style="width:100%;">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>Agência Brasileira Típica</th>
+              <th>Alpha Strategy Group</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Estratégia + Execução Digital + Formação</td>
+              <td><span class="cross">✗ Separado</span></td>
+              <td><span class="check">✓ Serviço integrado</span></td>
+            </tr>
+            <tr>
+              <td>Acesso ao mercado dos EUA e Europa</td>
+              <td><span class="cross">✗ Sem rede real</span></td>
+              <td><span class="check">✓ Presença física nos EUA</span></td>
+            </tr>
+            <tr>
+              <td>Serviço bilíngue (EN / ES)</td>
+              <td><span class="cross">✗ Só português</span></td>
+              <td><span class="check">✓ Nativo em inglês e espanhol</span></td>
+            </tr>
+            <tr>
+              <td>Flexibilidade de contratação</td>
+              <td><span class="cross">✗ Só mensalidade</span></td>
+              <td><span class="check">✓ Hora / projeto / mensalidade</span></td>
+            </tr>
+            <tr>
+              <td>Empregabilidade e marca pessoal</td>
+              <td><span class="cross">✗ Não oferecem</span></td>
+              <td><span class="check">✓ Serviço especializado</span></td>
+            </tr>
+            <tr>
+              <td>Dashboard de ROI e prestação de contas</td>
+              <td><span class="cross">✗ Relatórios básicos</span></td>
+              <td><span class="check">✓ Métricas mensais + reunião</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 — PRÓXIMOS PASSOS (CTA) -->
+  <div class="slide" style="background: radial-gradient(ellipse at 50% 40%, rgba(212,175,55,0.08) 0%, var(--bg) 60%);">
+    <div class="bg-circle" style="width:500px;height:500px;top:-150px;right:-150px;"></div>
+    <div class="slide-content" style="gap:28px;text-align:center;">
+      <p class="slide-label anim-fade-up anim-delay-1">Pronto para crescer?</p>
+      <h2 class="section-title anim-fade-up anim-delay-2" style="text-align:center;font-size:clamp(26px,4.5vw,52px);">Próximos <span>Passos</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <div class="steps anim-fade-up anim-delay-3">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Reunião de Diagnóstico</div>
+          <div class="step-body">30 minutos gratuitos para entender seu negócio, seus objetivos e a situação atual.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Proposta Personalizada</div>
+          <div class="step-body">Em 48–72 h você recebe um plano sob medida com serviços, prazos e preços claros.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Início e Auditoria</div>
+          <div class="step-body">Começamos com uma auditoria completa da sua situação e definimos prioridades juntos.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title">Execução e Resultados</div>
+          <div class="step-body">Implementamos, medimos e otimizamos com revisões mensais e relatórios de ROI.</div>
+        </div>
+      </div>
+      <div class="anim-fade-up anim-delay-5" style="margin-top:8px;">
+        <p style="font-size:clamp(12px,1.4vw,16px);color:var(--muted);margin-bottom:16px;">
+          Primeira reunião de diagnóstico: <strong style="color:var(--gold);">completamente gratuita e sem compromisso.</strong>
+        </p>
+        <button class="cta-btn" style="animation: pulse-glow 2.5s infinite;">
+          Solicitar Reunião de Diagnóstico →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 — CONTATO -->
+  <div class="slide" style="background: radial-gradient(ellipse at 50% 80%, rgba(21,40,66,0.7) 0%, var(--bg) 55%);">
+    <div class="bg-circle" style="width:400px;height:400px;bottom:-100px;right:-100px;"></div>
+    <div class="slide-content" style="gap:24px;text-align:center;">
+      <p class="slide-label anim-fade-up anim-delay-1">Estamos aqui para você</p>
+      <h2 class="section-title anim-fade-up anim-delay-2" style="text-align:center;font-size:clamp(26px,4.5vw,52px);">Fale com a <span>gente hoje</span></h2>
+      <div class="gold-line anim-fade-up anim-delay-2"></div>
+      <div class="contact-grid anim-fade-up anim-delay-3">
+        <div class="contact-card">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-label">Site</div>
+          <div class="contact-value">alphastrategygroupusa.com</div>
+        </div>
+        <div class="contact-card" style="border-color:rgba(212,175,55,0.4);">
+          <div class="contact-icon">📧</div>
+          <div class="contact-label">E-mail</div>
+          <div class="contact-value">info@alphastrategygroupusa.com</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">+1 (591) 750 25505</div>
+        </div>
+      </div>
+      <div class="anim-fade-up anim-delay-4" style="margin-top:6px;">
+        <p style="font-size:clamp(12px,1.4vw,16px);color:var(--muted);line-height:1.6;">
+          Respondemos em <strong style="color:var(--gold);">menos de 24 horas</strong>.<br/>
+          Consulta gratuita · Sem compromisso · Total confidencialidade.
+        </p>
+      </div>
+      <div class="anim-fade-up anim-delay-5" style="margin-top:8px;opacity:0.5;">
+        <p style="font-size:11px;color:var(--muted);letter-spacing:2px;">ALPHA STRATEGY GROUP · EUA · BRASIL · LATAM · ESPANHA</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.slide-deck -->
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="prevSlide()">←</button>
+  <span class="slide-counter"><span id="current">1</span> / <span id="total">11</span></span>
+  <button class="nav-btn" onclick="nextSlide()">→</button>
+</div>
+
+<script>
+  let current = 1;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+  function showSlide(n) {
+    if (n < 1) n = 1; if (n > total) n = total;
+    current = n;
+    slides.forEach((s, i) => s.classList.toggle('active', i === n - 1));
+    document.getElementById('current').textContent = n;
+    document.getElementById('progressBar').style.width = (n / total * 100) + '%';
+  }
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.nav-controls') && !e.target.closest('.cta-btn')) nextSlide();
+  });
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) dx < 0 ? nextSlide() : prevSlide();
+  });
+  showSlide(1);
+</script>
+</body>
+</html>

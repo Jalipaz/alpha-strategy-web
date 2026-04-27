@@ -37,9 +37,9 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      initial={{ y: -80, opacity: 0, filter: 'blur(4px)' }}
+      animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+      transition={{ type: 'spring', stiffness: 220, damping: 26, mass: 0.7 }}
       style={{
         position: 'fixed',
         top: 0,
@@ -57,8 +57,8 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
             <motion.div
-              whileHover={{ scale: 1.08, rotate: 5 }}
-              transition={{ duration: 0.2 }}
+              whileHover={{ scale: 1.1, rotate: 6 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 18 }}
               style={{
                 width: '36px', height: '36px',
                 background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
@@ -146,7 +146,7 @@ export default function Navbar() {
             </div>
 
             {/* CTA */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+            <motion.div whileHover={{ scale: 1.06, y: -2 }} whileTap={{ scale: 0.96 }} transition={{ type: 'spring', stiffness: 340, damping: 20 }}>
               <Link
                 href={`/${locale}/contact`}
                 style={{
@@ -207,9 +207,9 @@ export default function Navbar() {
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.3 }}
+                    initial={{ opacity: 0, x: -28, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 24, mass: 0.6, delay: i * 0.06 }}
                   >
                     <Link
                       href={`/${locale}${link.href === '/' ? '' : link.href}`}

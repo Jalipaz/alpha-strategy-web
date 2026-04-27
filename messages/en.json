@@ -59,7 +59,7 @@
   "about": {
     "title": "About Alpha Strategy Group",
     "subtitle": "More than an agency. A global growth ecosystem.",
-    "body": "Alpha Strategy Group is an international consulting firm headquartered in Miami, with presence across Latin America, the United States, and Europe. We specialize in business strategy, digital marketing, and professional development — integrating three strategic dimensions to drive real, measurable growth.",
+    "body": "Alpha Strategy Group is an international consulting firm headquartered in Miami, with active presence in the United States, Spain, Brazil, and Latin America. We specialize in business strategy, digital marketing, and professional development — integrating three strategic dimensions to drive real, measurable growth.",
     "pillars": [
       { "label": "Business Growth", "value": "Scale your company in global markets" },
       { "label": "Digital Positioning", "value": "Build a premium brand presence online" },
@@ -83,7 +83,7 @@
     },
     "info": {
       "location": "2 S Biscayne Blvd, Suite 3200 #4784, Miami, FL 33131",
-      "reach": "Latin America · United States · Europe"
+      "reach": "United States · Spain · Brazil · Latin America"
     }
   },
   "webDesign": {

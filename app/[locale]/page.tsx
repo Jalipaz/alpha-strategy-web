@@ -3,7 +3,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRef, useEffect, useState } from 'react';
+
+const AnimatedHeroBg = dynamic(() => import('../../components/AnimatedHeroBg'), { ssr: false });
 
 function CountUp({ to, suffix = '', duration = 1600 }: { to: number; suffix?: string; duration?: number }) {
   const [val, setVal] = useState(0);
@@ -39,17 +42,63 @@ const serviceColors = [
   { from: '#00D4FF', to: '#00B4D8' },
 ];
 
+// Crisp ease-out spring — matches Remotion's bezier(0.16, 1, 0.3, 1)
+const SPRING_ENTER = { type: 'spring' as const, stiffness: 300, damping: 28, mass: 0.6 };
+// Slower editorial spring for large elements
+const SPRING_SLOW = { type: 'spring' as const, stiffness: 180, damping: 22, mass: 0.8 };
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 36, filter: 'blur(4px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: SPRING_ENTER },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -40, filter: 'blur(4px)' },
+  show: { opacity: 1, x: 0, filter: 'blur(0px)', transition: SPRING_SLOW },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 40, filter: 'blur(4px)' },
+  show: { opacity: 1, x: 0, filter: 'blur(0px)', transition: SPRING_SLOW },
 };
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
+
+const staggerFast = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05 } },
 };
 
 const featureIcons = [Monitor, Smartphone, Search, ShieldCheck, Settings2, Lang];
+
+// Kinetic per-word animation — each word slides up with a spring
+function KineticWords({ text, style }: { text: string; style?: React.CSSProperties }) {
+  const words = text.split(' ');
+  return (
+    <span style={{ display: 'inline', ...style }}>
+      {words.map((word, i) => (
+        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.25em' }}>
+          <motion.span
+            style={{ display: 'inline-block' }}
+            variants={{
+              hidden: { y: '110%', opacity: 0 },
+              show: {
+                y: '0%',
+                opacity: 1,
+                transition: { type: 'spring', stiffness: 260, damping: 22, mass: 0.6, delay: i * 0.06 },
+              },
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function HomePage() {
   const t = useTranslations();
@@ -78,31 +127,37 @@ export default function HomePage() {
           backgroundSize: '40px 40px',
         }} />
 
+        {/* Canvas orb background — Remotion BrandLoop-style */}
+        <AnimatedHeroBg />
+
         {/* Animated orbs */}
         <motion.div
-          animate={{ y: [0, -24, 0], scale: [1, 1.05, 1] }}
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: [1, 1.05, 1], opacity: [0.7, 1, 0.7], y: [0, -24, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           style={{
             position: 'absolute', top: '10%', left: '3%', width: '560px', height: '560px',
-            background: 'radial-gradient(circle, rgba(233,30,140,0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(233,30,140,0.14) 0%, transparent 70%)',
             borderRadius: '50%', pointerEvents: 'none',
           }}
         />
         <motion.div
-          animate={{ y: [0, 20, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: [1, 1.08, 1], opacity: [0.6, 1, 0.6], y: [0, 20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
           style={{
             position: 'absolute', bottom: '5%', right: '3%', width: '640px', height: '640px',
-            background: 'radial-gradient(circle, rgba(0,180,216,0.10) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%)',
             borderRadius: '50%', pointerEvents: 'none',
           }}
         />
         <motion.div
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          initial={{ scale: 0.4, opacity: 0 }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.9, 0.5], y: [0, -12, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
           style={{
             position: 'absolute', top: '50%', right: '20%', width: '300px', height: '300px',
-            background: 'radial-gradient(circle, rgba(255,107,53,0.07) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255,107,53,0.09) 0%, transparent 70%)',
             borderRadius: '50%', pointerEvents: 'none',
           }}
         />
@@ -110,36 +165,44 @@ export default function HomePage() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '120px 24px 80px', position: 'relative', zIndex: 1 }}>
           <motion.div variants={stagger} initial="hidden" animate="show">
             {/* Badge */}
-            <motion.div variants={fadeUp} transition={{ duration: 0.6 }} style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(0,212,255,0.08)',
-              border: '1px solid rgba(0,212,255,0.2)',
-              borderRadius: '100px',
-              padding: '8px 18px',
-              marginBottom: '32px',
-            }}>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 16, scale: 0.92 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { ...SPRING_ENTER, delay: 0 } },
+              }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                background: 'rgba(0,212,255,0.08)',
+                border: '1px solid rgba(0,212,255,0.2)',
+                borderRadius: '100px',
+                padding: '8px 18px',
+                marginBottom: '32px',
+              }}>
               <MapPin size={14} style={{ color: '#00D4FF' }} />
               <span style={{ color: '#00D4FF', fontSize: '13px', fontWeight: 600, letterSpacing: '0.06em' }}>
                 {t('hero.tagline')} · Miami, USA
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1 variants={fadeUp} transition={{ duration: 0.7 }}
-              style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px', maxWidth: '820px' }}>
-              <span style={{ color: '#fff' }}>{t('hero.headline1')}</span>
-              <br />
-              <span style={{
-                background: 'linear-gradient(135deg, #FF6B35, #E91E8C, #00B4D8)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                {t('hero.headline2')}
-              </span>
+            {/* Headline — kinetic per-word spring entrance */}
+            <motion.h1
+              variants={staggerFast}
+              style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800, lineHeight: 1.15, marginBottom: '24px', maxWidth: '820px' }}
+            >
+              <KineticWords text={t('hero.headline1')} style={{ color: '#fff', display: 'block' }} />
+              <KineticWords
+                text={t('hero.headline2')}
+                style={{
+                  background: 'linear-gradient(135deg, #FF6B35, #E91E8C, #00B4D8)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  display: 'block',
+                }}
+              />
             </motion.h1>
 
-            <motion.p variants={fadeUp} transition={{ duration: 0.7 }} style={{
+            <motion.p variants={fadeUp} style={{
               fontSize: 'clamp(16px, 2vw, 20px)',
               color: '#8892B0',
               lineHeight: 1.7,
@@ -150,9 +213,9 @@ export default function HomePage() {
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} transition={{ duration: 0.6 }}
+            <motion.div variants={fadeUp}
               style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }} transition={SPRING_ENTER}>
                 <Link
                   href={`/${locale}/services`}
                   style={{
@@ -170,7 +233,7 @@ export default function HomePage() {
                   {t('hero.cta1')} <ArrowRight size={18} />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }} transition={SPRING_ENTER}>
                 <Link
                   href={`/${locale}/contact`}
                   style={{
@@ -207,7 +270,7 @@ export default function HomePage() {
               }}
             >
               {[
-                { to: 3, suffix: '', label: 'Countries', color: { from: '#00D4FF', to: '#0077FF' } },
+                { to: 4, suffix: '+', label: 'Markets', color: { from: '#00D4FF', to: '#0077FF' } },
                 { to: 100, suffix: '+', label: 'Clients', color: { from: '#FF6B35', to: '#E91E8C' } },
                 { to: 5, suffix: '', label: 'Service Pillars', color: { from: '#E91E8C', to: '#9C27B0' } },
               ].map((stat, i) => (
@@ -319,11 +382,11 @@ export default function HomePage() {
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 48, filter: 'blur(6px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 24, mass: 0.7, delay: i * 0.07 }}
+                  whileHover={{ y: -8, scale: 1.02, transition: SPRING_ENTER }}
                   style={{
                     background: 'rgba(15, 26, 62, 0.7)',
                     border: '1px solid rgba(255,255,255,0.07)',
@@ -461,10 +524,10 @@ export default function HomePage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px', alignItems: 'center' }}>
             {/* Browser Mockup */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              variants={fadeLeft}
+              initial="hidden"
+              whileInView="show"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7 }}
               style={{ order: 0 }}
             >
               {/* Browser chrome */}
@@ -595,10 +658,10 @@ export default function HomePage() {
 
             {/* Feature grid */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              variants={fadeRight}
+              initial="hidden"
+              whileInView="show"
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7 }}
               style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}
             >
               {webFeatures.map((feature, i) => {
@@ -615,11 +678,11 @@ export default function HomePage() {
                 return (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 28, filter: 'blur(4px)' }}
+                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.07 }}
-                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.6, delay: i * 0.06 }}
+                    whileHover={{ y: -6, scale: 1.03, transition: SPRING_ENTER }}
                     style={{
                       background: 'rgba(15,26,62,0.7)',
                       border: '1px solid rgba(255,255,255,0.07)',
@@ -690,10 +753,10 @@ export default function HomePage() {
       <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #060D26, #0B1130)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '64px', alignItems: 'center' }}>
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7 }}
           >
             <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, color: '#fff', marginBottom: '16px' }}>
               {t('about.title')}
@@ -731,10 +794,10 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={fadeRight}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7 }}
             style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
           >
             {pillars.map((pillar, i) => (
@@ -744,7 +807,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                whileHover={{ x: 6, scale: 1.01, transition: SPRING_ENTER }}
                 style={{
                   background: 'rgba(15,26,62,0.7)',
                   border: '1px solid rgba(255,255,255,0.07)',

@@ -4,10 +4,13 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { MapPin, Globe, MessageCircle, Send, CheckCircle } from 'lucide-react';
+import { MapPin, Globe, MessageCircle, Send, CheckCircle, CalendarCheck, Clock, Sparkles } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const AnimatedHeroBg = dynamic(() => import('../../../components/AnimatedHeroBg'), { ssr: false });
+
+// Replace with your Zoho Bookings URL: https://bookings.zoho.com/portal/YOUR_PORTAL/YOUR_SERVICE
+const ZOHO_BOOKINGS_URL = 'https://alphastrategygroup.zohobookings.com/#/4937990000000034049';
 
 const EMAILJS_SERVICE_ID = 'service_2y5hqth';
 const EMAILJS_TEMPLATE_ID = 'template_r64k81p';
@@ -32,7 +35,7 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: { preventDefault(): void }) {
     e.preventDefault();
     setSending(true);
     setError('');
@@ -118,6 +121,102 @@ export default function ContactPage() {
             {t('subtitle')}
           </motion.p>
         </motion.div>
+      </section>
+
+      {/* Booking CTA */}
+      <section style={{ padding: '0 24px', background: '#0B1130' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', paddingTop: '64px' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 40, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ ...SPRING_SLOW, delay: 0.2 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(0,119,255,0.12) 0%, rgba(233,30,140,0.10) 100%)',
+              border: '1px solid rgba(0,212,255,0.25)',
+              borderRadius: '24px',
+              padding: 'clamp(32px, 5vw, 56px)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '40px',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Glow accent */}
+            <div style={{
+              position: 'absolute', top: '-60px', right: '-60px',
+              width: '260px', height: '260px',
+              background: 'radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%)',
+              pointerEvents: 'none',
+            }} />
+
+            {/* Left: text */}
+            <div style={{ flex: '1 1 320px', position: 'relative', zIndex: 1 }}>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px',
+                background: 'rgba(0,212,255,0.12)',
+                border: '1px solid rgba(0,212,255,0.3)',
+                borderRadius: '999px',
+                padding: '6px 16px',
+                marginBottom: '20px',
+              }}>
+                <Sparkles size={14} style={{ color: '#00D4FF' }} />
+                <span style={{ color: '#00D4FF', fontSize: '13px', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  {t('booking.badge')}
+                </span>
+              </div>
+              <h2 style={{
+                color: '#fff', fontWeight: 800,
+                fontSize: 'clamp(22px, 3vw, 34px)',
+                marginBottom: '16px', lineHeight: 1.2,
+              }}>
+                {t('booking.title')}
+              </h2>
+              <p style={{ color: '#8892B0', fontSize: '16px', lineHeight: 1.7, maxWidth: '480px', marginBottom: '20px' }}>
+                {t('booking.desc')}
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Clock size={15} style={{ color: '#00D4FF' }} />
+                <span style={{ color: '#8892B0', fontSize: '14px' }}>{t('booking.note')}</span>
+              </div>
+            </div>
+
+            {/* Right: CTA */}
+            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', position: 'relative', zIndex: 1 }}>
+              <div style={{
+                width: '72px', height: '72px', borderRadius: '18px',
+                background: 'linear-gradient(135deg, #0077FF, #00D4FF)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 12px 32px rgba(0,119,255,0.4)',
+              }}>
+                <CalendarCheck size={34} color="#fff" />
+              </div>
+              <motion.a
+                href={ZOHO_BOOKINGS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.04, y: -3, boxShadow: '0 16px 40px rgba(0,119,255,0.5)', transition: SPRING }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '10px',
+                  background: 'linear-gradient(135deg, #0077FF, #00D4FF)',
+                  color: '#fff',
+                  padding: '16px 32px',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  fontSize: '16px',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 8px 24px rgba(0,119,255,0.35)',
+                }}
+              >
+                <CalendarCheck size={20} /> {t('booking.cta')}
+              </motion.a>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Content */}

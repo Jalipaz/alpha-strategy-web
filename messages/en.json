@@ -74,6 +74,13 @@
     "title": "Ready to Grow?",
     "subtitle": "Let's build your next opportunity together.",
     "whatsapp": "Message us on WhatsApp",
+    "booking": {
+      "badge": "100% Free · No Commitment",
+      "title": "Book a Free Strategy Call",
+      "desc": "15 minutes with an Alpha Strategy expert. We'll review your current situation and identify your biggest growth opportunity — no sales pitch.",
+      "cta": "Schedule My Free Consultation",
+      "note": "Usually available within 24–48 hours"
+    },
     "form": {
       "name": "Full Name",
       "email": "Email Address",

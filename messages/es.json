@@ -74,6 +74,13 @@
     "title": "¿Listo para Crecer?",
     "subtitle": "Construyamos tu próxima oportunidad juntos.",
     "whatsapp": "Escríbenos por WhatsApp",
+    "booking": {
+      "badge": "100% Gratis · Sin Compromiso",
+      "title": "Agenda tu Consultoría Gratuita",
+      "desc": "15 minutos con un experto de Alpha Strategy. Analizaremos tu situación actual e identificaremos tu mayor oportunidad de crecimiento — sin presión de ventas.",
+      "cta": "Reservar mi Consulta Gratuita",
+      "note": "Disponible normalmente en 24–48 horas"
+    },
     "form": {
       "name": "Nombre Completo",
       "email": "Correo Electrónico",

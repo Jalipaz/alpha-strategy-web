@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { useRef, useEffect, useState } from 'react';
 
 const AnimatedHeroBg = dynamic(() => import('../../components/AnimatedHeroBg'), { ssr: false });
+const WebShowcaseVideo = dynamic(() => import('../../components/WebShowcaseVideo'), { ssr: false });
 
 function CountUp({ to, suffix = '', duration = 1600 }: { to: number; suffix?: string; duration?: number }) {
   const [val, setVal] = useState(0);
@@ -127,7 +128,7 @@ export default function HomePage() {
           backgroundSize: '40px 40px',
         }} />
 
-        {/* Canvas orb background — Remotion BrandLoop-style */}
+        {/* Canvas orb background */}
         <AnimatedHeroBg />
 
         {/* Animated orbs */}
@@ -522,7 +523,7 @@ export default function HomePage() {
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px', alignItems: 'center' }}>
-            {/* Browser Mockup */}
+            {/* Browser Mockup — Remotion WebShowcase video */}
             <motion.div
               variants={fadeLeft}
               initial="hidden"
@@ -530,116 +531,7 @@ export default function HomePage() {
               viewport={{ once: true, margin: '-60px' }}
               style={{ order: 0 }}
             >
-              {/* Browser chrome */}
-              <div style={{
-                background: '#0D1B3E',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,119,255,0.1)',
-              }}>
-                {/* Browser bar */}
-                <div style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  borderBottom: '1px solid rgba(255,255,255,0.07)',
-                  padding: '12px 16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                }}>
-                  <div style={{ display: 'flex', gap: '6px' }}>
-                    {['#FF5F57', '#FFBD2E', '#28CA41'].map((c) => (
-                      <div key={c} style={{ width: '12px', height: '12px', borderRadius: '50%', background: c }} />
-                    ))}
-                  </div>
-                  <div style={{
-                    flex: 1,
-                    background: 'rgba(255,255,255,0.06)',
-                    borderRadius: '6px',
-                    padding: '6px 12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}>
-                    <ShieldCheck size={12} style={{ color: '#28CA41' }} />
-                    <span style={{ color: '#8892B0', fontSize: '12px' }}>yourclient.com</span>
-                  </div>
-                </div>
-                {/* Website preview */}
-                <div style={{ padding: '0', background: '#060D26' }}>
-                  {/* Fake hero */}
-                  <div style={{
-                    padding: '32px 24px 24px',
-                    background: 'linear-gradient(135deg, #060D26, #0B1130)',
-                    borderBottom: '1px solid rgba(255,255,255,0.05)',
-                  }}>
-                    <motion.div
-                      animate={{ opacity: [0.6, 1, 0.6] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      style={{
-                        height: '12px', width: '70%', borderRadius: '6px',
-                        background: 'linear-gradient(90deg, #FF6B35, #E91E8C)',
-                        marginBottom: '10px',
-                      }}
-                    />
-                    <div style={{ height: '8px', width: '90%', borderRadius: '4px', background: 'rgba(255,255,255,0.08)', marginBottom: '6px' }} />
-                    <div style={{ height: '8px', width: '60%', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', marginBottom: '18px' }} />
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <div style={{ height: '28px', width: '90px', borderRadius: '6px', background: 'linear-gradient(90deg, #FF6B35, #E91E8C)' }} />
-                      <div style={{ height: '28px', width: '80px', borderRadius: '6px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }} />
-                    </div>
-                  </div>
-                  {/* Fake service cards row */}
-                  <div style={{ padding: '20px 24px', display: 'flex', gap: '10px' }}>
-                    {[
-                      { from: '#FF6B35', to: '#E91E8C' },
-                      { from: '#00B4D8', to: '#0077FF' },
-                      { from: '#9C27B0', to: '#E91E8C' },
-                    ].map((c, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 + i * 0.15, duration: 0.4 }}
-                        style={{
-                          flex: 1,
-                          background: 'rgba(255,255,255,0.03)',
-                          border: '1px solid rgba(255,255,255,0.07)',
-                          borderRadius: '8px',
-                          padding: '12px 10px',
-                        }}
-                      >
-                        <div style={{ width: '20px', height: '20px', borderRadius: '4px', background: `linear-gradient(135deg, ${c.from}, ${c.to})`, marginBottom: '8px' }} />
-                        <div style={{ height: '6px', width: '80%', borderRadius: '3px', background: 'rgba(255,255,255,0.12)', marginBottom: '5px' }} />
-                        <div style={{ height: '5px', width: '60%', borderRadius: '3px', background: 'rgba(255,255,255,0.06)' }} />
-                      </motion.div>
-                    ))}
-                  </div>
-                  {/* Fake CTA bar */}
-                  <div style={{
-                    margin: '0 24px 20px',
-                    padding: '14px',
-                    background: 'linear-gradient(135deg, rgba(255,107,53,0.15), rgba(0,119,255,0.15))',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}>
-                    <div>
-                      <div style={{ height: '7px', width: '120px', borderRadius: '3px', background: 'rgba(255,255,255,0.2)', marginBottom: '5px' }} />
-                      <div style={{ height: '5px', width: '80px', borderRadius: '3px', background: 'rgba(255,255,255,0.08)' }} />
-                    </div>
-                    <motion.div
-                      animate={{ scale: [1, 1.04, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      style={{ height: '26px', width: '72px', borderRadius: '6px', background: 'linear-gradient(90deg, #FF6B35, #E91E8C)' }}
-                    />
-                  </div>
-                </div>
-              </div>
-
+              <WebShowcaseVideo />
               {/* Site types pill row */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px', justifyContent: 'center' }}>
                 {webTypes.map((type) => (

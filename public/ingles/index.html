@@ -530,13 +530,11 @@
       text-align: center;
       padding: 16px;
     }
-    /* Replace this img with your actual QR — set id="qr-image" */
     #qr-image {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
+      width: 100%;
+      height: auto;
+      display: block;
       border-radius: 10px;
-      display: none; /* show once you add src */
     }
     .qr-amount {
       display: inline-block;
@@ -926,11 +924,10 @@
             </div>
             <p style="margin-bottom:6px;">Escanea y paga exactamente <strong style="color:#fff;">Bs 500</strong>.</p>
             <p style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:18px;">Titular: Alipaz Salvatierra Jesus Andres · Cta. 1310806195</p>
-            <div class="qr-frame" style="width:220px;height:220px;">
+            <div class="qr-frame" style="width:260px;height:auto;padding:8px;">
               <img id="qr-image"
                    src="./qr-pago.jpeg"
                    alt="QR Banco Ganadero"
-                   style="width:210px;height:210px;object-fit:contain;border-radius:10px;"
                    onerror="this.style.display='none';document.getElementById('qr-placeholder').style.display='flex';" />
               <div class="qr-placeholder" id="qr-placeholder" style="display:none;">
                 <svg width="80" height="80" viewBox="0 0 80 80" fill="none">

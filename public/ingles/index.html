@@ -1001,12 +1001,10 @@
             </div>
 
             <div class="field">
-              <label for="horario">¿Prefieres mañana o tarde?</label>
-              <select id="horario" name="horario">
-                <option value="" disabled selected>Selecciona un horario</option>
-                <option value="19-22">Noche: 19:00 – 22:00</option>
-                <option value="indiferente">Me es indiferente</option>
-              </select>
+              <label>Horario</label>
+              <div style="background:var(--gray2);border:1.5px solid rgba(255,107,53,.3);border-radius:10px;padding:13px 16px;font-size:.95rem;color:rgba(255,255,255,.85);">
+                📅 Lunes y Miércoles &nbsp;·&nbsp; ⏰ 19:00 – 22:00
+              </div>
             </div>
 
             <div class="field">
@@ -1090,7 +1088,7 @@
       const whatsapp  = document.getElementById('whatsapp').value.trim();
       const email     = document.getElementById('email').value.trim();
       const nivel     = document.getElementById('nivel').value;
-      const horario   = document.getElementById('horario').value;
+      const horario   = 'Lunes y Miércoles 19:00–22:00';
       const mensaje   = document.getElementById('mensaje').value.trim();
       const file      = fileInput.files[0];
 

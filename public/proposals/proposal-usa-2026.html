@@ -114,9 +114,85 @@
     .slide.active .anim-delay-3  { animation-delay: 0.34s; opacity: 0; }
     .slide.active .anim-delay-4  { animation-delay: 0.46s; opacity: 0; }
     .slide.active .anim-delay-5  { animation-delay: 0.58s; opacity: 0; }
-
+    /* ── TABLET (≤768px) ── */
     @media (max-width: 768px) {
-      .slide { padding: 32px 24px; }
+      body { overflow-x: hidden; }
+
+      .slide {
+        padding: 70px 20px 88px;
+        height: 100svh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .slide-content {
+        gap: 12px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 6px;
+        max-height: none;
+      }
+
+      /* Grids → single column */
+      .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; gap: 10px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 12px; }
+      .split, .pain-grid, .contact-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* Steps */
+      .steps { flex-direction: column; gap: 12px; }
+      .tier-card.popular { transform: scale(1); }
+
+      /* Tables scroll horizontally */
+      .diff-table, .price-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 11px;
+      }
+
+      /* Typography */
+      h2.section-title { font-size: clamp(19px, 5vw, 28px); }
+      .slide-subtitle { font-size: 13px; line-height: 1.55; }
+      .slide-label { font-size: 10px; letter-spacing: 2px; }
+      .pain-quote { font-size: 12px; }
+      .deliverable-list li { font-size: 12px; }
+      .tier-list li { font-size: 11px; }
+      .tier-price { font-size: clamp(18px, 5vw, 24px); }
+      .price-tag { font-size: clamp(16px, 5vw, 22px); }
+      .card-title { font-size: 14px; }
+      .flags-row { gap: 10px; }
+      .flag-emoji { font-size: 20px; }
+
+      /* Cards */
+      .card { padding: 14px 16px; }
+      .tier-card { padding: 18px 14px; }
+      .contact-card { padding: 18px 14px; }
+
+      /* Nav */
+      .nav-controls { bottom: 14px; padding: 6px 16px; gap: 12px; }
+      .nav-btn { width: 32px; height: 32px; font-size: 14px; }
+      .slide-counter { font-size: 11px; }
+    }
+
+    /* ── PHONE (≤480px) ── */
+    @media (max-width: 480px) {
+      .slide { padding: 60px 14px 78px; }
+      .slide-content { gap: 10px; }
+      h2.section-title { font-size: clamp(17px, 5.5vw, 24px); }
+      .cta-btn { font-size: 13px; padding: 12px 22px; width: 100%; text-align: center; display: block; }
+      .step-num { width: 36px; height: 36px; font-size: 15px; }
+      .step-title { font-size: 13px; }
+      .step-body { font-size: 11px; }
+      .contact-icon { font-size: 24px; }
+      .contact-label { font-size: 10px; }
+      .contact-value { font-size: 12px; }
+      .popular-badge { font-size: 9px; padding: 2px 10px; }
+      .tier-name { font-size: 14px; }
+      .diff-table th { font-size: 10px; padding: 6px 10px; }
+      .diff-table td { font-size: 11px; padding: 7px 10px; }
+    }
       .grid-3, .grid-4 { grid-template-columns: repeat(2,1fr); }
       .split, .grid-2, .pain-grid, .contact-grid { grid-template-columns: 1fr; gap: 14px; }
       .steps { flex-direction: column; gap: 14px; }

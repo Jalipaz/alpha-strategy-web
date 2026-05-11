@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DentaSoft — Gestión Dental</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0e6ba8; --blue-dark: #0a4f7e; --blue-light: #e8f2fa;
+      --green: #16a34a; --green-light: #dcfce7;
+      --yellow: #d97706; --yellow-light: #fef3c7;
+      --red: #dc2626; --red-light: #fee2e2;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1; --gray-400: #94a3b8; --gray-500: #64748b;
+      --gray-600: #475569; --gray-700: #334155; --gray-800: #1e293b; --gray-900: #0f172a;
+      --sw: 220px; --r: 10px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray-100); color: var(--gray-800); display: flex; min-height: 100vh; font-size: 14px; }
+    /* SIDEBAR */
+    .sidebar { width: var(--sw); background: var(--blue-dark); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; }
+    .sb-brand { padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sb-brand .name { color: #fff; font-size: 18px; font-weight: 700; }
+    .sb-brand .sub { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 2px; }
+    .sb-nav { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: rgba(255,255,255,0.65); cursor: pointer; font-size: 13.5px; font-weight: 500; transition: background 0.15s, color 0.15s; user-select: none; }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-item.active { background: rgba(255,255,255,0.16); color: #fff; }
+    .sb-footer { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.35); font-size: 11px; }
+    /* MAIN */
+    .main { margin-left: var(--sw); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+    .topbar { background: #fff; border-bottom: 1px solid var(--gray-200); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+    .topbar-title { font-size: 17px; font-weight: 600; }
+    .topbar-sub { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
+    .page { padding: 24px 28px; display: none; }
+    .page.active { display: block; }
+    /* KPI GRID */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: #fff; border-radius: var(--r); padding: 18px 20px; box-shadow: var(--shadow); }
+    .kpi-label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 26px; font-weight: 700; color: var(--gray-900); margin: 6px 0 4px; line-height: 1; }
+    .kpi-sub { font-size: 12px; color: var(--gray-500); }
+    /* CARD */
+    .card { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+    .card-header { padding: 14px 20px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+    .card-title { font-size: 14px; font-weight: 600; }
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; }
+    thead th { padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.4px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); }
+    tbody tr { border-bottom: 1px solid var(--gray-100); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--gray-50); }
+    tbody td { padding: 11px 16px; font-size: 13.5px; color: var(--gray-700); vertical-align: middle; }
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .bg { background: var(--green-light); color: var(--green); }
+    .by { background: var(--yellow-light); color: var(--yellow); }
+    .br { background: var(--red-light); color: var(--red); }
+    .bb { background: var(--blue-light); color: var(--blue); }
+    .bgr { background: var(--gray-100); color: var(--gray-500); }
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-success { background: var(--green); color: #fff; }
+    .btn-success:hover { background: #15803d; }
+    .btn-danger { background: var(--red); color: #fff; }
+    .btn-danger:hover { background: #b91c1c; }
+    .btn-ghost { background: transparent; color: var(--gray-600); border: 1px solid var(--gray-200); }
+    .btn-ghost:hover { background: var(--gray-100); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    /* FORMS */
+    .fg { margin-bottom: 16px; }
+    .fr2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fr3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-600); margin-bottom: 5px; }
+    input, select, textarea { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 7px; font-size: 13.5px; color: var(--gray-800); background: #fff; transition: border-color 0.15s, box-shadow 0.15s; font-family: inherit; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(14,107,168,0.1); }
+    textarea { resize: vertical; min-height: 70px; }
+    /* MODAL */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; }
+    .modal-lg { max-width: 740px; }
+    .modal-hd { padding: 18px 24px 14px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+    .modal-title { font-size: 16px; font-weight: 600; }
+    .modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray-400); padding: 2px 6px; }
+    .modal-close:hover { color: var(--gray-700); }
+    .modal-bd { padding: 20px 24px; }
+    .modal-ft { padding: 14px 24px; border-top: 1px solid var(--gray-100); display: flex; justify-content: flex-end; gap: 10px; }
+    /* TOOLBAR */
+    .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .search { flex: 1; min-width: 180px; max-width: 300px; }
+    /* SUMMARY */
+    .sum-box { display: flex; gap: 16px; padding: 14px 18px; background: var(--gray-50); border-radius: var(--r); margin-bottom: 20px; flex-wrap: wrap; }
+    .sum-item .s-lbl { font-size: 11px; color: var(--gray-400); font-weight: 600; text-transform: uppercase; }
+    .sum-item .s-val { font-size: 20px; font-weight: 700; margin-top: 2px; }
+    /* PROGRESS */
+    .progress { height: 6px; background: var(--gray-200); border-radius: 99px; overflow: hidden; }
+    .pf { height: 100%; border-radius: 99px; }
+    /* DETAIL */
+    .dg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+    .di label { color: var(--gray-400); font-size: 11px; font-weight: 500; margin-bottom: 2px; }
+    .di p { color: var(--gray-800); font-size: 13.5px; font-weight: 500; }
+    .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+    .alert-info { background: var(--blue-light); color: var(--blue-dark); }
+    .empty { text-align: center; padding: 48px 20px; color: var(--gray-400); }
+    .empty-icon { font-size: 36px; margin-bottom: 10px; }
+    .actions { display: flex; gap: 5px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sb-brand">
+    <div class="name">🦷 DentaSoft</div>
+    <div class="sub">Gestión Dental Profesional</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-item active" onclick="nav('dashboard')">📊 Dashboard</div>
+    <div class="nav-item" onclick="nav('pacientes')">👤 Pacientes</div>
+    <div class="nav-item" onclick="nav('tratamientos')">🔧 Tratamientos</div>
+    <div class="nav-item" onclick="nav('cobranza')">💰 Cobranza</div>
+    <div class="nav-item" onclick="nav('doctores')">👨‍⚕️ Doctores</div>
+    <div class="nav-item" onclick="nav('comisiones')">💵 Comisiones</div>
+  </nav>
+  <div class="sb-footer" style="display:flex;flex-direction:column;gap:6px">
+    <span>DentaSoft v1.0</span>
+    <button onclick="configurarClinica()" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">⚙ Nombre del consultorio</button>
+    <button onclick="resetDB()" style="background:rgba(220,38,38,0.25);border:none;color:rgba(255,150,150,0.9);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">🗑 Limpiar base de datos</button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="tb-title">Dashboard</div>
+      <div class="topbar-sub" id="tb-sub">Resumen general del consultorio</div>
+    </div>
+    <div id="tb-actions" style="display:flex;gap:8px"></div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section class="page active" id="page-dashboard">
+    <div class="kpi-grid" id="kpis"></div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Pacientes con Deuda</span><button class="btn btn-sm btn-ghost" onclick="nav('cobranza')">Ver todos →</button></div>
+        <div id="dash-deudas"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Tratamientos Activos</span><button class="btn btn-sm btn-ghost" onclick="nav('tratamientos')">Ver todos →</button></div>
+        <div id="dash-tratos"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACIENTES -->
+  <section class="page" id="page-pacientes">
+    <div class="toolbar">
+      <input class="search" type="text" id="q-pac" placeholder="Buscar por nombre, CI, teléfono..." oninput="renderPacientes()">
+      <select id="f-pac-est" onchange="renderPacientes()" style="width:auto">
+        <option value="">Todos</option><option value="deuda">Con deuda</option><option value="ok">Al día</option>
+      </select>
+      <button class="btn btn-primary" onclick="openPaciente()">+ Nuevo Paciente</button>
+    </div>
+    <div class="card"><div id="t-pacientes"></div></div>
+  </section>
+
+  <!-- TRATAMIENTOS -->
+  <section class="page" id="page-tratamientos">
+    <div class="toolbar">
+      <input class="search" type="text" id="q-trat" placeholder="Buscar tratamiento o paciente..." oninput="renderTratamientos()">
+      <select id="f-trat-est" onchange="renderTratamientos()" style="width:auto">
+        <option value="">Todos los estados</option>
+        <option value="pendiente">Pendiente</option><option value="en proceso">En proceso</option><option value="completado">Completado</option>
+      </select>
+      <select id="f-trat-doc" onchange="renderTratamientos()" style="width:auto"><option value="">Todos los doctores</option></select>
+      <button class="btn btn-primary" onclick="openTratamiento()">+ Nuevo Tratamiento</button>
+    </div>
+    <div class="card"><div id="t-tratamientos"></div></div>
+  </section>
+
+  <!-- COBRANZA -->
+  <section class="page" id="page-cobranza">
+    <div class="toolbar">
+      <input class="search" type="text" id="q-cob" placeholder="Buscar paciente o tratamiento..." oninput="renderCobranza()">
+      <select id="f-cob-est" onchange="renderCobranza()" style="width:auto">
+        <option value="">Todos</option><option value="pendiente">Sin pago</option><option value="parcial">Pago parcial</option><option value="pagado">Saldado</option>
+      </select>
+    </div>
+    <div class="sum-box" id="sum-cob"></div>
+    <div class="card"><div id="t-cobranza"></div></div>
+  </section>
+
+  <!-- DOCTORES -->
+  <section class="page" id="page-doctores">
+    <div class="toolbar">
+      <input class="search" type="text" id="q-doc" placeholder="Buscar doctor..." oninput="renderDoctores()">
+      <button class="btn btn-primary" onclick="openDoctor()">+ Nuevo Doctor</button>
+    </div>
+    <div class="card"><div id="t-doctores"></div></div>
+  </section>
+
+  <!-- COMISIONES -->
+  <section class="page" id="page-comisiones">
+    <div class="toolbar">
+      <select id="f-com-doc" onchange="renderComisiones()" style="width:auto"><option value="">Todos los doctores</option></select>
+      <select id="f-com-est" onchange="renderComisiones()" style="width:auto">
+        <option value="">Todos los estados</option>
+        <option value="pendiente">Pendiente</option><option value="listo">Listo p/pagar</option><option value="pagado">Pagado</option>
+      </select>
+    </div>
+    <div class="sum-box" id="sum-com"></div>
+    <div class="card"><div id="t-comisiones"></div></div>
+  </section>
+</main>
+
+<!-- MODAL PACIENTE -->
+<div class="overlay" id="ov-pac">
+  <div class="modal">
+    <div class="modal-hd"><span class="modal-title" id="mp-ttl">Nuevo Paciente</span><button class="modal-close" onclick="closeOv('ov-pac')">✕</button></div>
+    <div class="modal-bd">
+      <input type="hidden" id="mp-id">
+      <div class="fr2">
+        <div class="fg"><label>Nombre *</label><input id="mp-nom" type="text" placeholder="Nombre"></div>
+        <div class="fg"><label>Apellido *</label><input id="mp-ape" type="text" placeholder="Apellido"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>C.I. / Documento</label><input id="mp-ci" type="text" placeholder="12345678"></div>
+        <div class="fg"><label>Fecha de Nacimiento</label><input id="mp-fnac" type="date"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Teléfono *</label><input id="mp-tel" type="tel" placeholder="7XXXXXXX"></div>
+        <div class="fg"><label>Email</label><input id="mp-email" type="email" placeholder="correo@ejemplo.com"></div>
+      </div>
+      <div class="fg"><label>Dirección</label><input id="mp-dir" type="text" placeholder="Dirección del paciente"></div>
+      <div class="fg"><label>Notas / Historial Médico</label><textarea id="mp-notas" placeholder="Alergias, condiciones, observaciones..."></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeOv('ov-pac')">Cancelar</button>
+      <button class="btn btn-primary" onclick="savePaciente()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TRATAMIENTO -->
+<div class="overlay" id="ov-trat">
+  <div class="modal">
+    <div class="modal-hd"><span class="modal-title" id="mt-ttl">Nuevo Tratamiento</span><button class="modal-close" onclick="closeOv('ov-trat')">✕</button></div>
+    <div class="modal-bd">
+      <input type="hidden" id="mt-id">
+      <div class="fg"><label>Paciente *</label><select id="mt-pac"></select></div>
+      <div class="fg"><label>Doctor *</label><select id="mt-doc"></select></div>
+      <div class="fr2">
+        <div class="fg"><label>Tratamiento *</label><input id="mt-nom" type="text" placeholder="Ej: Ortodoncia, Extracción, Limpieza..."></div>
+        <div class="fg"><label>Precio (Bs.) *</label><input id="mt-precio" type="number" placeholder="0.00" min="0" step="0.01"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Fecha Inicio</label><input id="mt-finicio" type="date"></div>
+        <div class="fg"><label>Estado</label>
+          <select id="mt-est"><option value="pendiente">Pendiente</option><option value="en proceso">En Proceso</option><option value="completado">Completado</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Descripción / Notas</label><textarea id="mt-desc" placeholder="Detalles del procedimiento..."></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeOv('ov-trat')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveTratamiento()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PAGO -->
+<div class="overlay" id="ov-pago">
+  <div class="modal">
+    <div class="modal-hd"><span class="modal-title">Registrar Pago</span><button class="modal-close" onclick="closeOv('ov-pago')">✕</button></div>
+    <div class="modal-bd">
+      <input type="hidden" id="mpg-tid">
+      <div class="alert alert-info" id="mpg-info"></div>
+      <div class="fr2">
+        <div class="fg"><label>Monto (Bs.) *</label><input id="mpg-monto" type="number" placeholder="0.00" min="0.01" step="0.01"></div>
+        <div class="fg"><label>Fecha *</label><input id="mpg-fecha" type="date"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Método de Pago</label>
+          <select id="mpg-metodo">
+            <option value="efectivo">Efectivo</option><option value="transferencia">Transferencia</option>
+            <option value="tarjeta">Tarjeta</option><option value="qr">QR / Billetera</option>
+          </select>
+        </div>
+        <div class="fg"><label>Referencia / Notas</label><input id="mpg-notas" type="text" placeholder="Opcional"></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeOv('ov-pago')">Cancelar</button>
+      <button class="btn btn-success" onclick="savePago()">💰 Registrar Pago</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DOCTOR -->
+<div class="overlay" id="ov-doc">
+  <div class="modal">
+    <div class="modal-hd"><span class="modal-title" id="md-ttl">Nuevo Doctor</span><button class="modal-close" onclick="closeOv('ov-doc')">✕</button></div>
+    <div class="modal-bd">
+      <input type="hidden" id="md-id">
+      <div class="fr2">
+        <div class="fg"><label>Nombre Completo *</label><input id="md-nom" type="text" placeholder="Dr. Juan Pérez"></div>
+        <div class="fg"><label>Especialidad</label><input id="md-esp" type="text" placeholder="Ortodoncia, General..."></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Teléfono</label><input id="md-tel" type="tel" placeholder="7XXXXXXX"></div>
+        <div class="fg"><label>Email</label><input id="md-email" type="email" placeholder="doctor@correo.com"></div>
+      </div>
+      <div class="fg"><label>% de Comisión sobre tratamientos *</label><input id="md-com" type="number" placeholder="Ej: 30" min="0" max="100" step="0.5"></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeOv('ov-doc')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveDoctor()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALLE (paciente / pagos) -->
+<div class="overlay" id="ov-det">
+  <div class="modal modal-lg">
+    <div class="modal-hd"><span class="modal-title" id="mdet-ttl">Detalle</span><button class="modal-close" onclick="closeOv('ov-det')">✕</button></div>
+    <div class="modal-bd" id="mdet-body"></div>
+  </div>
+</div>
+
+<script>
+// ─── STORE ────────────────────────────────────────────────────
+const K = { pac:'ds_pac', trat:'ds_trat', pag:'ds_pag', doc:'ds_doc', com:'ds_com' };
+const get = k => JSON.parse(localStorage.getItem(K[k]) || '[]');
+const set = (k,v) => localStorage.setItem(K[k], JSON.stringify(v));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const Bs = n => 'Bs. ' + Number(n||0).toLocaleString('es-BO',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtD = d => d ? new Date(d+'T12:00:00').toLocaleDateString('es-BO') : '—';
+
+// ─── CALCULATIONS ─────────────────────────────────────────────
+const pagadoTrat = id => get('pag').filter(p=>p.tid===id).reduce((s,p)=>s+Number(p.monto),0);
+const deudaTrat  = t  => Math.max(0, Number(t.precio) - pagadoTrat(t.id));
+function estadoPagoTrat(t) {
+  const pg = pagadoTrat(t.id), pr = Number(t.precio);
+  if(pg >= pr) return 'pagado'; if(pg > 0) return 'parcial'; return 'pendiente';
+}
+const deudaPac = pid => get('trat').filter(t=>t.pid===pid).reduce((s,t)=>s+deudaTrat(t),0);
+const nomPac  = id => { const p = get('pac').find(x=>x.id===id); return p ? p.nom+' '+p.ape : '—'; };
+const nomDoc  = id => { const d = get('doc').find(x=>x.id===id); return d ? d.nom : '—'; };
+
+// ─── BADGES ───────────────────────────────────────────────────
+function bEst(e) {
+  return {pendiente:'<span class="badge by">⏳ Pendiente</span>','en proceso':'<span class="badge bb">🔄 En proceso</span>',completado:'<span class="badge bg">✅ Completado</span>'}[e]||`<span class="badge bgr">${e}</span>`;
+}
+function bPago(e) {
+  return {pendiente:'<span class="badge br">Sin pago</span>',parcial:'<span class="badge by">Parcial</span>',pagado:'<span class="badge bg">✅ Saldado</span>'}[e]||`<span class="badge bgr">${e}</span>`;
+}
+function bCom(e) {
+  return {pendiente:'<span class="badge by">⏳ Pendiente</span>',listo:'<span class="badge bb">💰 Listo</span>',pagado:'<span class="badge bg">✅ Pagado</span>'}[e]||`<span class="badge bgr">${e}</span>`;
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────
+const PAGES = {
+  dashboard:    ['Dashboard','Resumen general del consultorio'],
+  pacientes:    ['Pacientes','Gestión de pacientes registrados'],
+  tratamientos: ['Tratamientos','Control de tratamientos y procedimientos'],
+  cobranza:     ['Cobranza','Seguimiento de pagos y deudas'],
+  doctores:     ['Doctores','Personal médico del consultorio'],
+  comisiones:   ['Comisiones','Control de comisiones por tratamientos'],
+};
+function nav(p) {
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.querySelector(`[onclick="nav('${p}')"]`).classList.add('active');
+  document.getElementById('tb-title').textContent = PAGES[p][0];
+  document.getElementById('tb-sub').textContent   = PAGES[p][1];
+  ({dashboard:renderDash,pacientes:renderPacientes,tratamientos:()=>{fillDocFilter('f-trat-doc');renderTratamientos()},cobranza:renderCobranza,doctores:renderDoctores,comisiones:()=>{fillDocFilter('f-com-doc');renderComisiones()}})[p]();
+}
+
+// ─── DASHBOARD ────────────────────────────────────────────────
+function renderDash() {
+  const pacs = get('pac'), trts = get('trat'), pags = get('pag'), coms = get('com');
+  const totalPag = pags.reduce((s,p)=>s+Number(p.monto),0);
+  const deudaTotal = trts.reduce((s,t)=>s+deudaTrat(t),0);
+  const activos = trts.filter(t=>t.est!=='completado').length;
+  const comPend = coms.filter(c=>c.est==='pendiente'||c.est==='listo').reduce((s,c)=>s+Number(c.monto),0);
+  document.getElementById('kpis').innerHTML = `
+    <div class="kpi-card" style="border-top:3px solid var(--blue)">
+      <div class="kpi-label">Pacientes</div><div class="kpi-value">${pacs.length}</div><div class="kpi-sub">Registrados</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid var(--green)">
+      <div class="kpi-label">Ingresos Cobrados</div><div class="kpi-value" style="font-size:19px">${Bs(totalPag)}</div><div class="kpi-sub">${pags.length} pago(s)</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid var(--red)">
+      <div class="kpi-label">Deuda Pendiente</div><div class="kpi-value" style="font-size:19px;color:var(--red)">${Bs(deudaTotal)}</div><div class="kpi-sub">Por cobrar</div>
+    </div>
+    <div class="kpi-card" style="border-top:3px solid var(--yellow)">
+      <div class="kpi-label">Comisiones x Pagar</div><div class="kpi-value" style="font-size:19px;color:var(--yellow)">${Bs(comPend)}</div><div class="kpi-sub">${activos} trat. activo(s)</div>
+    </div>`;
+  const conDeuda = pacs.map(p=>({...p,deuda:deudaPac(p.id)})).filter(p=>p.deuda>0).sort((a,b)=>b.deuda-a.deuda).slice(0,5);
+  document.getElementById('dash-deudas').innerHTML = conDeuda.length
+    ? `<table><thead><tr><th>Paciente</th><th>Deuda</th></tr></thead><tbody>${conDeuda.map(p=>`<tr><td>${p.nom} ${p.ape}</td><td><strong style="color:var(--red)">${Bs(p.deuda)}</strong></td></tr>`).join('')}</tbody></table>`
+    : '<div class="empty"><div class="empty-icon">✅</div><p>Sin deudas pendientes</p></div>';
+  const acts = trts.filter(t=>t.est!=='completado').slice(0,5);
+  document.getElementById('dash-tratos').innerHTML = acts.length
+    ? `<table><thead><tr><th>Paciente</th><th>Tratamiento</th><th>Estado</th></tr></thead><tbody>${acts.map(t=>`<tr><td>${nomPac(t.pid)}</td><td>${t.nom}</td><td>${bEst(t.est)}</td></tr>`).join('')}</tbody></table>`
+    : '<div class="empty"><div class="empty-icon">🦷</div><p>Sin tratamientos activos</p></div>';
+}
+
+// ─── PACIENTES ────────────────────────────────────────────────
+function renderPacientes() {
+  const q = (document.getElementById('q-pac')?.value||'').toLowerCase();
+  const fe = document.getElementById('f-pac-est')?.value||'';
+  let list = get('pac').map(p=>({...p,deuda:deudaPac(p.id)}));
+  if(q) list=list.filter(p=>`${p.nom} ${p.ape} ${p.ci||''} ${p.tel}`.toLowerCase().includes(q));
+  if(fe==='deuda') list=list.filter(p=>p.deuda>0);
+  if(fe==='ok') list=list.filter(p=>p.deuda<=0);
+  list.sort((a,b)=>`${a.nom} ${a.ape}`.localeCompare(`${b.nom} ${b.ape}`));
+  document.getElementById('t-pacientes').innerHTML = list.length ? `
+    <table>
+      <thead><tr><th>Nombre</th><th>C.I.</th><th>Teléfono</th><th>Deuda</th><th>Estado</th><th style="width:100px">Acciones</th></tr></thead>
+      <tbody>${list.map(p=>`
+        <tr>
+          <td><div style="font-weight:600">${p.nom} ${p.ape}</div>${p.email?`<div style="font-size:11px;color:var(--gray-400)">${p.email}</div>`:''}</td>
+          <td>${p.ci||'—'}</td><td>${p.tel}</td>
+          <td><strong ${p.deuda>0?'style="color:var(--red)"':''}>${Bs(p.deuda)}</strong></td>
+          <td>${p.deuda>0?'<span class="badge br">Con deuda</span>':'<span class="badge bg">Al día</span>'}</td>
+          <td><div class="actions">
+            <button class="btn btn-sm btn-ghost" title="Ver ficha" onclick="verPaciente('${p.id}')">👁</button>
+            <button class="btn btn-sm btn-ghost" title="Editar" onclick="openPaciente('${p.id}')">✏️</button>
+            <button class="btn btn-sm btn-ghost" title="Eliminar" onclick="delPaciente('${p.id}')">🗑</button>
+          </div></td>
+        </tr>`).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">👤</div><p>No hay pacientes registrados.</p></div>';
+}
+function openPaciente(id=null) {
+  const f = ['id','nom','ape','ci','fnac','tel','email','dir','notas'];
+  f.forEach(x=>document.getElementById('mp-'+x).value='');
+  if(id) {
+    const p=get('pac').find(x=>x.id===id); if(!p) return;
+    document.getElementById('mp-id').value=p.id; document.getElementById('mp-nom').value=p.nom;
+    document.getElementById('mp-ape').value=p.ape; document.getElementById('mp-ci').value=p.ci||'';
+    document.getElementById('mp-fnac').value=p.fnac||''; document.getElementById('mp-tel').value=p.tel;
+    document.getElementById('mp-email').value=p.email||''; document.getElementById('mp-dir').value=p.dir||'';
+    document.getElementById('mp-notas').value=p.notas||'';
+    document.getElementById('mp-ttl').textContent='Editar Paciente';
+  } else document.getElementById('mp-ttl').textContent='Nuevo Paciente';
+  openOv('ov-pac');
+}
+function savePaciente() {
+  const nom=document.getElementById('mp-nom').value.trim(), ape=document.getElementById('mp-ape').value.trim(), tel=document.getElementById('mp-tel').value.trim();
+  if(!nom||!ape||!tel){alert('Nombre, apellido y teléfono son obligatorios.');return;}
+  const list=get('pac'), id=document.getElementById('mp-id').value;
+  const d={id:id||uid(),nom,ape,ci:document.getElementById('mp-ci').value.trim(),fnac:document.getElementById('mp-fnac').value,tel,email:document.getElementById('mp-email').value.trim(),dir:document.getElementById('mp-dir').value.trim(),notas:document.getElementById('mp-notas').value.trim()};
+  if(id){const i=list.findIndex(x=>x.id===id);list[i]={...list[i],...d};}else list.push(d);
+  set('pac',list); closeOv('ov-pac'); renderPacientes();
+}
+function delPaciente(id) {
+  const p=get('pac').find(x=>x.id===id);
+  if(!confirm(`¿Eliminar a ${p.nom} ${p.ape}? Se borrarán sus tratamientos y pagos.`)) return;
+  const tids=get('trat').filter(t=>t.pid===id).map(t=>t.id);
+  set('pac',get('pac').filter(x=>x.id!==id)); set('trat',get('trat').filter(t=>t.pid!==id));
+  set('pag',get('pag').filter(p=>!tids.includes(p.tid))); set('com',get('com').filter(c=>!tids.includes(c.tid)));
+  renderPacientes();
+}
+function verPaciente(id) {
+  const p=get('pac').find(x=>x.id===id); if(!p) return;
+  const trts=get('trat').filter(t=>t.pid===id);
+  const totalPag=get('pag').filter(pg=>trts.some(t=>t.id===pg.tid)).reduce((s,p)=>s+Number(p.monto),0);
+  const totalPrecio=trts.reduce((s,t)=>s+Number(t.precio),0);
+  const deuda=deudaPac(id);
+  let edad=''; if(p.fnac){const d=new Date()-new Date(p.fnac+'T12:00:00');edad=`(${Math.floor(d/(365.25*24*3600*1000))} años)`;}
+  document.getElementById('mdet-ttl').textContent=`${p.nom} ${p.ape}`;
+  document.getElementById('mdet-body').innerHTML=`
+    <div class="dg" style="margin-bottom:20px">
+      <div class="di"><label>C.I.</label><p>${p.ci||'—'}</p></div>
+      <div class="di"><label>Nacimiento</label><p>${fmtD(p.fnac)} ${edad}</p></div>
+      <div class="di"><label>Teléfono</label><p>${p.tel}</p></div>
+      <div class="di"><label>Email</label><p>${p.email||'—'}</p></div>
+      <div class="di"><label>Dirección</label><p>${p.dir||'—'}</p></div>
+      <div class="di"><label>Saldo</label><p style="font-weight:700;color:${deuda>0?'var(--red)':'var(--green)'}">${Bs(deuda)}</p></div>
+    </div>
+    ${p.notas?`<div class="alert alert-info" style="margin-bottom:18px"><strong>Notas:</strong> ${p.notas}</div>`:''}
+    <div class="sum-box" style="margin-bottom:20px">
+      <div class="sum-item"><div class="s-lbl">Facturado</div><div class="s-val">${Bs(totalPrecio)}</div></div>
+      <div class="sum-item"><div class="s-lbl">Cobrado</div><div class="s-val" style="color:var(--green)">${Bs(totalPag)}</div></div>
+      <div class="sum-item"><div class="s-lbl">Pendiente</div><div class="s-val" style="color:${deuda>0?'var(--red)':'var(--green)'}">${Bs(deuda)}</div></div>
+    </div>
+    <strong>Tratamientos (${trts.length})</strong>
+    ${trts.length?`<table style="margin-top:10px">
+      <thead><tr><th>Tratamiento</th><th>Doctor</th><th>Precio</th><th>Pagado</th><th>Pago</th><th>Estado</th></tr></thead>
+      <tbody>${trts.map(t=>{const pg=pagadoTrat(t.id);return`<tr><td>${t.nom}</td><td>${nomDoc(t.did)}</td><td>${Bs(t.precio)}</td><td>${Bs(pg)}</td><td>${bPago(estadoPagoTrat(t))}</td><td>${bEst(t.est)}</td></tr>`;}).join('')}</tbody>
+    </table>`:'<p style="color:var(--gray-400);font-size:13px;margin-top:8px">Sin tratamientos.</p>'}`;
+  openOv('ov-det');
+}
+
+// ─── TRATAMIENTOS ─────────────────────────────────────────────
+function fillDocFilter(selId) {
+  const sel=document.getElementById(selId); if(!sel) return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Todos los doctores</option>'+get('doc').map(d=>`<option value="${d.id}"${d.id===cur?' selected':''}>${d.nom}</option>`).join('');
+}
+function renderTratamientos() {
+  const q=(document.getElementById('q-trat')?.value||'').toLowerCase();
+  const fe=document.getElementById('f-trat-est')?.value||'';
+  const fd=document.getElementById('f-trat-doc')?.value||'';
+  let list=get('trat');
+  if(q) list=list.filter(t=>`${t.nom} ${nomPac(t.pid)}`.toLowerCase().includes(q));
+  if(fe) list=list.filter(t=>t.est===fe);
+  if(fd) list=list.filter(t=>t.did===fd);
+  list.sort((a,b)=>(b.finicio||'').localeCompare(a.finicio||''));
+  document.getElementById('t-tratamientos').innerHTML = list.length ? `
+    <table>
+      <thead><tr><th>Paciente</th><th>Tratamiento</th><th>Doctor</th><th>Precio</th><th>Pagado</th><th>Deuda</th><th>Estado</th><th style="width:120px">Acciones</th></tr></thead>
+      <tbody>${list.map(t=>{
+        const pg=pagadoTrat(t.id),deu=deudaTrat(t);
+        return`<tr>
+          <td>${nomPac(t.pid)}</td>
+          <td><div style="font-weight:600">${t.nom}</div>${t.desc?`<div style="font-size:11px;color:var(--gray-400)">${t.desc.slice(0,40)}${t.desc.length>40?'...':''}</div>`:''}</td>
+          <td>${nomDoc(t.did)}</td>
+          <td>${Bs(t.precio)}</td>
+          <td style="color:var(--green)">${Bs(pg)}</td>
+          <td>${deu>0?`<strong style="color:var(--red)">${Bs(deu)}</strong>`:'<span style="color:var(--green)">✓</span>'}</td>
+          <td>${bEst(t.est)}</td>
+          <td><div class="actions">
+            ${deu>0?`<button class="btn btn-sm btn-success" onclick="openPago('${t.id}')">💰</button>`:''}
+            <button class="btn btn-sm btn-ghost" onclick="openTratamiento('${t.id}')">✏️</button>
+            <button class="btn btn-sm btn-ghost" onclick="delTratamiento('${t.id}')">🗑</button>
+          </div></td>
+        </tr>`;}).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">🔧</div><p>No hay tratamientos registrados.</p></div>';
+}
+function openTratamiento(id=null) {
+  const docs=get('doc'), pacs=get('pac');
+  if(!docs.length){alert('Primero registra un doctor.');nav('doctores');return;}
+  if(!pacs.length){alert('Primero registra un paciente.');nav('pacientes');return;}
+  document.getElementById('mt-pac').innerHTML=pacs.sort((a,b)=>`${a.nom} ${a.ape}`.localeCompare(`${b.nom} ${b.ape}`)).map(p=>`<option value="${p.id}">${p.nom} ${p.ape}</option>`).join('');
+  document.getElementById('mt-doc').innerHTML=docs.map(d=>`<option value="${d.id}">${d.nom}</option>`).join('');
+  ['id','nom','precio','desc'].forEach(x=>document.getElementById('mt-'+x).value='');
+  document.getElementById('mt-finicio').value=new Date().toISOString().split('T')[0];
+  document.getElementById('mt-est').value='pendiente';
+  if(id) {
+    const t=get('trat').find(x=>x.id===id); if(!t) return;
+    document.getElementById('mt-ttl').textContent='Editar Tratamiento';
+    document.getElementById('mt-id').value=t.id; document.getElementById('mt-pac').value=t.pid;
+    document.getElementById('mt-doc').value=t.did; document.getElementById('mt-nom').value=t.nom;
+    document.getElementById('mt-precio').value=t.precio; document.getElementById('mt-finicio').value=t.finicio||'';
+    document.getElementById('mt-est').value=t.est; document.getElementById('mt-desc').value=t.desc||'';
+  } else document.getElementById('mt-ttl').textContent='Nuevo Tratamiento';
+  openOv('ov-trat');
+}
+function saveTratamiento() {
+  const nom=document.getElementById('mt-nom').value.trim(), precio=document.getElementById('mt-precio').value;
+  const pid=document.getElementById('mt-pac').value, did=document.getElementById('mt-doc').value;
+  if(!nom||!precio||!pid||!did){alert('Completa los campos obligatorios.');return;}
+  const list=get('trat'), id=document.getElementById('mt-id').value;
+  const d={id:id||uid(),pid,did,nom,precio:parseFloat(precio),finicio:document.getElementById('mt-finicio').value,est:document.getElementById('mt-est').value,desc:document.getElementById('mt-desc').value.trim()};
+  if(id){const i=list.findIndex(x=>x.id===id);list[i]={...list[i],...d};recalcCom(d.id);}
+  else{list.push(d);crearCom(d);}
+  set('trat',list); closeOv('ov-trat'); renderTratamientos();
+}
+function delTratamiento(id) {
+  if(!confirm('¿Eliminar este tratamiento? Se borrarán sus pagos y comisiones.')) return;
+  set('trat',get('trat').filter(x=>x.id!==id)); set('pag',get('pag').filter(p=>p.tid!==id)); set('com',get('com').filter(c=>c.tid!==id));
+  renderTratamientos();
+}
+
+// ─── COBRANZA ─────────────────────────────────────────────────
+function renderCobranza() {
+  const q=(document.getElementById('q-cob')?.value||'').toLowerCase();
+  const fe=document.getElementById('f-cob-est')?.value||'';
+  let list=get('trat').map(t=>{
+    const p=get('pac').find(x=>x.id===t.pid)||{};
+    const pg=pagadoTrat(t.id),deu=deudaTrat(t),epg=estadoPagoTrat(t);
+    return{...t,pnom:`${p.nom||''} ${p.ape||''}`.trim(),pg,deu,epg};
+  });
+  if(q) list=list.filter(x=>(x.pnom+x.nom).toLowerCase().includes(q));
+  if(fe) list=list.filter(x=>x.epg===fe);
+  list.sort((a,b)=>b.deu-a.deu);
+  const totP=list.reduce((s,x)=>s+Number(x.precio),0),totPg=list.reduce((s,x)=>s+x.pg,0),totD=list.reduce((s,x)=>s+x.deu,0),sinP=list.filter(x=>x.epg==='pendiente').length;
+  document.getElementById('sum-cob').innerHTML=`
+    <div class="sum-item"><div class="s-lbl">Facturado</div><div class="s-val">${Bs(totP)}</div></div>
+    <div class="sum-item"><div class="s-lbl">Cobrado</div><div class="s-val" style="color:var(--green)">${Bs(totPg)}</div></div>
+    <div class="sum-item"><div class="s-lbl">Por Cobrar</div><div class="s-val" style="color:var(--red)">${Bs(totD)}</div></div>
+    <div class="sum-item"><div class="s-lbl">Sin Pago</div><div class="s-val">${sinP}</div></div>`;
+  document.getElementById('t-cobranza').innerHTML = list.length ? `
+    <table>
+      <thead><tr><th>Paciente</th><th>Tratamiento</th><th>Total</th><th>Pagado</th><th>Deuda</th><th>Avance</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>${list.map(t=>{
+        const pct=Number(t.precio)>0?Math.min(100,(t.pg/Number(t.precio))*100):0;
+        const color=pct>=100?'var(--green)':pct>50?'var(--blue)':'var(--yellow)';
+        return`<tr>
+          <td style="font-weight:600">${t.pnom}</td>
+          <td>${t.nom}</td><td>${Bs(t.precio)}</td>
+          <td style="color:var(--green)">${Bs(t.pg)}</td>
+          <td>${t.deu>0?`<strong style="color:var(--red)">${Bs(t.deu)}</strong>`:'<span style="color:var(--green)">✓</span>'}</td>
+          <td style="min-width:90px"><div style="display:flex;align-items:center;gap:6px">
+            <div class="progress" style="flex:1"><div class="pf" style="width:${pct}%;background:${color}"></div></div>
+            <span style="font-size:11px;color:var(--gray-500)">${Math.round(pct)}%</span>
+          </div></td>
+          <td>${bPago(t.epg)}</td>
+          <td><div class="actions">
+            ${t.deu>0?`<button class="btn btn-sm btn-success" onclick="openPago('${t.id}')">+ Pago</button>`:''}
+            <button class="btn btn-sm btn-ghost" onclick="verPagos('${t.id}')">Historial</button>
+          </div></td>
+        </tr>`;}).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">💰</div><p>No hay registros de cobranza.</p></div>';
+}
+function openPago(tid) {
+  const t=get('trat').find(x=>x.id===tid); if(!t) return;
+  const deu=deudaTrat(t);
+  document.getElementById('mpg-tid').value=tid;
+  document.getElementById('mpg-info').innerHTML=`<strong>${nomPac(t.pid)}</strong> — ${t.nom}<br>Total: ${Bs(t.precio)} | Pagado: ${Bs(pagadoTrat(tid))} | <strong>Saldo: ${Bs(deu)}</strong>`;
+  document.getElementById('mpg-monto').value=deu.toFixed(2);
+  document.getElementById('mpg-fecha').value=new Date().toISOString().split('T')[0];
+  document.getElementById('mpg-metodo').value='efectivo';
+  document.getElementById('mpg-notas').value='';
+  openOv('ov-pago');
+}
+function savePago() {
+  const tid=document.getElementById('mpg-tid').value, monto=parseFloat(document.getElementById('mpg-monto').value), fecha=document.getElementById('mpg-fecha').value;
+  if(!monto||monto<=0||!fecha){alert('Ingresa monto y fecha válidos.');return;}
+  const t=get('trat').find(x=>x.id===tid), deu=deudaTrat(t);
+  if(monto>deu+0.01&&!confirm(`El monto ${Bs(monto)} supera la deuda ${Bs(deu)}. ¿Continuar?`)) return;
+  const pags=get('pag');
+  const numRecibo = (parseInt(localStorage.getItem('ds_recibo_num')||'0')) + 1;
+  localStorage.setItem('ds_recibo_num', numRecibo);
+  const nuevoPago = {id:uid(),tid,pid:t.pid,monto,fecha,metodo:document.getElementById('mpg-metodo').value,notas:document.getElementById('mpg-notas').value.trim(),createdAt:new Date().toISOString(),numRecibo};
+  pags.push(nuevoPago);
+  set('pag',pags);
+  if(deudaTrat(t)<=0) marcarComListo(tid);
+  closeOv('ov-pago'); renderCobranza();
+  if(confirm('✅ Pago registrado exitosamente.\n\n¿Deseas imprimir el recibo ahora?')) imprimirRecibo(nuevoPago.id);
+}
+function verPagos(tid) {
+  const t=get('trat').find(x=>x.id===tid), p=get('pac').find(x=>x.id===t.pid)||{};
+  const pags=get('pag').filter(pg=>pg.tid===tid).sort((a,b)=>b.fecha.localeCompare(a.fecha));
+  document.getElementById('mdet-ttl').textContent=`Pagos — ${p.nom||''} ${p.ape||''}`;
+  document.getElementById('mdet-body').innerHTML=`
+    <div class="alert alert-info" style="margin-bottom:16px">
+      <strong>${t.nom}</strong> | Precio: ${Bs(t.precio)} | Pagado: ${Bs(pagadoTrat(tid))} | Saldo: ${Bs(deudaTrat(t))}
+    </div>
+    ${pags.length?`<table>
+      <thead><tr><th>Fecha</th><th>Monto</th><th>Método</th><th>Notas</th><th></th></tr></thead>
+      <tbody>${pags.map(pg=>`<tr>
+        <td>${fmtD(pg.fecha)}<br><span style="font-size:10px;color:var(--gray-400)">Recibo #${pg.numRecibo?String(pg.numRecibo).padStart(4,'0'):pg.id.slice(-4).toUpperCase()}</span></td>
+        <td><strong style="color:var(--green)">${Bs(pg.monto)}</strong></td>
+        <td style="text-transform:capitalize">${pg.metodo}</td><td>${pg.notas||'—'}</td>
+        <td><div class="actions">
+          <button class="btn btn-sm btn-ghost" title="Imprimir recibo" onclick="imprimirRecibo('${pg.id}')">🧾</button>
+          <button class="btn btn-sm btn-ghost" title="Eliminar pago" onclick="delPago('${pg.id}','${tid}')">🗑</button>
+        </div></td>
+      </tr>`).join('')}</tbody>
+    </table>`:'<div class="empty" style="padding:24px"><p>Sin pagos registrados.</p></div>'}
+    <div style="margin-top:14px">
+      ${deudaTrat(t)>0?`<button class="btn btn-success btn-sm" onclick="closeOv('ov-det');openPago('${tid}')">+ Registrar Pago</button>`:''}
+    </div>`;
+  openOv('ov-det');
+}
+function delPago(pid,tid) {
+  if(!confirm('¿Eliminar este pago?')) return;
+  set('pag',get('pag').filter(p=>p.id!==pid));
+  const coms=get('com'), i=coms.findIndex(c=>c.tid===tid&&c.est==='listo');
+  if(i!==-1){coms[i].est='pendiente';set('com',coms);}
+  closeOv('ov-det'); renderCobranza();
+}
+
+// ─── RECIBO ───────────────────────────────────────────────────
+function resetDB() {
+  if(!confirm('⚠ ¿Seguro que quieres borrar TODOS los datos?\n\nEsto eliminará pacientes, tratamientos, pagos, doctores y comisiones. Esta acción no se puede deshacer.')) return;
+  ['pac','trat','pag','doc','com'].forEach(k => localStorage.removeItem(K[k]));
+  localStorage.removeItem('ds_recibo_num');
+  alert('✅ Base de datos limpiada.');
+  nav('dashboard');
+}
+
+function configurarClinica() {
+  const actual = localStorage.getItem('ds_clinica') || '';
+  const nuevo = prompt('Nombre del consultorio (aparece en el recibo):', actual);
+  if(nuevo !== null) localStorage.setItem('ds_clinica', nuevo.trim() || 'Consultorio Dental');
+}
+
+function imprimirRecibo(pagoId) {
+  const pg = get('pag').find(x=>x.id===pagoId); if(!pg){alert('Pago no encontrado.');return;}
+  const t  = get('trat').find(x=>x.id===pg.tid)||{};
+  const p  = get('pac').find(x=>x.id===pg.pid)||{};
+  const d  = get('doc').find(x=>x.id===t.did)||{};
+  const totalPagado = pagadoTrat(t.id);
+  const pagadoAntes = totalPagado - pg.monto;
+  const saldo = Math.max(0, Number(t.precio||0) - totalPagado);
+  const clinica = localStorage.getItem('ds_clinica') || 'Consultorio Dental';
+  const num = pg.numRecibo ? String(pg.numRecibo).padStart(4,'0') : pg.id.slice(-4).toUpperCase();
+  const metodoLabel = {efectivo:'Efectivo',transferencia:'Transferencia bancaria',tarjeta:'Tarjeta de débito/crédito',qr:'QR / Billetera digital'}[pg.metodo]||pg.metodo;
+
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Recibo #${num}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',sans-serif;font-size:13px;color:#1e293b;padding:30px;max-width:420px;margin:0 auto}
+    .hd{text-align:center;margin-bottom:18px;border-bottom:2px solid #0e6ba8;padding-bottom:14px}
+    .logo{font-size:22px;font-weight:700;color:#0a4f7e}
+    .logo span{color:#0e6ba8}
+    .hd-sub{font-size:11px;color:#64748b;margin-top:3px}
+    h2{font-size:15px;text-align:center;margin:14px 0 4px;color:#0a4f7e;text-transform:uppercase;letter-spacing:1px}
+    .num{text-align:center;font-size:12px;color:#64748b;margin-bottom:18px}
+    .sec{margin-bottom:14px}
+    .sec-t{font-size:10px;font-weight:700;text-transform:uppercase;color:#94a3b8;letter-spacing:.5px;border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-bottom:7px}
+    .row{display:flex;justify-content:space-between;padding:3px 0;font-size:12.5px}
+    .lbl{color:#64748b}.val{font-weight:600;text-align:right;max-width:60%}
+    .total-box{background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:14px;margin:16px 0;text-align:center}
+    .t-lbl{font-size:11px;color:#0369a1;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .t-val{font-size:30px;font-weight:700;color:#0a4f7e;margin-top:4px}
+    .estado{text-align:center;font-size:12px;font-weight:600;padding:6px;border-radius:6px;margin-top:8px}
+    .ok{background:#dcfce7;color:#16a34a}.pend{background:#fef3c7;color:#d97706}
+    .firmas{display:flex;justify-content:space-around;margin-top:32px}
+    .firma{text-align:center;font-size:11px;color:#64748b}
+    .fline{width:120px;border-top:1px solid #94a3b8;margin:0 auto 5px;padding-top:3px}
+    .ft{margin-top:20px;text-align:center;border-top:1px dashed #cbd5e1;padding-top:14px;font-size:11px;color:#94a3b8}
+    .print-btn{display:block;margin:20px auto 0;padding:10px 32px;background:#0e6ba8;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit}
+    @media print{.print-btn{display:none}body{padding:10px}}
+  </style></head><body>
+  <div class="hd">
+    <div class="logo">🦷 <span>${clinica}</span></div>
+    <div class="hd-sub">Servicio de Atención Odontológica</div>
+  </div>
+  <h2>Recibo de Pago</h2>
+  <div class="num">N° <strong>${num}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;${fmtD(pg.fecha)}</div>
+
+  <div class="sec">
+    <div class="sec-t">Datos del Paciente</div>
+    <div class="row"><span class="lbl">Paciente</span><span class="val">${p.nom||''} ${p.ape||''}</span></div>
+    ${p.ci?`<div class="row"><span class="lbl">C.I.</span><span class="val">${p.ci}</span></div>`:''}
+    ${p.tel?`<div class="row"><span class="lbl">Teléfono</span><span class="val">${p.tel}</span></div>`:''}
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Detalle del Servicio</div>
+    <div class="row"><span class="lbl">Tratamiento</span><span class="val">${t.nom||'—'}</span></div>
+    ${d.nom?`<div class="row"><span class="lbl">Doctor</span><span class="val">${d.nom}</span></div>`:''}
+    <div class="row"><span class="lbl">Precio total del tratamiento</span><span class="val">${Bs(t.precio||0)}</span></div>
+    <div class="row"><span class="lbl">Pagado anteriormente</span><span class="val">${Bs(Math.max(0,pagadoAntes))}</span></div>
+  </div>
+
+  <div class="total-box">
+    <div class="t-lbl">Monto Recibido en Este Pago</div>
+    <div class="t-val">${Bs(pg.monto)}</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Método de Pago</div>
+    <div class="row"><span class="lbl">Método</span><span class="val">${metodoLabel}</span></div>
+    ${pg.notas?`<div class="row"><span class="lbl">Referencia</span><span class="val">${pg.notas}</span></div>`:''}
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Estado de Cuenta</div>
+    <div class="row"><span class="lbl">Total cobrado a la fecha</span><span class="val" style="color:#16a34a">${Bs(totalPagado)}</span></div>
+    <div class="row"><span class="lbl">Saldo pendiente</span><span class="val" style="color:${saldo>0?'#d97706':'#16a34a'}">${Bs(saldo)}</span></div>
+  </div>
+  <div class="estado ${saldo<=0?'ok':'pend'}">${saldo<=0?'✅ Tratamiento completamente saldado':'⚠ Saldo pendiente: '+Bs(saldo)}</div>
+
+  <div class="firmas">
+    <div class="firma"><div class="fline">Firma / Sello</div>Consultorio</div>
+    <div class="firma"><div class="fline">Firma</div>Paciente</div>
+  </div>
+
+  <div class="ft">
+    <p>Documento emitido por DentaSoft</p>
+    <p style="margin-top:4px">${new Date().toLocaleString('es-BO')}</p>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨&nbsp; Imprimir Recibo</button>
+  <script>setTimeout(()=>window.print(),500);<\/script>
+  </body></html>`;
+
+  const w = window.open('','_blank','width=520,height=760');
+  if(!w){alert('El navegador bloqueó la ventana emergente. Permite pop-ups para este sitio.');return;}
+  w.document.write(html);
+  w.document.close();
+}
+
+// ─── DOCTORES ─────────────────────────────────────────────────
+function renderDoctores() {
+  const q=(document.getElementById('q-doc')?.value||'').toLowerCase();
+  let list=get('doc'); if(q) list=list.filter(d=>d.nom.toLowerCase().includes(q));
+  document.getElementById('t-doctores').innerHTML = list.length ? `
+    <table>
+      <thead><tr><th>Nombre</th><th>Especialidad</th><th>Teléfono</th><th>Email</th><th>% Comisión</th><th>Tratamientos</th><th style="width:80px">Acciones</th></tr></thead>
+      <tbody>${list.map(d=>{
+        const n=get('trat').filter(t=>t.did===d.id).length;
+        return`<tr>
+          <td style="font-weight:600">${d.nom}</td><td>${d.esp||'—'}</td><td>${d.tel||'—'}</td><td>${d.email||'—'}</td>
+          <td><span class="badge bb">${d.com}%</span></td><td>${n}</td>
+          <td><div class="actions">
+            <button class="btn btn-sm btn-ghost" onclick="openDoctor('${d.id}')">✏️</button>
+            <button class="btn btn-sm btn-ghost" onclick="delDoctor('${d.id}')">🗑</button>
+          </div></td>
+        </tr>`;}).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">👨‍⚕️</div><p>No hay doctores registrados. Agrega uno para comenzar.</p></div>';
+}
+function openDoctor(id=null) {
+  ['id','nom','esp','tel','email','com'].forEach(x=>document.getElementById('md-'+x).value='');
+  if(id) {
+    const d=get('doc').find(x=>x.id===id); if(!d) return;
+    document.getElementById('md-ttl').textContent='Editar Doctor';
+    document.getElementById('md-id').value=d.id; document.getElementById('md-nom').value=d.nom;
+    document.getElementById('md-esp').value=d.esp||''; document.getElementById('md-tel').value=d.tel||'';
+    document.getElementById('md-email').value=d.email||''; document.getElementById('md-com').value=d.com;
+  } else document.getElementById('md-ttl').textContent='Nuevo Doctor';
+  openOv('ov-doc');
+}
+function saveDoctor() {
+  const nom=document.getElementById('md-nom').value.trim(), com=document.getElementById('md-com').value;
+  if(!nom||com===''){alert('Nombre y % de comisión son obligatorios.');return;}
+  const list=get('doc'), id=document.getElementById('md-id').value;
+  const d={id:id||uid(),nom,esp:document.getElementById('md-esp').value.trim(),tel:document.getElementById('md-tel').value.trim(),email:document.getElementById('md-email').value.trim(),com:parseFloat(com)};
+  if(id){const i=list.findIndex(x=>x.id===id);list[i]={...list[i],...d};recalcComDoctor(id,d.com);}
+  else list.push(d);
+  set('doc',list); closeOv('ov-doc'); renderDoctores();
+}
+function delDoctor(id) {
+  const d=get('doc').find(x=>x.id===id);
+  if(!confirm(`¿Eliminar al doctor ${d.nom}?`)) return;
+  set('doc',get('doc').filter(x=>x.id!==id)); set('com',get('com').filter(c=>c.did!==id));
+  renderDoctores();
+}
+
+// ─── COMISIONES ───────────────────────────────────────────────
+function crearCom(t) {
+  const doc=get('doc').find(d=>d.id===t.did); if(!doc) return;
+  const monto=(Number(t.precio)*doc.com)/100;
+  const list=get('com').filter(c=>c.tid!==t.id);
+  list.push({id:uid(),did:t.did,tid:t.id,pid:t.pid,monto,fecha:t.finicio||new Date().toISOString().split('T')[0],est:'pendiente'});
+  set('com',list);
+}
+function recalcCom(tid) { const t=get('trat').find(x=>x.id===tid); if(t) crearCom(t); }
+function recalcComDoctor(did,nuevoPct) {
+  const coms=get('com');
+  coms.forEach(c=>{if(c.did===did&&c.est==='pendiente'){const t=get('trat').find(x=>x.id===c.tid);if(t)c.monto=(Number(t.precio)*nuevoPct)/100;}});
+  set('com',coms);
+}
+function marcarComListo(tid) {
+  const coms=get('com'), i=coms.findIndex(c=>c.tid===tid);
+  if(i!==-1&&coms[i].est==='pendiente'){coms[i].est='listo';set('com',coms);}
+}
+function renderComisiones() {
+  const fd=document.getElementById('f-com-doc')?.value||'';
+  const fe=document.getElementById('f-com-est')?.value||'';
+  let list=get('com').map(c=>{
+    const d=get('doc').find(x=>x.id===c.did)||{}, t=get('trat').find(x=>x.id===c.tid)||{}, p=get('pac').find(x=>x.id===c.pid)||{};
+    return{...c,dnom:d.nom||'—',tnom:t.nom||'—',pnom:`${p.nom||''} ${p.ape||''}`.trim()};
+  });
+  if(fd) list=list.filter(c=>c.did===fd);
+  if(fe) list=list.filter(c=>c.est===fe);
+  list.sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
+  const pend=list.filter(c=>c.est==='pendiente').reduce((s,c)=>s+Number(c.monto),0);
+  const listo=list.filter(c=>c.est==='listo').reduce((s,c)=>s+Number(c.monto),0);
+  const pagd=list.filter(c=>c.est==='pagado').reduce((s,c)=>s+Number(c.monto),0);
+  document.getElementById('sum-com').innerHTML=`
+    <div class="sum-item"><div class="s-lbl">En proceso (trat. activos)</div><div class="s-val" style="color:var(--yellow)">${Bs(pend)}</div></div>
+    <div class="sum-item"><div class="s-lbl">Listo para pagar</div><div class="s-val" style="color:var(--blue)">${Bs(listo)}</div></div>
+    <div class="sum-item"><div class="s-lbl">Comisiones pagadas</div><div class="s-val" style="color:var(--green)">${Bs(pagd)}</div></div>`;
+  document.getElementById('t-comisiones').innerHTML = list.length ? `
+    <table>
+      <thead><tr><th>Doctor</th><th>Paciente</th><th>Tratamiento</th><th>Comisión</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody>${list.map(c=>`<tr>
+        <td style="font-weight:600">${c.dnom}</td>
+        <td>${c.pnom}</td><td>${c.tnom}</td>
+        <td><strong>${Bs(c.monto)}</strong></td>
+        <td>${bCom(c.est)}</td>
+        <td>
+          ${c.est==='listo'?`<button class="btn btn-sm btn-success" onclick="pagarCom('${c.id}')">✓ Marcar Pagado</button>`:''}
+          ${c.est==='pagado'?`<span style="color:var(--gray-400);font-size:12px">Liquidado ${fmtD(c.fpago)}</span>`:''}
+        </td>
+      </tr>`).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">💵</div><p>No hay comisiones registradas.</p></div>';
+}
+function pagarCom(id) {
+  const coms=get('com'), i=coms.findIndex(c=>c.id===id);
+  if(i!==-1){coms[i].est='pagado';coms[i].fpago=new Date().toISOString().split('T')[0];}
+  set('com',coms); renderComisiones();
+}
+
+// ─── OVERLAY HELPERS ──────────────────────────────────────────
+function openOv(id)  { document.getElementById(id).classList.add('open'); }
+function closeOv(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(m=>m.classList.remove('open'));});
+
+// ─── DEMO DATA ────────────────────────────────────────────────
+function cargarDemo() {
+  if(get('doc').length||get('pac').length){alert('Ya hay datos. Limpia el localStorage primero si deseas cargar demo.');return;}
+  const d1=uid(),d2=uid();
+  set('doc',[{id:d1,nom:'Dr. Carlos Mendoza',esp:'Odontología General',tel:'76123456',email:'cmendoza@clinica.com',com:35},{id:d2,nom:'Dra. Ana Quispe',esp:'Ortodoncia',tel:'71987654',email:'aquispe@clinica.com',com:40}]);
+  const p1=uid(),p2=uid(),p3=uid();
+  set('pac',[{id:p1,nom:'María',ape:'García López',ci:'7123456',fnac:'1985-03-15',tel:'77001122',email:'mgarcia@gmail.com',dir:'Av. Cristo Redentor 123',notas:''},{id:p2,nom:'Juan',ape:'Pérez Vaca',ci:'5432167',fnac:'1992-07-20',tel:'70998877',email:'',dir:'Urb. Las Palmas',notas:'Alérgico a la penicilina'},{id:p3,nom:'Sofía',ape:'Rojas Méndez',ci:'8901234',fnac:'2001-11-05',tel:'67543210',email:'srojas@outlook.com',dir:'',notas:''}]);
+  const t1=uid(),t2=uid(),t3=uid(),t4=uid();
+  set('trat',[{id:t1,pid:p1,did:d1,nom:'Limpieza Dental',precio:150,finicio:'2026-04-10',est:'completado',desc:''},{id:t2,pid:p1,did:d2,nom:'Ortodoncia Completa',precio:2800,finicio:'2026-04-15',est:'en proceso',desc:'Brackets metálicos superior e inferior'},{id:t3,pid:p2,did:d1,nom:'Extracción',precio:200,finicio:'2026-05-02',est:'completado',desc:'Muela del juicio'},{id:t4,pid:p3,did:d2,nom:'Bracket Cerámico',precio:3200,finicio:'2026-05-08',est:'pendiente',desc:''}]);
+  set('pag',[{id:uid(),tid:t1,pid:p1,monto:150,fecha:'2026-04-10',metodo:'efectivo',notas:''},{id:uid(),tid:t2,pid:p1,monto:500,fecha:'2026-04-15',metodo:'transferencia',notas:'Pago inicial'},{id:uid(),tid:t2,pid:p1,monto:500,fecha:'2026-05-01',metodo:'qr',notas:'Cuota 2'},{id:uid(),tid:t3,pid:p2,monto:200,fecha:'2026-05-02',metodo:'efectivo',notas:''}]);
+  // Comisiones
+  const coms=[];
+  [{id:t1,pid:p1,did:d1,precio:150,finicio:'2026-04-10'},{id:t2,pid:p1,did:d2,precio:2800,finicio:'2026-04-15'},{id:t3,pid:p2,did:d1,precio:200,finicio:'2026-05-02'},{id:t4,pid:p3,did:d2,precio:3200,finicio:'2026-05-08'}].forEach(t=>{
+    const doc=get('doc').find(d=>d.id===t.did);
+    if(doc) coms.push({id:uid(),did:t.did,tid:t.id,pid:t.pid,monto:(t.precio*doc.com)/100,fecha:t.finicio,est:'pendiente'});
+  });
+  // t1 y t3 están saldados → marcar listo
+  coms.filter(c=>c.tid===t1||c.tid===t3).forEach(c=>c.est='listo');
+  set('com',coms);
+  alert('Datos de demo cargados.');
+  renderDash();
+}
+document.getElementById('tb-actions').innerHTML='<button class="btn btn-ghost btn-sm" onclick="cargarDemo()" title="Cargar datos de ejemplo">📋 Demo</button>';
+renderDash();
+</script>
+</body>
+</html>

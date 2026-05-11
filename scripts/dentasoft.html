@@ -129,6 +129,7 @@
   <div class="sb-footer" style="display:flex;flex-direction:column;gap:6px">
     <span>DentaSoft v1.0</span>
     <button onclick="configurarClinica()" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">⚙ Nombre del consultorio</button>
+    <button onclick="resetDB()" style="background:rgba(220,38,38,0.25);border:none;color:rgba(255,150,150,0.9);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">🗑 Limpiar base de datos</button>
   </div>
 </aside>
 
@@ -670,6 +671,14 @@ function delPago(pid,tid) {
 }
 
 // ─── RECIBO ───────────────────────────────────────────────────
+function resetDB() {
+  if(!confirm('⚠ ¿Seguro que quieres borrar TODOS los datos?\n\nEsto eliminará pacientes, tratamientos, pagos, doctores y comisiones. Esta acción no se puede deshacer.')) return;
+  ['pac','trat','pag','doc','com'].forEach(k => localStorage.removeItem(K[k]));
+  localStorage.removeItem('ds_recibo_num');
+  alert('✅ Base de datos limpiada.');
+  nav('dashboard');
+}
+
 function configurarClinica() {
   const actual = localStorage.getItem('ds_clinica') || '';
   const nuevo = prompt('Nombre del consultorio (aparece en el recibo):', actual);

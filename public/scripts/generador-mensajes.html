@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Mensajes — Alpha Strategy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    header {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3c5e;
+      letter-spacing: -0.3px;
+    }
+
+    header .badge {
+      background: #1a3c5e;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3c5e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1a202c;
+      background: #f7fafc;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1a3c5e;
+      background: #fff;
+    }
+
+    input::placeholder { color: #a0aec0; }
+
+    .btn-generate {
+      width: 100%;
+      padding: 12px;
+      background: #1a3c5e;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-generate:hover { background: #14304d; }
+
+    .btn-clear {
+      width: 100%;
+      padding: 9px;
+      background: transparent;
+      color: #718096;
+      font-size: 13px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.15s;
+    }
+
+    .btn-clear:hover { border-color: #a0aec0; color: #4a5568; }
+
+    /* Right panel */
+    .right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+    .message-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 3px solid #e2e8f0;
+      transition: border-color 0.2s;
+    }
+
+    .message-card.active { border-left-color: #1a3c5e; }
+
+    .message-card .msg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .msg-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #718096;
+      background: #f0f4f8;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .message-card.active .msg-tag {
+      background: #ebf4ff;
+      color: #1a3c5e;
+    }
+
+    .btn-copy {
+      padding: 6px 14px;
+      background: #1a3c5e;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-copy:hover { background: #14304d; }
+    .btn-copy.copied { background: #38a169; }
+
+    .message-card.whatsapp { border-left-color: #25d366; }
+    .message-card.whatsapp .msg-tag { background: #f0fff4; color: #276749; }
+    .message-card.whatsapp .btn-copy { background: #25d366; }
+    .message-card.whatsapp .btn-copy:hover { background: #1da851; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a0aec0;
+      padding: 4px 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .message-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #2d3748;
+      white-space: pre-wrap;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 90px;
+      border: 1.5px solid #e2e8f0;
+    }
+
+    .message-text.empty {
+      color: #a0aec0;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+    }
+
+    .char-count {
+      font-size: 11px;
+      color: #a0aec0;
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* Tracker */
+    .tracker-section {
+      max-width: 860px;
+      margin: 20px auto 0;
+    }
+
+    .tracker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .tracker-header h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3c5e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .btn-export {
+      padding: 7px 16px;
+      background: #fff;
+      color: #1a3c5e;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid #1a3c5e;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-export:hover { background: #1a3c5e; color: #fff; }
+
+    table {
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead { background: #1a3c5e; color: #fff; }
+
+    th {
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f4f8;
+      color: #2d3748;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f7fafc; }
+
+    .empty-tracker {
+      text-align: center;
+      padding: 32px;
+      color: #a0aec0;
+      font-size: 14px;
+      font-style: italic;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .status-enviado { background: #ebf4ff; color: #2b6cb0; }
+    .status-respondio { background: #f0fff4; color: #276749; }
+    .status-pendiente { background: #fffff0; color: #744210; }
+
+    select.status-select {
+      padding: 3px 8px;
+      font-size: 12px;
+      border-radius: 20px;
+      width: auto;
+    }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #e53e3e;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .btn-delete:hover { background: #fff5f5; }
+
+    .url-link {
+      color: #2b6cb0;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .url-link:hover { text-decoration: underline; }
+
+    .tip {
+      background: #ebf4ff;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #2b6cb0;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+      .scripts-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── Video Scripts Section ── */
+    .scripts-section {
+      max-width: 860px;
+      margin: 28px auto 0;
+    }
+
+    .scripts-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .scripts-section-header h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3c5e;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .scripts-section-header .badge-sonrie {
+      background: #4FC3F7;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+    }
+
+    .scripts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .script-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .script-card-header {
+      background: linear-gradient(135deg, #1a3c5e 0%, #2196F3 100%);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .script-card-header.teal {
+      background: linear-gradient(135deg, #00838F 0%, #4DD0E1 100%);
+    }
+
+    .script-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .script-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .script-badge {
+      font-size: 10px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .script-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .script-block {
+      background: #f7fafc;
+      border-radius: 8px;
+      border: 1.5px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .script-block-label {
+      background: #e2e8f0;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #4a5568;
+      padding: 4px 12px;
+    }
+
+    .script-block.direction .script-block-label { background: #fef3c7; color: #92400e; }
+    .script-block.voice .script-block-label     { background: #dbeafe; color: #1e40af; }
+    .script-block.close .script-block-label     { background: #dcfce7; color: #166534; }
+
+    .script-block-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #2d3748;
+      padding: 10px 12px;
+      white-space: pre-wrap;
+    }
+
+    .script-block.voice .script-block-text {
+      font-style: italic;
+      color: #1e3a5f;
+      font-size: 13.5px;
+    }
+
+    .script-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 18px 16px;
+    }
+
+    .btn-copy-script {
+      padding: 8px 18px;
+      background: #1a3c5e;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-copy-script:hover { background: #14304d; }
+    .btn-copy-script.copied { background: #38a169; }
+    .btn-copy-script.teal { background: #00838F; }
+    .btn-copy-script.teal:hover { background: #006064; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">Alpha Strategy Group</span>
+  <span class="badge">Generador de Mensajes</span>
+</header>
+
+<div class="container">
+
+  <!-- LEFT: Formulario -->
+  <div class="card">
+    <h2>Datos del prospecto</h2>
+
+    <div class="form-group">
+      <label>Nombre *</label>
+      <input type="text" id="nombre" placeholder="Ej: María García" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Empresa</label>
+      <input type="text" id="empresa" placeholder="Ej: Logicargo Group" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Cargo</label>
+      <input type="text" id="cargo" placeholder="Ej: Gerente General" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Sector / Industria</label>
+      <input type="text" id="sector" placeholder="Ej: logística, salud, retail" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>URL perfil LinkedIn</label>
+      <input type="url" id="url" placeholder="https://linkedin.com/in/..." />
+    </div>
+
+    <div style="border-top:1.5px dashed #e2e8f0;margin:16px 0 14px;"></div>
+    <div style="font-size:11px;font-weight:700;color:#a0aec0;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;">📢 Datos para post de caso de éxito</div>
+
+    <div class="form-group">
+      <label>Trayectoria / Dato clave</label>
+      <input type="text" id="dato" placeholder="Ej: 8 años y +3,200 envíos completados" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Servicio que prestaste</label>
+      <input type="text" id="servicio" placeholder="Ej: sistema de contenido mensual" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Resultado obtenido</label>
+      <input type="text" id="resultado" placeholder="Ej: presencia activa en 3 plataformas" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Variación recomendada</label>
+      <select id="variacion" onchange="resaltarVariacion()">
+        <option value="A">A — Dueño de empresa (LinkedIn)</option>
+        <option value="B">B — Profesional independiente (LinkedIn)</option>
+        <option value="C">C — Presencia digital débil (LinkedIn)</option>
+        <option value="WA">WA — Red dormida (WhatsApp)</option>
+      </select>
+    </div>
+
+    <button class="btn-generate" onclick="guardarProspecto()">
+      + Guardar en tracker
+    </button>
+    <button class="btn-clear" onclick="limpiarForm()">
+      Limpiar formulario
+    </button>
+
+    <div class="tip">
+      💡 Los mensajes se generan automáticamente mientras escribes. Copia el que quieras y luego guarda el prospecto en el tracker.
+    </div>
+  </div>
+
+  <!-- RIGHT: Mensajes generados -->
+  <div class="right-panel">
+
+    <div class="section-label">💼 LinkedIn — Prospección en frío</div>
+
+    <div class="message-card" id="card-A">
+      <div class="msg-header">
+        <span class="msg-tag">Variación A — Dueño de empresa</span>
+        <button class="btn-copy" onclick="copiar('msg-A', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-A">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-A"></div>
+    </div>
+
+    <div class="message-card" id="card-B">
+      <div class="msg-header">
+        <span class="msg-tag">Variación B — Profesional independiente</span>
+        <button class="btn-copy" onclick="copiar('msg-B', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-B">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-B"></div>
+    </div>
+
+    <div class="message-card" id="card-C">
+      <div class="msg-header">
+        <span class="msg-tag">Variación C — Presencia digital débil</span>
+        <button class="btn-copy" onclick="copiar('msg-C', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-C">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-C"></div>
+    </div>
+
+    <div class="section-label">📢 LinkedIn — Post de caso de éxito</div>
+
+    <div class="message-card" id="card-POST">
+      <div class="msg-header">
+        <span class="msg-tag">Post — Para publicar en tu perfil LinkedIn</span>
+        <button class="btn-copy" onclick="copiar('msg-POST', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-POST">Completa el nombre de la empresa para ver el post...</div>
+      <div class="char-count" id="chars-POST"></div>
+    </div>
+
+    <div class="section-label">💬 WhatsApp — Reactivar red dormida</div>
+
+    <div class="message-card whatsapp" id="card-WA">
+      <div class="msg-header">
+        <span class="msg-tag">WA — Red dormida (contacto que ya te conoce)</span>
+        <button class="btn-copy" onclick="copiar('msg-WA', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-WA">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-WA"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRACKER -->
+<div class="tracker-section">
+  <div class="tracker-header">
+    <h2>Tracker de prospectos</h2>
+    <button class="btn-export" onclick="exportarCSV()">Exportar CSV</button>
+  </div>
+  <div id="tracker-container">
+    <div class="empty-tracker">Todavía no has guardado ningún prospecto.</div>
+  </div>
+</div>
+
+<script>
+  let prospectos = JSON.parse(localStorage.getItem('alpha_prospectos') || '[]');
+
+  function generarMensajes() {
+    const nombre  = document.getElementById('nombre').value.trim() || '[Nombre]';
+    const empresa = document.getElementById('empresa').value.trim() || '[Empresa]';
+    const cargo   = document.getElementById('cargo').value.trim()   || '[Cargo]';
+    const sector  = document.getElementById('sector').value.trim()  || '[sector]';
+    const primerNombre = nombre.split(' ')[0];
+
+    const msgA =
+`Hola ${primerNombre}, vi que llevas tu empresa en ${sector} desde hace tiempo.
+
+Trabajo con negocios como el tuyo en Bolivia ayudándoles a conseguir clientes de forma sistemática — sin depender solo de referidos.
+
+¿Tienes 15 minutos esta semana para una llamada rápida? No es pitch, solo quiero entender si hay algo en lo que pueda ayudarte.`;
+
+    const msgB =
+`Hola ${primerNombre}, tu perfil me llamó la atención — veo que eres ${cargo} con experiencia en ${sector}.
+
+Trabajo con profesionales independientes en Bolivia que quieren posicionarse mejor y atraer clientes sin depender de la suerte o el boca a boca.
+
+¿Podríamos hablar 15 minutos? Me gustaría entender tu situación antes de comentarte cómo trabajo.`;
+
+    const msgC =
+`Hola ${primerNombre}, encontré ${empresa} buscando ${sector} en Bolivia y noté que tienen presencia digital pero podría estar trabajando más fuerte para ustedes.
+
+Ayudo a empresas medianas en Bolivia a convertir su marketing en clientes reales — no solo seguidores.
+
+¿15 minutos esta semana? Sin compromiso.`;
+
+    const dato     = document.getElementById('dato').value.trim()     || '[dato clave de la empresa]';
+    const servicio = document.getElementById('servicio').value.trim() || '[servicio que prestaste]';
+    const resultado= document.getElementById('resultado').value.trim()|| '[resultado obtenido]';
+
+    const msgPOST =
+`${empresa} tenía algo que muchos negocios en Bolivia comparten: años de trayectoria y resultados reales, pero sin una presencia digital que lo demostrara.
+
+${dato} — y nadie afuera lo sabía.
+
+Trabajamos con ellos para construir su ${servicio}:
+
+✅ Estrategia de contenido alineada a su posición real en el mercado
+✅ Voz y tono que refleja lo que son — no lo que parecen
+✅ Presencia consistente que convierte visibilidad en confianza
+
+El resultado: ${resultado}.
+
+Si tu empresa hace un buen trabajo pero nadie lo sabe — ese es exactamente el problema que resolvemos.
+
+¿Hablamos?`;
+
+    const msgWA =
+`Hola ${primerNombre}, ¿cómo estás?
+
+Te escribo porque estoy enfocando Alpha Strategy Group en ayudar a pequeñas empresas en Bolivia a conseguir más clientes y crecer.
+
+Mi pregunta es directa: ¿conoces a alguien — un dueño de negocio, emprendedor o profesional — que esté batallando con ese tema? Solo quiero tener una conversación, sin compromiso.
+
+Si se te viene alguien, te agradecería mucho una presentación por WhatsApp. Y si en algún momento puedo ayudarte a ti también, con gusto hablamos.
+
+Gracias de antemano 🙏`;
+
+    setMsg('msg-A',    'chars-A',    msgA);
+    setMsg('msg-B',    'chars-B',    msgB);
+    setMsg('msg-C',    'chars-C',    msgC);
+    setMsg('msg-POST', 'chars-POST', msgPOST);
+    setMsg('msg-WA',   'chars-WA',   msgWA);
+    resaltarVariacion();
+  }
+
+  function setMsg(id, charsId, text) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.classList.remove('empty');
+    document.getElementById(charsId).textContent = `${text.length} caracteres`;
+  }
+
+  function resaltarVariacion() {
+    const v = document.getElementById('variacion').value;
+    ['A','B','C'].forEach(x => {
+      document.getElementById('card-' + x).classList.toggle('active', x === v);
+    });
+    document.getElementById('card-WA').classList.toggle('active', v === 'WA');
+  }
+
+  function copiar(id, btn) {
+    const text = document.getElementById(id).textContent;
+    if (!text || text.includes('Completa el nombre')) return;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copiado';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copiar';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function guardarProspecto() {
+    const nombre  = document.getElementById('nombre').value.trim();
+    if (!nombre) { alert('Ingresa el nombre del prospecto.'); return; }
+
+    const prospecto = {
+      id: Date.now(),
+      nombre,
+      empresa  : document.getElementById('empresa').value.trim() || '—',
+      cargo    : document.getElementById('cargo').value.trim()   || '—',
+      sector   : document.getElementById('sector').value.trim()  || '—',
+      url      : document.getElementById('url').value.trim()     || '',
+      variacion: document.getElementById('variacion').value,
+      fecha    : new Date().toLocaleDateString('es-BO'),
+      estado   : 'Enviado',
+    };
+
+    prospectos.unshift(prospecto);
+    localStorage.setItem('alpha_prospectos', JSON.stringify(prospectos));
+    renderTracker();
+    limpiarForm();
+  }
+
+  function limpiarForm() {
+    ['nombre','empresa','cargo','sector','url','dato','servicio','resultado'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('variacion').value = 'A';
+    ['nombre','empresa','cargo','sector','url','dato','servicio','resultado'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    ['msg-A','msg-B','msg-C','msg-POST','msg-WA'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = 'Completa el nombre para ver el mensaje...';
+      el.classList.add('empty');
+    });
+    ['chars-A','chars-B','chars-C','chars-POST','chars-WA'].forEach(id => {
+      document.getElementById(id).textContent = '';
+    });
+    resaltarVariacion();
+  }
+
+  function cambiarEstado(id, val) {
+    prospectos = prospectos.map(p => p.id === id ? { ...p, estado: val } : p);
+    localStorage.setItem('alpha_prospectos', JSON.stringify(prospectos));
+    renderTracker();
+  }
+
+  function eliminar(id) {
+    if (!confirm('¿Eliminar este prospecto?')) return;
+    prospectos = prospectos.filter(p => p.id !== id);
+    localStorage.setItem('alpha_prospectos', JSON.stringify(prospectos));
+    renderTracker();
+  }
+
+  function estadoBadgeClass(e) {
+    if (e === 'Respondió') return 'status-respondio';
+    if (e === 'Enviado')   return 'status-enviado';
+    return 'status-pendiente';
+  }
+
+  function renderTracker() {
+    const container = document.getElementById('tracker-container');
+    if (prospectos.length === 0) {
+      container.innerHTML = '<div class="empty-tracker">Todavía no has guardado ningún prospecto.</div>';
+      return;
+    }
+
+    const estados = ['Enviado','Respondió','En conversación','Llamada agendada','Cerrado','No interesado'];
+
+    const rows = prospectos.map(p => `
+      <tr>
+        <td><strong>${p.nombre}</strong></td>
+        <td>${p.empresa}</td>
+        <td style="color:#718096;font-size:12px">${p.cargo}</td>
+        <td style="color:#718096;font-size:12px">${p.sector}</td>
+        <td><span style="background:#f0f4f8;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700">${p.variacion}</span></td>
+        <td style="color:#718096;font-size:12px">${p.fecha}</td>
+        <td>
+          <select class="status-select" onchange="cambiarEstado(${p.id}, this.value)">
+            ${estados.map(e => `<option value="${e}" ${p.estado===e?'selected':''}>${e}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          ${p.url
+            ? `<a class="url-link" href="${p.url}" target="_blank">Ver perfil ↗</a>`
+            : '<span style="color:#a0aec0;font-size:12px">—</span>'}
+        </td>
+        <td><button class="btn-delete" onclick="eliminar(${p.id})">×</button></td>
+      </tr>
+    `).join('');
+
+    container.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th><th>Empresa</th><th>Cargo</th><th>Sector</th>
+            <th>Var.</th><th>Fecha</th><th>Estado</th><th>Perfil</th><th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function exportarCSV() {
+    if (prospectos.length === 0) { alert('No hay prospectos guardados.'); return; }
+    const headers = ['Nombre','Empresa','Cargo','Sector','Variación','Fecha','Estado','URL'];
+    const rows = prospectos.map(p =>
+      [p.nombre, p.empresa, p.cargo, p.sector, p.variacion, p.fecha, p.estado, p.url]
+        .map(v => `"${(v||'').replace(/"/g,'""')}"`)
+        .join(',')
+    );
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `prospectos-alpha-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+  }
+
+  // Init
+  resaltarVariacion();
+  renderTracker();
+</script>
+
+</body>
+</html>

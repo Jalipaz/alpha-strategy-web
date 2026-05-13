@@ -996,63 +996,151 @@
   </section>
 
   <!-- ─── CONTACTO ─── -->
-  <section class="form-section" id="contacto" style="padding:96px 24px;">
+  <section class="form-section" id="contacto">
     <div class="container">
-      <div style="text-align:center;margin-bottom:48px;">
-        <div class="section-label">¿Te interesa?</div>
-        <h2 class="section-title">Déjanos tu número<br/>y nosotros te llamamos</h2>
-        <p class="section-sub" style="margin:0 auto;">Sin compromisos. Te contactamos por WhatsApp, coordinamos el horario y resolvemos todas tus dudas.</p>
+      <div style="text-align:center;margin-bottom:56px;">
+        <div class="section-label">Inscripción</div>
+        <h2 class="section-title">Reserva tu lugar</h2>
+        <p class="section-sub" style="margin:0 auto;">Completa el formulario y te contactamos por WhatsApp para coordinar horario y confirmar tu lugar.</p>
       </div>
 
-      <div style="max-width:520px;margin:0 auto;">
+      <div class="form-layout">
 
-        <div class="success-msg" id="successMsg">
-          <div class="check">🎉</div>
-          <h3>¡Recibido!</h3>
-          <p>Te escribimos por WhatsApp en menos de 24 horas para coordinar todo. ¡Nos vemos pronto!</p>
+        <!-- PAYMENT OPTIONS -->
+        <div class="payment-col">
+          <div class="payment-box">
+            <h3>Opciones de pago</h3>
+            <p>Después de coordinar te indicamos el monto exacto. Aceptamos:</p>
+
+            <div class="payment-option">
+              <div class="payment-option-icon" style="background:rgba(99,91,255,.15);">💳</div>
+              <div class="payment-option-info">
+                <div class="payment-option-name">Stripe <span style="font-size:10px;background:rgba(99,91,255,.2);color:#a78bfa;padding:2px 8px;border-radius:10px;font-weight:700;margin-left:6px;">INVOICE USA</span></div>
+                <div class="payment-option-detail">Tarjeta de crédito/débito · Factura oficial</div>
+              </div>
+            </div>
+
+            <div class="payment-option">
+              <div class="payment-option-icon" style="background:rgba(90,200,100,.12);">💚</div>
+              <div class="payment-option-info">
+                <div class="payment-option-name">Zelle</div>
+                <div class="payment-option-detail">alipazjesus@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="payment-option">
+              <div class="payment-option-icon" style="background:rgba(0,112,243,.12);">💙</div>
+              <div class="payment-option-info">
+                <div class="payment-option-name">PayPal</div>
+                <div class="payment-option-detail">paypal.me/alphastrategygroupusa</div>
+              </div>
+            </div>
+
+            <div class="payment-option">
+              <div class="payment-option-icon" style="background:rgba(255,107,53,.12);">💜</div>
+              <div class="payment-option-info">
+                <div class="payment-option-name">Venmo</div>
+                <div class="payment-option-detail">@AlphaStrategyGroup</div>
+              </div>
+            </div>
+
+            <div style="text-align:center;margin-top:6px;">
+              <div class="payment-amount-badge">$15 USD / hora</div>
+            </div>
+          </div>
+
+          <div class="payment-steps">
+            <h4>CÓMO FUNCIONA</h4>
+            <ol>
+              <li>Completa el formulario con tus datos</li>
+              <li>Te contactamos por WhatsApp para coordinar horario y horas</li>
+              <li>Te enviamos el monto exacto y el link de pago (Stripe) o datos para transferencia</li>
+              <li>Confirmas tu lugar y te mandamos el link de Zoom</li>
+            </ol>
+          </div>
+
+          <div style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:14px;padding:18px 20px;font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6;">
+            ¿Prefieres escribir tú primero?<br/>
+            <a href="https://wa.me/59175025505" target="_blank" style="color:var(--orange);font-weight:700;text-decoration:none;">+591 750 25505 →</a>
+          </div>
         </div>
 
-        <form id="registroForm" novalidate style="background:var(--gray2);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:18px;">
+        <!-- FORM -->
+        <div class="form-col">
+          <h2>Tus datos de contacto</h2>
+          <p>Cuéntanos sobre ti — te contactamos nosotros para coordinar todo.</p>
 
-          <div class="field" style="margin-bottom:0;">
-            <label for="nombre">Tu nombre *</label>
-            <input type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamas?" required />
+          <div class="success-msg" id="successMsg">
+            <div class="check">🎉</div>
+            <h3>¡Recibido!</h3>
+            <p>Te escribimos por WhatsApp en menos de 24 horas para coordinar el horario y confirmar tu lugar.</p>
           </div>
 
-          <div class="field" style="margin-bottom:0;">
-            <label for="whatsapp">Tu número de WhatsApp *</label>
-            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+1 (XXX) XXX-XXXX" required />
-          </div>
+          <form id="registroForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="nombre">Nombre completo *</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="field">
+                <label for="whatsapp">WhatsApp *</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ej: 305 555 1234" required />
+              </div>
+            </div>
 
-          <div class="field" style="margin-bottom:0;">
-            <label for="nivel">¿Qué nivel te interesa?</label>
-            <select id="nivel" name="nivel">
-              <option value="" selected>No sé todavía / que me orienten</option>
-              <option value="basico">Básico — empiezo desde cero</option>
-              <option value="intermedio">Intermedio — tengo bases, quiero mejorar</option>
-              <option value="avanzado">Avanzado — quiero fluidez profesional</option>
-              <option value="grupo">Grupo — somos varios interesados</option>
-            </select>
-          </div>
+            <div class="field">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+            </div>
 
-          <div class="field" style="margin-bottom:0;">
-            <label for="mensaje">¿Algo que quieras comentar? (opcional)</label>
-            <textarea id="mensaje" name="mensaje" rows="2" placeholder="Tu disponibilidad de horario, si vienen en grupo, dudas, etc."></textarea>
-          </div>
+            <div class="field">
+              <label for="estado">Estado donde vives *</label>
+              <select id="estado" name="estado" required>
+                <option value="" disabled selected>Selecciona tu estado</option>
+                <option>Florida</option>
+                <option>Texas</option>
+                <option>California</option>
+                <option>New York</option>
+                <option>Georgia</option>
+                <option>Arizona</option>
+                <option>Illinois</option>
+                <option>North Carolina</option>
+                <option>New Jersey</option>
+                <option>Otro estado</option>
+              </select>
+            </div>
 
-          <button type="submit" class="submit-btn" id="submitBtn" style="margin-top:4px;">
-            📲 Que me contacten por WhatsApp
-          </button>
+            <div class="field">
+              <label for="nivel">Nivel que te interesa *</label>
+              <select id="nivel" name="nivel" required>
+                <option value="" disabled selected>Selecciona tu nivel</option>
+                <option value="basico">Básico — empiezo desde cero</option>
+                <option value="intermedio">Intermedio — tengo bases, quiero mejorar</option>
+                <option value="avanzado">Avanzado — quiero conversación fluida y profesional</option>
+                <option value="grupo">Grupo — somos varios interesados</option>
+              </select>
+            </div>
 
-          <p style="font-size:.78rem;color:rgba(255,255,255,.35);text-align:center;margin-top:-8px;">
-            Te respondemos en menos de 24 horas · Sin presión, sin compromisos
-          </p>
+            <div class="field">
+              <label>Horario</label>
+              <div style="background:var(--gray2);border:1.5px solid rgba(255,107,53,.3);border-radius:10px;padding:13px 16px;font-size:.95rem;color:rgba(255,255,255,.85);">
+                📅 2 días por semana &nbsp;·&nbsp; ⭐ Se coordina según tu disponibilidad
+              </div>
+            </div>
 
-        </form>
+            <div class="field">
+              <label for="mensaje">¿Algo más que quieras contarnos? (opcional)</label>
+              <textarea id="mensaje" name="mensaje" rows="3" placeholder="Horarios preferidos, si vienen en grupo, dudas, etc."></textarea>
+            </div>
 
-        <div style="margin-top:20px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:14px;padding:18px 22px;font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.65;text-align:center;">
-          ¿Prefieres escribir tú primero?<br/>
-          <a href="https://wa.me/15917502550" target="_blank" style="color:var(--orange);font-weight:700;text-decoration:none;font-size:.95rem;">WhatsApp: +1 (591) 750-2550 →</a>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Quiero reservar mi lugar →
+            </button>
+
+            <p style="font-size:.78rem;color:rgba(255,255,255,.35);text-align:center;margin-top:12px;">
+              Te contactamos en &lt;24 h por WhatsApp · Sin presión, sin compromiso
+            </p>
+          </form>
         </div>
 
       </div>
@@ -1091,11 +1179,13 @@
 
       const nombre   = document.getElementById('nombre').value.trim();
       const whatsapp = document.getElementById('whatsapp').value.trim();
-      const nivel    = document.getElementById('nivel').value || 'No especificado';
+      const email    = document.getElementById('email').value.trim();
+      const estado   = document.getElementById('estado').value;
+      const nivel    = document.getElementById('nivel').value;
       const mensaje  = document.getElementById('mensaje').value.trim();
 
-      if (!nombre || !whatsapp) {
-        alert('Por favor ingresa tu nombre y número de WhatsApp.');
+      if (!nombre || !whatsapp || !email || !estado || !nivel) {
+        alert('Por favor completa todos los campos obligatorios.');
         return;
       }
 
@@ -1106,6 +1196,8 @@
         const formData = new FormData();
         formData.append('nombre',   nombre);
         formData.append('whatsapp', whatsapp);
+        formData.append('email',    email);
+        formData.append('estado',   estado);
         formData.append('nivel',    nivel);
         formData.append('mensaje',  mensaje || '—');
         formData.append('_subject', '📲 Nuevo interesado — Inglés para Latinos en USA');
@@ -1125,9 +1217,9 @@
           throw new Error('server error');
         }
       } catch (err) {
-        alert('Hubo un problema. Escríbenos directo por WhatsApp: +1 (591) 750-2550');
+        alert('Hubo un problema. Escríbenos por WhatsApp: +591 750 25505');
         submitBtn.disabled = false;
-        submitBtn.textContent = '📲 Que me contacten por WhatsApp';
+        submitBtn.textContent = 'Quiero reservar mi lugar →';
       }
     });
   </script>

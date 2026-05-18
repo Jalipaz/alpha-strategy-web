@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X CARGO Logistics Bolivia — Importa desde China sin complicaciones</title>
+  <meta name="description" content="X CARGO conecta Bolivia con China y Asia. Transporte marítimo FCL/LCL, flete aéreo, despacho aduanero y verificación de proveedores." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #020C1B;
+      --navy2:   #040E20;
+      --navy3:   #071428;
+      --glass:   rgba(6, 18, 40, 0.6);
+      --blue:    #0057FF;
+      --blue2:   #1A6FFF;
+      --blue3:   #4D96FF;
+      --glow:    rgba(0, 87, 255, 0.35);
+      --orange:  #FF6B00;
+      --orange2: #FF8C33;
+      --oglow:   rgba(255, 107, 0, 0.3);
+      --white:   #FFFFFF;
+      --off:     #E8EFF8;
+      --muted:   #7A8EA8;
+      --muted2:  #4A5E75;
+      --border:  rgba(255,255,255,0.06);
+      --borderB: rgba(0,87,255,0.2);
+      --r:       16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--off);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── CANVAS BG ─── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── Z WRAP ─── */
+    nav, section, .route-band, footer, .wa-float { position: relative; z-index: 2; }
+
+    /* ═══════════════════════════════
+       NAV
+    ═══════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: rgba(2, 12, 27, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+
+    nav.scrolled {
+      background: rgba(2, 12, 27, 0.95);
+      box-shadow: 0 1px 40px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue) 0%, #003DB3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 0 20px var(--glow);
+      flex-shrink: 0;
+    }
+
+    .logo-word {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--white);
+      letter-spacing: -.3px;
+    }
+
+    .logo-word em {
+      font-style: normal;
+      color: var(--blue3);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .1px;
+      transition: color .2s;
+    }
+
+    .nav-menu a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+      padding: 9px 22px !important;
+      border-radius: 10px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 24px var(--glow);
+      transition: box-shadow .2s, transform .2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 40px var(--glow) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      width: 22px; height: 2px;
+      background: var(--off);
+      border-radius: 2px;
+      display: block;
+      transition: all .3s;
+    }
+
+    /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 6% 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 700px; height: 700px;
+      top: -200px; left: -150px;
+      background: radial-gradient(circle, rgba(0,87,255,0.18) 0%, transparent 70%);
+      animation: drift1 14s ease-in-out infinite alternate;
+    }
+
+    .orb-2 {
+      width: 500px; height: 500px;
+      bottom: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(255,107,0,0.14) 0%, transparent 70%);
+      animation: drift2 18s ease-in-out infinite alternate;
+    }
+
+    .orb-3 {
+      width: 300px; height: 300px;
+      top: 40%; left: 60%;
+      background: radial-gradient(circle, rgba(0,87,255,0.1) 0%, transparent 70%);
+      animation: drift1 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift1 {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(60px, 40px); }
+    }
+
+    @keyframes drift2 {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(-50px, -30px); }
+    }
+
+    /* grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,87,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,87,255,0.04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 900px; }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,87,255,0.12);
+      border: 1px solid rgba(0,87,255,0.3);
+      color: var(--blue3);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .4px;
+      margin-bottom: 32px;
+    }
+
+    .chip-dot {
+      width: 7px; height: 7px;
+      background: var(--blue3);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 7.5vw, 5.6rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -2.5px;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero-title .line-blue {
+      background: linear-gradient(90deg, var(--blue2) 0%, var(--blue3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title .line-orange {
+      background: linear-gradient(90deg, var(--orange) 0%, var(--orange2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 44px;
+      line-height: 1.75;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-blue {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--blue);
+      color: var(--white);
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 0 36px var(--glow);
+      transition: all .25s;
+    }
+
+    .btn-blue:hover {
+      background: var(--blue2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 48px var(--glow);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255,255,255,0.04);
+      color: var(--off);
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      transition: all .25s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* stats strip */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 80px;
+      border-top: 1px solid var(--border);
+      padding-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      padding: 0 48px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+
+    .stat-val .accent { color: var(--blue3); }
+    .stat-val .accent-o { color: var(--orange); }
+
+    .stat-desc {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 6px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    /* ═══════════════════════════════
+       ROUTE BAND
+    ═══════════════════════════════ */
+    .route-band {
+      background: linear-gradient(90deg, #003DB3 0%, var(--blue) 50%, #0046CC 100%);
+      padding: 0 6%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .route-band::before,
+    .route-band::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 1;
+    }
+
+    .route-band::before { left: 0; background: linear-gradient(90deg, #003DB3, transparent); }
+    .route-band::after  { right: 0; background: linear-gradient(-90deg, #0046CC, transparent); }
+
+    .route-scroll {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      white-space: nowrap;
+      animation: scroll-x 20s linear infinite;
+    }
+
+    @keyframes scroll-x {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .route-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .route-sep { color: rgba(255,255,255,0.3); font-size: 18px; }
+
+    /* ═══════════════════════════════
+       SECTIONS SHARED
+    ═══════════════════════════════ */
+    section { padding: 112px 6%; }
+
+    .alt-bg { background: var(--navy2); }
+
+    .s-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--blue3);
+      margin-bottom: 14px;
+    }
+
+    .s-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .s-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    .s-header { margin-bottom: 64px; }
+    .s-header.center { text-align: center; }
+    .s-header.center .s-sub { margin: 0 auto; }
+
+    /* ═══════════════════════════════
+       SERVICES
+    ═══════════════════════════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    .svc {
+      background: var(--navy3);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+      cursor: default;
+    }
+
+    .svc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,87,255,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .svc:hover { background: #091830; }
+    .svc:hover::after { opacity: 1; }
+
+    .svc-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .svc-icon {
+      width: 54px; height: 54px;
+      border-radius: 12px;
+      background: rgba(0,87,255,0.1);
+      border: 1px solid rgba(0,87,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: all .3s;
+    }
+
+    .svc:hover .svc-icon {
+      background: rgba(0,87,255,0.18);
+      box-shadow: 0 0 20px rgba(0,87,255,0.2);
+    }
+
+    .svc-arrow {
+      font-size: 20px;
+      color: var(--muted2);
+      transition: all .3s;
+      transform: rotate(45deg);
+    }
+
+    .svc:hover .svc-arrow {
+      color: var(--blue3);
+      transform: rotate(0deg);
+    }
+
+    .svc h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .svc p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════
+       HOW IT WORKS
+    ═══════════════════════════════ */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), var(--orange), var(--blue), transparent);
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-circle {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--navy3);
+      border: 1px solid var(--borderB);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue3);
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,87,255,0.1);
+      transition: all .3s;
+    }
+
+    .step:hover .step-circle {
+      background: rgba(0,87,255,0.12);
+      box-shadow: 0 0 40px rgba(0,87,255,0.25);
+      border-color: var(--blue3);
+    }
+
+    .step h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════
+       WHY US
+    ═══════════════════════════════ */
+    .why-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* map card */
+    .map-card {
+      background: rgba(7, 20, 40, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--borderB);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(0,87,255,0.15) 0%, transparent 70%);
+    }
+
+    .map-globe {
+      font-size: 5rem;
+      text-align: center;
+      display: block;
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 20px rgba(0,87,255,0.4));
+    }
+
+    .route-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(0,87,255,0.05);
+      border: 1px solid rgba(0,87,255,0.1);
+      margin-bottom: 12px;
+      transition: all .2s;
+    }
+
+    .route-row:hover {
+      background: rgba(0,87,255,0.1);
+      border-color: rgba(0,87,255,0.25);
+    }
+
+    .r-flag { font-size: 1.5rem; flex-shrink: 0; }
+
+    .r-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--blue3), var(--orange));
+      position: relative;
+    }
+
+    .r-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--navy3);
+      padding: 0 6px;
+      font-size: 13px;
+    }
+
+    .r-city { font-size: 11px; color: var(--muted2); font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
+
+    /* why list */
+    .why-list { list-style: none; }
+
+    .why-item {
+      display: flex;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all .2s;
+    }
+
+    .why-item:last-child { border-bottom: none; }
+
+    .why-item:hover { padding-left: 8px; }
+
+    .why-check {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(0,87,255,0.1);
+      border: 1px solid rgba(0,87,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .why-item h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+
+    .why-item p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; }
+
+    /* ═══════════════════════════════
+       PRODUCTS
+    ═══════════════════════════════ */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .prod {
+      background: rgba(7,20,40,0.8);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      cursor: default;
+      transition: all .25s;
+      backdrop-filter: blur(10px);
+    }
+
+    .prod:hover {
+      border-color: rgba(0,87,255,0.35);
+      background: rgba(0,87,255,0.07);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,87,255,0.12);
+    }
+
+    .prod-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .prod span { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+    /* ═══════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════ */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .tcard {
+      background: rgba(7,20,40,0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tcard::before {
+      content: '"';
+      position: absolute;
+      top: -10px; right: 24px;
+      font-size: 120px;
+      color: rgba(0,87,255,0.06);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .tcard:hover {
+      border-color: rgba(0,87,255,0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,20,60,0.4);
+    }
+
+    .stars { color: #FFB800; font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+
+    .tcard-text {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tcard-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .t-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, #003DB3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--white);
+      box-shadow: 0 0 16px var(--glow);
+      flex-shrink: 0;
+    }
+
+    .t-name { font-size: 0.93rem; font-weight: 700; color: var(--white); }
+    .t-role { font-size: 0.78rem; color: var(--muted2); margin-top: 2px; }
+
+    /* ═══════════════════════════════
+       CTA
+    ═══════════════════════════════ */
+    #contacto {
+      background: var(--navy);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-orb-1 {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,87,255,0.12) 0%, transparent 65%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    .cta-orb-2 {
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      bottom: -60px; right: 10%;
+      background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--white);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .cta-inner p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #128C7E;
+      color: var(--white);
+      padding: 17px 34px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 0 36px rgba(18,140,126,0.3);
+      transition: all .25s;
+    }
+
+    .btn-wa:hover {
+      background: #0f7a6e;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 48px rgba(18,140,126,0.35);
+    }
+
+    .cta-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    .cc {
+      text-align: center;
+    }
+
+    .cc-icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+    .cc-label { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; display: block; margin-bottom: 4px; }
+    .cc-val { font-size: 0.9rem; color: var(--off); font-weight: 500; }
+
+    /* ═══════════════════════════════
+       FOOTER
+    ═══════════════════════════════ */
+    footer {
+      background: var(--navy2);
+      border-top: 1px solid var(--border);
+      padding: 64px 6% 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      gap: 56px;
+      margin-bottom: 56px;
+    }
+
+    .footer-about p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      margin-top: 18px;
+      line-height: 1.75;
+      max-width: 280px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .f-social {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      text-decoration: none;
+      color: var(--muted);
+      transition: all .2s;
+    }
+
+    .f-social:hover {
+      border-color: var(--blue3);
+      background: rgba(0,87,255,0.08);
+      color: var(--blue3);
+    }
+
+    .f-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted2);
+      margin-bottom: 20px;
+    }
+
+    .f-col ul { list-style: none; }
+
+    .f-col li { margin-bottom: 12px; }
+
+    .f-col a {
+      text-decoration: none;
+      font-size: 0.87rem;
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    .f-col a:hover { color: var(--off); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p { font-size: 0.82rem; color: var(--muted2); }
+
+    .footer-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,87,255,0.08);
+      border: 1px solid rgba(0,87,255,0.15);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--blue3);
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════
+       FLOATING WA
+    ═══════════════════════════════ */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 300;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-decoration: none;
+      box-shadow: 0 4px 32px rgba(37,211,102,0.45);
+      animation: wa-pulse 3s infinite;
+      transition: transform .2s;
+    }
+
+    .wa-float:hover { transform: scale(1.1); }
+
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 4px 32px rgba(37,211,102,0.45); }
+      50%       { box-shadow: 0 4px 52px rgba(37,211,102,0.65); }
+    }
+
+    /* ═══════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+    .fade-up:nth-child(5) { transition-delay: .4s; }
+
+    /* ═══════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+      .hamburger { display: flex; }
+
+      .nav-menu.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: rgba(2,12,27,0.98);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 28px 6%;
+        gap: 24px;
+        z-index: 199;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .steps::before { display: none; }
+
+      .why-wrap { grid-template-columns: 1fr; }
+      .map-card { display: none; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+
+      .hero-stats { gap: 0; }
+      .stat { padding: 16px 20px; }
+    }
+
+    @media (max-width: 560px) {
+      .steps { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .stat-val { font-size: 2rem; }
+      .hero-title { letter-spacing: -1.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANIMATED CANVAS BG -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="logo">
+    <div class="logo-mark">X</div>
+    <span class="logo-word">X<em>CARGO</em></span>
+  </a>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como-funciona">Proceso</a></li>
+    <li><a href="#por-que">Nosotros</a></li>
+    <li><a href="#testimonios">Clientes</a></li>
+    <li><a href="#contacto" class="nav-cta">Cotizar →</a></li>
+  </ul>
+  <div class="hamburger" id="ham" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner fade-up">
+    <div class="chip">
+      <span class="chip-dot"></span>
+      Bolivia ↔ China &amp; Asia · Logística Internacional
+    </div>
+
+    <h1 class="hero-title">
+      Tu puerta de entrada<br>
+      <span class="line-blue">al comercio global</span><br>
+      <span class="line-orange">desde Bolivia</span>
+    </h1>
+
+    <p class="hero-sub">
+      Somos especialistas en conectar Bolivia con China y Asia.
+      Gestionamos todo el proceso — desde la verificación de tu proveedor
+      hasta la entrega en tu bodega.
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://wa.me/591" class="btn-blue">
+        💬 Cotizar por WhatsApp
+      </a>
+      <a href="https://linktr.ee/importaconximena" target="_blank" class="btn-ghost">
+        Ver contactos →
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-val">FCL<span class="accent"> &</span> LCL</div>
+        <div class="stat-desc">Contenedor completo o consolidado</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">🇨🇳→🇧🇴</div>
+        <div class="stat-desc">Ruta directa China · Bolivia</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><span class="accent">HK</span></div>
+        <div class="stat-desc">Oficina propia en Hong Kong</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">360<span class="accent">°</span></div>
+        <div class="stat-desc">Servicio puerta a puerta</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE BAND -->
+<div class="route-band">
+  <div class="route-scroll">
+    <span class="route-item">🇨🇳 Shanghái</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇭🇰 Hong Kong</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇰🇷 Seúl</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇯🇵 Tokio</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🚢 FCL · LCL</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">✈️ Flete Aéreo</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 Santa Cruz</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 La Paz</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 Cochabamba</span>
+    <span class="route-sep">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="route-item">🇨🇳 Shanghái</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇭🇰 Hong Kong</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇰🇷 Seúl</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇯🇵 Tokio</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🚢 FCL · LCL</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">✈️ Flete Aéreo</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 Santa Cruz</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 La Paz</span>
+    <span class="route-sep">·</span>
+    <span class="route-item">🇧🇴 Cochabamba</span>
+    <span class="route-sep">·</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="servicios" class="alt-bg">
+  <div class="s-header center fade-up">
+    <span class="s-eyebrow">Servicios</span>
+    <h2 class="s-title">Todo lo que necesitas<br>para importar de Asia</h2>
+    <p class="s-sub">Manejamos cada etapa de la cadena logística para que tú solo te preocupes por vender.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">🚢</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Transporte Marítimo FCL</h3>
+      <p>Contenedores completos 20' y 40' desde los principales puertos de China hasta Bolivia. Ideal para grandes volúmenes con costo por unidad optimizado.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">📦</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Transporte Marítimo LCL</h3>
+      <p>Carga consolidada para importaciones menores. Pagas solo el espacio que usas, sin esperar a llenar un contenedor completo.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">✈️</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Flete Aéreo</h3>
+      <p>Cuando el tiempo es crítico. Enviamos tu mercadería por vía aérea con rastreo en tiempo real y tiempos de entrega reducidos.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">🚛</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Transporte Terrestre</h3>
+      <p>Distribución nacional desde el punto de ingreso hasta tu bodega en Santa Cruz, La Paz o Cochabamba.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">📋</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Despacho Aduanero</h3>
+      <p>Gestionamos todos los trámites ante la Aduana Nacional de Bolivia. Documentos, aranceles y liberación de mercadería sin sorpresas.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">🔍</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Verificación de Proveedores</h3>
+      <p>Auditamos a tus proveedores en China y Asia directamente desde nuestra oficina en Hong Kong. Protege tu inversión antes de pagar.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">🏭</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Sourcing en Asia</h3>
+      <p>Te ayudamos a encontrar el fabricante o proveedor ideal en China, Hong Kong o cualquier parte de Asia según tu producto y presupuesto.</p>
+    </div>
+    <div class="svc fade-up">
+      <div class="svc-top">
+        <div class="svc-icon">📊</div>
+        <span class="svc-arrow">↗</span>
+      </div>
+      <h3>Asesoría en Comercio Exterior</h3>
+      <p>Guiamos a importadores en regulaciones, aranceles, partidas arancelarias y estrategias de importación para maximizar tu rentabilidad.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div class="s-header center fade-up">
+    <span class="s-eyebrow">Proceso</span>
+    <h2 class="s-title">De China a tu puerta en 5 pasos</h2>
+    <p class="s-sub">Un proceso simple, transparente y completamente gestionado por nuestro equipo.</p>
+  </div>
+
+  <div class="steps fade-up">
+    <div class="step">
+      <div class="step-circle">01</div>
+      <h3>Consulta gratuita</h3>
+      <p>Contáctanos por WhatsApp. Cuéntanos qué quieres importar, volumen y urgencia.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">02</div>
+      <h3>Cotización a medida</h3>
+      <p>Recibe una propuesta detallada con costos por marítimo, aéreo o terrestre.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">03</div>
+      <h3>Verificamos tu proveedor</h3>
+      <p>Nuestro equipo en Hong Kong audita al fabricante y supervisa la producción.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">04</div>
+      <h3>Gestionamos el envío</h3>
+      <p>Coordinamos recogida, embalaje, documentos y embarque desde origen.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">05</div>
+      <h3>Entrega en Bolivia</h3>
+      <p>Despachamos en aduana y entregamos en tu bodega. Tú recibes y vendes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="por-que" class="alt-bg">
+  <div class="why-wrap">
+    <div class="map-card fade-up">
+      <span class="map-globe">🌏</span>
+      <div class="route-row">
+        <span class="r-flag">🇨🇳</span>
+        <div class="r-line"><span class="r-icon">✈️</span></div>
+        <span class="r-flag">🇧🇴</span>
+        <span class="r-city">Shanghái → Santa Cruz</span>
+      </div>
+      <div class="route-row">
+        <span class="r-flag">🇭🇰</span>
+        <div class="r-line"><span class="r-icon">🚢</span></div>
+        <span class="r-flag">🇧🇴</span>
+        <span class="r-city">Hong Kong → La Paz</span>
+      </div>
+      <div class="route-row">
+        <span class="r-flag">🇰🇷</span>
+        <div class="r-line"><span class="r-icon">✈️</span></div>
+        <span class="r-flag">🇧🇴</span>
+        <span class="r-city">Seúl → Cochabamba</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <span class="s-eyebrow">Por qué elegirnos</span>
+      <h2 class="s-title">Tu negocio merece un aliado, no un proveedor</h2>
+      <ul class="why-list">
+        <li class="why-item">
+          <div class="why-check">✓</div>
+          <div>
+            <h4>Oficina propia en Hong Kong</h4>
+            <p>Presencia directa en Asia. Negociamos y supervisamos en nombre de nuestros clientes sin intermediarios externos.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-check">✓</div>
+          <div>
+            <h4>Especialistas en aduana boliviana</h4>
+            <p>Conocemos los procesos locales, aranceles y requisitos de la Aduana Nacional. Sin sorpresas al momento de la internación.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-check">✓</div>
+          <div>
+            <h4>Asesor dedicado en cada operación</h4>
+            <p>No eres un número. Tienes un asesor personal que te guía desde la primera consulta hasta la entrega final.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-check">✓</div>
+          <div>
+            <h4>Protección total contra fraudes</h4>
+            <p>Verificamos proveedores y monitoreamos la producción para que tu dinero e inversión estén siempre protegidos.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-check">✓</div>
+          <div>
+            <h4>Soluciones FCL y LCL para todo tamaño</h4>
+            <p>Desde emprendedores hasta empresas consolidadas. Tenemos la solución correcta sin importar el volumen.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="productos">
+  <div class="s-header center fade-up">
+    <span class="s-eyebrow">Productos frecuentes</span>
+    <h2 class="s-title">¿Qué importan nuestros clientes?</h2>
+    <p class="s-sub">Desde electrónica hasta materiales de construcción, gestionamos todo tipo de mercadería desde Asia.</p>
+  </div>
+  <div class="products-grid fade-up">
+    <div class="prod"><span class="prod-icon">📱</span><span>Electrónica</span></div>
+    <div class="prod"><span class="prod-icon">👗</span><span>Ropa y textiles</span></div>
+    <div class="prod"><span class="prod-icon">🧴</span><span>Cosméticos</span></div>
+    <div class="prod"><span class="prod-icon">🪑</span><span>Muebles</span></div>
+    <div class="prod"><span class="prod-icon">🔧</span><span>Herramientas</span></div>
+    <div class="prod"><span class="prod-icon">🧸</span><span>Juguetes</span></div>
+    <div class="prod"><span class="prod-icon">🏗️</span><span>Materiales de construcción</span></div>
+    <div class="prod"><span class="prod-icon">🚗</span><span>Autopartes</span></div>
+    <div class="prod"><span class="prod-icon">🌿</span><span>Suplementos</span></div>
+    <div class="prod"><span class="prod-icon">💻</span><span>Computadoras</span></div>
+    <div class="prod"><span class="prod-icon">🏋️</span><span>Equipos de gym</span></div>
+    <div class="prod"><span class="prod-icon">🍳</span><span>Utensilios de cocina</span></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonios" class="alt-bg">
+  <div class="s-header center fade-up">
+    <span class="s-eyebrow">Testimonios</span>
+    <h2 class="s-title">Lo que dicen nuestros clientes</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="tcard fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="tcard-text">Importé electrónica desde China por primera vez y X CARGO me guió en todo el proceso. Me ayudaron a elegir proveedor, negociar el precio y traer todo sin problemas. 100% recomendado.</p>
+      <div class="tcard-author">
+        <div class="t-avatar">MR</div>
+        <div>
+          <div class="t-name">Mario R.</div>
+          <div class="t-role">Comerciante · Santa Cruz de la Sierra</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="tcard-text">Tenía miedo de que me estafaran en China. X CARGO verificó a mi proveedor y monitoreó la producción desde Hong Kong. La mercadería llegó perfecta y en el tiempo acordado.</p>
+      <div class="tcard-author">
+        <div class="t-avatar">LV</div>
+        <div>
+          <div class="t-name">Laura V.</div>
+          <div class="t-role">Emprendedora · La Paz</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="tcard-text">El servicio LCL es perfecto para mi negocio. No tengo que esperar a llenar un contenedor. Importo cada mes con ellos y el proceso es cada vez más fluido y económico.</p>
+      <div class="tcard-author">
+        <div class="t-avatar">CP</div>
+        <div>
+          <div class="t-name">Carlos P.</div>
+          <div class="t-role">Distribuidor · Cochabamba</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contacto">
+  <div class="cta-orb-1"></div>
+  <div class="cta-orb-2"></div>
+  <div class="cta-inner fade-up">
+    <span class="s-eyebrow">Empieza hoy</span>
+    <h2>¿Listo para importar<br>desde China?</h2>
+    <p>Habla con nuestros asesores ahora mismo. Cotización gratuita, sin compromiso. Te respondemos en menos de 24 horas.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/591" class="btn-wa">
+        💬 WhatsApp — Cotizar ahora
+      </a>
+      <a href="https://linktr.ee/importaconximena" target="_blank" class="btn-ghost">
+        Todos los contactos →
+      </a>
+    </div>
+    <div class="cta-contacts">
+      <div class="cc">
+        <span class="cc-icon">📍</span>
+        <span class="cc-label">Sede principal</span>
+        <span class="cc-val">Santa Cruz de la Sierra, Bolivia</span>
+      </div>
+      <div class="cc">
+        <span class="cc-icon">🏢</span>
+        <span class="cc-label">Oficina en Asia</span>
+        <span class="cc-val">Hong Kong, China</span>
+      </div>
+      <div class="cc">
+        <span class="cc-icon">🌐</span>
+        <span class="cc-label">Redes sociales</span>
+        <span class="cc-val">linktr.ee/importaconximena</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <div class="logo">
+        <div class="logo-mark">X</div>
+        <span class="logo-word">X<em>CARGO</em></span>
+      </div>
+      <p>Empresa boliviana especializada en logística e importación desde China y Asia. Oficinas en Santa Cruz de la Sierra y Hong Kong.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/people/X-CARGO-Logistics-Bolivia/61551413495453/" target="_blank" class="f-social">f</a>
+        <a href="https://bo.linkedin.com/company/x-cargo-logistics-srl" target="_blank" class="f-social">in</a>
+        <a href="https://wa.me/591" class="f-social">💬</a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Marítimo FCL</a></li>
+        <li><a href="#servicios">Marítimo LCL</a></li>
+        <li><a href="#servicios">Flete Aéreo</a></li>
+        <li><a href="#servicios">Despacho Aduanero</a></li>
+        <li><a href="#servicios">Sourcing en Asia</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#por-que">Por qué nosotros</a></li>
+        <li><a href="#como-funciona">Proceso</a></li>
+        <li><a href="#testimonios">Clientes</a></li>
+        <li><a href="https://www.facebook.com/people/X-CARGO-Logistics-Bolivia/61551413495453/" target="_blank">Facebook</a></li>
+        <li><a href="https://bo.linkedin.com/company/x-cargo-logistics-srl" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/591">WhatsApp</a></li>
+        <li><a href="https://linktr.ee/importaconximena" target="_blank">Linktree</a></li>
+        <li><a href="#contacto">Santa Cruz, Bolivia</a></li>
+        <li><a href="#contacto">Hong Kong</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 X CARGO LOGISTICS SRL · Todos los derechos reservados.</p>
+    <div class="footer-badge">
+      🇧🇴 Hecho en Bolivia · 🌏 Conectado con Asia
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/591" class="wa-float" title="Cotizar por WhatsApp">💬</a>
+
+<script>
+  /* ── PARTICLE CANVAS ── */
+  (function() {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function init() {
+      resize();
+      particles = [];
+      const count = Math.min(60, Math.floor(W / 22));
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: rand(0, W),
+          y: rand(0, H),
+          r: rand(0.5, 1.8),
+          vx: rand(-0.15, 0.15),
+          vy: rand(-0.15, 0.15),
+          a: rand(0.1, 0.5)
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(77,150,255,${p.a})`;
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+      });
+
+      // draw faint connecting lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0,87,255,${0.06 * (1 - dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', init);
+    init();
+    draw();
+  })();
+
+  /* ── NAV SCROLL ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── MOBILE NAV ── */
+  function toggleNav() {
+    document.getElementById('navMenu').classList.toggle('open');
+  }
+
+  document.querySelectorAll('#navMenu a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navMenu').classList.remove('open'));
+  });
+
+  /* ── INTERSECTION OBSERVER ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

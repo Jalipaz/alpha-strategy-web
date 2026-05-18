@@ -4,7 +4,28 @@
       "Bash(python -c \"import pptx; print\\('pptx available'\\)\")",
       "Bash(py --version)",
       "PowerShell(& \"C:\\\\Users\\\\alipa\\\\improve_pptx.ps1\" 2>&1)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(node_modules/.bin/remotion render *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/en)",
+      "Bash(vercel --version)",
+      "Bash(cat vercel.json)",
+      "WebFetch(domain:alpha-strategy-web-e89d.vercel.app)",
+      "Bash(python3 -)",
+      "Bash(Get-ChildItem app *)",
+      "Bash(Select-Object FullName)",
+      "WebFetch(domain:drive.google.com)",
+      "Bash(npx vercel *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-alipazjesus-1606s-projects.vercel.app/proposals/proposal-usa-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-alipazjesus-1606s-projects.vercel.app/proposals/proposta-brasil-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-alipazjesus-1606s-projects.vercel.app/proposals/propuesta-espana-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-alipazjesus-1606s-projects.vercel.app/proposals/propuesta-latam-emergente-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-alipazjesus-1606s-projects.vercel.app/usalatino.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web.vercel.app/proposals/proposal-usa-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://www.alphastrategygroupusa.com/proposals/proposal-usa-2026.html\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://alpha-strategy-web-yzkl.vercel.app/proposals/proposal-usa-2026.html\")",
+      "Bash(wait)",
+      "Bash(mkdir -p public/scripts)",
+      "Bash(cp scripts/dentasoft.html public/scripts/dentasoft.html)"
     ]
   }
 }

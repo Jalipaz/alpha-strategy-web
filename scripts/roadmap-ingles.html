@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap — Llenar el Curso de Inglés | Alpha Strategy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #fffbeb;
+      color: #1a202c;
+      min-height: 100vh;
+      padding: 32px 24px 60px;
+    }
+
+    .header {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .header .brand {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #78350f;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 15px;
+      color: #92400e;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* MÉTRICAS */
+    .metrics {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-top: 3px solid #F59E0B;
+    }
+
+    .metric .value {
+      font-size: 26px;
+      font-weight: 800;
+      color: #78350f;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #92400e;
+    }
+
+    /* FASES */
+    .phases {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phase {
+      position: relative;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+    }
+
+    .phase:not(:last-child) .phase-left::after {
+      content: '';
+      position: absolute;
+      left: 167px;
+      top: 60px;
+      bottom: -32px;
+      width: 2px;
+      background: #fde68a;
+      z-index: 0;
+    }
+
+    .phase-left {
+      position: relative;
+      padding-top: 16px;
+      padding-right: 24px;
+      text-align: right;
+    }
+
+    .phase-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #F59E0B;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px #F59E0B;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      margin-left: auto;
+    }
+
+    .phase-dot.today {
+      background: #dc2626;
+      box-shadow: 0 0 0 3px #dc2626;
+      animation: pulse 2s infinite;
+    }
+
+    .phase-dot.next  { background: #d97706; box-shadow: 0 0 0 3px #d97706; }
+    .phase-dot.soon  { background: #92400e; box-shadow: 0 0 0 3px #92400e; }
+    .phase-dot.goal  { background: #16a34a; box-shadow: 0 0 0 3px #16a34a; }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px #dc2626; }
+      50% { box-shadow: 0 0 0 7px rgba(220,38,38,0.25); }
+    }
+
+    .phase-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .phase-right {
+      padding: 0 0 36px 0;
+    }
+
+    .phase-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 4px solid #fde68a;
+      transition: box-shadow 0.2s;
+    }
+
+    .phase-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .phase-card.today { border-left-color: #dc2626; }
+    .phase-card.next  { border-left-color: #d97706; }
+    .phase-card.soon  { border-left-color: #92400e; }
+    .phase-card.goal  { border-left-color: #16a34a; }
+
+    .phase-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #78350f;
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+    }
+
+    .phase-subtitle {
+      font-size: 13px;
+      color: #92400e;
+      margin-bottom: 16px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #fffbeb;
+      border-radius: 10px;
+      transition: background 0.15s;
+    }
+
+    .action:hover { background: #fef3c7; }
+
+    .action-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .action-body { flex: 1; }
+
+    .action-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 2px;
+    }
+
+    .action-desc {
+      font-size: 12px;
+      color: #718096;
+      line-height: 1.5;
+    }
+
+    .action-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #92400e;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+      background: #fde68a;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .checklist {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #fef3c7;
+    }
+
+    .checklist-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #92400e;
+      margin-bottom: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.12s;
+      user-select: none;
+    }
+
+    .check-item:hover { background: #fef3c7; }
+
+    .check-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #d97706;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-item label {
+      font-size: 13px;
+      color: #2d3748;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    .check-item input:checked + label {
+      text-decoration: line-through;
+      color: #a0aec0;
+    }
+
+    .meta-box {
+      margin-top: 16px;
+      background: #f0fff4;
+      border: 1.5px solid #9ae6b4;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-box .meta-icon { font-size: 20px; }
+
+    .meta-box .meta-text {
+      font-size: 13px;
+      color: #276749;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tool-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #fef3c7;
+      color: #92400e;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .tool-tag:hover { background: #fde68a; }
+
+    /* Canales box */
+    .canales {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .canal {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .canal .canal-icon { font-size: 22px; margin-bottom: 4px; }
+    .canal .canal-name { font-size: 12px; font-weight: 700; color: #78350f; }
+    .canal .canal-meta { font-size: 11px; color: #92400e; margin-top: 2px; }
+
+    .legend {
+      max-width: 900px;
+      margin: 32px auto 0;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #92400e;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 640px) {
+      .phase { grid-template-columns: 60px 1fr; }
+      .phase-left { padding-right: 14px; }
+      .phase-time { display: none; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .phase:not(:last-child) .phase-left::after { left: 47px; }
+      .canales { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">Alpha Strategy Group — Curso de Inglés</div>
+  <h1>Roadmap: Llenar la Primera Cohorte</h1>
+  <p>Plan semana a semana para conseguir los primeros 10 estudiantes con 1–2 horas al día</p>
+</div>
+
+<!-- MÉTRICAS -->
+<div class="metrics">
+  <div class="metric">
+    <div class="value">10</div>
+    <div class="label">Estudiantes meta</div>
+  </div>
+  <div class="metric">
+    <div class="value">500 Bs</div>
+    <div class="label">Por estudiante/mes</div>
+  </div>
+  <div class="metric">
+    <div class="value">5,000 Bs</div>
+    <div class="label">Ingresos mes 1</div>
+  </div>
+  <div class="metric">
+    <div class="value">Lun/Mié</div>
+    <div class="label">Horario de clases</div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="phases">
+
+  <!-- HOY -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot today">1</div>
+        <span class="phase-time">Hoy</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card today">
+        <div class="phase-title">Activar la red inmediata</div>
+        <div class="phase-subtitle">Las personas más cercanas son las primeras en inscribirse — y las que más refieren</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">💬</div>
+            <div class="action-body">
+              <div class="action-title">WhatsApp a 20 contactos cercanos</div>
+              <div class="action-desc">Profesionales activos que sabes que quieren mejorar su inglés o conocen a alguien así. Usar el generador de mensajes WA-CAL.</div>
+            </div>
+            <div class="action-time">40 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📝</div>
+            <div class="action-body">
+              <div class="action-title">Publicar post de lanzamiento en LinkedIn</div>
+              <div class="action-desc">Anuncio del curso con enfoque en el beneficio: inglés para reuniones, correos y presentaciones — no inglés de libro. Incluir precio y link.</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📸</div>
+            <div class="action-body">
+              <div class="action-title">Story + post en Instagram</div>
+              <div class="action-desc">Historia personal de por qué lanzaste el curso. Más emocional que el post de LinkedIn. Agregar link en bio a la página del curso.</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Checklist de hoy</div>
+          <div class="check-item"><input type="checkbox" id="c1"><label for="c1">WhatsApp enviado a 20 contactos</label></div>
+          <div class="check-item"><input type="checkbox" id="c2"><label for="c2">Post de lanzamiento publicado en LinkedIn</label></div>
+          <div class="check-item"><input type="checkbox" id="c3"><label for="c3">Story publicada en Instagram con link en bio</label></div>
+          <div class="check-item"><input type="checkbox" id="c4"><label for="c4">Link de la página del curso lista y funcional</label></div>
+        </div>
+
+        <div class="tools">
+          <a class="tool-tag" href="generador-ingles.html" target="_blank">🛠 Generador de mensajes — Inglés</a>
+          <span class="tool-tag">🔗 alpha-strategy-web.vercel.app/ingles</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍAS 2–5 -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot next">2</div>
+        <span class="phase-time">Días 2–5</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card next">
+        <div class="phase-title">Convertir interés en conversaciones</div>
+        <div class="phase-subtitle">Alguien que vio el post o recibió tu mensaje ya está tibio — hay que hablarle</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">✉️</div>
+            <div class="action-body">
+              <div class="action-title">DM a 10 perfiles de LinkedIn por día</div>
+              <div class="action-desc">Profesionales que trabajan en empresas con proyección internacional: logística, comercio exterior, salud, tecnología. Usar variación LI-PRO del generador.</div>
+            </div>
+            <div class="action-time">30 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🔄</div>
+            <div class="action-body">
+              <div class="action-title">Seguimiento a WhatsApp sin respuesta</div>
+              <div class="action-desc">"Hola [Nombre], ¿llegó mi mensaje? Solo quería ver si el inglés es algo que te interesa este año…"</div>
+            </div>
+            <div class="action-time">15 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📊</div>
+            <div class="action-body">
+              <div class="action-title">Registrar interesados en tracker</div>
+              <div class="action-desc">Cada persona que responde entra al tracker. Estado: Interesado → Info enviada → Inscrito.</div>
+            </div>
+            <div class="action-time">10 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Meta de la semana</div>
+          <div class="check-item"><input type="checkbox" id="c5"><label for="c5">50 DMs enviados (LinkedIn + WhatsApp)</label></div>
+          <div class="check-item"><input type="checkbox" id="c6"><label for="c6">5–8 personas interesadas en conversación activa</label></div>
+          <div class="check-item"><input type="checkbox" id="c7"><label for="c7">2 historias más publicadas en Instagram esta semana</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 2 — CANALES INSTITUCIONALES -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot next">3</div>
+        <span class="phase-time">Semana 2</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card next">
+        <div class="phase-title">Activar canales con volumen</div>
+        <div class="phase-subtitle">Empresas y referentes que pueden traerte 3–5 estudiantes de un solo golpe</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">🏢</div>
+            <div class="action-body">
+              <div class="action-title">Contactar HR de empresas medianas</div>
+              <div class="action-desc">Proponer el curso como beneficio corporativo: la empresa paga el curso a sus empleados. Precio grupal desde 400 Bs/persona. Sectores: logística, banca, salud, exportación.</div>
+            </div>
+            <div class="action-time">60 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🤝</div>
+            <div class="action-body">
+              <div class="action-title">Acuerdo de referidos con Logicargo</div>
+              <div class="action-desc">Sus empleados y contactos son el perfil exacto. Pedir que compartan el link internamente. Ofrecer comisión o mes gratis por cada inscrito que refieran.</div>
+            </div>
+            <div class="action-time">30 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🎓</div>
+            <div class="action-body">
+              <div class="action-title">Alianza con universidad o instituto</div>
+              <div class="action-desc">Publicar en grupos universitarios de egresados (Fb, WhatsApp). El inglés es aspiracional para recién graduados con trabajo.</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+        </div>
+
+        <div class="canales">
+          <div class="canal">
+            <div class="canal-icon">💼</div>
+            <div class="canal-name">LinkedIn</div>
+            <div class="canal-meta">Prospección en frío</div>
+          </div>
+          <div class="canal">
+            <div class="canal-icon">💬</div>
+            <div class="canal-name">WhatsApp</div>
+            <div class="canal-meta">Red caliente + referidos</div>
+          </div>
+          <div class="canal">
+            <div class="canal-icon">📸</div>
+            <div class="canal-name">Instagram</div>
+            <div class="canal-meta">Contenido + historias</div>
+          </div>
+        </div>
+
+        <div class="meta-box">
+          <div class="meta-icon">🎯</div>
+          <div class="meta-text">Meta: 1 empresa interesada en el plan grupal. Un grupo de 5 empleados = 2,000 Bs/mes extra.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 3–4 -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot soon">4</div>
+        <span class="phase-time">Semanas 3–4</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card soon">
+        <div class="phase-title">Cerrar inscripciones y arrancar</div>
+        <div class="phase-subtitle">Convertir a los interesados en pagos reales — la urgencia es tu aliada</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">⏰</div>
+            <div class="action-body">
+              <div class="action-title">Comunicar fecha límite de inscripción</div>
+              <div class="action-desc">"El curso empieza el [fecha] y los cupos son limitados — quedan X lugares." No negociar el precio; sí ofrecer facilidades de pago si preguntan.</div>
+            </div>
+            <div class="action-time">10 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">💳</div>
+            <div class="action-body">
+              <div class="action-title">Confirmar pago y enviar bienvenida</div>
+              <div class="action-desc">QR de pago, horario, Zoom/meet link o dirección de clase. Crear grupo de WhatsApp del curso para generar comunidad desde el primer día.</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📣</div>
+            <div class="action-body">
+              <div class="action-title">Post de "clase inaugural" en redes</div>
+              <div class="action-desc">Foto o video del primer día. Genera FOMO para la siguiente cohorte. Pedir a los alumnos que compartan en sus historias.</div>
+            </div>
+            <div class="action-time">15 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Meta del mes</div>
+          <div class="check-item"><input type="checkbox" id="c8"><label for="c8">10 estudiantes inscritos y pagados</label></div>
+          <div class="check-item"><input type="checkbox" id="c9"><label for="c9">5,000 Bs/mes de ingresos recurrentes</label></div>
+          <div class="check-item"><input type="checkbox" id="c10"><label for="c10">Lista de espera para la 2ª cohorte iniciada</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 2+ -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot goal">5</div>
+        <span class="phase-time">Mes 2+</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card goal">
+        <div class="phase-title">Escalar a 2 grupos y plan corporativo</div>
+        <div class="phase-subtitle">Con testimonios reales y una primera cohorte exitosa, todo se vuelve más fácil</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">🌟</div>
+            <div class="action-body">
+              <div class="action-title">Recoger testimonios de los primeros alumnos</div>
+              <div class="action-desc">Video corto o texto de cómo mejoró su inglés. Esta es tu prueba social más poderosa para la 2ª cohorte.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🏆</div>
+            <div class="action-body">
+              <div class="action-title">Abrir 2ª cohorte con lista de espera</div>
+              <div class="action-desc">Los que quedaron fuera de la 1ª son los primeros en inscribirse. Objetivo: 15–20 estudiantes en el 2º mes.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🏢</div>
+            <div class="action-body">
+              <div class="action-title">Plan corporativo — inglés para empresas</div>
+              <div class="action-desc">Grupo privado para empleados de una empresa. Precio: 350–400 Bs/persona (grupo de 8+). Ticket total: 2,800–3,200 Bs/mes por empresa.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+        </div>
+
+        <div class="meta-box">
+          <div class="meta-icon">🚀</div>
+          <div class="meta-text">Meta mes 2: 20 estudiantes individuales + 1 empresa = 10,000–13,000 Bs/mes de ingresos recurrentes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEYENDA -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div> Acción inmediata (hoy)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div> Esta semana</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#92400e"></div> Próximas semanas</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div> Meta de escala</div>
+</div>
+
+<script>
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => {
+    const key = 'roadmap_ingles_' + cb.id;
+    if (localStorage.getItem(key) === 'true') cb.checked = true;
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked);
+    });
+  });
+</script>
+
+</body>
+</html>

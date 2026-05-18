@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap — Conseguir Clientes | Alpha Strategy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+      padding: 32px 24px 60px;
+    }
+
+    /* HEADER */
+    .header {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .header .brand {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1a3c5e;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 15px;
+      color: #718096;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* MÉTRICAS */
+    .metrics {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    .metric .value {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1a3c5e;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric .label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #a0aec0;
+    }
+
+    /* FASES */
+    .phases {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* FASE HEADER */
+    .phase {
+      position: relative;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+      margin-bottom: 0;
+    }
+
+    /* Línea vertical de timeline */
+    .phase:not(:last-child) .phase-left::after {
+      content: '';
+      position: absolute;
+      left: 167px;
+      top: 60px;
+      bottom: -32px;
+      width: 2px;
+      background: #e2e8f0;
+      z-index: 0;
+    }
+
+    .phase-left {
+      position: relative;
+      padding-top: 16px;
+      padding-right: 24px;
+      text-align: right;
+    }
+
+    .phase-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1a3c5e;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px #1a3c5e;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      margin-left: auto;
+    }
+
+    .phase-dot.today {
+      background: #e53e3e;
+      box-shadow: 0 0 0 3px #e53e3e;
+      animation: pulse 2s infinite;
+    }
+
+    .phase-dot.next { background: #d69e2e; box-shadow: 0 0 0 3px #d69e2e; }
+    .phase-dot.future { background: #718096; box-shadow: 0 0 0 3px #718096; }
+    .phase-dot.goal { background: #38a169; box-shadow: 0 0 0 3px #38a169; }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px #e53e3e; }
+      50% { box-shadow: 0 0 0 6px rgba(229,62,62,0.3); }
+    }
+
+    .phase-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a0aec0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .phase-right {
+      padding: 0 0 36px 0;
+    }
+
+    /* CARD DE FASE */
+    .phase-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 4px solid #e2e8f0;
+      transition: box-shadow 0.2s;
+    }
+
+    .phase-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .phase-card.today { border-left-color: #e53e3e; }
+    .phase-card.next  { border-left-color: #d69e2e; }
+    .phase-card.future { border-left-color: #718096; }
+    .phase-card.goal  { border-left-color: #38a169; }
+
+    .phase-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #1a3c5e;
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+    }
+
+    .phase-subtitle {
+      font-size: 13px;
+      color: #718096;
+      margin-bottom: 16px;
+    }
+
+    /* ACCIONES */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #f7fafc;
+      border-radius: 10px;
+      transition: background 0.15s;
+      cursor: default;
+    }
+
+    .action:hover { background: #edf2f7; }
+
+    .action-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .action-body { flex: 1; }
+
+    .action-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 2px;
+    }
+
+    .action-desc {
+      font-size: 12px;
+      color: #718096;
+      line-height: 1.5;
+    }
+
+    .action-time {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a0aec0;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+      background: #e2e8f0;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #f0f4f8;
+    }
+
+    .checklist-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #a0aec0;
+      margin-bottom: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.12s;
+      user-select: none;
+    }
+
+    .check-item:hover { background: #f0f4f8; }
+
+    .check-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #1a3c5e;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-item label {
+      font-size: 13px;
+      color: #2d3748;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+
+    .check-item input:checked + label {
+      text-decoration: line-through;
+      color: #a0aec0;
+    }
+
+    /* META BADGE */
+    .meta-box {
+      margin-top: 16px;
+      background: #f0fff4;
+      border: 1.5px solid #9ae6b4;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-box .meta-icon { font-size: 20px; }
+
+    .meta-box .meta-text {
+      font-size: 13px;
+      color: #276749;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* HERRAMIENTAS */
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tool-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #ebf4ff;
+      color: #2b6cb0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .tool-tag:hover { background: #bee3f8; }
+
+    /* LEYENDA */
+    .legend {
+      max-width: 900px;
+      margin: 32px auto 0;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #718096;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 640px) {
+      .phase { grid-template-columns: 60px 1fr; }
+      .phase-left { padding-right: 14px; }
+      .phase-time { display: none; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .phase:not(:last-child) .phase-left::after { left: 47px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">Alpha Strategy Group</div>
+  <h1>Roadmap: Conseguir Clientes</h1>
+  <p>Plan de acción semana a semana para generar flujo de caja con 2 horas al día</p>
+</div>
+
+<!-- MÉTRICAS -->
+<div class="metrics">
+  <div class="metric">
+    <div class="value">2h</div>
+    <div class="label">Por día disponibles</div>
+  </div>
+  <div class="metric">
+    <div class="value">Bolivia</div>
+    <div class="label">Mercado prioritario</div>
+  </div>
+  <div class="metric">
+    <div class="value">2–3</div>
+    <div class="label">Clientes meta mes 1</div>
+  </div>
+  <div class="metric">
+    <div class="value">$4.5K</div>
+    <div class="label">Potencial mes 1 (USD)</div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="phases">
+
+  <!-- HOY -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot today">1</div>
+        <span class="phase-time">Hoy</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card today">
+        <div class="phase-title">Activar la red inmediata</div>
+        <div class="phase-subtitle">El camino más rápido al primer cliente — tus contactos ya te conocen</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">💬</div>
+            <div class="action-body">
+              <div class="action-title">WhatsApp a 20 contactos</div>
+              <div class="action-desc">Mensaje directo pidiendo referidos. No es venta — es activar tu red dormida.</div>
+            </div>
+            <div class="action-time">45 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📝</div>
+            <div class="action-body">
+              <div class="action-title">Publicar post en LinkedIn</div>
+              <div class="action-desc">Caso de éxito de Logicargo — prueba social visible para nuevos prospectos.</div>
+            </div>
+            <div class="action-time">15 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🔍</div>
+            <div class="action-body">
+              <div class="action-title">Conectar con 10 perfiles en LinkedIn</div>
+              <div class="action-desc">Filtros: Gerente/CEO + Bolivia + Logística/Comercio/Salud. Solo con foto y perfil completo.</div>
+            </div>
+            <div class="action-time">30 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Checklist de hoy</div>
+          <div class="check-item"><input type="checkbox" id="c1"><label for="c1">WhatsApp enviado a 20 contactos</label></div>
+          <div class="check-item"><input type="checkbox" id="c2"><label for="c2">Post de Logicargo publicado en LinkedIn</label></div>
+          <div class="check-item"><input type="checkbox" id="c3"><label for="c3">10 conexiones enviadas en LinkedIn</label></div>
+        </div>
+
+        <div class="tools">
+          <a class="tool-tag" href="generador-mensajes.html" target="_blank">🛠 Generador de mensajes</a>
+          <span class="tool-tag">📊 LinkedIn — Filtros de búsqueda</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍA 2-5 -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot next">2</div>
+        <span class="phase-time">Días 2–5</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card next">
+        <div class="phase-title">Convertir conexiones en conversaciones</div>
+        <div class="phase-subtitle">Los que aceptaron tu conexión ayer ya pueden recibir el mensaje</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">✉️</div>
+            <div class="action-body">
+              <div class="action-title">Enviar mensaje a nuevas conexiones</div>
+              <div class="action-desc">Usar el generador: ingresa nombre, sector y copia el mensaje. 5 mensajes por día.</div>
+            </div>
+            <div class="action-time">30 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🔄</div>
+            <div class="action-body">
+              <div class="action-title">Seguimiento a WhatsApp sin respuesta</div>
+              <div class="action-desc">"Hola [Nombre], ¿llegó mi mensaje? Quería saber si conoces a alguien…"</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📊</div>
+            <div class="action-body">
+              <div class="action-title">Actualizar tracker</div>
+              <div class="action-desc">Registrar quién respondió, cambiar estado y anotar siguiente acción.</div>
+            </div>
+            <div class="action-time">10 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🔍</div>
+            <div class="action-body">
+              <div class="action-title">10 conexiones nuevas en LinkedIn</div>
+              <div class="action-desc">Mantener el flujo constante — hoy conectas, mañana mensajeas.</div>
+            </div>
+            <div class="action-time">20 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Meta de la semana</div>
+          <div class="check-item"><input type="checkbox" id="c4"><label for="c4">50+ conexiones enviadas en LinkedIn</label></div>
+          <div class="check-item"><input type="checkbox" id="c5"><label for="c5">20+ mensajes de outreach enviados</label></div>
+          <div class="check-item"><input type="checkbox" id="c6"><label for="c6">3–5 respuestas activas en tracker</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 2 — LOGICARGO -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot next">3</div>
+        <span class="phase-time">Semana 2</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card next">
+        <div class="phase-title">Activar canal Logicargo</div>
+        <div class="phase-subtitle">La acción con mayor potencial de retorno — leads calificados con presupuesto real</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">🤝</div>
+            <div class="action-body">
+              <div class="action-title">Reunión con contacto de Logicargo</div>
+              <div class="action-desc">Pedir presentaciones a sus 50+ clientes activos. Llevar el guión preparado.</div>
+            </div>
+            <div class="action-time">60 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">💰</div>
+            <div class="action-body">
+              <div class="action-title">Proponer acuerdo de referidos</div>
+              <div class="action-desc">10–15% de comisión por cada cliente que se cierre. Formalizar por escrito.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">📞</div>
+            <div class="action-body">
+              <div class="action-title">Llamadas con prospectos que respondieron la semana 1</div>
+              <div class="action-desc">15 minutos por llamada. Usar guión de objeciones. Objetivo: agendar propuesta.</div>
+            </div>
+            <div class="action-time">30 min/c</div>
+          </div>
+        </div>
+
+        <div class="meta-box">
+          <div class="meta-icon">🎯</div>
+          <div class="meta-text">Meta: 1 propuesta enviada esta semana. Un solo cierre aquí vale $800–$1,500/mes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 3-4 -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot future">4</div>
+        <span class="phase-time">Semanas 3–4</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card future">
+        <div class="phase-title">Cerrar primeros clientes</div>
+        <div class="phase-subtitle">Propuestas, seguimiento y onboarding de los primeros contratos</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">📄</div>
+            <div class="action-body">
+              <div class="action-title">Enviar propuestas a leads calificados</div>
+              <div class="action-desc">Propuesta personalizada por sector. Precio: $800–$1,500/mes para empresas medianas.</div>
+            </div>
+            <div class="action-time">60 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🔔</div>
+            <div class="action-body">
+              <div class="action-title">Seguimiento activo — cada 3 días</div>
+              <div class="action-desc">"¿Pudiste revisar la propuesta?" — No dejes que se enfríe.</div>
+            </div>
+            <div class="action-time">15 min</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">✅</div>
+            <div class="action-body">
+              <div class="action-title">Onboarding del primer cliente</div>
+              <div class="action-desc">Brief, accesos, primer entregable. Dejar una primera impresión impecable.</div>
+            </div>
+            <div class="action-time">90 min</div>
+          </div>
+        </div>
+
+        <div class="checklist">
+          <div class="checklist-title">Meta del mes</div>
+          <div class="check-item"><input type="checkbox" id="c7"><label for="c7">2–3 contratos cerrados en Bolivia</label></div>
+          <div class="check-item"><input type="checkbox" id="c8"><label for="c8">$1,600–$4,500/mes de ingresos recurrentes</label></div>
+          <div class="check-item"><input type="checkbox" id="c9"><label for="c9">Pipeline de 10+ prospectos activos</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 2 — ESPAÑA -->
+  <div class="phase">
+    <div class="phase-left">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="phase-dot goal">5</div>
+        <span class="phase-time">Mes 2+</span>
+      </div>
+    </div>
+    <div class="phase-right">
+      <div class="phase-card goal">
+        <div class="phase-title">Expandir a España</div>
+        <div class="phase-subtitle">Con caja generada en Bolivia, atacar el mercado de mayor ticket</div>
+
+        <div class="actions">
+          <div class="action">
+            <div class="action-icon">🇪🇸</div>
+            <div class="action-body">
+              <div class="action-title">Empresas españolas que quieren entrar a LATAM</div>
+              <div class="action-desc">Tu diferenciador único: conoces ambos mercados. Nadie más lo tiene. Ticket: €800–€3,000/mes.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+          <div class="action">
+            <div class="action-icon">🏆</div>
+            <div class="action-body">
+              <div class="action-title">Usar casos de Bolivia como prueba social</div>
+              <div class="action-desc">Logicargo + Sonríe + nuevos clientes = credibilidad real para el mercado español.</div>
+            </div>
+            <div class="action-time">—</div>
+          </div>
+        </div>
+
+        <div class="meta-box">
+          <div class="meta-icon">🚀</div>
+          <div class="meta-text">Meta: 1 cliente en España a €1,200/mes. Combinado con Bolivia: €2,800–$5,000 USD/mes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEYENDA -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#e53e3e"></div> Acción inmediata (hoy)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d69e2e"></div> Esta semana</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#718096"></div> Próximas semanas</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#38a169"></div> Meta de expansión</div>
+</div>
+
+<script>
+  // Persistir checkboxes en localStorage
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach(cb => {
+    const key = 'roadmap_' + cb.id;
+    if (localStorage.getItem(key) === 'true') cb.checked = true;
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked);
+    });
+  });
+</script>
+
+</body>
+</html>

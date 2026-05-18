@@ -19,7 +19,19 @@
       "Bash(npm run *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(gh api *)",
+      "PowerShell(vercel --version)",
+      "PowerShell(npm install -g vercel)",
+      "PowerShell(vercel whoami 2>&1)",
+      "PowerShell(vercel --yes --prod 2>&1)",
+      "Bash(start \"c:\\\\Users\\\\alipa\\\\alpha-strategy-web\\\\resultados\\\\sonrie-plan-contenido-may-jun-2026.html\")",
+      "Bash(python -c ' *)",
+      "Bash(Start-Process \"c:\\\\Users\\\\alipa\\\\alpha-strategy-web\\\\resultados\\\\sonrie-video-dia-madre-2026.html\")",
+      "Bash(cmd.exe /c start \"\" \"c:\\\\Users\\\\alipa\\\\alpha-strategy-web\\\\resultados\\\\sonrie-video-dia-madre-2026.html\")",
+      "PowerShell(\\(Get-ItemProperty \"HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\Shell\\\\Associations\\\\UrlAssociations\\\\https\\\\UserChoice\"\\).ProgId)",
+      "Bash(cmd.exe /c start chrome \"c:\\\\Users\\\\alipa\\\\alpha-strategy-web\\\\resultados\\\\sonrie-video-dia-madre-2026.html\")",
+      "WebFetch(domain:www.curso-ingles.com)"
     ],
     "additionalDirectories": [
       "c:\\Users\\alipa\\alpha-strategy-web\\resultados\\social"

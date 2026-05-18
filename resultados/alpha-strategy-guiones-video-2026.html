@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpha Strategy Group — Guiones de Video 2026</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:     #060D26;
+      --navy-mid: #0B1130;
+      --navy-l:   #1A2B4A;
+      --blue:     #0077FF;
+      --orange:   #FF6B35;
+      --magenta:  #E91E8C;
+      --cyan:     #00B4D8;
+      --gold:     #C9A84C;
+      --white:    #FFFFFF;
+      --gray:     #64748B;
+      --gray-l:   #F1F5F9;
+      --text:     #1E293B;
+      --border:   #E2E8F0;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#F8FAFC; color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; line-height:1.6; }
+
+    /* ── MASTER HEADER ── */
+    .master-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-l) 100%);
+      padding: 48px 40px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .master-header::before {
+      content:'';
+      position:absolute; inset:0;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--magenta), var(--cyan));
+      border-radius: 2px;
+      width: 80px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .master-header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 52px);
+      color: #fff;
+      line-height: 1.1;
+      position: relative;
+    }
+    .master-header h1 span {
+      background: linear-gradient(90deg, var(--orange), var(--magenta), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .master-sub { color:rgba(255,255,255,0.6); font-size:16px; margin-top:10px; max-width:580px; position:relative; }
+    .header-meta { display:flex; gap:16px; margin-top:28px; flex-wrap:wrap; position:relative; }
+    .meta-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+    .meta-pill strong { display:block; font-size:15px; font-weight:700; color:#fff; }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      background: var(--navy-mid);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 40px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .tab-btn {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .tab-btn:hover { color:rgba(255,255,255,0.8); }
+    .tab-btn.active { color:#fff; border-bottom-color: var(--orange); }
+    .tab-btn .tab-num {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      text-align: center;
+      line-height: 20px;
+      margin-right: 6px;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { display:none; }
+    .video-section.active { display:block; }
+
+    .video-header {
+      padding: 36px 40px 32px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-l) 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .video-header::after {
+      content:'';
+      position:absolute;
+      bottom:0; left:40px; right:40px;
+      height:1px;
+    }
+    .video-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border: 1px solid;
+    }
+    .video-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 3vw, 38px);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .video-hook { font-size:15px; color:rgba(255,255,255,0.6); max-width:600px; }
+    .video-meta { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+    .vmeta-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── CONTAINER ── */
+    .container { max-width:960px; margin:0 auto; padding:40px 24px 80px; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom:48px; }
+    .section-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .section-icon {
+      width:40px; height:40px;
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; flex-shrink:0;
+    }
+    .section-title { font-size:19px; font-weight:700; color:var(--text); }
+    .section-sub { font-size:13px; color:var(--gray); font-weight:500; }
+
+    /* ── CONCEPTO ── */
+    .concept-main {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 14px;
+    }
+    .concept-headline {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy-l);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .concept-desc { font-size:14px; color:var(--gray); line-height:1.75; }
+    .concept-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media(max-width:600px){ .concept-grid{grid-template-columns:1fr;} }
+    .concept-item {
+      background:white; border:1px solid var(--border);
+      border-radius:12px; padding:16px;
+    }
+    .concept-label {
+      font-size:11px; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; margin-bottom:6px;
+    }
+    .concept-val { font-size:14px; font-weight:600; color:var(--text); }
+    .concept-note { font-size:12px; color:var(--gray); margin-top:4px; }
+
+    /* ── BENCHMARKING BOX ── */
+    .bench-box {
+      background: linear-gradient(135deg, #F0F4FF, #F8F0FF);
+      border: 1px solid #C7D7FF;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .bench-title { font-size:13px; font-weight:700; color:#3730A3; margin-bottom:10px; letter-spacing:.5px; text-transform:uppercase; }
+    .bench-list { list-style:none; }
+    .bench-list li { font-size:13px; color:#4338CA; padding:3px 0; }
+    .bench-list li::before { content:'📊 '; }
+
+    /* ── GUION / SCENES ── */
+    .script-scene {
+      background:white; border:1px solid var(--border);
+      border-radius:14px; overflow:hidden; margin-bottom:12px;
+    }
+    .scene-header {
+      padding:13px 20px;
+      display:flex; align-items:center; gap:14px;
+      border-bottom:1px solid var(--border);
+    }
+    .scene-num {
+      width:32px; height:32px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px; font-weight:700; color:#fff; flex-shrink:0;
+    }
+    .scene-name { font-size:14px; font-weight:700; color:var(--text); }
+    .scene-time { font-size:12px; color:var(--gray); }
+    .scene-body {
+      padding:20px; display:grid;
+      grid-template-columns:1fr 1fr; gap:20px;
+    }
+    @media(max-width:600px){ .scene-body{grid-template-columns:1fr;} }
+    .col-label {
+      font-size:11px; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; margin-bottom:8px; color:var(--gray);
+    }
+    .scene-txt { font-size:14px; color:var(--text); line-height:1.65; }
+    .scene-txt em { color:var(--gray); font-style:italic; font-size:13px; }
+    .vo-line {
+      font-size:15px; font-weight:600; color:var(--navy-l);
+      font-style:italic; line-height:1.65;
+    }
+    .vo-line::before { content:'\201C'; }
+    .vo-line::after  { content:'\201D'; }
+    .tag-screen {
+      display:inline-block; border-radius:6px;
+      padding:3px 10px; font-size:12px; font-weight:600; margin-top:6px;
+    }
+    .tag-blue { background:#EFF6FF; color:#1D4ED8; }
+    .tag-accent { background:#FFF1F2; color:#BE123C; font-weight:700; }
+    .tag-gold { background:#FFFBEB; color:#92400E; }
+
+    /* ── STORYBOARD ── */
+    .sb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    @media(max-width:680px){ .sb-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:400px){ .sb-grid{grid-template-columns:1fr;} }
+    .sb-card { background:white; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .sb-frame {
+      aspect-ratio:9/16; display:flex;
+      align-items:center; justify-content:center;
+      padding:10px; position:relative;
+    }
+    .sb-frame svg { width:100%; height:100%; }
+    .sb-info { padding:12px 14px; }
+    .sb-snum { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+    .sb-desc { font-size:12px; color:var(--text); font-weight:500; margin-top:3px; line-height:1.4; }
+    .sb-time { font-size:11px; color:var(--gray); margin-top:4px; }
+
+    /* ── PRODUCCION GRID ── */
+    .prod-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:600px){ .prod-grid{grid-template-columns:1fr;} }
+    .prod-card { background:white; border:1px solid var(--border); border-radius:12px; padding:20px; }
+    .prod-card-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .prod-card-title span { font-size:18px; }
+    .prod-list { list-style:none; }
+    .prod-list li {
+      font-size:13px; color:var(--gray); padding:5px 0;
+      border-bottom:1px solid #F1F5F9;
+      display:flex; align-items:flex-start; gap:8px;
+    }
+    .prod-list li:last-child { border:none; }
+    .prod-list li::before { content:'✓'; color:var(--cyan); font-weight:700; flex-shrink:0; margin-top:1px; }
+
+    /* ── CAPTION BOX ── */
+    .caption-box {
+      background:#F0FDF4; border:1px solid #BBF7D0;
+      border-radius:12px; padding:20px 24px; margin-top:12px;
+    }
+    .caption-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#15803D; margin-bottom:10px; }
+    .caption-txt { font-size:14px; color:var(--text); line-height:1.8; white-space:pre-line; }
+
+    /* ── MUSIC ── */
+    .music-card {
+      background: linear-gradient(135deg, #1E1B4B, #312E81);
+      border-radius:12px; padding:20px 24px;
+    }
+    .music-title { font-size:14px; font-weight:700; color:#C7D2FE; margin-bottom:10px; }
+    .music-list { list-style:none; }
+    .music-list li { font-size:13px; color:#A5B4FC; padding:4px 0; }
+    .music-list li::before { content:'♪  '; }
+
+    /* ── CTA BOX ── */
+    .cta-box {
+      background: linear-gradient(135deg, var(--navy), var(--navy-l));
+      border-radius:16px; padding:36px; color:white; text-align:center;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative; overflow:hidden;
+    }
+    .cta-box::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:3px;
+      background: linear-gradient(90deg, var(--orange), var(--magenta), var(--cyan));
+    }
+    .cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:26px; margin-bottom:8px; }
+    .cta-box p { font-size:14px; opacity:.7; margin-bottom:20px; }
+    .cta-pills { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .cta-pill {
+      background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+      border-radius:8px; padding:10px 20px; font-size:14px; font-weight:600;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border:none; border-top:1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── BENCHMARK HEADER ── */
+    .bench-header {
+      background: linear-gradient(135deg, #1E1B4B, #4338CA);
+      border-radius:14px; padding:24px 28px; margin-bottom:40px;
+    }
+    .bench-header h2 { color:#fff; font-family:'Space Grotesk',sans-serif; font-size:20px; margin-bottom:14px; }
+    .bench-table { width:100%; border-collapse:collapse; }
+    .bench-table th {
+      font-size:11px; font-weight:700; letter-spacing:1.5px;
+      text-transform:uppercase; color:#A5B4FC; padding:8px 12px;
+      text-align:left; border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .bench-table td {
+      font-size:13px; color:#C7D2FE; padding:8px 12px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      vertical-align:top;
+    }
+    .bench-table tr:last-child td { border-bottom:none; }
+    .bench-apply { color:#6EE7B7; font-size:12px; }
+
+    @media print {
+      .tab-nav { display:none; }
+      .video-section { display:block !important; }
+      body { background:white; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MASTER HEADER -->
+<div class="master-header">
+  <div class="accent-bar"></div>
+  <h1>Alpha Strategy Group<br><span>Guiones de Video 2026</span></h1>
+  <p class="master-sub">5 guiones completos con benchmarking aplicado — awareness, ventas, posicionamiento, prueba social y thought leadership.</p>
+  <div class="header-meta">
+    <div class="meta-pill"><strong>5 videos</strong>Listos para producir</div>
+    <div class="meta-pill"><strong>LinkedIn · Instagram · Facebook</strong>Multi-plataforma</div>
+    <div class="meta-pill"><strong>USA · España · LatAm</strong>Mercados objetivo</div>
+    <div class="meta-pill"><strong>Mayo 2026</strong>Alpha Strategy Group</div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav" id="tabNav">
+  <button class="tab-btn active" onclick="showTab(1)" id="tab1">
+    <span class="tab-num" style="background:#FF6B3520;color:#FF6B35;">1</span>¿Qué hacemos?
+  </button>
+  <button class="tab-btn" onclick="showTab(2)" id="tab2">
+    <span class="tab-num" style="background:#E91E8C20;color:#E91E8C;">2</span>Video de Ventas
+  </button>
+  <button class="tab-btn" onclick="showTab(3)" id="tab3">
+    <span class="tab-num" style="background:#00B4D820;color:#00B4D8;">3</span>Posicionamiento
+  </button>
+  <button class="tab-btn" onclick="showTab(4)" id="tab4">
+    <span class="tab-num" style="background:#C9A84C20;color:#C9A84C;">4</span>Prueba Social
+  </button>
+  <button class="tab-btn" onclick="showTab(5)" id="tab5">
+    <span class="tab-num" style="background:#0077FF20;color:#0077FF;">5</span>Thought Leadership
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- VIDEO 1: AWARENESS — ¿QUÉ HACE ALPHA STRATEGY? -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="video-section active" id="v1">
+  <div class="video-header">
+    <div class="video-badge" style="background:rgba(255,107,53,.15);border-color:rgba(255,107,53,.4);color:#FF6B35;">
+      🎯 Video 1 · Awareness
+    </div>
+    <div class="video-title">"¿Trabajas duro — y tu negocio no crece?"</div>
+    <div class="video-hook">El video que explica quiénes somos y qué problema resolvemos. Para audiencias frías en LinkedIn, Instagram y Facebook.</div>
+    <div class="video-meta">
+      <div class="vmeta-pill">⏱ 60 segundos</div>
+      <div class="vmeta-pill">📱 Vertical 9:16 + Horizontal 16:9</div>
+      <div class="vmeta-pill">🎯 Awareness / Tráfico frío</div>
+      <div class="vmeta-pill">📢 LinkedIn · Instagram Reels · Facebook</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- BENCHMARKING -->
+    <div class="bench-box">
+      <div class="bench-title">Benchmarking aplicado — Video Awareness B2B</div>
+      <ul class="bench-list">
+        <li>LinkedIn video genera 5x más engagement que texto — prioridad en este canal (LinkedIn, 2026)</li>
+        <li>Los primeros 3 segundos determinan el 80% de la retención — hook de dolor urgente (Meta, 2025)</li>
+        <li>Formato "problema → sistema → resultado" convierte 34% más que storytelling de marca (HubSpot, 2026)</li>
+        <li>85% de usuarios ven video sin sonido — subtítulos y texto en pantalla obligatorios</li>
+        <li>Videos bajo 60 seg tienen 2x tasa de compleción vs. videos más largos (Sprout Social, 2026)</li>
+      </ul>
+    </div>
+
+    <!-- CONCEPTO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">💡</div>
+        <div>
+          <div class="section-title">Concepto del Video</div>
+          <div class="section-sub">La idea que guía cada decisión creativa</div>
+        </div>
+      </div>
+      <div class="concept-main">
+        <div class="concept-headline">"El negocio que trabaja duro pero no escala — no tiene un problema de esfuerzo. Tiene un problema de sistema."</div>
+        <div class="concept-desc">
+          Este video habla directamente al empresario o profesional que siente que trabaja más que nadie pero los resultados no reflejan ese esfuerzo. El dolor es reconocible, el diagnóstico es claro, y Alpha Strategy Group aparece como la solución completa: no una agencia, no un consultor genérico — un equipo estratégico que integra los tres pilares que falta.
+        </div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="concept-label" style="color:#FF6B35;">Tono</div>
+          <div class="concept-val">Empático → directo → aspiracional</div>
+          <div class="concept-note">Arranca con el dolor, termina con posibilidad real</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#FF6B35;">Protagonista</div>
+          <div class="concept-val">Empresario/a 30–50 años</div>
+          <div class="concept-note">Alguien que el espectador se ve reflejado: profesional, dedicado, con potencial</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#FF6B35;">Objetivo</div>
+          <div class="concept-val">Awareness + primera consulta</div>
+          <div class="concept-note">CTA suave: "primera consulta sin costo"</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#FF6B35;">Plataformas</div>
+          <div class="concept-val">LinkedIn · Instagram Reels · Facebook</div>
+          <div class="concept-note">Principal vertical 9:16 — adaptar a 16:9 para LinkedIn nativo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">🎙️</div>
+        <div>
+          <div class="section-title">Guion — Escena por Escena</div>
+          <div class="section-sub">Narración VO + texto en pantalla + instrucciones de filmación</div>
+        </div>
+      </div>
+
+      <!-- ESCENA 1 -->
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF5F0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">1</div>
+          <div>
+            <div class="scene-name">HOOK — El dolor reconocible</div>
+            <div class="scene-time">00:00 – 00:06 · 6 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Empresario/a mirando pantalla de laptop con gráficas planas o métricas que no crecen. Expresión de frustración contenida — no dramática, reconocible.<br><br>
+              <em>Alternativa: escritorio lleno de notas, llamadas, reuniones — y una agenda agotada. Plano cenital (desde arriba).</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">¿Trabajas más que nadie — y tu negocio sigue igual?</p>
+              <br>
+              <span class="tag-screen tag-accent">TEXTO GRANDE: "Trabajas duro. Pero no creces."</span><br>
+              <span class="tag-screen tag-blue">Música: arranca aquí — tono tenso, minimalista</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESCENA 2 -->
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF5F0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">2</div>
+          <div>
+            <div class="scene-name">PROBLEMA — Los síntomas del negocio sin sistema</div>
+            <div class="scene-time">00:06 – 00:18 · 12 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              3 cortes rápidos (2–3 seg cada uno):<br>
+              1. Marketing: post en redes sin interacción visible<br>
+              2. Ventas: lista de contactos sin seguimiento estructurado<br>
+              3. Equipo: reunión que no lleva a ningún resultado<br><br>
+              <em>Cada corte acompaña una línea de texto en pantalla.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">No es falta de esfuerzo. Es falta de sistema.</p>
+              <br>
+              <span class="tag-screen tag-accent">❌ Marketing sin estrategia</span><br>
+              <span class="tag-screen tag-accent">❌ Ventas sin proceso</span><br>
+              <span class="tag-screen tag-accent">❌ Equipo sin dirección clara</span><br>
+              <span class="tag-screen tag-blue">Música sube ligeramente de tensión</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESCENA 3 -->
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF5F0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">3</div>
+          <div>
+            <div class="scene-name">SOLUCIÓN — Alpha Strategy Group entra</div>
+            <div class="scene-time">00:18 – 00:40 · 22 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Logo Alpha Strategy Group aparece (animado, con gradiente de marca). Luego 3 iconos/pilares aparecen en secuencia:<br><br>
+              1. 📊 ESTRATEGIA — Plano de consultoría, whiteboard con plan de 90 días<br>
+              2. 💻 MARKETING DIGITAL — Dashboard de campañas activas, pantalla con métricas subiendo<br>
+              3. 🏆 FORMACIÓN — Profesional en llamada de videoconsulta, sonriendo<br><br>
+              <em>Ritmo rápido, cada pilar 4–5 seg.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Alpha Strategy Group es el equipo que le faltaba a tu empresa. Estrategia, marketing digital y formación — integrados en un solo sistema que funciona.</p>
+              <br>
+              <span class="tag-screen tag-gold">LOGO Alpha Strategy Group</span><br>
+              <span class="tag-screen tag-blue">📊 Estrategia empresarial</span><br>
+              <span class="tag-screen tag-blue">💻 Marketing digital</span><br>
+              <span class="tag-screen tag-blue">🏆 Formación y empleabilidad</span><br>
+              <span class="tag-screen tag-blue">Música transición: resolutiva, con energía</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESCENA 4 -->
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF5F0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">4</div>
+          <div>
+            <div class="scene-name">PRUEBA — Alcance y resultados</div>
+            <div class="scene-time">00:40 – 00:52 · 12 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Mapa o animación mostrando conexiones USA → España → LatAm. O empresarios en distintos países en videollamada exitosa, gráficas subiendo.<br><br>
+              <em>Alternativa: B-roll de pantalla con campañas activas, datos reales de clientes (anonimizados), dashboard con métricas positivas.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Empresas y profesionales en USA, España y Latinoamérica ya están creciendo con nosotros.</p>
+              <br>
+              <span class="tag-screen tag-blue">🇺🇸 USA · 🇪🇸 España · 🌎 Latinoamérica</span><br>
+              <span class="tag-screen tag-gold">PyMEs · Profesionales · Emprendedores</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESCENA 5 -->
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF5F0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">5</div>
+          <div>
+            <div class="scene-name">CTA — Primera consulta sin costo</div>
+            <div class="scene-time">00:52 – 01:00 · 8 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Pantalla de cierre con fondo navy y gradiente de marca. Logo Alpha Strategy Group centrado, con tagline y datos de contacto.<br><br>
+              <em>Puede terminar con el empresario protagonista mirando a cámara, sonriendo — la transformación completada.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Primera consulta sin costo. Empieza hoy.</p>
+              <br>
+              <span class="tag-screen tag-gold">ALPHA STRATEGY GROUP</span><br>
+              <span class="tag-screen tag-accent">PRIMERA CONSULTA SIN COSTO</span><br>
+              <span class="tag-screen tag-blue">alphastrategygroup.com</span><br>
+              <span class="tag-screen tag-blue">Música: fade out con impacto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPTION -->
+      <div class="caption-box">
+        <div class="caption-label">Caption para redes sociales</div>
+        <div class="caption-txt">¿Tu negocio trabaja duro — pero los resultados no reflejan ese esfuerzo? 📊
+
+No es falta de esfuerzo. Es falta de sistema.
+
+En Alpha Strategy Group integramos los tres pilares que necesita tu empresa para crecer de verdad:
+
+📊 Estrategia empresarial clara
+💻 Marketing digital que convierte
+🏆 Formación para el equipo que ejecuta
+
+Disponible para empresas y profesionales en 🇺🇸 USA · 🇪🇸 España · 🌎 Latinoamérica
+
+📩 Primera consulta sin costo — escríbenos hoy.
+
+#AlphaStrategyGroup #EstrategiaEmpresarial #MarketingDigital #CrecimientoEmpresarial #ConsultoríaDeNegocios #PyMEs #USA #España #LatAm</div>
+      </div>
+    </div>
+
+    <!-- STORYBOARD -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">🎬</div>
+        <div>
+          <div class="section-title">Storyboard Visual</div>
+          <div class="section-sub">5 fotogramas clave — formato 9:16 vertical</div>
+        </div>
+      </div>
+      <div class="sb-grid">
+
+        <!-- SB1 -->
+        <div class="sb-card">
+          <div class="sb-frame" style="background:linear-gradient(160deg,#1A1A2E,#16213E);">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- desk surface -->
+              <rect x="0" y="100" width="90" height="60" fill="#0F3460" rx="0"/>
+              <!-- laptop -->
+              <rect x="15" y="60" width="60" height="42" fill="#1A1A2E" rx="4"/>
+              <rect x="17" y="62" width="56" height="35" fill="#0D1B2A" rx="2"/>
+              <!-- flat graph on screen -->
+              <polyline points="22,90 32,88 42,89 52,87 62,88 67,87" fill="none" stroke="#FF6B35" stroke-width="2"/>
+              <!-- sad dots -->
+              <circle cx="32" cy="88" r="1.5" fill="#E91E8C"/>
+              <circle cx="52" cy="87" r="1.5" fill="#E91E8C"/>
+              <!-- person -->
+              <ellipse cx="45" cy="50" rx="10" ry="11" fill="#FFCCBC"/>
+              <ellipse cx="45" cy="39" rx="10" ry="7" fill="#4A2C17"/>
+              <!-- frown -->
+              <path d="M40 54 Q45 51 50 54" fill="none" stroke="#BC8A7A" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- hand on chin -->
+              <rect x="39" y="54" width="12" height="5" fill="#FFCCBC" rx="3"/>
+              <text x="45" y="152" text-anchor="middle" font-size="6.5" fill="#FF6B35" font-family="sans-serif" font-weight="bold">00:00 – 00:06</text>
+            </svg>
+          </div>
+          <div class="sb-info">
+            <div class="sb-snum" style="color:#FF6B35;">Escena 1 · HOOK</div>
+            <div class="sb-desc">Empresario frustrado. Gráfica plana en pantalla. Dolor reconocible.</div>
+            <div class="sb-time">0:00 – 0:06</div>
+          </div>
+        </div>
+
+        <!-- SB2 -->
+        <div class="sb-card">
+          <div class="sb-frame" style="background:linear-gradient(160deg,#1A1A2E,#16213E);">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- 3 red X items stacking -->
+              <rect x="8" y="30" width="74" height="22" fill="#2D1B1B" rx="6"/>
+              <text x="18" y="45" font-size="9" fill="#FF4444" font-family="sans-serif" font-weight="bold">❌ Sin estrategia</text>
+              <rect x="8" y="58" width="74" height="22" fill="#2D1B1B" rx="6"/>
+              <text x="18" y="73" font-size="9" fill="#FF4444" font-family="sans-serif" font-weight="bold">❌ Sin proceso</text>
+              <rect x="8" y="86" width="74" height="22" fill="#2D1B1B" rx="6"/>
+              <text x="18" y="101" font-size="9" fill="#FF4444" font-family="sans-serif" font-weight="bold">❌ Sin métricas</text>
+              <!-- central icon: no growth -->
+              <circle cx="45" cy="130" r="16" fill="#2D1B1B" stroke="#FF6B35" stroke-width="1.5"/>
+              <path d="M37 137 L45 122 L53 137" fill="none" stroke="#FF4444" stroke-width="2"/>
+              <line x1="35" y1="132" x2="55" y2="132" stroke="#FF4444" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="45" y="155" text-anchor="middle" font-size="6.5" fill="#FF6B35" font-family="sans-serif">00:06 – 00:18</text>
+            </svg>
+          </div>
+          <div class="sb-info">
+            <div class="sb-snum" style="color:#FF6B35;">Escena 2 · PROBLEMA</div>
+            <div class="sb-desc">3 síntomas aparecen en pantalla. Sin sistema = sin crecimiento.</div>
+            <div class="sb-time">0:06 – 0:18</div>
+          </div>
+        </div>
+
+        <!-- SB3 — CLAVE -->
+        <div class="sb-card" style="border-color:#FF6B35;border-width:2px;">
+          <div class="sb-frame" style="background:linear-gradient(160deg,#060D26,#1A2B4A);">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- logo text -->
+              <text x="45" y="22" text-anchor="middle" font-size="7" fill="#FF6B35" font-family="sans-serif" font-weight="bold" letter-spacing="1">ALPHA</text>
+              <text x="45" y="32" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="bold">STRATEGY</text>
+              <text x="45" y="42" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.4)" font-family="sans-serif" font-weight="bold">GROUP</text>
+              <!-- gradient line -->
+              <line x1="10" y1="49" x2="80" y2="49" stroke="url(#grad1)" stroke-width="1.5"/>
+              <defs><linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FF6B35"/><stop offset="50%" stop-color="#E91E8C"/><stop offset="100%" stop-color="#00B4D8"/></linearGradient></defs>
+              <!-- 3 pillars -->
+              <rect x="5" y="58" width="24" height="30" fill="rgba(255,107,53,.15)" rx="5" stroke="#FF6B35" stroke-width="1"/>
+              <text x="17" y="72" text-anchor="middle" font-size="10" font-family="sans-serif">📊</text>
+              <text x="17" y="83" text-anchor="middle" font-size="5.5" fill="#FF6B35" font-family="sans-serif" font-weight="bold">ESTRATEGIA</text>
+
+              <rect x="33" y="58" width="24" height="30" fill="rgba(233,30,140,.15)" rx="5" stroke="#E91E8C" stroke-width="1"/>
+              <text x="45" y="72" text-anchor="middle" font-size="10" font-family="sans-serif">💻</text>
+              <text x="45" y="83" text-anchor="middle" font-size="5" fill="#E91E8C" font-family="sans-serif" font-weight="bold">MARKETING</text>
+
+              <rect x="61" y="58" width="24" height="30" fill="rgba(0,180,216,.15)" rx="5" stroke="#00B4D8" stroke-width="1"/>
+              <text x="73" y="72" text-anchor="middle" font-size="10" font-family="sans-serif">🏆</text>
+              <text x="73" y="83" text-anchor="middle" font-size="5.5" fill="#00B4D8" font-family="sans-serif" font-weight="bold">FORMACIÓN</text>
+
+              <!-- = result -->
+              <text x="45" y="104" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.4)" font-family="sans-serif">=</text>
+              <rect x="18" y="110" width="54" height="18" fill="rgba(201,168,76,.15)" rx="5" stroke="#C9A84C" stroke-width="1"/>
+              <text x="45" y="123" text-anchor="middle" font-size="7.5" fill="#C9A84C" font-family="sans-serif" font-weight="bold">RESULTADOS REALES</text>
+              <text x="45" y="155" text-anchor="middle" font-size="7" fill="#FF6B35" font-family="sans-serif" font-weight="bold">★ ESCENA CLAVE</text>
+            </svg>
+          </div>
+          <div class="sb-info">
+            <div class="sb-snum" style="color:#FF6B35;">Escena 3 · SOLUCIÓN ★</div>
+            <div class="sb-desc">Logo + 3 pilares aparecen. La promesa completa de Alpha Strategy.</div>
+            <div class="sb-time">0:18 – 0:40</div>
+          </div>
+        </div>
+
+        <!-- SB4 -->
+        <div class="sb-card">
+          <div class="sb-frame" style="background:linear-gradient(160deg,#060D26,#0B1130);">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- world map dots -->
+              <!-- USA dot -->
+              <circle cx="20" cy="55" r="5" fill="#FF6B35" opacity=".8"/>
+              <text x="20" y="68" text-anchor="middle" font-size="5" fill="#FF6B35" font-family="sans-serif">USA</text>
+              <!-- Spain dot -->
+              <circle cx="48" cy="45" r="5" fill="#E91E8C" opacity=".8"/>
+              <text x="48" y="58" text-anchor="middle" font-size="5" fill="#E91E8C" font-family="sans-serif">España</text>
+              <!-- LatAm dot -->
+              <circle cx="28" cy="90" r="5" fill="#00B4D8" opacity=".8"/>
+              <text x="28" y="103" text-anchor="middle" font-size="5" fill="#00B4D8" font-family="sans-serif">LatAm</text>
+              <!-- connection lines -->
+              <line x1="20" y1="55" x2="48" y2="45" stroke="rgba(255,107,53,.4)" stroke-width="1" stroke-dasharray="3,2"/>
+              <line x1="48" y1="45" x2="28" y2="90" stroke="rgba(233,30,140,.4)" stroke-width="1" stroke-dasharray="3,2"/>
+              <line x1="20" y1="55" x2="28" y2="90" stroke="rgba(0,180,216,.4)" stroke-width="1" stroke-dasharray="3,2"/>
+              <!-- growth arrow -->
+              <path d="M15 140 L40 115 L55 125 L75 100" fill="none" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round"/>
+              <polygon points="75,100 70,106 80,108" fill="#C9A84C"/>
+              <text x="45" y="155" text-anchor="middle" font-size="6.5" fill="#C9A84C" font-family="sans-serif">00:40 – 00:52</text>
+            </svg>
+          </div>
+          <div class="sb-info">
+            <div class="sb-snum" style="color:#FF6B35;">Escena 4 · PRUEBA</div>
+            <div class="sb-desc">Mapa USA·España·LatAm. Conexiones activas. Gráfica sube.</div>
+            <div class="sb-time">0:40 – 0:52</div>
+          </div>
+        </div>
+
+        <!-- SB5 -->
+        <div class="sb-card">
+          <div class="sb-frame" style="background:linear-gradient(160deg,#060D26,#1A2B4A);">
+            <svg viewBox="0 0 90 160" xmlns="http://www.w3.org/2000/svg">
+              <!-- top gradient bar -->
+              <rect x="0" y="0" width="90" height="4" fill="url(#grad2)"/>
+              <defs><linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#FF6B35"/><stop offset="50%" stop-color="#E91E8C"/><stop offset="100%" stop-color="#00B4D8"/></linearGradient></defs>
+              <!-- CTA box -->
+              <rect x="8" y="50" width="74" height="28" fill="rgba(255,107,53,.15)" rx="8" stroke="#FF6B35" stroke-width="1.5"/>
+              <text x="45" y="62" text-anchor="middle" font-size="7" fill="white" font-family="sans-serif" font-weight="bold">PRIMERA CONSULTA</text>
+              <text x="45" y="73" text-anchor="middle" font-size="8" fill="#FF6B35" font-family="sans-serif" font-weight="bold">SIN COSTO</text>
+              <!-- URL -->
+              <rect x="12" y="88" width="66" height="16" fill="rgba(201,168,76,.1)" rx="4" stroke="#C9A84C" stroke-width="1"/>
+              <text x="45" y="100" text-anchor="middle" font-size="6.5" fill="#C9A84C" font-family="sans-serif">alphastrategygroup.com</text>
+              <!-- logo mark -->
+              <text x="45" y="30" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.8)" font-family="sans-serif" font-weight="bold" letter-spacing="2">ALPHA STRATEGY GROUP</text>
+              <text x="45" y="155" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,0.4)" font-family="sans-serif">00:52 – 01:00</text>
+            </svg>
+          </div>
+          <div class="sb-info">
+            <div class="sb-snum" style="color:#FF6B35;">Escena 5 · CTA</div>
+            <div class="sb-desc">Pantalla final navy-gradiente. Logo + CTA + URL.</div>
+            <div class="sb-time">0:52 – 1:00</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRODUCCION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#FF6B35,#E91E8C);">🎥</div>
+        <div>
+          <div class="section-title">Guía de Producción</div>
+          <div class="section-sub">Lo que necesitas para filmar este video</div>
+        </div>
+      </div>
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-card-title"><span>📱</span>Equipo mínimo</div>
+          <ul class="prod-list">
+            <li>iPhone 13+ o cámara Android de alta gama — modo video 4K/30fps</li>
+            <li>Trípode o soporte para planos fijos (empresario en escritorio)</li>
+            <li>Aro de luz o luz natural frontal</li>
+            <li>Fondo oscuro/neutro para escenas con texto superpuesto</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>🎬</span>Tips de filmación</div>
+          <ul class="prod-list">
+            <li>Filmar en VERTICAL (9:16) — modo retrato del celular siempre</li>
+            <li>Escenas 1–2: iluminación de pantalla de laptop como fuente de luz secundaria</li>
+            <li>Escena 3: grabar close-up de pantallas con dashboards reales (borrando datos sensibles)</li>
+            <li>Texto en pantalla se puede agregar en edición — no necesitas pantallas perfectas</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>✂️</span>Edición</div>
+          <ul class="prod-list">
+            <li>CapCut (gratis) o Adobe Premiere Rush para cortes rápidos</li>
+            <li>Subtítulos automáticos — activar en CapCut para versión sin sonido</li>
+            <li>Texto en pantalla: sans-serif bold blanca con sombra oscura</li>
+            <li>Color grade: oscuro, contraste alto — tonos del brand navy/naranja</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>🎵</span>Música sugerida</div>
+          <ul class="prod-list">
+            <li>Tono: minimalista tenso → resolutivo con energía</li>
+            <li>Pixabay: "Corporate Background" o "Business Technology"</li>
+            <li>YouTube Audio Library: "Inspiring Corporate"</li>
+            <li>Volumen: 35% bajo la voz en off / 70% en escenas sin VO</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- END VIDEO 1 -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- VIDEO 2: VENTAS — "Tu negocio merece crecer"   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="video-section" id="v2">
+  <div class="video-header">
+    <div class="video-badge" style="background:rgba(233,30,140,.15);border-color:rgba(233,30,140,.4);color:#E91E8C;">
+      💰 Video 2 · Ventas / Conversión
+    </div>
+    <div class="video-title">"¿Cuántos clientes nuevos trajo tu marketing este mes?"</div>
+    <div class="video-hook">El video que convierte. Hook de dolor directo → oferta concreta → CTA urgente. Para audiencias tibias que ya nos conocen.</div>
+    <div class="video-meta">
+      <div class="vmeta-pill">⏱ 45 segundos</div>
+      <div class="vmeta-pill">📱 Vertical 9:16</div>
+      <div class="vmeta-pill">🎯 Conversión directa</div>
+      <div class="vmeta-pill">📢 Instagram Reels · Facebook · LinkedIn</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="bench-box">
+      <div class="bench-title">Benchmarking aplicado — Video de Ventas B2B</div>
+      <ul class="bench-list">
+        <li>Hook con pregunta de "resultado" ("¿cuántos clientes...") activa modo autoevaluación — 2.4x más clics (HubSpot 2026)</li>
+        <li>Mostrar la oferta específica en pantalla (no solo narrarla) aumenta conversión 41% (Meta, 2025)</li>
+        <li>3 bullets de beneficio concreto superan a listas largas — el cerebro recuerda máx. 3 en video</li>
+        <li>CTA con escasez o urgencia suave ("Primera consulta sin costo — plazas limitadas") convierte 28% más</li>
+        <li>Videos de ventas B2B bajo 45 seg tienen mejor CTR que los de 60–90 seg (LinkedIn, 2026)</li>
+      </ul>
+    </div>
+
+    <!-- CONCEPTO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#E91E8C,#00B4D8);">💡</div>
+        <div>
+          <div class="section-title">Concepto del Video</div>
+          <div class="section-sub">Directo al dolor. Directo a la solución. Directo al sí.</div>
+        </div>
+      </div>
+      <div class="concept-main">
+        <div class="concept-headline">"Si no sabes cuántos clientes te trajo tu marketing este mes — el problema no es el mercado. Es que no tienes el sistema."</div>
+        <div class="concept-desc">Este video no explica quiénes somos — eso ya lo saben. Este video hace una pregunta que duele, identifica el problema, presenta la solución con claridad y termina con un CTA que no requiere compromiso (primera consulta sin costo). Estructura clásica de conversión: Dolor → Agitación → Solución → CTA.</div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="concept-label" style="color:#E91E8C;">Fórmula</div>
+          <div class="concept-val">DAS: Dolor → Agitación → Solución</div>
+          <div class="concept-note">La estructura de copy que más convierte en video corto</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#E91E8C;">Audiencia</div>
+          <div class="concept-val">Seguidores que ya nos conocen</div>
+          <div class="concept-note">Retargeting / audiencia tibia — saben quiénes somos pero no han tomado acción</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#E91E8C;">Objetivo</div>
+          <div class="concept-val">Agendar primera consulta</div>
+          <div class="concept-note">Un solo CTA, claro y sin fricción</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#E91E8C;">Tono</div>
+          <div class="concept-val">Directo, urgente, propositivo</div>
+          <div class="concept-note">Sin rodeos — este video vende</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#E91E8C,#00B4D8);">🎙️</div>
+        <div>
+          <div class="section-title">Guion — Escena por Escena</div>
+          <div class="section-sub">45 segundos · Estructura DAS</div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF0F7,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#E91E8C,#9C27B0);">1</div>
+          <div>
+            <div class="scene-name">HOOK — La pregunta que duele</div>
+            <div class="scene-time">00:00 – 00:05 · 5 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Pantalla de un celular o computadora con una red social abierta — contador de likes pero cero mensajes de clientes potenciales. O un inbox vacío.<br><br>
+              <em>Alternativa: persona mirando a cámara, directa — modo "talking head" corporativo. Pausa antes de hablar para crear tensión.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">¿Cuántos clientes nuevos trajo tu marketing este mes?</p>
+              <br>
+              <span class="tag-screen tag-accent">TEXTO GRANDE: "¿CUÁNTOS CLIENTES NUEVOS?"</span><br>
+              <span class="tag-screen tag-blue">Silencio 1 seg después de la pregunta — dejar que aterrice</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF0F7,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#E91E8C,#9C27B0);">2</div>
+          <div>
+            <div class="scene-name">AGITACIÓN — El diagnóstico del problema</div>
+            <div class="scene-time">00:05 – 00:17 · 12 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Lista de síntomas apareciendo en pantalla uno por uno (velocidad media — 2 seg cada uno). Fondo oscuro con texto blanco y rojo.<br><br>
+              <em>Puede ser B-roll de pantalla con analytics mostrando tráfico sin conversión, posts con likes pero sin mensajes.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Si la respuesta no es clara, o el número es bajo — el problema no es el mercado. Es que no tienes el sistema correcto todavía.</p>
+              <br>
+              <span class="tag-screen tag-accent">❌ Publicas pero no conviertes</span><br>
+              <span class="tag-screen tag-accent">❌ No sabes qué canal te trae clientes</span><br>
+              <span class="tag-screen tag-accent">❌ Tu presupuesto de ads no tiene ROI claro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF0F7,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#E91E8C,#9C27B0);">3</div>
+          <div>
+            <div class="scene-name">SOLUCIÓN — La oferta concreta</div>
+            <div class="scene-time">00:17 – 00:35 · 18 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              3 checks verdes apareciendo en pantalla, cada uno con su beneficio. Fondo navy con acento de marca.<br><br>
+              <em>Alternativa poderosa: pantalla partida — izquierda en rojo (caos/sin sistema) vs. derecha en verde/navy (con sistema Alpha Strategy). Contraste visual instantáneo.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">En Alpha Strategy Group construimos ese sistema. En 90 días: estrategia que funciona, marketing que convierte y métricas que demuestran resultados.</p>
+              <br>
+              <span class="tag-screen tag-blue">✅ Plan de 90 días personalizado</span><br>
+              <span class="tag-screen tag-blue">✅ Campañas en LinkedIn · Meta · Google</span><br>
+              <span class="tag-screen tag-blue">✅ Dashboard de métricas reales</span><br>
+              <span class="tag-screen tag-gold">Música: sube con energía positiva</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFF0F7,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#E91E8C,#9C27B0);">4</div>
+          <div>
+            <div class="scene-name">PRUEBA + CTA — Cierre con urgencia suave</div>
+            <div class="scene-time">00:35 – 00:45 · 10 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Pantalla de cierre premium con fondo navy. Logo Alpha Strategy Group. Datos de contacto visibles.<br><br>
+              <em>Opcional: persona mirando a cámara diciendo el CTA directamente — el contacto visual genera más acción que el texto solo.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Disponible para empresas en USA, España y Latinoamérica. Primera consulta sin costo — agenda hoy.</p>
+              <br>
+              <span class="tag-screen tag-gold">🇺🇸 USA · 🇪🇸 España · 🌎 LatAm</span><br>
+              <span class="tag-screen tag-accent">PRIMERA CONSULTA SIN COSTO</span><br>
+              <span class="tag-screen tag-blue">alphastrategygroup.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-box">
+        <div class="caption-label">Caption para redes sociales</div>
+        <div class="caption-txt">¿Cuántos clientes nuevos te trajo tu marketing este mes? 🤔
+
+Si no tienes una respuesta clara — el problema no es el mercado. Es el sistema.
+
+En Alpha Strategy Group lo resolvemos en 90 días:
+
+✅ Plan estratégico personalizado para tu negocio
+✅ Campañas activas en LinkedIn, Meta y Google
+✅ Dashboard de métricas reales — sin adivinar
+✅ Más clientes, más conversiones, más crecimiento
+
+📩 Primera consulta SIN COSTO — ¿conversamos?
+
+🇺🇸 USA · 🇪🇸 España · 🌎 Latinoamérica
+
+#AlphaStrategyGroup #MarketingDigital #LeadGeneration #CrecimientoEmpresarial #PyMEs #VentasB2B #ConsultoríaEmpresarial</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- END VIDEO 2 -->
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- VIDEO 3: POSICIONAMIENTO — "No somos una agencia"  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="video-section" id="v3">
+  <div class="video-header">
+    <div class="video-badge" style="background:rgba(0,180,216,.15);border-color:rgba(0,180,216,.4);color:#00B4D8;">
+      🏆 Video 3 · Posicionamiento
+    </div>
+    <div class="video-title">"No somos una agencia. Somos tu equipo estratégico."</div>
+    <div class="video-hook">El video que posiciona. Diferencia a Alpha Strategy de todas las demás opciones. Ideal para LinkedIn como video de thought leadership.</div>
+    <div class="video-meta">
+      <div class="vmeta-pill">⏱ 60 segundos</div>
+      <div class="vmeta-pill">📱 Horizontal 16:9 + Vertical 9:16</div>
+      <div class="vmeta-pill">🎯 Diferenciación / Autoridad</div>
+      <div class="vmeta-pill">📢 LinkedIn (principal) · Instagram</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="bench-box">
+      <div class="bench-title">Benchmarking aplicado — Video de Posicionamiento B2B</div>
+      <ul class="bench-list">
+        <li>"Talking head" del founder posiciona autoridad — 3x más confianza que B-roll animado (Edelman Trust, 2026)</li>
+        <li>Declaración de diferenciador en los primeros 8 seg aumenta retención 52% (LinkedIn Learning, 2025)</li>
+        <li>El concepto "no somos X, somos Y" (reencuadre de categoría) es el frame más poderoso para posicionamiento de agencias</li>
+        <li>Videos de posicionamiento funcionan mejor en LinkedIn nativo que como link externo — subir directo</li>
+        <li>Diagrama de Venn o framework visual propio = símbolo de autoridad intelectual (Content Marketing Institute, 2026)</li>
+      </ul>
+    </div>
+
+    <!-- CONCEPTO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">💡</div>
+        <div>
+          <div class="section-title">Concepto del Video</div>
+          <div class="section-sub">Romper la categoría para liderar la propia</div>
+        </div>
+      </div>
+      <div class="concept-main">
+        <div class="concept-headline">"Hay miles de agencias de marketing. Hay cientos de consultores. Pero solo Alpha Strategy Group hace las tres cosas — integradas."</div>
+        <div class="concept-desc">La mayoría de los competidores son una cosa: agencia, o consultor, o academia. Alpha Strategy Group rompe esa lógica: somos las tres cosas integradas. Este video hace explícita esa diferencia, construye autoridad con presencia internacional y termina con un CTA de bajo compromiso (conectar, conversar).</div>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="concept-label" style="color:#00B4D8;">Marco</div>
+          <div class="concept-val">Reencuadre de categoría</div>
+          <div class="concept-note">"No somos X ni Y — somos algo diferente y más completo"</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#00B4D8;">Formato ideal</div>
+          <div class="concept-val">Talking head del founder</div>
+          <div class="concept-note">El fundador hablando a cámara: máxima autoridad y autenticidad</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#00B4D8;">Canal principal</div>
+          <div class="concept-val">LinkedIn video nativo</div>
+          <div class="concept-note">Subir directamente a LinkedIn — no como link de YouTube</div>
+        </div>
+        <div class="concept-item">
+          <div class="concept-label" style="color:#00B4D8;">CTA</div>
+          <div class="concept-val">Soft: conectar o conversar</div>
+          <div class="concept-note">Sin presión — posicionamiento requiere CTA de baja fricción</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">🎙️</div>
+        <div>
+          <div class="section-title">Guion — Escena por Escena</div>
+          <div class="section-sub">60 segundos · Reencuadre de categoría + autoridad</div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F9FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">1</div>
+          <div>
+            <div class="scene-name">PROVOCACIÓN — Romper la expectativa</div>
+            <div class="scene-time">00:00 – 00:10 · 10 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Founder o portavoz mirando a cámara, fondo oscuro corporativo (navy, minimalista). Plano medio. Confianza en la postura — no agresivo, sí directo.<br><br>
+              <em>Alternativa si no hay cámara disponible: texto animado sobre fondo navy con tipografía premium.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Hay miles de agencias de marketing. Hay cientos de consultores. Y hay docenas de programas de formación para profesionales.</p>
+              <br>
+              <span class="tag-screen tag-blue">Agencias · Consultores · Formación</span><br>
+              <span class="tag-screen tag-blue">Todos dicen que pueden hacer crecer tu negocio.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F9FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">2</div>
+          <div>
+            <div class="scene-name">EL DIFERENCIADOR — El diagrama de los 3 círculos</div>
+            <div class="scene-time">00:10 – 00:28 · 18 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Animación del diagrama de Venn: 3 círculos que se superponen. Aparecen en secuencia mientras el VO los menciona:<br>
+              1. ESTRATEGIA (naranja)<br>
+              2. MARKETING DIGITAL (magenta)<br>
+              3. FORMACIÓN (cyan)<br>
+              → Centro: RESULTADOS REALES (dorado, brilla)<br><br>
+              <em>Se puede hacer como motion graphics simple en CapCut o After Effects. O mostrar una pizarra dibujada a mano — más auténtico.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Alpha Strategy Group hace algo diferente. No te damos solo estrategia. No solo marketing. No solo formación. Te damos las tres — integradas — porque el crecimiento real necesita las tres al mismo tiempo.</p>
+              <br>
+              <span class="tag-screen tag-gold">📊 ESTRATEGIA + 💻 MARKETING + 🏆 FORMACIÓN</span><br>
+              <span class="tag-screen tag-gold">= CRECIMIENTO REAL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F9FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">3</div>
+          <div>
+            <div class="scene-name">AUTORIDAD — Presencia y experiencia</div>
+            <div class="scene-time">00:28 – 00:44 · 16 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Mapa animado mostrando USA, España, Latinoamérica con puntos de luz. O B-roll de sesiones de trabajo: videollamadas, dashboards, whiteboards con planes estratégicos.<br><br>
+              <em>Si tienes fotos o videos de trabajo real con clientes (con permiso), usarlos aquí — autenticidad > perfección.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Con presencia en USA, España y Latinoamérica, hemos acompañado a empresas y profesionales en los mercados más competitivos del mundo. Y lo hacemos con algo que pocas firmas tienen: visión completa del negocio.</p>
+              <br>
+              <span class="tag-screen tag-blue">🇺🇸 USA · 🇪🇸 España · 🌎 Latinoamérica</span><br>
+              <span class="tag-screen tag-gold">Visión completa del negocio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F9FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#00B4D8,#0077FF);">4</div>
+          <div>
+            <div class="scene-name">PARA QUIÉN + CTA SOFT</div>
+            <div class="scene-time">00:44 – 01:00 · 16 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Founder de vuelta a cámara — plano más cercano (busto). Tono directo y personal para el cierre. Luego pantalla final con logo y tagline.<br><br>
+              <em>El contacto visual directo en el CTA es el elemento más poderoso para generar acción.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Somos para la empresa que quiere crecer con un sistema — y para el profesional que quiere posicionarse donde están las mejores oportunidades. Primera conversación sin costo.</p>
+              <br>
+              <span class="tag-screen tag-gold">ALPHA STRATEGY GROUP</span><br>
+              <span class="tag-screen tag-blue">"Tu crecimiento, nuestra estrategia."</span><br>
+              <span class="tag-screen tag-accent">Primera conversación SIN COSTO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-box">
+        <div class="caption-label">Caption para LinkedIn (formato largo)</div>
+        <div class="caption-txt">Hay miles de agencias de marketing. Hay cientos de consultores. Hay docenas de programas de formación.
+
+Pero muy pocos hacen las tres cosas — integradas.
+
+En Alpha Strategy Group trabajamos diferente:
+
+📊 No solo hacemos estrategia — la ejecutamos
+💻 No solo hacemos marketing — lo conectamos al plan de negocio
+🏆 No solo damos formación — desarrollamos el equipo que ejecuta
+
+Porque el crecimiento sostenible necesita las tres. Y si falta una, las otras dos no funcionan solas.
+
+¿Tu empresa tiene las tres en marcha?
+
+Primera conversación sin costo — escríbeme por DM.
+
+🇺🇸 USA · 🇪🇸 España · 🌎 Latinoamérica
+
+#AlphaStrategyGroup #EstrategiaEmpresarial #MarketingDigital #ConsultoríaDeNegocios #Empleabilidad #CrecimientoEmpresarial #B2B #PyMEs</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- END VIDEO 3 -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- VIDEO 4: PRUEBA SOCIAL — "Antes vs. Después"   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="video-section" id="v4">
+  <div class="video-header">
+    <div class="video-badge" style="background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.5);color:#C9A84C;">
+      ⭐ Video 4 · Prueba Social
+    </div>
+    <div class="video-title">"Antes: sin sistema. Después: con Alpha Strategy."</div>
+    <div class="video-hook">El video que genera confianza. Antes vs. después, resultados reales o estructurados. Ideal para retargeting y audiencias que dudan.</div>
+    <div class="video-meta">
+      <div class="vmeta-pill">⏱ 30 segundos</div>
+      <div class="vmeta-pill">📱 Vertical 9:16</div>
+      <div class="vmeta-pill">🎯 Prueba social / Trust</div>
+      <div class="vmeta-pill">📢 Instagram · Facebook · LinkedIn</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="bench-box">
+      <div class="bench-title">Benchmarking aplicado — Video de Prueba Social</div>
+      <ul class="bench-list">
+        <li>Videos "antes vs. después" tienen 2.8x más compartidos que otros formatos de video B2B (BuzzSumo, 2026)</li>
+        <li>30 segundos es el sweet spot para testimoniales — suficiente para emocionar, corto para retener</li>
+        <li>Los datos específicos (% de mejora, cifras) generan 37% más confianza que testimonios genéricos (Nielsen, 2025)</li>
+        <li>Transformación visual (colores, estado emocional) en pantalla refuerza el mensaje sin necesidad de palabras</li>
+      </ul>
+    </div>
+
+    <!-- CONCEPTO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">💡</div>
+        <div><div class="section-title">Concepto del Video</div></div>
+      </div>
+      <div class="concept-main">
+        <div class="concept-headline">"El antes es el dolor que el cliente ya siente. El después es lo que Alpha Strategy hace posible."</div>
+        <div class="concept-desc">Formato de contraste visual y narrativo. Pantalla dividida o secuencia rápida antes/después. Los números y resultados hablan por sí solos. Puede usarse con caso real (cliente anónimo) o como caso estructurado representativo.</div>
+      </div>
+    </div>
+
+    <!-- GUION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">🎙️</div>
+        <div><div class="section-title">Guion — 30 segundos</div></div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFFBF0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">1</div>
+          <div>
+            <div class="scene-name">HOOK — El dato que detiene el scroll</div>
+            <div class="scene-time">00:00 – 00:05 · 5 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">Gráfica subiendo drásticamente — de plana a ascendente. Puede ser pantalla de Google Analytics, Meta Ads o cualquier dashboard con número visible creciendo.</div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">¿Qué cambia cuando una empresa implementa un sistema de crecimiento real?</p>
+              <br>
+              <span class="tag-screen tag-accent">TEXTO: "ANTES vs. DESPUÉS"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFFBF0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">2</div>
+          <div>
+            <div class="scene-name">ANTES — El estado de caos</div>
+            <div class="scene-time">00:05 – 00:13 · 8 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Fondo rojo/oscuro. Empresario frustrado, pantalla con métricas planas, inbox vacío, lista de tareas sin terminar.<br><br>
+              <em>Tono visual: desorden, urgencia, agotamiento.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Antes: marketing sin resultados, ventas que no cierran, sin métricas de qué está funcionando.</p>
+              <br>
+              <span class="tag-screen tag-accent">ANTES: ❌ Sin sistema · ❌ Sin métricas · ❌ Sin clientes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFFBF0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">3</div>
+          <div>
+            <div class="scene-name">DESPUÉS — La transformación</div>
+            <div class="scene-time">00:13 – 00:24 · 11 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Fondo navy/gradiente. Gráficas subiendo, inbox con mensajes de clientes, dashboard con métricas positivas, empresario sonriendo en videollamada.<br><br>
+              <em>Tono visual: orden, claridad, momentum.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Después de trabajar con Alpha Strategy Group: leads calificados, conversiones medibles, y un plan que el equipo ejecuta sin que el dueño tenga que estar en todo.</p>
+              <br>
+              <span class="tag-screen tag-blue">DESPUÉS: ✅ Sistema claro · ✅ Leads calificados · ✅ Crecimiento real</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#FFFBF0,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#C9A84C,#FF6B35);">4</div>
+          <div>
+            <div class="scene-name">CTA — ¿Cuándo empieza la tuya?</div>
+            <div class="scene-time">00:24 – 00:30 · 6 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">Pantalla de cierre con logo y CTA. Simple, limpia, poderosa.</div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">¿Cuándo empieza la tuya? Primera consulta sin costo.</p>
+              <br>
+              <span class="tag-screen tag-accent">¿CUÁNDO EMPIEZA LA TUYA?</span><br>
+              <span class="tag-screen tag-gold">alphastrategygroup.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-box">
+        <div class="caption-label">Caption</div>
+        <div class="caption-txt">ANTES vs. DESPUÉS — lo que cambia cuando tienes el sistema correcto 📊
+
+ANTES de trabajar con Alpha Strategy Group:
+❌ Marketing activo pero sin clientes nuevos
+❌ Sin proceso de ventas definido
+❌ Sin métricas claras de qué funciona
+
+DESPUÉS de trabajar con Alpha Strategy Group:
+✅ Leads calificados de forma predecible
+✅ Proceso de ventas documentado y replicable
+✅ Dashboard con métricas reales cada semana
+
+La diferencia no es el esfuerzo. Es el sistema.
+
+📩 Primera consulta sin costo — empieza hoy.
+
+#AlphaStrategyGroup #AntesVsDespues #CrecimientoEmpresarial #MarketingDigital #SistemasDeNegocio</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- END VIDEO 4 -->
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VIDEO 5: THOUGHT LEADERSHIP — "¿Creciendo o sobreviviendo?" -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="video-section" id="v5">
+  <div class="video-header">
+    <div class="video-badge" style="background:rgba(0,119,255,.15);border-color:rgba(0,119,255,.4);color:#0077FF;">
+      🧠 Video 5 · Thought Leadership
+    </div>
+    <div class="video-title">"¿Tu negocio está creciendo — o solo sobreviviendo?"</div>
+    <div class="video-hook">El video que construye autoridad intelectual. Educativo, provocador, útil. Posiciona a Alpha Strategy Group como el referente del sector, no solo como proveedor.</div>
+    <div class="video-meta">
+      <div class="vmeta-pill">⏱ 45 segundos</div>
+      <div class="vmeta-pill">📱 Talking head + texto</div>
+      <div class="vmeta-pill">🎯 Autoridad / Top of Mind</div>
+      <div class="vmeta-pill">📢 LinkedIn (principal) · Instagram</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="bench-box">
+      <div class="bench-title">Benchmarking aplicado — Thought Leadership en Video</div>
+      <ul class="bench-list">
+        <li>70% de decisores B2B consumen thought leadership para tomar decisiones de compra (Edelman-LinkedIn B2B, 2026)</li>
+        <li>Preguntas binarias en el hook ("¿X o Y?") generan 1.9x más comentarios — activan posicionamiento del viewer</li>
+        <li>Un framework propio (como el "3 pilares del crecimiento") aumenta shares 2.3x vs. tips genéricos</li>
+        <li>El formato "insight + framework + CTA suave" es el más efectivo para posicionamiento de consultoras en LinkedIn</li>
+        <li>Terminar con pregunta abierta en el caption = 3x más comentarios — mejor distribución orgánica</li>
+      </ul>
+    </div>
+
+    <!-- CONCEPTO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">💡</div>
+        <div><div class="section-title">Concepto del Video</div></div>
+      </div>
+      <div class="concept-main">
+        <div class="concept-headline">"Ocupado no es lo mismo que en crecimiento. Esta distinción cambia todo para los negocios que se estancan."</div>
+        <div class="concept-desc">Video educativo de autoridad. Presenta un insight que el empresario ya intuía pero nunca había escuchado articulado así. Introduce el framework de los 3 pilares de Alpha Strategy como herramienta mental. Termina con una invitación a conversar, no a comprar — el posicionamiento hace el trabajo.</div>
+      </div>
+    </div>
+
+    <!-- GUION -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">🎙️</div>
+        <div><div class="section-title">Guion — 45 segundos</div></div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F5FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">1</div>
+          <div>
+            <div class="scene-name">PREGUNTA DISRUPTIVA — Binario que activa reflexión</div>
+            <div class="scene-time">00:00 – 00:08 · 8 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Founder/portavoz a cámara. Pausa larga antes de hablar — 1 segundo en silencio mirando a cámara crea tensión. Luego la pregunta.<br><br>
+              <em>También funciona como texto animado sobre fondo navy: las palabras "CRECIENDO" y "SOBREVIVIENDO" aparecen en contraste.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Hay una pregunta que todo empresario debería hacerse cada trimestre: ¿mi negocio está creciendo — o solo sobreviviendo?</p>
+              <br>
+              <span class="tag-screen tag-gold">TEXTO GRANDE: "¿CRECIENDO O SOBREVIVIENDO?"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F5FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">2</div>
+          <div>
+            <div class="scene-name">EL INSIGHT — La distinción que cambia todo</div>
+            <div class="scene-time">00:08 – 00:22 · 14 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Pantalla dividida animada o texto en pantalla que contrasta los dos estados.<br>
+              Izquierda: "OCUPADO" — caos, correos, reuniones, urgencias<br>
+              Derecha: "CRECIENDO" — sistema, métricas, equipo, escala<br><br>
+              <em>La diferencia visual es inmediata — el espectador se reconoce en uno de los lados.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">Porque hay una diferencia enorme entre los dos. Las empresas que sobreviven trabajan más horas. Las que crecen tienen mejores sistemas. Ocupado no es lo mismo que en crecimiento.</p>
+              <br>
+              <span class="tag-screen tag-accent">OCUPADO ≠ CRECIENDO</span><br>
+              <span class="tag-screen tag-blue">Más horas ≠ Mejores resultados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F5FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">3</div>
+          <div>
+            <div class="scene-name">EL FRAMEWORK — Los 3 pilares del crecimiento</div>
+            <div class="scene-time">00:22 – 00:38 · 16 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">
+              Los 3 pilares aparecen en pantalla en secuencia — cada uno con su icono y una breve descripción. Fondo navy, texto blanco, acento de color por pilar.<br><br>
+              <em>Este es el framework propio de Alpha Strategy — repetirlo en múltiples videos construye reconocimiento de marca y autoridad.</em>
+            </div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">El crecimiento sostenible necesita tres cosas al mismo tiempo: una estrategia clara de hacia dónde va el negocio, un marketing que convierta atención en clientes, y un equipo formado que ejecute sin depender del dueño. Si falta una — las otras dos no funcionan.</p>
+              <br>
+              <span class="tag-screen tag-gold">1️⃣ Estrategia clara → plan de acción</span><br>
+              <span class="tag-screen tag-gold">2️⃣ Marketing → convierte atención en clientes</span><br>
+              <span class="tag-screen tag-gold">3️⃣ Formación → equipo que ejecuta solo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-scene">
+        <div class="scene-header" style="background:linear-gradient(90deg,#F0F5FF,#FFF);">
+          <div class="scene-num" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">4</div>
+          <div>
+            <div class="scene-name">CTA SUAVE — Invitación a conversar</div>
+            <div class="scene-time">00:38 – 00:45 · 7 segundos</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div>
+            <div class="col-label">Imagen / Video</div>
+            <div class="scene-txt">Founder mirando directo a cámara. Plano cercano. Tono cálido, no vendedor — es una invitación genuina.</div>
+          </div>
+          <div>
+            <div class="col-label">Audio / Texto en Pantalla</div>
+            <div class="scene-txt">
+              <p class="vo-line">¿Quieres saber cuál de los tres le falta a tu negocio? Hablemos. Primera sesión sin costo.</p>
+              <br>
+              <span class="tag-screen tag-blue">¿Cuál de los 3 le falta a TU negocio?</span><br>
+              <span class="tag-screen tag-gold">alphastrategygroup.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-box">
+        <div class="caption-label">Caption para LinkedIn (máximo impacto)</div>
+        <div class="caption-txt">Una pregunta que todo empresario debería hacerse cada trimestre:
+
+¿Mi negocio está creciendo — o solo sobreviviendo?
+
+La diferencia no es obvia. Muchos negocios que trabajan duro están en modo supervivencia sin saberlo.
+
+Las señales de alerta:
+→ Trabajas más horas pero el ingreso no crece proporcionalmente
+→ Eres el cuello de botella: sin ti, todo se detiene
+→ No sabes qué canal de marketing te trae más clientes
+→ Las decisiones importantes se toman por intuición, no por datos
+
+El crecimiento sostenible necesita tres cosas al mismo tiempo:
+📊 Estrategia clara → plan de acción por trimestre
+💻 Marketing → que convierta atención en clientes reales
+🏆 Formación → equipo que ejecuta sin depender del dueño
+
+Si falta una, las otras dos no funcionan.
+
+¿En cuál de los tres está el cuello de botella de tu negocio?
+
+👇 Comenta A, B o C — me da curiosidad el patrón.
+
+#EstrategiaEmpresarial #CrecimientoEmpresarial #LiderazgoEmpresarial #AlphaStrategyGroup #PyMEs #ConsultoríaDeNegocios #MarketingDigital</div>
+      </div>
+    </div>
+
+    <!-- PRODUCCION GENERAL (solo en v5 como cierre) -->
+    <hr class="divider">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg,#0077FF,#00B4D8);">📋</div>
+        <div>
+          <div class="section-title">Plan de Producción — Los 5 Videos</div>
+          <div class="section-sub">Orden sugerido y prioridad de producción</div>
+        </div>
+      </div>
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="prod-card-title"><span>🗓️</span>Orden de producción sugerido</div>
+          <ul class="prod-list">
+            <li><strong>Semana 1:</strong> Video 5 (Thought Leadership) — solo talking head, más fácil de producir</li>
+            <li><strong>Semana 2:</strong> Video 1 (Awareness) — requiere más B-roll pero es el más estratégico</li>
+            <li><strong>Semana 3:</strong> Video 3 (Posicionamiento) — founder a cámara + animación del diagrama</li>
+            <li><strong>Semana 4:</strong> Video 2 (Ventas) + Video 4 (Prueba Social) — se pueden filmar juntos</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>🎯</span>Prioridad por canal</div>
+          <ul class="prod-list">
+            <li><strong>LinkedIn:</strong> Videos 3 y 5 primero — thought leadership y posicionamiento</li>
+            <li><strong>Instagram Reels:</strong> Videos 1 y 4 — awareness y transformación visual</li>
+            <li><strong>Facebook:</strong> Video 2 — ventas directas a audiencia tibia</li>
+            <li>Todos los videos en formato 9:16 con versión 16:9 para LinkedIn nativo</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>📱</span>Setup mínimo para todos</div>
+          <ul class="prod-list">
+            <li>iPhone 13+ o Android equivalente — modo 4K/30fps</li>
+            <li>Trípode o soporte estable — no cámara en mano para hablar a cámara</li>
+            <li>Fondo: pared lisa oscura o espacio de oficina limpio con luz lateral</li>
+            <li>Camisa o blazer de color sólido oscuro — evitar estampados</li>
+            <li>Aro de luz frontal — la diferencia entre amateur y profesional</li>
+          </ul>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-title"><span>✂️</span>Herramientas de edición</div>
+          <ul class="prod-list">
+            <li><strong>CapCut (gratis):</strong> cortes, texto, subtítulos automáticos, música</li>
+            <li><strong>Adobe Premiere Rush:</strong> si se quiere más control de color y transiciones</li>
+            <li><strong>Canva Video:</strong> para motion graphics del diagrama de Venn (Video 3)</li>
+            <li><strong>Subtítulos:</strong> SIEMPRE activar — 85% ve sin sonido en redes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- END VIDEO 5 -->
+
+<!-- BENCHMARK GENERAL (fijo, fuera de tabs) -->
+<div style="background:var(--navy-mid);padding:48px 40px;">
+  <div style="max-width:960px;margin:0 auto;">
+    <div class="bench-header">
+      <h2>📊 Benchmarking 2026 — Fuentes aplicadas en estos guiones</h2>
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Insight</th>
+            <th>Fuente</th>
+            <th class="bench-apply">Aplicado en</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LinkedIn video: 5x más engagement que texto</td>
+            <td>LinkedIn Internal Data, 2026</td>
+            <td class="bench-apply">Videos 3 y 5 — LinkedIn nativo</td>
+          </tr>
+          <tr>
+            <td>Hook de los primeros 3 segundos = 80% de retención</td>
+            <td>Meta Research, 2025</td>
+            <td class="bench-apply">Todos los hooks de los 5 videos</td>
+          </tr>
+          <tr>
+            <td>85% ve video sin sonido → subtítulos obligatorios</td>
+            <td>Verizon Media / Meta, 2025</td>
+            <td class="bench-apply">Instrucción de producción en todos</td>
+          </tr>
+          <tr>
+            <td>Fórmula Dolor→Agitación→Solución: +34% conversión</td>
+            <td>HubSpot Video Study, 2026</td>
+            <td class="bench-apply">Video 2 (Ventas) — estructura completa</td>
+          </tr>
+          <tr>
+            <td>Talking head del founder: 3x más confianza que animación</td>
+            <td>Edelman Trust Barometer, 2026</td>
+            <td class="bench-apply">Videos 3 y 5 — formato recomendado</td>
+          </tr>
+          <tr>
+            <td>Before/After videos: 2.8x más compartidos en B2B</td>
+            <td>BuzzSumo B2B Report, 2026</td>
+            <td class="bench-apply">Video 4 — formato antes vs. después</td>
+          </tr>
+          <tr>
+            <td>70% de decisores B2B consumen thought leadership</td>
+            <td>Edelman-LinkedIn, 2026</td>
+            <td class="bench-apply">Video 5 — justificación del formato</td>
+          </tr>
+          <tr>
+            <td>Framework propio: +2.3x shares vs. tips genéricos</td>
+            <td>Content Marketing Institute, 2026</td>
+            <td class="bench-apply">Video 5 — los 3 pilares de ASG</td>
+          </tr>
+          <tr>
+            <td>Videos bajo 60 seg: 2x tasa de compleción</td>
+            <td>Sprout Social, 2026</td>
+            <td class="bench-apply">Duración de todos los videos (30–60s)</td>
+          </tr>
+          <tr>
+            <td>CTA con urgencia suave: +28% conversión</td>
+            <td>WordStream / Meta Ads, 2025</td>
+            <td class="bench-apply">Video 2 — "Primera consulta SIN COSTO"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cta-box">
+      <h3>Alpha Strategy Group</h3>
+      <p>Guiones listos para producción — 5 videos, 5 objetivos, un solo sistema.</p>
+      <div class="cta-pills">
+        <div class="cta-pill">📊 Video 1: Awareness</div>
+        <div class="cta-pill">💰 Video 2: Ventas</div>
+        <div class="cta-pill">🏆 Video 3: Posicionamiento</div>
+        <div class="cta-pill">⭐ Video 4: Prueba Social</div>
+        <div class="cta-pill">🧠 Video 5: Thought Leadership</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(n) {
+    for (let i = 1; i <= 5; i++) {
+      document.getElementById('v' + i).classList.remove('active');
+      document.getElementById('tab' + i).classList.remove('active');
+    }
+    document.getElementById('v' + n).classList.add('active');
+    document.getElementById('tab' + n).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+</script>
+</body>
+</html>

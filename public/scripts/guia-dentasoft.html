@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guía de Usuario — DentaSoft</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #0e6ba8; --blue-dark: #0a4f7e; --blue-light: #e8f2fa;
+      --green: #16a34a; --green-light: #dcfce7;
+      --yellow: #d97706; --yellow-light: #fef3c7;
+      --red: #dc2626; --red-light: #fee2e2;
+      --purple: #8b5cf6; --purple-light: #ede9fe;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-500: #64748b; --gray-700: #334155; --gray-900: #0f172a;
+    }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray-50); color: var(--gray-700); font-size: 15px; line-height: 1.6; }
+
+    /* COVER */
+    .cover { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%); color: #fff; padding: 60px 40px; text-align: center; }
+    .cover-icon { font-size: 64px; margin-bottom: 16px; }
+    .cover h1 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+    .cover .sub { font-size: 18px; opacity: .75; margin-bottom: 24px; }
+    .cover .version { background: rgba(255,255,255,.15); display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+
+    /* LAYOUT */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+
+    /* TOC */
+    .toc { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); padding: 28px 32px; margin-bottom: 40px; }
+    .toc h2 { font-size: 16px; font-weight: 700; color: var(--blue-dark); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { margin-bottom: 8px; }
+    .toc a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .toc a:hover { text-decoration: underline; }
+
+    /* SECTION */
+    .sec { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); padding: 32px; margin-bottom: 28px; scroll-margin-top: 20px; }
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--gray-100); }
+    .sec-icon { font-size: 32px; }
+    .sec-header h2 { font-size: 22px; font-weight: 700; color: var(--gray-900); }
+    .sec-header .num { background: var(--blue); color: #fff; font-size: 13px; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num { background: var(--blue); color: #fff; font-size: 13px; font-weight: 700; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-body h4 { font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+    .step-body p { font-size: 14px; color: var(--gray-500); }
+
+    /* ALERTS */
+    .alert { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; font-size: 14px; margin: 16px 0; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .alert-info    { background: var(--blue-light);   border-left: 4px solid var(--blue);   }
+    .alert-success { background: var(--green-light);  border-left: 4px solid var(--green);  }
+    .alert-warn    { background: var(--yellow-light); border-left: 4px solid var(--yellow); }
+    .alert-danger  { background: var(--red-light);    border-left: 4px solid var(--red);    }
+
+    /* MOCKUP */
+    .mockup { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; margin: 20px 0; font-size: 13px; }
+    .mockup-bar { background: var(--blue-dark); padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+    .mockup-bar span { color: rgba(255,255,255,.5); font-size: 12px; }
+    .mockup-bar strong { color: #fff; font-size: 13px; }
+    .mockup-body { padding: 16px; }
+    .mockup-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .mnav-item { padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,.6); background: rgba(255,255,255,.1); }
+    .mnav-item.active { background: rgba(255,255,255,.2); color: #fff; }
+
+    /* KPI ROW */
+    .kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
+    .kpi { background: #fff; border-radius: 8px; padding: 12px 14px; border-top: 3px solid var(--blue); }
+    .kpi .lbl { font-size: 10px; color: var(--gray-500); font-weight: 600; text-transform: uppercase; }
+    .kpi .val { font-size: 20px; font-weight: 700; color: var(--gray-900); margin-top: 4px; }
+
+    /* TABLE MOCKUP */
+    .t-mock { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--gray-200); }
+    .t-mock-header { display: grid; padding: 8px 14px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; }
+    .t-mock-row { display: grid; padding: 10px 14px; border-bottom: 1px solid var(--gray-100); font-size: 12px; color: var(--gray-700); }
+    .t-mock-row:last-child { border-bottom: none; }
+    .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+    .bg  { background: var(--green-light);  color: var(--green);  }
+    .by  { background: var(--yellow-light); color: var(--yellow); }
+    .br  { background: var(--red-light);    color: var(--red);    }
+    .bb  { background: var(--blue-light);   color: var(--blue);   }
+    .bp  { background: var(--purple-light); color: var(--purple); }
+
+    /* PIPE MOCK */
+    .pipe-mock { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; margin-bottom: 14px; }
+    .pipe-m { background: #fff; border-radius: 8px; padding: 12px 8px; text-align: center; border-top: 3px solid #ccc; }
+    .pipe-m .n { font-size: 22px; font-weight: 700; }
+    .pipe-m .l { font-size: 10px; color: var(--gray-500); font-weight: 600; margin-top: 2px; }
+
+    /* MODAL MOCKUP */
+    .modal-mock { background: #fff; border-radius: 10px; border: 1px solid var(--gray-200); padding: 16px; margin: 14px 0; }
+    .modal-mock h4 { font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-100); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .field { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 6px; padding: 6px 10px; font-size: 12px; color: var(--gray-500); }
+    .field strong { display: block; font-size: 10px; font-weight: 600; color: var(--gray-500); margin-bottom: 2px; text-transform: uppercase; }
+
+    /* BTN MOCK */
+    .btn-mock { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+    .btn-blue   { background: var(--blue);  color: #fff; }
+    .btn-green  { background: var(--green); color: #fff; }
+    .btn-gray   { background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-200); }
+
+    /* LABEL */
+    .label { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .label-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .label-green  { background: var(--green-light);  color: var(--green);  }
+    .label-yellow { background: var(--yellow-light); color: var(--yellow); }
+    .label-red    { background: var(--red-light);    color: var(--red);    }
+
+    /* TWO COL */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+
+    /* KEY */
+    kbd { background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: 5px; padding: 2px 8px; font-size: 13px; font-family: monospace; color: var(--gray-700); }
+
+    /* DIVIDER */
+    .div { border: none; border-top: 1px solid var(--gray-200); margin: 24px 0; }
+
+    /* FOOTER */
+    .footer { text-align: center; padding: 32px; color: var(--gray-500); font-size: 13px; }
+
+    @media print {
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .sec { break-inside: avoid; }
+    }
+    @media (max-width: 600px) {
+      .kpi-row { grid-template-columns: repeat(2,1fr); }
+      .pipe-mock { grid-template-columns: repeat(3,1fr); }
+      .field-row { grid-template-columns: 1fr; }
+      .two { grid-template-columns: 1fr; }
+      .cover h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="cover">
+  <div class="cover-icon">🦷</div>
+  <h1>DentaSoft + CRM</h1>
+  <div class="sub">Guía completa de usuario — Sistema de Gestión Dental</div>
+  <div class="version">Versión 2.0 · Para uso interno del consultorio</div>
+</div>
+
+<div class="wrap">
+
+  <!-- ÍNDICE -->
+  <div class="toc">
+    <h2>📋 Contenido</h2>
+    <ol>
+      <li><a href="#inicio">Cómo abrir el sistema</a></li>
+      <li><a href="#configurar">Configurar el nombre del consultorio</a></li>
+      <li><a href="#doctores">Registrar doctores</a></li>
+      <li><a href="#pacientes">Registrar pacientes</a></li>
+      <li><a href="#tratamientos">Crear tratamientos</a></li>
+      <li><a href="#cobranza">Registrar pagos y recibos</a></li>
+      <li><a href="#comisiones">Gestión de comisiones</a></li>
+      <li><a href="#crm">CRM — Prospectos y seguimiento</a></li>
+      <li><a href="#backup">Backups automáticos</a></li>
+      <li><a href="#tips">Consejos importantes</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. CÓMO ABRIR -->
+  <div class="sec" id="inicio">
+    <div class="sec-header">
+      <div class="num">1</div>
+      <div class="sec-icon">💻</div>
+      <h2>Cómo abrir el sistema</h2>
+    </div>
+
+    <p style="margin-bottom:16px">El sistema está compuesto por <strong>dos archivos HTML</strong> que funcionan sin internet directamente desde la computadora.</p>
+
+    <div class="two">
+      <div style="background:var(--blue-light);border-radius:10px;padding:18px">
+        <div style="font-size:28px;margin-bottom:8px">🦷</div>
+        <div style="font-weight:700;font-size:15px;color:var(--blue-dark);margin-bottom:4px">dentasoft.html</div>
+        <div style="font-size:13px;color:var(--gray-500)">Sistema principal: pacientes, tratamientos, cobros, doctores y comisiones.</div>
+      </div>
+      <div style="background:var(--purple-light);border-radius:10px;padding:18px">
+        <div style="font-size:28px;margin-bottom:8px">🎯</div>
+        <div style="font-weight:700;font-size:15px;color:var(--purple);margin-bottom:4px">crm.html</div>
+        <div style="font-size:13px;color:var(--gray-500)">CRM de prospectos: seguimiento de personas interesadas y conversión a pacientes.</div>
+      </div>
+    </div>
+
+    <div class="steps" style="margin-top:20px">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Abrir el Explorador de archivos</h4>
+          <p>Busca la carpeta donde guardaste los archivos (USB o carpeta local).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Doble clic sobre dentasoft.html</h4>
+          <p>Se abrirá automáticamente en el navegador (Chrome o Edge recomendado).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>El sistema carga listo para usar</h4>
+          <p>La primera vez estará vacío. Empieza registrando los doctores.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warn" style="margin-top:16px">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Importante:</strong> Siempre abre los archivos desde la <strong>misma computadora</strong> y el <strong>mismo navegador</strong>. Los datos se guardan en ese navegador específico.</div>
+    </div>
+  </div>
+
+  <!-- 2. CONFIGURAR -->
+  <div class="sec" id="configurar">
+    <div class="sec-header">
+      <div class="num">2</div>
+      <div class="sec-icon">⚙️</div>
+      <h2>Configurar el nombre del consultorio</h2>
+    </div>
+
+    <p style="margin-bottom:16px">Antes de empezar, configura el nombre del consultorio. Aparecerá en todos los recibos impresos.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Busca el botón en la esquina inferior izquierda</h4>
+          <p>En la barra lateral del sistema verás el botón <strong>⚙ Nombre del consultorio</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Escribe el nombre oficial</h4>
+          <p>Ejemplo: <em>"Clínica Dental Sonríe"</em> o <em>"Consultorio Dr. Mendoza"</em>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Clic en Aceptar</h4>
+          <p>El nombre quedará guardado y aparecerá en todos los recibos desde ese momento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup" style="margin-top:20px">
+      <div class="mockup-bar"><strong>🦷 DentaSoft</strong></div>
+      <div style="background:var(--blue-dark);padding:10px 14px;display:flex;flex-direction:column;gap:6px">
+        <div style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-size:11px;padding:5px 10px;border-radius:6px">⚙ Nombre del consultorio  ← Clic aquí</div>
+        <div style="background:rgba(220,38,38,.25);color:rgba(255,150,150,.9);font-size:11px;padding:5px 10px;border-radius:6px">🗑 Limpiar base de datos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. DOCTORES -->
+  <div class="sec" id="doctores">
+    <div class="sec-header">
+      <div class="num">3</div>
+      <div class="sec-icon">👨‍⚕️</div>
+      <h2>Registrar doctores</h2>
+    </div>
+
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ️</span>
+      <div><strong>Empieza siempre por aquí.</strong> No podrás crear tratamientos si no hay al menos un doctor registrado.</div>
+    </div>
+
+    <div class="steps" style="margin-top:16px">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Ve al módulo Doctores</h4>
+          <p>Clic en <strong>👨‍⚕️ Doctores</strong> en el menú lateral izquierdo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Clic en "+ Nuevo Doctor"</h4>
+          <p>Se abrirá el formulario de registro.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Completa los datos</h4>
+          <p>Nombre completo, especialidad, teléfono, email y <strong>porcentaje de comisión</strong> (ej: 35 para 35%).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Clic en "Guardar"</h4>
+          <p>El doctor aparecerá en la lista y estará disponible al crear tratamientos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup" style="margin-top:20px">
+      <div class="mockup-bar"><strong>👨‍⚕️</strong><strong>Doctores</strong><span>Personal médico del consultorio</span></div>
+      <div class="mockup-body">
+        <div class="t-mock">
+          <div class="t-mock-header" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr">
+            <span>Nombre</span><span>Especialidad</span><span>Teléfono</span><span>% Comisión</span><span>Acciones</span>
+          </div>
+          <div class="t-mock-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr">
+            <strong>Dr. Carlos Mendoza</strong><span>Odontología General</span><span>76123456</span>
+            <span><span class="badge bb">35%</span></span><span>✏️ 🗑</span>
+          </div>
+          <div class="t-mock-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr">
+            <strong>Dra. Ana Quispe</strong><span>Ortodoncia</span><span>71987654</span>
+            <span><span class="badge bb">40%</span></span><span>✏️ 🗑</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. PACIENTES -->
+  <div class="sec" id="pacientes">
+    <div class="sec-header">
+      <div class="num">4</div>
+      <div class="sec-icon">👤</div>
+      <h2>Registrar pacientes</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Ve al módulo Pacientes</h4>
+          <p>Clic en <strong>👤 Pacientes</strong> en el menú lateral.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Clic en "+ Nuevo Paciente"</h4>
+          <p>Se abre el formulario de registro.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Completa los datos obligatorios</h4>
+          <p><strong>Nombre ✱, Apellido ✱ y Teléfono ✱</strong> son obligatorios. Los demás campos son opcionales.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Notas / Historial Médico</h4>
+          <p>Usa este campo para registrar alergias, condiciones especiales o cualquier observación importante.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Clic en "Guardar"</h4>
+          <p>El paciente quedará registrado. Puedes verlo, editarlo o buscarlos por nombre, CI o teléfono.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup" style="margin-top:20px">
+      <div class="mockup-bar"><strong>👤</strong><strong>Pacientes</strong></div>
+      <div class="mockup-body">
+        <div class="modal-mock">
+          <h4>Nuevo Paciente</h4>
+          <div class="field-row">
+            <div class="field"><strong>Nombre ✱</strong>María</div>
+            <div class="field"><strong>Apellido ✱</strong>García López</div>
+          </div>
+          <div class="field-row">
+            <div class="field"><strong>C.I. / Documento</strong>7123456</div>
+            <div class="field"><strong>Fecha de Nacimiento</strong>15/03/1985</div>
+          </div>
+          <div class="field-row">
+            <div class="field"><strong>Teléfono ✱</strong>77001122</div>
+            <div class="field"><strong>Email</strong>mgarcia@gmail.com</div>
+          </div>
+          <div class="field" style="margin-bottom:12px"><strong>Dirección</strong>Av. Cristo Redentor 123</div>
+          <div class="field"><strong>Notas / Historial Médico</strong>Sin alergias conocidas</div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px">
+            <span class="btn-mock btn-gray">Cancelar</span>
+            <span class="btn-mock btn-blue">Guardar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-success">
+      <span class="alert-icon">💡</span>
+      <div><strong>Ver ficha completa:</strong> Clic en el botón 👁 al lado de cualquier paciente para ver su historial de tratamientos, pagos y saldo total.</div>
+    </div>
+  </div>
+
+  <!-- 5. TRATAMIENTOS -->
+  <div class="sec" id="tratamientos">
+    <div class="sec-header">
+      <div class="num">5</div>
+      <div class="sec-icon">🔧</div>
+      <h2>Crear tratamientos</h2>
+    </div>
+
+    <p style="margin-bottom:16px">Cada servicio que se realiza a un paciente se registra como un tratamiento.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Ve al módulo Tratamientos</h4>
+          <p>Clic en <strong>🔧 Tratamientos</strong> en el menú lateral.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Clic en "+ Nuevo Tratamiento"</h4>
+          <p>Se abre el formulario.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Selecciona el paciente y el doctor</h4>
+          <p>Elige de la lista de pacientes y doctores ya registrados.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Ingresa el nombre y precio total</h4>
+          <p>Ejemplo: <em>"Ortodoncia Completa"</em> — <em>Bs. 2.800</em>. Este es el precio total aunque se pague en cuotas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Selecciona el estado</h4>
+          <p><span class="label label-yellow">⏳ Pendiente</span> — aún no comenzó &nbsp;|&nbsp; <span class="label label-blue">🔄 En proceso</span> — en curso &nbsp;|&nbsp; <span class="label label-green">✅ Completado</span> — finalizado</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h4>Guardar</h4>
+          <p>El sistema creará automáticamente la comisión para el doctor.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ️</span>
+      <div>El precio del tratamiento es el <strong>precio total</strong>. Los pagos se registran por separado en el módulo Cobranza y pueden hacerse en cuotas.</div>
+    </div>
+  </div>
+
+  <!-- 6. COBRANZA -->
+  <div class="sec" id="cobranza">
+    <div class="sec-header">
+      <div class="num">6</div>
+      <div class="sec-icon">💰</div>
+      <h2>Registrar pagos y recibos</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Ve al módulo Cobranza</h4>
+          <p>Clic en <strong>💰 Cobranza</strong> en el menú lateral. Verás todos los tratamientos con su estado de pago.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Clic en el botón "+ Pago" del tratamiento</h4>
+          <p>Aparece solo en los tratamientos con saldo pendiente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Ingresa el monto, fecha y método de pago</h4>
+          <p>Puedes pagar en cuotas — el sistema acumula los pagos y muestra el saldo restante.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Clic en "💰 Registrar Pago"</h4>
+          <p>El sistema preguntará si deseas imprimir el recibo inmediatamente.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">🧾 Imprimir recibo</h3>
+    <p style="margin-bottom:12px">El recibo incluye: nombre del paciente, tratamiento, doctor, monto pagado, saldo pendiente y espacio para firmas.</p>
+
+    <div class="two">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">A</div>
+            <div class="step-body">
+              <h4>Al registrar el pago</h4>
+              <p>El sistema pregunta automáticamente si quieres imprimir.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">B</div>
+            <div class="step-body">
+              <h4>Desde el historial</h4>
+              <p>Clic en <strong>"Historial"</strong> del tratamiento → botón 🧾 al lado de cada pago.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--gray-50);border-radius:10px;padding:16px;border:1px solid var(--gray-200)">
+        <div style="text-align:center;padding:10px 0;border-bottom:2px solid var(--blue);margin-bottom:10px">
+          <div style="font-size:15px;font-weight:700;color:var(--blue-dark)">🦷 Clínica Dental Sonríe</div>
+          <div style="font-size:11px;color:var(--gray-500)">Servicio de Atención Odontológica</div>
+        </div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:4px">RECIBO DE PAGO</div>
+        <div style="text-align:center;font-size:11px;color:var(--gray-500);margin-bottom:12px">N° 0001 | 12/05/2026</div>
+        <div style="font-size:11px;color:var(--gray-500);display:flex;justify-content:space-between;margin-bottom:4px"><span>Paciente</span><strong style="color:var(--gray-700)">María García</strong></div>
+        <div style="font-size:11px;color:var(--gray-500);display:flex;justify-content:space-between;margin-bottom:4px"><span>Tratamiento</span><strong style="color:var(--gray-700)">Ortodoncia</strong></div>
+        <div style="background:var(--blue-light);border-radius:6px;padding:8px;text-align:center;margin:10px 0">
+          <div style="font-size:10px;color:var(--blue);font-weight:700;text-transform:uppercase">Monto Recibido</div>
+          <div style="font-size:20px;font-weight:700;color:var(--blue-dark)">Bs. 500.00</div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);display:flex;justify-content:space-between"><span>Saldo pendiente</span><strong style="color:var(--yellow)">Bs. 1.800.00</strong></div>
+      </div>
+    </div>
+
+    <div class="mockup" style="margin-top:20px">
+      <div class="mockup-bar"><strong>💰</strong><strong>Cobranza</strong></div>
+      <div class="mockup-body">
+        <div style="display:flex;gap:12px;background:var(--gray-50);border-radius:8px;padding:12px;margin-bottom:12px;flex-wrap:wrap">
+          <div><div style="font-size:10px;color:var(--gray-500);font-weight:600;text-transform:uppercase">Facturado</div><div style="font-size:18px;font-weight:700">Bs. 6.350</div></div>
+          <div><div style="font-size:10px;color:var(--gray-500);font-weight:600;text-transform:uppercase">Cobrado</div><div style="font-size:18px;font-weight:700;color:var(--green)">Bs. 1.350</div></div>
+          <div><div style="font-size:10px;color:var(--gray-500);font-weight:600;text-transform:uppercase">Por Cobrar</div><div style="font-size:18px;font-weight:700;color:var(--red)">Bs. 5.000</div></div>
+          <div><div style="font-size:10px;color:var(--gray-500);font-weight:600;text-transform:uppercase">Sin Pago</div><div style="font-size:18px;font-weight:700">2</div></div>
+        </div>
+        <div class="t-mock">
+          <div class="t-mock-header" style="grid-template-columns:1.5fr 1.5fr 1fr 1fr 1fr 80px 80px 100px">
+            <span>Paciente</span><span>Tratamiento</span><span>Total</span><span>Pagado</span><span>Deuda</span><span>Avance</span><span>Estado</span><span>Acciones</span>
+          </div>
+          <div class="t-mock-row" style="grid-template-columns:1.5fr 1.5fr 1fr 1fr 1fr 80px 80px 100px">
+            <strong>María García</strong><span>Ortodoncia</span><span>Bs. 2.800</span><span style="color:var(--green)">Bs. 1.000</span><span style="color:var(--red);font-weight:700">Bs. 1.800</span>
+            <span style="font-size:11px">36%</span><span><span class="badge by">Parcial</span></span>
+            <span style="display:flex;gap:4px"><span class="btn-mock btn-green" style="font-size:10px;padding:3px 7px">+ Pago</span><span class="btn-mock btn-gray" style="font-size:10px;padding:3px 7px">Historial</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. COMISIONES -->
+  <div class="sec" id="comisiones">
+    <div class="sec-header">
+      <div class="num">7</div>
+      <div class="sec-icon">💵</div>
+      <h2>Gestión de comisiones</h2>
+    </div>
+
+    <p style="margin-bottom:16px">Las comisiones se calculan y registran <strong>automáticamente</strong> cada vez que se crea un tratamiento, según el porcentaje asignado al doctor.</p>
+
+    <div class="two">
+      <div class="alert alert-info" style="margin:0">
+        <span class="alert-icon">⏳</span>
+        <div><strong>Pendiente:</strong> El tratamiento aún tiene saldo por cobrar al paciente.</div>
+      </div>
+      <div class="alert alert-success" style="margin:0">
+        <span class="alert-icon">💰</span>
+        <div><strong>Listo para pagar:</strong> El paciente saldó el tratamiento. Se puede pagar al doctor.</div>
+      </div>
+    </div>
+
+    <div class="steps" style="margin-top:16px">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Ve al módulo Comisiones</h4>
+          <p>Clic en <strong>💵 Comisiones</strong> en el menú lateral.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Filtra por doctor o estado</h4>
+          <p>Usa los selectores para ver solo las comisiones de un doctor o solo las que están listas para pagar.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Marcar como pagado</h4>
+          <p>Cuando entregues la comisión al doctor, clic en <strong>"✓ Marcar Pagado"</strong>. Queda registrado con la fecha.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warn" style="margin-top:16px">
+      <span class="alert-icon">⚠️</span>
+      <div>Si editas el precio de un tratamiento, la comisión se recalcula automáticamente (solo si aún está en estado Pendiente).</div>
+    </div>
+  </div>
+
+  <!-- 8. CRM -->
+  <div class="sec" id="crm">
+    <div class="sec-header">
+      <div class="num">8</div>
+      <div class="sec-icon">🎯</div>
+      <h2>CRM — Prospectos y seguimiento</h2>
+    </div>
+
+    <p style="margin-bottom:16px">El CRM permite registrar personas interesadas en los servicios del consultorio y hacer seguimiento hasta convertirlas en pacientes.</p>
+
+    <div class="alert alert-info">
+      <span class="alert-icon">📁</span>
+      <div>El CRM está disponible tanto dentro de <strong>dentasoft.html</strong> (módulo 🎯 CRM) como en el archivo separado <strong>crm.html</strong>.</div>
+    </div>
+
+    <hr class="div">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">Pipeline de estados</h3>
+
+    <div class="pipe-mock">
+      <div class="pipe-m" style="border-top-color:#0e6ba8"><div class="n" style="color:#0e6ba8">3</div><div class="l">🆕 Nuevo</div></div>
+      <div class="pipe-m" style="border-top-color:#d97706"><div class="n" style="color:#d97706">2</div><div class="l">📞 Contactado</div></div>
+      <div class="pipe-m" style="border-top-color:#8b5cf6"><div class="n" style="color:#8b5cf6">1</div><div class="l">📅 Cita Agendada</div></div>
+      <div class="pipe-m" style="border-top-color:#06b6d4"><div class="n" style="color:#06b6d4">1</div><div class="l">🏥 Visitó</div></div>
+      <div class="pipe-m" style="border-top-color:#16a34a"><div class="n" style="color:#16a34a">4</div><div class="l">✅ Convertido</div></div>
+      <div class="pipe-m" style="border-top-color:#dc2626"><div class="n" style="color:#dc2626">1</div><div class="l">❌ Perdido</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--gray-500);margin-bottom:20px">Clic en cualquier tarjeta para filtrar los prospectos de ese estado.</p>
+
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">Registrar un prospecto</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Clic en "+ Nuevo Prospecto"</h4>
+          <p>Completa nombre, teléfono, fuente (Instagram, WhatsApp, Referido...) e interés (ortodoncia, limpieza, etc.).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Agrega una nota inicial (opcional)</h4>
+          <p>Escribe lo que te comentó en el primer contacto: presupuesto consultado, dudas, etc.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Guardar</h4>
+          <p>Queda registrado como <span class="label label-blue">🆕 Nuevo</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">Hacer seguimiento</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Clic en el botón 📋 del prospecto</h4>
+          <p>Se abre el panel de seguimiento con toda la información del prospecto.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Selecciona el tipo de interacción</h4>
+          <p>📞 Llamada · 💬 Mensaje · 🏥 Visita · 📝 Nota</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Escribe lo que pasó y clic en "+ Agregar"</h4>
+          <p>Queda registrado con fecha y hora en el historial.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Actualiza el estado desde el mismo panel</h4>
+          <p>Usa el selector de estado (Nuevo → Contactado → Cita Agendada → Visitó).</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:12px">Convertir a paciente</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Abre el panel de seguimiento del prospecto</h4>
+          <p>Clic en 📋 al lado de su nombre.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Clic en "👤 Convertir a Paciente"</h4>
+          <p>El sistema crea automáticamente su ficha en el módulo Pacientes con el teléfono e interés ya cargados.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Completar la ficha en Pacientes</h4>
+          <p>Ve a 👤 Pacientes y edita su ficha para agregar CI, fecha de nacimiento y demás datos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-success">
+      <span class="alert-icon">✅</span>
+      <div>Una vez convertido, el prospecto queda marcado como <strong>Convertido</strong> en el CRM y su historial de seguimiento queda guardado.</div>
+    </div>
+  </div>
+
+  <!-- 9. BACKUP -->
+  <div class="sec" id="backup">
+    <div class="sec-header">
+      <div class="num">9</div>
+      <div class="sec-icon">💾</div>
+      <h2>Backups automáticos</h2>
+    </div>
+
+    <p style="margin-bottom:16px">El sistema hace una copia de seguridad automática <strong>una vez por día</strong> al abrir dentasoft.html.</p>
+
+    <div class="two">
+      <div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Backup automático</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Abre dentasoft.html</h4>
+              <p>Si es la primera vez del día, el backup se descarga automáticamente.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Archivo descargado</h4>
+              <p>Se guarda en la carpeta <strong>Descargas</strong> con el nombre <code>dentasoft-backup-2026-05-12.json</code>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Backup manual</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>En DentaSoft</h4>
+              <p>Clic en <strong>💾 Descargar backup</strong> en la esquina inferior izquierda (barra lateral).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>En CRM</h4>
+              <p>Clic en el botón <strong>💾 Backup</strong> en la barra superior derecha.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warn" style="margin-top:16px">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Recomendación:</strong> Guarda los archivos de backup en un USB o carpeta compartida. Si formatean la computadora o limpian el navegador, los datos se pierden — el backup es la única forma de recuperarlos.</div>
+    </div>
+
+    <div class="alert alert-danger" style="margin-top:8px">
+      <span class="alert-icon">🗑️</span>
+      <div><strong>El botón "Limpiar base de datos"</strong> borra TODO permanentemente. Solo usarlo si se quiere empezar desde cero. No se puede deshacer.</div>
+    </div>
+  </div>
+
+  <!-- 10. TIPS -->
+  <div class="sec" id="tips">
+    <div class="sec-header">
+      <div class="num">10</div>
+      <div class="sec-icon">💡</div>
+      <h2>Consejos importantes</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--blue-light);border-radius:8px">
+        <div style="font-size:20px">🔄</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">Si tienes dos archivos abiertos, usa F5 para actualizar</div>
+          <div style="font-size:13px;color:var(--gray-500)">Si cambias algo en crm.html y quieres verlo en dentasoft.html, presiona <kbd>F5</kbd> en esa pestaña.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--green-light);border-radius:8px">
+        <div style="font-size:20px">🖥️</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">Siempre usar el mismo navegador en la misma PC</div>
+          <div style="font-size:13px;color:var(--gray-500)">Los datos están guardados en Chrome de esa computadora. Si abres el archivo en Edge o en otra PC, no verás los mismos datos.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--yellow-light);border-radius:8px">
+        <div style="font-size:20px">📋</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">Orden recomendado para empezar</div>
+          <div style="font-size:13px;color:var(--gray-500)">1. Configurar nombre del consultorio → 2. Registrar doctores → 3. Registrar pacientes → 4. Crear tratamientos.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--purple-light);border-radius:8px">
+        <div style="font-size:20px">🎯</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">CRM vs Pacientes</div>
+          <div style="font-size:13px;color:var(--gray-500)">El CRM es para personas que <em>todavía no son pacientes</em>. Una vez que asisten al consultorio, se convierten en pacientes con el botón "Convertir a Paciente".</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--red-light);border-radius:8px">
+        <div style="font-size:20px">💾</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">No borres el historial del navegador</div>
+          <div style="font-size:13px;color:var(--gray-500)">Si limpias el "historial" o los "datos del sitio" en la configuración del navegador, se borran todos los datos del sistema. Haz backup antes de cualquier limpieza.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--gray-100);border-radius:8px">
+        <div style="font-size:20px">🖨️</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:2px">Imprimir recibos</div>
+          <div style="font-size:13px;color:var(--gray-500)">Al imprimir un recibo, el sistema abre una ventana nueva. Si el navegador la bloquea, permite las ventanas emergentes para este archivo.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESUMEN RÁPIDO -->
+  <div class="sec" style="background:var(--blue-dark);color:#fff">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;color:#fff">📌 Resumen rápido de módulos</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">📊 Dashboard</div>
+        <div style="font-size:13px;opacity:.75">Resumen general: pacientes, ingresos cobrados, deudas pendientes y comisiones por pagar.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">👤 Pacientes</div>
+        <div style="font-size:13px;opacity:.75">Fichas completas con historial médico, tratamientos y estado de cuenta.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">🔧 Tratamientos</div>
+        <div style="font-size:13px;opacity:.75">Control de todos los procedimientos con estado y deuda por tratamiento.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">💰 Cobranza</div>
+        <div style="font-size:13px;opacity:.75">Registro de pagos en cuotas, historial y generación de recibos impresos.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">👨‍⚕️ Doctores</div>
+        <div style="font-size:13px;opacity:.75">Perfil del personal con su porcentaje de comisión por tratamiento.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">💵 Comisiones</div>
+        <div style="font-size:13px;opacity:.75">Seguimiento automático de comisiones: pendiente → listo para pagar → pagado.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:14px;grid-column:1/-1">
+        <div style="font-size:18px;margin-bottom:6px">🎯 CRM</div>
+        <div style="font-size:13px;opacity:.75">Pipeline de prospectos con seguimiento de llamadas, mensajes y visitas. Conversión a paciente con un clic.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div style="font-size:24px;margin-bottom:8px">🦷</div>
+    <div style="font-weight:700;color:var(--gray-700);margin-bottom:4px">DentaSoft v2.0</div>
+    <div>Sistema de Gestión Dental — Uso interno del consultorio</div>
+    <div style="margin-top:8px;opacity:.6">Desarrollado por Alpha Strategy Group</div>
+  </div>
+
+</div>
+
+<script>
+  // Resaltar sección activa al hacer scroll
+  const secs = document.querySelectorAll('.sec[id]');
+  const links = document.querySelectorAll('.toc a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if(window.scrollY >= s.offsetTop - 60) cur = s.id; });
+    links.forEach(a => {
+      a.style.fontWeight = a.getAttribute('href') === '#'+cur ? '700' : '500';
+      a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--blue-dark)' : 'var(--blue)';
+    });
+  });
+</script>
+</body>
+</html>

@@ -187,6 +187,12 @@
     .message-card.whatsapp .btn-copy { background: #25d366; }
     .message-card.whatsapp .btn-copy:hover { background: #1da851; }
 
+    .message-card.ingles { border-left-color: #F59E0B; }
+    .message-card.ingles .msg-tag { background: #fffbeb; color: #92400e; }
+    .message-card.ingles .btn-copy { background: #F59E0B; color: #fff; }
+    .message-card.ingles .btn-copy:hover { background: #d97706; }
+    .message-card.ingles .btn-copy.copied { background: #38a169; }
+
     .section-label {
       font-size: 11px;
       font-weight: 700;
@@ -580,10 +586,16 @@
     <div class="form-group">
       <label>Variación recomendada</label>
       <select id="variacion" onchange="resaltarVariacion()">
-        <option value="A">A — Dueño de empresa (LinkedIn)</option>
-        <option value="B">B — Profesional independiente (LinkedIn)</option>
-        <option value="C">C — Presencia digital débil (LinkedIn)</option>
-        <option value="WA">WA — Red dormida (WhatsApp)</option>
+        <optgroup label="── Consultoría / Marketing ──">
+          <option value="A">A — Dueño de empresa (LinkedIn)</option>
+          <option value="B">B — Profesional independiente (LinkedIn)</option>
+          <option value="C">C — Presencia digital débil (LinkedIn)</option>
+          <option value="WA">WA — Red dormida (WhatsApp)</option>
+        </optgroup>
+        <optgroup label="── Curso de Inglés ──">
+          <option value="EN-LI">EN-LI — Profesional, mejorar inglés (LinkedIn)</option>
+          <option value="EN-WA">EN-WA — Contacto directo (WhatsApp)</option>
+        </optgroup>
       </select>
     </div>
 
@@ -651,6 +663,26 @@
       </div>
       <div class="message-text empty" id="msg-WA">Completa el nombre para ver el mensaje...</div>
       <div class="char-count" id="chars-WA"></div>
+    </div>
+
+    <div class="section-label">🎓 Inglés — Curso para profesionales</div>
+
+    <div class="message-card ingles" id="card-EN-LI">
+      <div class="msg-header">
+        <span class="msg-tag">EN-LI — LinkedIn (quiere mejorar su inglés)</span>
+        <button class="btn-copy ingles-copy" onclick="copiar('msg-EN-LI', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-EN-LI">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-EN-LI"></div>
+    </div>
+
+    <div class="message-card ingles" id="card-EN-WA">
+      <div class="msg-header">
+        <span class="msg-tag">EN-WA — WhatsApp (contacto directo)</span>
+        <button class="btn-copy ingles-copy" onclick="copiar('msg-EN-WA', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-EN-WA">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-EN-WA"></div>
     </div>
 
   </div>
@@ -778,11 +810,39 @@ Si se te viene alguien, te agradecería mucho una presentación por WhatsApp. Y 
 
 Gracias de antemano 🙏`;
 
-    setMsg('msg-A',    'chars-A',    msgA);
-    setMsg('msg-B',    'chars-B',    msgB);
-    setMsg('msg-C',    'chars-C',    msgC);
-    setMsg('msg-POST', 'chars-POST', msgPOST);
-    setMsg('msg-WA',   'chars-WA',   msgWA);
+    const urlIngles = 'https://alpha-strategy-web.vercel.app/ingles';
+
+    const msgENLI =
+`Hola ${primerNombre}, vi tu perfil y me llamó la atención tu trayectoria en ${sector || 'tu área'}.
+
+Una pregunta directa: ¿el inglés es algo que querías mejorar pero siempre quedó pendiente?
+
+Desde Alpha Strategy Group lanzamos un programa diseñado para profesionales como tú — clases en vivo, horario compatible con el trabajo y enfoque en el inglés que realmente usas en tu carrera.
+
+📌 3 niveles · 500 Bs/mes · Lunes y miércoles
+
+¿Te interesa conocer los detalles? Aquí está la info completa: ${urlIngles}`;
+
+    const msgENWA =
+`Hola ${primerNombre}, ¿cómo estás?
+
+Te escribo porque lanzamos un programa de inglés para profesionales desde Alpha Strategy Group — y pensé que podría interesarte o que conoces a alguien que lo necesite.
+
+📌 Clases en vivo · 3 niveles · 500 Bs/mes · Lunes y miércoles
+
+El enfoque es práctico: inglés para el trabajo, reuniones, correos y presentaciones — no inglés de libro.
+
+¿Quieres que te mande los detalles? O si conoces a alguien que esté buscando esto, te agradecería mucho pasarle la info 🙏
+
+${urlIngles}`;
+
+    setMsg('msg-A',     'chars-A',     msgA);
+    setMsg('msg-B',     'chars-B',     msgB);
+    setMsg('msg-C',     'chars-C',     msgC);
+    setMsg('msg-POST',  'chars-POST',  msgPOST);
+    setMsg('msg-WA',    'chars-WA',    msgWA);
+    setMsg('msg-EN-LI', 'chars-EN-LI', msgENLI);
+    setMsg('msg-EN-WA', 'chars-EN-WA', msgENWA);
     resaltarVariacion();
   }
 
@@ -795,10 +855,9 @@ Gracias de antemano 🙏`;
 
   function resaltarVariacion() {
     const v = document.getElementById('variacion').value;
-    ['A','B','C'].forEach(x => {
+    ['A','B','C','WA','EN-LI','EN-WA'].forEach(x => {
       document.getElementById('card-' + x).classList.toggle('active', x === v);
     });
-    document.getElementById('card-WA').classList.toggle('active', v === 'WA');
   }
 
   function copiar(id, btn) {
@@ -843,12 +902,12 @@ Gracias de antemano 🙏`;
     document.getElementById('variacion').value = 'A';
     document.getElementById('desconoce').checked = false;
     document.getElementById('preview-intro').style.display = 'none';
-    ['msg-A','msg-B','msg-C','msg-POST','msg-WA'].forEach(id => {
+    ['msg-A','msg-B','msg-C','msg-POST','msg-WA','msg-EN-LI','msg-EN-WA'].forEach(id => {
       const el = document.getElementById(id);
       el.textContent = 'Completa el nombre para ver el mensaje...';
       el.classList.add('empty');
     });
-    ['chars-A','chars-B','chars-C','chars-POST','chars-WA'].forEach(id => {
+    ['chars-A','chars-B','chars-C','chars-POST','chars-WA','chars-EN-LI','chars-EN-WA'].forEach(id => {
       document.getElementById(id).textContent = '';
     });
     resaltarVariacion();

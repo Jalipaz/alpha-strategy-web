@@ -109,6 +109,17 @@
     .empty-icon { font-size: 36px; margin-bottom: 10px; }
     .actions { display: flex; gap: 5px; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    /* CRM */
+    .pipeline { display: grid; grid-template-columns: repeat(6,1fr); gap: 12px; margin-bottom: 20px; }
+    .pipe-card { background:#fff; border-radius:var(--r); padding:14px 16px; box-shadow:var(--shadow); text-align:center; cursor:pointer; transition:box-shadow .15s; }
+    .pipe-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .pipe-num { font-size:26px; font-weight:700; margin:4px 0; }
+    .pipe-lbl { font-size:11px; font-weight:600; color:var(--gray-500); text-transform:uppercase; letter-spacing:.4px; }
+    .tag { display:inline-flex; align-items:center; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; background:var(--gray-100); color:var(--gray-600); }
+    .note-item { padding:10px 0; border-bottom:1px solid var(--gray-100); }
+    .note-item:last-child { border-bottom:none; }
+    .note-meta { font-size:11px; color:var(--gray-400); margin-bottom:3px; }
+    .note-text { font-size:13.5px; color:var(--gray-700); }
   </style>
 </head>
 <body>
@@ -125,10 +136,12 @@
     <div class="nav-item" onclick="nav('cobranza')">💰 Cobranza</div>
     <div class="nav-item" onclick="nav('doctores')">👨‍⚕️ Doctores</div>
     <div class="nav-item" onclick="nav('comisiones')">💵 Comisiones</div>
+    <div class="nav-item" onclick="nav('crm')">🎯 CRM</div>
   </nav>
   <div class="sb-footer" style="display:flex;flex-direction:column;gap:6px">
-    <span>DentaSoft v1.0</span>
+    <span>DentaSoft v2.0</span>
     <button onclick="configurarClinica()" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">⚙ Nombre del consultorio</button>
+    <button onclick="hacerBackup(true)" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">💾 Descargar backup</button>
     <button onclick="resetDB()" style="background:rgba(220,38,38,0.25);border:none;color:rgba(255,150,150,0.9);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;text-align:left">🗑 Limpiar base de datos</button>
   </div>
 </aside>
@@ -202,6 +215,34 @@
       <button class="btn btn-primary" onclick="openDoctor()">+ Nuevo Doctor</button>
     </div>
     <div class="card"><div id="t-doctores"></div></div>
+  </section>
+
+  <!-- CRM -->
+  <section class="page" id="page-crm">
+    <div class="pipeline" id="crm-pipeline"></div>
+    <div class="toolbar">
+      <input class="search" type="text" id="q-crm" placeholder="Buscar por nombre, teléfono, interés..." oninput="renderCRM()">
+      <select id="f-crm-est" onchange="renderCRM()" style="width:auto">
+        <option value="">Todos los estados</option>
+        <option value="nuevo">🆕 Nuevo</option>
+        <option value="contactado">📞 Contactado</option>
+        <option value="cita_agendada">📅 Cita Agendada</option>
+        <option value="visito">🏥 Visitó</option>
+        <option value="convertido">✅ Convertido</option>
+        <option value="perdido">❌ Perdido</option>
+      </select>
+      <select id="f-crm-src" onchange="renderCRM()" style="width:auto">
+        <option value="">Todas las fuentes</option>
+        <option value="instagram">Instagram</option>
+        <option value="facebook">Facebook</option>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="referido">Referido</option>
+        <option value="presencial">Presencial</option>
+        <option value="otro">Otro</option>
+      </select>
+      <button class="btn btn-primary" onclick="openProspecto()">+ Nuevo Prospecto</button>
+    </div>
+    <div class="card"><div id="t-crm"></div></div>
   </section>
 
   <!-- COMISIONES -->
@@ -324,6 +365,80 @@
   </div>
 </div>
 
+<!-- MODAL PROSPECTO CRM -->
+<div class="overlay" id="ov-crm">
+  <div class="modal">
+    <div class="modal-hd"><span class="modal-title" id="mcrm-ttl">Nuevo Prospecto</span><button class="modal-close" onclick="closeOv('ov-crm')">✕</button></div>
+    <div class="modal-bd">
+      <input type="hidden" id="mcrm-id">
+      <div class="fr2">
+        <div class="fg"><label>Nombre *</label><input id="mcrm-nom" type="text" placeholder="Nombre completo"></div>
+        <div class="fg"><label>Teléfono *</label><input id="mcrm-tel" type="tel" placeholder="7XXXXXXX"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Email</label><input id="mcrm-email" type="email" placeholder="correo@ejemplo.com"></div>
+        <div class="fg"><label>Fuente</label>
+          <select id="mcrm-src">
+            <option value="instagram">Instagram</option>
+            <option value="facebook">Facebook</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="referido">Referido</option>
+            <option value="presencial">Presencial</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Interés / Tratamiento</label><input id="mcrm-int" type="text" placeholder="Ortodoncia, Limpieza, Blanqueamiento..."></div>
+        <div class="fg"><label>Estado</label>
+          <select id="mcrm-est">
+            <option value="nuevo">🆕 Nuevo</option>
+            <option value="contactado">📞 Contactado</option>
+            <option value="cita_agendada">📅 Cita Agendada</option>
+            <option value="visito">🏥 Visitó</option>
+            <option value="convertido">✅ Convertido</option>
+            <option value="perdido">❌ Perdido</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Nota inicial</label><textarea id="mcrm-nota" placeholder="Observaciones, presupuesto consultado, detalles..."></textarea></div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeOv('ov-crm')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveProspecto()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SEGUIMIENTO CRM -->
+<div class="overlay" id="ov-crm-notas">
+  <div class="modal modal-lg">
+    <div class="modal-hd"><span class="modal-title" id="mcrm-notas-ttl">Seguimiento</span><button class="modal-close" onclick="closeOv('ov-crm-notas')">✕</button></div>
+    <div class="modal-bd">
+      <div id="mcrm-notas-info" style="margin-bottom:16px"></div>
+      <div class="fg" style="margin-bottom:8px">
+        <label>Nueva Nota / Interacción</label>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <select id="mcrm-nota-tipo" style="width:auto;flex-shrink:0">
+            <option value="llamada">📞 Llamada</option>
+            <option value="mensaje">💬 Mensaje</option>
+            <option value="visita">🏥 Visita</option>
+            <option value="otro">📝 Nota</option>
+          </select>
+          <textarea id="mcrm-nota-txt" placeholder="Escribe lo que pasó en este contacto..." style="flex:1;min-height:60px"></textarea>
+          <button class="btn btn-primary btn-sm" onclick="addNota()" style="flex-shrink:0;align-self:flex-end">+ Agregar</button>
+        </div>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--gray-200);margin:16px 0">
+      <div id="mcrm-notas-list"></div>
+    </div>
+    <div class="modal-ft">
+      <div id="mcrm-notas-convert" style="margin-right:auto"></div>
+      <button class="btn btn-ghost" onclick="closeOv('ov-crm-notas')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL DETALLE (paciente / pagos) -->
 <div class="overlay" id="ov-det">
   <div class="modal modal-lg">
@@ -371,6 +486,7 @@ const PAGES = {
   cobranza:     ['Cobranza','Seguimiento de pagos y deudas'],
   doctores:     ['Doctores','Personal médico del consultorio'],
   comisiones:   ['Comisiones','Control de comisiones por tratamientos'],
+  crm:          ['CRM','Seguimiento y conversión de prospectos'],
 };
 function nav(p) {
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
@@ -379,7 +495,7 @@ function nav(p) {
   document.querySelector(`[onclick="nav('${p}')"]`).classList.add('active');
   document.getElementById('tb-title').textContent = PAGES[p][0];
   document.getElementById('tb-sub').textContent   = PAGES[p][1];
-  ({dashboard:renderDash,pacientes:renderPacientes,tratamientos:()=>{fillDocFilter('f-trat-doc');renderTratamientos()},cobranza:renderCobranza,doctores:renderDoctores,comisiones:()=>{fillDocFilter('f-com-doc');renderComisiones()}})[p]();
+  ({dashboard:renderDash,pacientes:renderPacientes,tratamientos:()=>{fillDocFilter('f-trat-doc');renderTratamientos()},cobranza:renderCobranza,doctores:renderDoctores,comisiones:()=>{fillDocFilter('f-com-doc');renderComisiones()},crm:renderCRM})[p]();
 }
 
 // ─── DASHBOARD ────────────────────────────────────────────────
@@ -674,6 +790,7 @@ function delPago(pid,tid) {
 function resetDB() {
   if(!confirm('⚠ ¿Seguro que quieres borrar TODOS los datos?\n\nEsto eliminará pacientes, tratamientos, pagos, doctores y comisiones. Esta acción no se puede deshacer.')) return;
   ['pac','trat','pag','doc','com'].forEach(k => localStorage.removeItem(K[k]));
+  ['pros','notas'].forEach(k => localStorage.removeItem(CRM_K[k]));
   localStorage.removeItem('ds_recibo_num');
   alert('✅ Base de datos limpiada.');
   nav('dashboard');
@@ -884,11 +1001,200 @@ function pagarCom(id) {
   set('com',coms); renderComisiones();
 }
 
+// ─── CRM ──────────────────────────────────────────────────────
+const CRM_K = { pros:'ds_crm_pros', notas:'ds_crm_notas' };
+const getCRM = k => JSON.parse(localStorage.getItem(CRM_K[k]) || '[]');
+const setCRM = (k,v) => localStorage.setItem(CRM_K[k], JSON.stringify(v));
+
+const CRM_EST = {
+  nuevo:         { lbl:'Nuevo',        icon:'🆕', color:'var(--blue)'   },
+  contactado:    { lbl:'Contactado',   icon:'📞', color:'var(--yellow)' },
+  cita_agendada: { lbl:'Cita Agendada',icon:'📅', color:'#8b5cf6'      },
+  visito:        { lbl:'Visitó',       icon:'🏥', color:'#06b6d4'      },
+  convertido:    { lbl:'Convertido',   icon:'✅', color:'var(--green)'  },
+  perdido:       { lbl:'Perdido',      icon:'❌', color:'var(--red)'    },
+};
+const CRM_SRC   = { instagram:'Instagram', facebook:'Facebook', whatsapp:'WhatsApp', referido:'Referido', presencial:'Presencial', otro:'Otro' };
+const NOTA_TIPO = { llamada:'📞 Llamada', mensaje:'💬 Mensaje', visita:'🏥 Visita', otro:'📝 Nota' };
+let _crmId = null;
+
+function bCrmEst(e) {
+  const s = CRM_EST[e]; if(!s) return `<span class="badge bgr">${e}</span>`;
+  const cls = {nuevo:'bb',contactado:'by',cita_agendada:'bb',visito:'bb',convertido:'bg',perdido:'br'}[e]||'bgr';
+  return `<span class="badge ${cls}">${s.icon} ${s.lbl}</span>`;
+}
+
+function renderCRM() {
+  const list = getCRM('pros');
+  const pipe = Object.entries(CRM_EST).map(([k,v]) => {
+    const cnt = list.filter(p=>p.est===k).length;
+    return `<div class="pipe-card" style="border-top:3px solid ${v.color}" onclick="document.getElementById('f-crm-est').value='${k}';renderCRM()">
+      <div class="pipe-num" style="color:${v.color}">${cnt}</div>
+      <div class="pipe-lbl">${v.icon} ${v.lbl}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('crm-pipeline').innerHTML = pipe;
+
+  const q  = (document.getElementById('q-crm')?.value||'').toLowerCase();
+  const fe = document.getElementById('f-crm-est')?.value||'';
+  const fs = document.getElementById('f-crm-src')?.value||'';
+  let shown = list;
+  if(q)  shown = shown.filter(p=>`${p.nom} ${p.tel} ${p.int||''}`.toLowerCase().includes(q));
+  if(fe) shown = shown.filter(p=>p.est===fe);
+  if(fs) shown = shown.filter(p=>p.src===fs);
+  shown.sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
+
+  document.getElementById('t-crm').innerHTML = shown.length ? `
+    <table>
+      <thead><tr><th>Nombre</th><th>Teléfono</th><th>Interés</th><th>Fuente</th><th>Estado</th><th>Registro</th><th style="width:120px">Acciones</th></tr></thead>
+      <tbody>${shown.map(p=>`<tr>
+        <td style="font-weight:600">${p.nom}</td>
+        <td>${p.tel}</td>
+        <td>${p.int||'—'}</td>
+        <td><span class="tag">${CRM_SRC[p.src]||p.src||'—'}</span></td>
+        <td>${bCrmEst(p.est)}</td>
+        <td style="font-size:12px;color:var(--gray-400)">${fmtD(p.fecha)}</td>
+        <td><div class="actions">
+          <button class="btn btn-sm btn-ghost" title="Seguimiento" onclick="verNotas('${p.id}')">📋</button>
+          <button class="btn btn-sm btn-ghost" title="Editar" onclick="openProspecto('${p.id}')">✏️</button>
+          <button class="btn btn-sm btn-ghost" title="Eliminar" onclick="delProspecto('${p.id}')">🗑</button>
+        </div></td>
+      </tr>`).join('')}</tbody>
+    </table>` : '<div class="empty"><div class="empty-icon">🎯</div><p>No hay prospectos registrados.</p></div>';
+}
+
+function openProspecto(id=null) {
+  ['id','nom','tel','email','int','nota'].forEach(x=>document.getElementById('mcrm-'+x).value='');
+  document.getElementById('mcrm-src').value='instagram';
+  document.getElementById('mcrm-est').value='nuevo';
+  if(id) {
+    const p=getCRM('pros').find(x=>x.id===id); if(!p) return;
+    document.getElementById('mcrm-ttl').textContent='Editar Prospecto';
+    document.getElementById('mcrm-id').value=p.id; document.getElementById('mcrm-nom').value=p.nom;
+    document.getElementById('mcrm-tel').value=p.tel; document.getElementById('mcrm-email').value=p.email||'';
+    document.getElementById('mcrm-src').value=p.src||'otro'; document.getElementById('mcrm-int').value=p.int||'';
+    document.getElementById('mcrm-est').value=p.est||'nuevo';
+  } else document.getElementById('mcrm-ttl').textContent='Nuevo Prospecto';
+  openOv('ov-crm');
+}
+
+function saveProspecto() {
+  const nom=document.getElementById('mcrm-nom').value.trim(), tel=document.getElementById('mcrm-tel').value.trim();
+  if(!nom||!tel){alert('Nombre y teléfono son obligatorios.');return;}
+  const list=getCRM('pros'), id=document.getElementById('mcrm-id').value;
+  const nota=document.getElementById('mcrm-nota').value.trim();
+  const d={id:id||uid(),nom,tel,email:document.getElementById('mcrm-email').value.trim(),src:document.getElementById('mcrm-src').value,int:document.getElementById('mcrm-int').value.trim(),est:document.getElementById('mcrm-est').value,fecha:new Date().toISOString().split('T')[0]};
+  if(id){const i=list.findIndex(x=>x.id===id);list[i]={...list[i],...d,fecha:list[i].fecha};}
+  else{list.push(d);if(nota){const ns=getCRM('notas');ns.push({id:uid(),crmId:d.id,tipo:'otro',texto:nota,fecha:new Date().toISOString()});setCRM('notas',ns);}}
+  setCRM('pros',list); closeOv('ov-crm'); renderCRM();
+}
+
+function delProspecto(id) {
+  const p=getCRM('pros').find(x=>x.id===id);
+  if(!confirm(`¿Eliminar prospecto "${p.nom}"?`)) return;
+  setCRM('pros',getCRM('pros').filter(x=>x.id!==id));
+  setCRM('notas',getCRM('notas').filter(n=>n.crmId!==id));
+  renderCRM();
+}
+
+function verNotas(crmId) {
+  _crmId = crmId;
+  const p=getCRM('pros').find(x=>x.id===crmId); if(!p) return;
+  document.getElementById('mcrm-notas-ttl').textContent=`Seguimiento — ${p.nom}`;
+  document.getElementById('mcrm-nota-txt').value='';
+  document.getElementById('mcrm-nota-tipo').value='llamada';
+  document.getElementById('mcrm-notas-convert').innerHTML = p.est!=='convertido'
+    ? `<button class="btn btn-success btn-sm" onclick="convertirPaciente('${p.id}')">👤 Convertir a Paciente</button>`
+    : '<span class="badge bg">✅ Ya es paciente</span>';
+  document.getElementById('mcrm-notas-info').innerHTML=`
+    <div style="display:flex;gap:16px;flex-wrap:wrap;padding:12px 16px;background:var(--gray-50);border-radius:var(--r);align-items:center">
+      <div><div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase">Nombre</div><div style="font-weight:600">${p.nom}</div></div>
+      <div><div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase">Teléfono</div><div>${p.tel}</div></div>
+      ${p.int?`<div><div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase">Interés</div><div>${p.int}</div></div>`:''}
+      <div><div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase">Estado</div><div>${bCrmEst(p.est)}</div></div>
+      <div style="margin-left:auto">
+        <select style="font-size:12px" onchange="cambiarEstadoCRM('${p.id}',this.value)">
+          ${Object.entries(CRM_EST).map(([k,v])=>`<option value="${k}"${k===p.est?' selected':''}>${v.icon} ${v.lbl}</option>`).join('')}
+        </select>
+      </div>
+    </div>`;
+  renderNotasList(crmId);
+  openOv('ov-crm-notas');
+}
+
+function renderNotasList(crmId) {
+  const notas=getCRM('notas').filter(n=>n.crmId===crmId).sort((a,b)=>b.fecha.localeCompare(a.fecha));
+  document.getElementById('mcrm-notas-list').innerHTML = notas.length
+    ? notas.map(n=>`<div class="note-item">
+        <div class="note-meta">${NOTA_TIPO[n.tipo]||n.tipo} · ${new Date(n.fecha).toLocaleString('es-BO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
+        <div class="note-text">${n.texto}</div>
+      </div>`).join('')
+    : '<p style="color:var(--gray-400);font-size:13px">Sin interacciones registradas aún.</p>';
+}
+
+function addNota() {
+  const txt=document.getElementById('mcrm-nota-txt').value.trim();
+  if(!txt){alert('Escribe algo antes de agregar.');return;}
+  const tipo=document.getElementById('mcrm-nota-tipo').value;
+  const notas=getCRM('notas');
+  notas.push({id:uid(),crmId:_crmId,tipo,texto:txt,fecha:new Date().toISOString()});
+  setCRM('notas',notas);
+  document.getElementById('mcrm-nota-txt').value='';
+  renderNotasList(_crmId);
+}
+
+function cambiarEstadoCRM(id, nuevoEst) {
+  const list=getCRM('pros'), i=list.findIndex(x=>x.id===id);
+  if(i!==-1){list[i].est=nuevoEst;setCRM('pros',list);}
+  verNotas(id); renderCRM();
+}
+
+function convertirPaciente(crmId) {
+  const p=getCRM('pros').find(x=>x.id===crmId); if(!p) return;
+  if(!confirm(`¿Convertir a "${p.nom}" en paciente?\n\nSe creará su ficha en el módulo Pacientes.`)) return;
+  const partes=p.nom.trim().split(' ');
+  const nom=partes[0], ape=partes.slice(1).join(' ')||'—';
+  const pacs=get('pac');
+  pacs.push({id:uid(),nom,ape,ci:'',fnac:'',tel:p.tel,email:p.email||'',dir:'',notas:p.int?`Interés inicial: ${p.int}`:''});
+  set('pac',pacs);
+  const list=getCRM('pros'), i=list.findIndex(x=>x.id===crmId);
+  if(i!==-1){list[i].est='convertido';setCRM('pros',list);}
+  const notas=getCRM('notas');
+  notas.push({id:uid(),crmId,tipo:'otro',texto:'Convertido a paciente activo.',fecha:new Date().toISOString()});
+  setCRM('notas',notas);
+  closeOv('ov-crm-notas');
+  alert(`✅ ${p.nom} fue registrado como paciente.\n\nPuedes completar su ficha en el módulo Pacientes.`);
+  renderCRM();
+}
+
 // ─── OVERLAY HELPERS ──────────────────────────────────────────
 function openOv(id)  { document.getElementById(id).classList.add('open'); }
 function closeOv(id) { document.getElementById(id).classList.remove('open'); }
 document.querySelectorAll('.overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(m=>m.classList.remove('open'));});
+
+// ─── BACKUP ───────────────────────────────────────────────────
+function hacerBackup(manual = false) {
+  const claves = ['ds_pac','ds_trat','ds_pag','ds_doc','ds_com','ds_crm_pros','ds_crm_notas'];
+  const data = { _fecha: new Date().toISOString(), _version: '2.0' };
+  claves.forEach(k => { data[k] = JSON.parse(localStorage.getItem(k) || '[]'); });
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `dentasoft-backup-${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  localStorage.setItem('ds_backup_fecha', new Date().toISOString().split('T')[0]);
+  if(manual) alert('✅ Backup descargado en tu carpeta de Descargas.');
+}
+function autoBackup() {
+  const ultima = localStorage.getItem('ds_backup_fecha');
+  const hoy    = new Date().toISOString().split('T')[0];
+  if(ultima !== hoy) hacerBackup(false);
+}
 
 // ─── DEMO DATA ────────────────────────────────────────────────
 function cargarDemo() {
@@ -914,6 +1220,7 @@ function cargarDemo() {
 }
 document.getElementById('tb-actions').innerHTML='<button class="btn btn-ghost btn-sm" onclick="cargarDemo()" title="Cargar datos de ejemplo">📋 Demo</button>';
 renderDash();
+autoBackup();
 </script>
 </body>
 </html>

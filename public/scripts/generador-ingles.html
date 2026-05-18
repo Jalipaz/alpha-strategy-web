@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de Mensajes — Curso de Inglés | Alpha Strategy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #fffbeb;
+      color: #1a202c;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    header .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #78350f;
+      letter-spacing: -0.3px;
+    }
+
+    header .badge {
+      background: #d97706;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    header .badge-ingles {
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1.5px solid #fde68a;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #78350f;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 18px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1a202c;
+      background: #fffbeb;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #d97706;
+      background: #fff;
+    }
+
+    input::placeholder { color: #a0aec0; }
+
+    .btn-generate {
+      width: 100%;
+      padding: 12px;
+      background: #d97706;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-generate:hover { background: #b45309; }
+
+    .btn-clear {
+      width: 100%;
+      padding: 9px;
+      background: transparent;
+      color: #92400e;
+      font-size: 13px;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.15s;
+    }
+
+    .btn-clear:hover { border-color: #d97706; color: #78350f; }
+
+    /* Right panel */
+    .right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+    .message-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-left: 3px solid #fde68a;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .message-card.active {
+      border-left-color: #d97706;
+      box-shadow: 0 2px 12px rgba(217,119,6,0.15);
+    }
+
+    .message-card .msg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .msg-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #92400e;
+      background: #fef3c7;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .message-card.active .msg-tag {
+      background: #fde68a;
+      color: #78350f;
+    }
+
+    .btn-copy {
+      padding: 6px 14px;
+      background: #d97706;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-copy:hover { background: #b45309; }
+    .btn-copy.copied { background: #16a34a; }
+
+    /* WhatsApp cards */
+    .message-card.wa { border-left-color: #25d366; }
+    .message-card.wa .msg-tag { background: #f0fff4; color: #166534; }
+    .message-card.wa .btn-copy { background: #25d366; }
+    .message-card.wa .btn-copy:hover { background: #16a34a; }
+    .message-card.wa.active { border-left-color: #25d366; box-shadow: 0 2px 12px rgba(37,211,102,0.15); }
+
+    /* Instagram cards */
+    .message-card.ig { border-left-color: #e1306c; }
+    .message-card.ig .msg-tag { background: #fff0f6; color: #9d174d; }
+    .message-card.ig .btn-copy { background: #e1306c; }
+    .message-card.ig .btn-copy:hover { background: #be185d; }
+    .message-card.ig.active { border-left-color: #e1306c; box-shadow: 0 2px 12px rgba(225,48,108,0.15); }
+
+    /* Corporate card */
+    .message-card.corp { border-left-color: #6366f1; }
+    .message-card.corp .msg-tag { background: #eef2ff; color: #3730a3; }
+    .message-card.corp .btn-copy { background: #6366f1; }
+    .message-card.corp .btn-copy:hover { background: #4f46e5; }
+    .message-card.corp.active { border-left-color: #6366f1; box-shadow: 0 2px 12px rgba(99,102,241,0.15); }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #92400e;
+      padding: 4px 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #fde68a;
+    }
+
+    .message-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #2d3748;
+      white-space: pre-wrap;
+      background: #fffbeb;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 90px;
+      border: 1.5px solid #fde68a;
+    }
+
+    .message-text.empty {
+      color: #a0aec0;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+    }
+
+    .char-count {
+      font-size: 11px;
+      color: #a0aec0;
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* Tracker */
+    .tracker-section {
+      max-width: 900px;
+      margin: 20px auto 0;
+    }
+
+    .tracker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .tracker-header h2 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #78350f;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .btn-export {
+      padding: 7px 16px;
+      background: #fff;
+      color: #d97706;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid #d97706;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-export:hover { background: #d97706; color: #fff; }
+
+    table {
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead { background: #78350f; color: #fff; }
+
+    th {
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #fef3c7;
+      color: #2d3748;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fffbeb; }
+
+    .empty-tracker {
+      text-align: center;
+      padding: 32px;
+      color: #92400e;
+      font-size: 14px;
+      font-style: italic;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    select.status-select {
+      padding: 3px 8px;
+      font-size: 12px;
+      border-radius: 20px;
+      width: auto;
+      border-color: #fde68a;
+    }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: #e53e3e;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    .btn-delete:hover { background: #fff5f5; }
+
+    .url-link {
+      color: #d97706;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .url-link:hover { text-decoration: underline; }
+
+    .tip {
+      background: #fef3c7;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #92400e;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* Urgency toggle */
+    .toggle-box {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .toggle-box label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .toggle-box input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: #d97706;
+      flex-shrink: 0;
+      border: none;
+    }
+
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">Alpha Strategy Group</span>
+  <span class="badge">Generador de Mensajes</span>
+  <span class="badge-ingles">Curso de Inglés</span>
+</header>
+
+<div class="container">
+
+  <!-- LEFT: Formulario -->
+  <div class="card">
+    <h2>Datos del prospecto</h2>
+
+    <div class="form-group">
+      <label>Nombre *</label>
+      <input type="text" id="nombre" placeholder="Ej: Carlos Mendoza" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Empresa / Organización</label>
+      <input type="text" id="empresa" placeholder="Ej: Logicargo Group" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Cargo</label>
+      <input type="text" id="cargo" placeholder="Ej: Coordinador de Operaciones" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>Sector / Industria</label>
+      <input type="text" id="sector" placeholder="Ej: logística, salud, tecnología" oninput="generarMensajes()" />
+    </div>
+
+    <div class="form-group">
+      <label>URL perfil LinkedIn</label>
+      <input type="url" id="url" placeholder="https://linkedin.com/in/..." />
+    </div>
+
+    <div style="border-top:1.5px dashed #fde68a;margin:16px 0 14px;"></div>
+
+    <!-- Toggle: cupos limitados -->
+    <div class="toggle-box">
+      <label>
+        <input type="checkbox" id="urgencia" onchange="generarMensajes()" />
+        <span>Activar <strong>urgencia de cupos</strong> — mencionar que quedan pocos lugares disponibles</span>
+      </label>
+    </div>
+
+    <!-- Toggle: plan corporativo -->
+    <div class="toggle-box">
+      <label>
+        <input type="checkbox" id="corporativo" onchange="generarMensajes()" />
+        <span>Este contacto es de <strong>Recursos Humanos o empresa</strong> — usar versión del plan corporativo</span>
+      </label>
+    </div>
+
+    <div style="border-top:1.5px dashed #fde68a;margin:2px 0 14px;"></div>
+
+    <div class="form-group">
+      <label>Variación recomendada</label>
+      <select id="variacion" onchange="resaltarVariacion()">
+        <optgroup label="── LinkedIn ──">
+          <option value="LI-PRO">LI-PRO — Profesional en empresa (LinkedIn)</option>
+          <option value="LI-EMP">LI-EMP — Joven profesional / recién graduado (LinkedIn)</option>
+        </optgroup>
+        <optgroup label="── WhatsApp ──">
+          <option value="WA-CAL">WA-CAL — Contacto caliente (te conoce)</option>
+          <option value="WA-REF">WA-REF — Pedir referidos (red dormida)</option>
+        </optgroup>
+        <optgroup label="── Instagram ──">
+          <option value="IG-DM">IG-DM — DM directo Instagram</option>
+        </optgroup>
+        <optgroup label="── Corporativo ──">
+          <option value="CORP">CORP — HR / Empresa (plan grupal)</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <button class="btn-generate" onclick="guardarProspecto()">
+      + Guardar en tracker
+    </button>
+    <button class="btn-clear" onclick="limpiarForm()">
+      Limpiar formulario
+    </button>
+
+    <div class="tip">
+      💡 Los mensajes se generan automáticamente mientras escribes. Copia el que quieras y luego guarda el prospecto en el tracker.
+    </div>
+  </div>
+
+  <!-- RIGHT: Mensajes generados -->
+  <div class="right-panel">
+
+    <div class="section-label">💼 LinkedIn — Profesionales en empresa</div>
+
+    <div class="message-card active" id="card-LI-PRO">
+      <div class="msg-header">
+        <span class="msg-tag">LI-PRO — Profesional en empresa</span>
+        <button class="btn-copy" onclick="copiar('msg-LI-PRO', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-LI-PRO">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-LI-PRO"></div>
+    </div>
+
+    <div class="message-card" id="card-LI-EMP">
+      <div class="msg-header">
+        <span class="msg-tag">LI-EMP — Joven profesional / recién graduado</span>
+        <button class="btn-copy" onclick="copiar('msg-LI-EMP', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-LI-EMP">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-LI-EMP"></div>
+    </div>
+
+    <div class="section-label">💬 WhatsApp — Red caliente y referidos</div>
+
+    <div class="message-card wa" id="card-WA-CAL">
+      <div class="msg-header">
+        <span class="msg-tag">WA-CAL — Contacto caliente (te conoce)</span>
+        <button class="btn-copy" onclick="copiar('msg-WA-CAL', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-WA-CAL">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-WA-CAL"></div>
+    </div>
+
+    <div class="message-card wa" id="card-WA-REF">
+      <div class="msg-header">
+        <span class="msg-tag">WA-REF — Pedir referidos a tu red</span>
+        <button class="btn-copy" onclick="copiar('msg-WA-REF', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-WA-REF">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-WA-REF"></div>
+    </div>
+
+    <div class="section-label">📸 Instagram — DM directo</div>
+
+    <div class="message-card ig" id="card-IG-DM">
+      <div class="msg-header">
+        <span class="msg-tag">IG-DM — DM directo Instagram</span>
+        <button class="btn-copy" onclick="copiar('msg-IG-DM', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-IG-DM">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-IG-DM"></div>
+    </div>
+
+    <div class="section-label">🏢 Corporativo — Plan para empresas</div>
+
+    <div class="message-card corp" id="card-CORP">
+      <div class="msg-header">
+        <span class="msg-tag">CORP — HR / Plan grupal para empresa</span>
+        <button class="btn-copy" onclick="copiar('msg-CORP', this)">Copiar</button>
+      </div>
+      <div class="message-text empty" id="msg-CORP">Completa el nombre para ver el mensaje...</div>
+      <div class="char-count" id="chars-CORP"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRACKER -->
+<div class="tracker-section">
+  <div class="tracker-header">
+    <h2>Tracker de interesados — Inglés</h2>
+    <button class="btn-export" onclick="exportarCSV()">Exportar CSV</button>
+  </div>
+  <div id="tracker-container">
+    <div class="empty-tracker">Todavía no has guardado ningún interesado.</div>
+  </div>
+</div>
+
+<script>
+  const URL_CURSO = 'https://alpha-strategy-web.vercel.app/ingles';
+  let prospectos = JSON.parse(localStorage.getItem('ingles_prospectos') || '[]');
+
+  function generarMensajes() {
+    const nombre  = document.getElementById('nombre').value.trim() || '[Nombre]';
+    const empresa = document.getElementById('empresa').value.trim() || '[Empresa]';
+    const cargo   = document.getElementById('cargo').value.trim()   || '[Cargo]';
+    const sector  = document.getElementById('sector').value.trim()  || 'tu área';
+    const pn = nombre.split(' ')[0];
+
+    const urgencia    = document.getElementById('urgencia').checked;
+    const corporativo = document.getElementById('corporativo').checked;
+
+    const cupos = urgencia ? '\n\n⚠️ Los cupos son limitados — quedan pocos lugares para esta cohorte.' : '';
+
+    // ── LI-PRO ──
+    const msgLIPRO =
+`Hola ${pn}, vi tu perfil y me llamó la atención tu trayectoria en ${sector}.
+
+Una pregunta directa: ¿el inglés es algo que querías mejorar pero siempre quedó en lista de pendientes?
+
+Desde Alpha Strategy Group lanzamos un programa de inglés diseñado para profesionales como tú — clases en vivo dos veces por semana, horario compatible con el trabajo y enfoque total en el inglés que realmente usas: reuniones, correos, presentaciones y negociaciones.
+
+📌 3 niveles · 500 Bs/mes · Lunes y miércoles${cupos}
+
+¿Te interesa que te mande los detalles? Aquí está la info: ${URL_CURSO}`;
+
+    // ── LI-EMP ──
+    const msgLIEMP =
+`Hola ${pn}, encontré tu perfil y me pareció que podrías sacarle mucho partido a esto.
+
+Lanzamos un programa de inglés para profesionales jóvenes en Bolivia — clases en vivo, enfocadas en el inglés que te abre puertas en el trabajo: entrevistas en inglés, comunicación con clientes internacionales, presentaciones.
+
+📌 Desde cero o intermedio · 500 Bs/mes · Lunes y miércoles${cupos}
+
+La diferencia con otros cursos: está pensado para personas con trabajo, no para estudiantes con todo el día libre.
+
+¿Te mando la info completa? ${URL_CURSO}`;
+
+    // ── WA-CAL ──
+    const msgWACAL =
+`Hola ${pn}, ¿cómo estás?
+
+Te escribo porque lanzamos un programa de inglés para profesionales desde Alpha Strategy Group — y pensé inmediatamente en ti.
+
+📌 Clases en vivo · 3 niveles · 500 Bs/mes · Lunes y miércoles
+
+Es inglés práctico para el trabajo: reuniones, correos, presentaciones. No inglés de libro.${cupos}
+
+¿Te interesa conocer los detalles? Puedo mandarte la info ahora mismo 👇
+${URL_CURSO}`;
+
+    // ── WA-REF ──
+    const msgWAREF =
+`Hola ${pn}, ¿cómo estás?
+
+Te escribo porque lanzamos un programa de inglés para profesionales — y quería preguntarte algo:
+
+¿Conoces a alguien en tu entorno (colegas, amigos, familiares) que esté buscando mejorar su inglés para el trabajo?
+
+📌 Inglés en vivo · 500 Bs/mes · Lun y Mié · 3 niveles disponibles
+
+Es práctico y diseñado para personas con trabajo. No es un curso de libro.${cupos}
+
+Si se te viene alguien, te agradecería mucho que le pases esta info. Y si a ti también te interesa, con gusto hablamos 🙏
+
+${URL_CURSO}`;
+
+    // ── IG-DM ──
+    const msgIGDM =
+`Hola ${pn} 👋
+
+Vi tu perfil y me pareció que esto podría interesarte.
+
+Desde Alpha Strategy Group lanzamos un programa de inglés para profesionales en Bolivia — clases en vivo, 500 Bs al mes, lunes y miércoles.
+
+No es inglés de academia: es el inglés que usas en el trabajo. Reuniones, correos, presentaciones.${cupos}
+
+¿Quieres que te mande los detalles? También puedes ver todo aquí: ${URL_CURSO}`;
+
+    // ── CORP ──
+    const msgCORP = corporativo
+? `Hola ${pn}, mi nombre es Jesús Alipaz de Alpha Strategy Group.
+
+Te escribo porque lanzamos un programa de inglés para empresas en Bolivia — diseñado específicamente para equipos que necesitan comunicarse en inglés con clientes, proveedores o socios internacionales.
+
+El programa incluye:
+✅ Clases en vivo para grupos de empleados (lunes y miércoles)
+✅ 3 niveles: básico, intermedio y avanzado
+✅ Enfoque en inglés laboral: reuniones, correos, negociaciones
+✅ Precio grupal: desde 350 Bs/persona/mes (grupos de 5+)
+
+Trabajamos con empresas en logística, salud, tecnología y comercio internacional.
+
+¿Tienes 15 minutos esta semana para una llamada rápida? Me gustaría entender las necesidades de ${empresa} y ver si podemos diseñar un plan a medida.`
+: `Hola ${pn}, mi nombre es Jesús de Alpha Strategy Group.
+
+¿Sus empleados necesitan mejorar el inglés para comunicarse con clientes o socios internacionales?
+
+Lanzamos un programa corporativo de inglés en vivo — clases prácticas dos veces por semana, enfocadas en el inglés que se usa en el trabajo real.
+
+📌 Grupos desde 5 personas · 350 Bs/persona/mes
+📌 Clases lunes y miércoles · 3 niveles disponibles
+
+¿Tiene 15 minutos esta semana para conversar? ${URL_CURSO}`;
+
+    setMsg('msg-LI-PRO',  'chars-LI-PRO',  msgLIPRO);
+    setMsg('msg-LI-EMP',  'chars-LI-EMP',  msgLIEMP);
+    setMsg('msg-WA-CAL',  'chars-WA-CAL',  msgWACAL);
+    setMsg('msg-WA-REF',  'chars-WA-REF',  msgWAREF);
+    setMsg('msg-IG-DM',   'chars-IG-DM',   msgIGDM);
+    setMsg('msg-CORP',    'chars-CORP',     msgCORP);
+
+    resaltarVariacion();
+  }
+
+  function setMsg(id, charsId, text) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.classList.remove('empty');
+    document.getElementById(charsId).textContent = `${text.length} caracteres`;
+  }
+
+  function resaltarVariacion() {
+    const v = document.getElementById('variacion').value;
+    ['LI-PRO','LI-EMP','WA-CAL','WA-REF','IG-DM','CORP'].forEach(x => {
+      document.getElementById('card-' + x).classList.toggle('active', x === v);
+    });
+  }
+
+  function copiar(id, btn) {
+    const text = document.getElementById(id).textContent;
+    if (!text || text.includes('Completa el nombre')) return;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copiado';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copiar';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function guardarProspecto() {
+    const nombre = document.getElementById('nombre').value.trim();
+    if (!nombre) { alert('Ingresa el nombre del interesado.'); return; }
+
+    const prospecto = {
+      id       : Date.now(),
+      nombre,
+      empresa  : document.getElementById('empresa').value.trim() || '—',
+      cargo    : document.getElementById('cargo').value.trim()   || '—',
+      sector   : document.getElementById('sector').value.trim()  || '—',
+      url      : document.getElementById('url').value.trim()     || '',
+      variacion: document.getElementById('variacion').value,
+      fecha    : new Date().toLocaleDateString('es-BO'),
+      estado   : 'Contactado',
+    };
+
+    prospectos.unshift(prospecto);
+    localStorage.setItem('ingles_prospectos', JSON.stringify(prospectos));
+    renderTracker();
+    limpiarForm();
+  }
+
+  function limpiarForm() {
+    ['nombre','empresa','cargo','sector','url'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('variacion').value = 'LI-PRO';
+    document.getElementById('urgencia').checked = false;
+    document.getElementById('corporativo').checked = false;
+
+    ['msg-LI-PRO','msg-LI-EMP','msg-WA-CAL','msg-WA-REF','msg-IG-DM','msg-CORP'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = 'Completa el nombre para ver el mensaje...';
+      el.classList.add('empty');
+    });
+    ['chars-LI-PRO','chars-LI-EMP','chars-WA-CAL','chars-WA-REF','chars-IG-DM','chars-CORP'].forEach(id => {
+      document.getElementById(id).textContent = '';
+    });
+    resaltarVariacion();
+  }
+
+  function cambiarEstado(id, val) {
+    prospectos = prospectos.map(p => p.id === id ? { ...p, estado: val } : p);
+    localStorage.setItem('ingles_prospectos', JSON.stringify(prospectos));
+  }
+
+  function eliminar(id) {
+    if (!confirm('¿Eliminar este interesado?')) return;
+    prospectos = prospectos.filter(p => p.id !== id);
+    localStorage.setItem('ingles_prospectos', JSON.stringify(prospectos));
+    renderTracker();
+  }
+
+  function renderTracker() {
+    const container = document.getElementById('tracker-container');
+    if (prospectos.length === 0) {
+      container.innerHTML = '<div class="empty-tracker">Todavía no has guardado ningún interesado.</div>';
+      return;
+    }
+
+    const estados = ['Contactado','Interesado','Info enviada','Llamada agendada','Inscrito','No interesado'];
+
+    const rows = prospectos.map(p => `
+      <tr>
+        <td><strong>${p.nombre}</strong></td>
+        <td>${p.empresa}</td>
+        <td style="color:#718096;font-size:12px">${p.cargo}</td>
+        <td style="color:#718096;font-size:12px">${p.sector}</td>
+        <td><span style="background:#fef3c7;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;color:#92400e">${p.variacion}</span></td>
+        <td style="color:#718096;font-size:12px">${p.fecha}</td>
+        <td>
+          <select class="status-select" onchange="cambiarEstado(${p.id}, this.value)">
+            ${estados.map(e => `<option value="${e}" ${p.estado===e?'selected':''}>${e}</option>`).join('')}
+          </select>
+        </td>
+        <td>
+          ${p.url
+            ? `<a class="url-link" href="${p.url}" target="_blank">Ver perfil ↗</a>`
+            : '<span style="color:#a0aec0;font-size:12px">—</span>'}
+        </td>
+        <td><button class="btn-delete" onclick="eliminar(${p.id})">×</button></td>
+      </tr>
+    `).join('');
+
+    container.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th><th>Empresa</th><th>Cargo</th><th>Sector</th>
+            <th>Var.</th><th>Fecha</th><th>Estado</th><th>Perfil</th><th></th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function exportarCSV() {
+    if (prospectos.length === 0) { alert('No hay interesados guardados.'); return; }
+    const headers = ['Nombre','Empresa','Cargo','Sector','Variación','Fecha','Estado','URL'];
+    const rows = prospectos.map(p =>
+      [p.nombre, p.empresa, p.cargo, p.sector, p.variacion, p.fecha, p.estado, p.url]
+        .map(v => `"${(v||'').replace(/"/g,'""')}"`)
+        .join(',')
+    );
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `ingles-interesados-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+  }
+
+  // Init
+  resaltarVariacion();
+  renderTracker();
+</script>
+
+</body>
+</html>

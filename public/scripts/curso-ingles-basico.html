@@ -157,7 +157,8 @@ table.gt tr:last-child td{border:none}
   <span class="tlogo">Alpha Strategy · Inglés</span>
   <div class="level-tabs">
     <button class="ltab active" id="tabBasic" onclick="setLevel('basic')">Nivel Básico</button>
-    <button class="ltab" id="tabInter" onclick="setLevel('inter')">Nivel Intermedio</button>
+    <button class="ltab" id="tabInter" onclick="setLevel('inter')">Intermedio</button>
+    <button class="ltab" id="tabAdv" onclick="setLevel('advanced')">Avanzado</button>
   </div>
   <div class="prog-wrap"><div class="prog-bar" id="progBar"></div></div>
 </header>
@@ -883,12 +884,375 @@ const INTER_UNITS = [
 ];
 
 // ═══════════════════════════════════════════════════
+// ADVANCED UNITS  (B2 / C1)
+// ═══════════════════════════════════════════════════
+const ADVANCED_UNITS = [
+{
+  title:'Tiempos Perfectos', sub:'Perfect Tenses', icon:'✅',
+  tag:'Unidad A1',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">✅</div><div><h2>Present Perfect</h2><p>Pasado con relevancia en el presente</p></div></div><div class="cb">
+    <div class="rule"><h4>Estructura: have/has + participio (3ª forma)</h4><p>
+    I/You/We/They → <strong>have</strong> + past participle<br>
+    He/She/It → <strong>has</strong> + past participle
+    </p></div>
+    <div class="tip"><strong>Usos:</strong><br>
+    ✦ Experiencias de vida: I <strong>have been</strong> to Paris.<br>
+    ✦ Acción pasada con resultado presente: She <strong>has lost</strong> her keys. (no las tiene ahora)<br>
+    ✦ Con: ever, never, already, yet, just, since, for<br>
+    ✦ Have you <strong>ever</strong> tried sushi? / I've <strong>never</strong> seen that movie.<br>
+    ✦ I've <strong>just</strong> finished. / Have you eaten <strong>yet</strong>? / I haven't called <strong>yet</strong>.
+    </div>
+    <div class="glabel gl-neg" style="margin-top:8px">❌ Negativo: haven't / hasn't + participio</div>
+    <div class="glabel gl-q" style="margin-top:8px">❓ Pregunta: Have/Has + sujeto + participio?</div>
+    <div class="seclabel">Participios irregulares clave</div>
+    <table class="gt"><tr><th>Infinitivo</th><th>Pasado</th><th>Participio</th></tr>
+    <tr><td>go</td><td>went</td><td><strong>gone</strong></td></tr>
+    <tr><td>see</td><td>saw</td><td><strong>seen</strong></td></tr>
+    <tr><td>do</td><td>did</td><td><strong>done</strong></td></tr>
+    <tr><td>write</td><td>wrote</td><td><strong>written</strong></td></tr>
+    <tr><td>take</td><td>took</td><td><strong>taken</strong></td></tr>
+    <tr><td>speak</td><td>spoke</td><td><strong>spoken</strong></td></tr>
+    <tr><td>make</td><td>made</td><td><strong>made</strong></td></tr>
+    <tr><td>know</td><td>knew</td><td><strong>known</strong></td></tr>
+    <tr><td>eat</td><td>ate</td><td><strong>eaten</strong></td></tr>
+    <tr><td>break</td><td>broke</td><td><strong>broken</strong></td></tr>
+    </table>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">⏮️</div><div><h2>Past Perfect & Future Perfect</h2></div></div><div class="cb">
+    <div class="rule"><h4>Past Perfect — had + participio</h4><p>
+    Acción anterior a otra acción pasada.<br>
+    When I arrived, she <strong>had already left</strong>.<br>
+    He was tired because he <strong>hadn't slept</strong> well.
+    </p></div>
+    <div class="rule" style="margin-top:10px"><h4>Future Perfect — will have + participio</h4><p>
+    Acción completada antes de un punto futuro.<br>
+    By 2030, I <strong>will have finished</strong> my degree.<br>
+    She <strong>will have worked</strong> here for 10 years by December.
+    </p></div>
+    <div class="rule" style="margin-top:10px"><h4>Present Perfect vs Past Simple</h4><ul>
+    <li><strong>Present Perfect</strong>: tiempo no especificado / relevante ahora<br>I <strong>have seen</strong> that film. (en algún momento, importa ahora)</li>
+    <li><strong>Past Simple</strong>: tiempo específico en el pasado<br>I <strong>saw</strong> that film last night.</li>
+    </ul></div>
+  </div></div>`,
+  quiz:[
+    {q:'I ____ never ____ to Japan. (go)', opts:['have / went','have / gone','had / gone','has / gone'], ans:1},
+    {q:'She ____ just finished her homework.', opts:['have','has','had','is'], ans:1},
+    {q:'Have you ever ____ sushi? (eat)', opts:['ate','eating','eat','eaten'], ans:3},
+    {q:'I ____ yet. (not call)', opts:["haven't called","hasn't called","didn't called","not called"], ans:0},
+    {q:'When I arrived, she ____ already left. (past perfect)', opts:['has','have','had','was'], ans:2},
+    {q:'He was tired because he ____ well. (not sleep — past perfect)', opts:["hadn't slept","hasn't slept","didn't sleep","wasn't slept"], ans:0},
+    {q:'By 2030, I ____ my degree. (future perfect / finish)', opts:['will finish','will have finished','have finished','would finish'], ans:1},
+    {q:'I ____ her for 5 years. (know — desde hace, hasta ahora)', opts:['know','knew','have known','had known'], ans:2},
+    {q:'____ you ever met a celebrity?', opts:['Did','Have','Had','Do'], ans:1},
+    {q:'She ____ in that company since 2018.', opts:['works','worked','has worked','had worked'], ans:2},
+  ]
+},
+{
+  title:'Voz Pasiva', sub:'Passive Voice', icon:'🔄',
+  tag:'Unidad A2',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">🔄</div><div><h2>Voz Pasiva</h2><p>El objeto se vuelve sujeto</p></div></div><div class="cb">
+    <div class="tip to"><strong>¿Cuándo usar la pasiva?</strong><br>
+    ✦ El agente (quien hace) es desconocido o no importa<br>
+    ✦ Para dar énfasis al objeto/resultado<br>
+    ✦ En textos formales, científicos y noticias
+    </div>
+    <div class="rule"><h4>Estructura: To Be (conjugado) + Participio Pasado</h4><p>
+    Activa: <strong>Someone builds</strong> the house.<br>
+    Pasiva: The house <strong>is built</strong>.
+    </p></div>
+    <table class="gt"><tr><th>Tiempo</th><th>Activa</th><th>Pasiva</th></tr>
+    <tr><td>Present Simple</td><td>They make cars here.</td><td>Cars <strong>are made</strong> here.</td></tr>
+    <tr><td>Past Simple</td><td>She wrote the report.</td><td>The report <strong>was written</strong>.</td></tr>
+    <tr><td>Present Perfect</td><td>They have fixed it.</td><td>It <strong>has been fixed</strong>.</td></tr>
+    <tr><td>Future (will)</td><td>They will announce it.</td><td>It <strong>will be announced</strong>.</td></tr>
+    <tr><td>Modal</td><td>You must do this.</td><td>This <strong>must be done</strong>.</td></tr>
+    </table>
+    <div class="tip" style="margin-top:12px"><strong>Agente con "by":</strong> The letter was written <strong>by</strong> Maria. (cuando el agente importa)</div>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">📝</div><div><h2>Ejemplos y práctica</h2></div></div><div class="cb">
+    <ul class="el">
+      <li><span class="een">English is spoken worldwide.</span><span class="ees">El inglés se habla en todo el mundo.</span></li>
+      <li><span class="een">The thief was arrested.</span><span class="ees">El ladrón fue arrestado.</span></li>
+      <li><span class="een">This bridge was built in 1890.</span><span class="ees">Este puente fue construido en 1890.</span></li>
+      <li><span class="een">The package will be delivered tomorrow.</span><span class="ees">El paquete será entregado mañana.</span></li>
+      <li><span class="een">The problem has been solved.</span><span class="ees">El problema ha sido resuelto.</span></li>
+      <li><span class="een">The car must be repaired.</span><span class="ees">El carro debe ser reparado.</span></li>
+    </ul>
+  </div></div>`,
+  quiz:[
+    {q:'Cars ____ in this factory. (make — present simple pasiva)', opts:['make','are making','are made','made'], ans:2},
+    {q:'The report ____ by Maria. (write — past simple pasiva)', opts:['wrote','was written','has written','is written'], ans:1},
+    {q:'English ____ worldwide. (speak — present simple)', opts:['speaks','is speaking','is spoken','has spoken'], ans:2},
+    {q:'The problem ____. (already fix — present perfect pasiva)', opts:['has already fixed','has already been fixed','was already fixed','already fixed'], ans:1},
+    {q:'This must ____. (do — pasiva modal)', opts:['do','be done','be doing','doing'], ans:1},
+    {q:'The letter ____ tomorrow. (send — future pasiva)', opts:['will sent','will be sent','is sent','will be send'], ans:1},
+    {q:'He ____ by the police. (arrest — past simple)', opts:['arrested','was arrested','has arrested','is arrested'], ans:1},
+    {q:'La forma correcta es: "The cake ____."', opts:['eating','has eaten','was eaten','ate'], ans:2},
+    {q:'Activa→Pasiva: "They clean the office every day."', opts:['The office cleans every day.','The office is cleaned every day.','The office was cleaned every day.','The office has been cleaned every day.'], ans:1},
+    {q:'The results ____ next week. (announce — future)', opts:['are announced','will announce','will be announced','are announcing'], ans:2},
+  ]
+},
+{
+  title:'Condicionales', sub:'Conditional Sentences', icon:'🔀',
+  tag:'Unidad A3',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">🔀</div><div><h2>Los 4 Condicionales</h2></div></div><div class="cb">
+    <div class="rule"><h4>Zero Conditional — Verdades generales / hechos científicos</h4><p>
+    <strong>If + Present Simple, Present Simple</strong><br>
+    If you <strong>heat</strong> water to 100°C, it <strong>boils</strong>.<br>
+    If it <strong>rains</strong>, the streets <strong>get</strong> wet.
+    </p></div>
+    <div class="rule"><h4>First Conditional — Situaciones reales / posibles en el futuro</h4><p>
+    <strong>If + Present Simple, will + infinitivo</strong><br>
+    If it <strong>rains</strong> tomorrow, I <strong>will stay</strong> home.<br>
+    If you <strong>study</strong> hard, you <strong>will pass</strong> the exam.
+    </p></div>
+    <div class="rule"><h4>Second Conditional — Situaciones hipotéticas / poco probables</h4><p>
+    <strong>If + Past Simple, would + infinitivo</strong><br>
+    If I <strong>had</strong> more money, I <strong>would travel</strong> the world.<br>
+    If she <strong>were</strong> taller, she <strong>would be</strong> a model.
+    </p></div>
+    <div class="rule"><h4>Third Conditional — Situaciones imposibles (pasado que no ocurrió)</h4><p>
+    <strong>If + Past Perfect, would have + participio</strong><br>
+    If I <strong>had studied</strong> more, I <strong>would have passed</strong>.<br>
+    If she <strong>hadn't been</strong> late, she <strong>would have got</strong> the job.
+    </p></div>
+    <div class="tip"><strong>Unless = if...not:</strong> Unless you hurry, you'll miss the bus. (= If you don't hurry...)</div>
+  </div></div>`,
+  quiz:[
+    {q:'If you heat ice, it ____ . (zero conditional / melt)', opts:['will melt','melts','melted','would melt'], ans:1},
+    {q:'If it ____ tomorrow, we will cancel the trip. (rain — 1st conditional)', opts:['rained','rains','will rain','would rain'], ans:1},
+    {q:'If I ____ you, I would apologize. (be — 2nd conditional)', opts:['am','was / were','have been','would be'], ans:1},
+    {q:'She would travel more if she ____ more money. (have — 2nd)', opts:['has','had','would have','will have'], ans:1},
+    {q:'If I had studied harder, I ____ the exam. (pass — 3rd)', opts:['would pass','will have passed','would have passed','had passed'], ans:2},
+    {q:'If she ____ earlier, she wouldn\'t have missed the train. (leave — 3rd)', opts:['left','had left','would leave','has left'], ans:1},
+    {q:'____ you eat healthier, you will feel better. (1st cond. — unless/if)', opts:['Unless','If','Although','When'], ans:1},
+    {q:'If they ____ harder, the project will be done. (work — 1st)', opts:['worked','work','would work','will work'], ans:1},
+    {q:'What ____ you do if you won the lottery? (2nd cond.)', opts:['will','would','did','do'], ans:1},
+    {q:'If I ____ known, I would have told you. (3rd cond.)', opts:['have','has','had','would have'], ans:2},
+  ]
+},
+{
+  title:'Verbos Modales', sub:'Modal Verbs — Advanced', icon:'💡',
+  tag:'Unidad A4',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">💡</div><div><h2>Modales de obligación y deducción</h2></div></div><div class="cb">
+    <table class="gt"><tr><th>Modal</th><th>Uso</th><th>Ejemplo</th></tr>
+    <tr><td><strong>must</strong></td><td>Obligación fuerte / deducción lógica</td><td>You must wear a seatbelt. / He must be tired.</td></tr>
+    <tr><td><strong>have to</strong></td><td>Obligación externa / necesidad</td><td>I have to work tomorrow.</td></tr>
+    <tr><td><strong>should</strong></td><td>Consejo / recomendación</td><td>You should see a doctor.</td></tr>
+    <tr><td><strong>ought to</strong></td><td>Consejo / deber moral</td><td>You ought to apologize.</td></tr>
+    <tr><td><strong>need to</strong></td><td>Necesidad</td><td>I need to call her.</td></tr>
+    <tr><td><strong>mustn't</strong></td><td>Prohibición fuerte</td><td>You mustn't smoke here.</td></tr>
+    <tr><td><strong>don't have to</strong></td><td>No es necesario (pero puedes)</td><td>You don't have to come.</td></tr>
+    </table>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">🎲</div><div><h2>Modales de posibilidad y deducción</h2></div></div><div class="cb">
+    <table class="gt"><tr><th>Modal</th><th>Certeza</th><th>Ejemplo</th></tr>
+    <tr><td><strong>must</strong></td><td>Casi seguro (positivo)</td><td>She must be at home — the light is on.</td></tr>
+    <tr><td><strong>can't / couldn't</strong></td><td>Casi seguro (negativo)</td><td>That can't be true!</td></tr>
+    <tr><td><strong>might / may</strong></td><td>Posible (50%)</td><td>It might rain later.</td></tr>
+    <tr><td><strong>could</strong></td><td>Posibilidad remota</td><td>That could be the answer.</td></tr>
+    </table>
+    <div class="seclabel">Modales perfectos — Pasado</div>
+    <ul class="el">
+      <li><span class="een">She must have forgotten.</span><span class="ees">Debe haber olvidado. (deducción pasada)</span></li>
+      <li><span class="een">He might have missed the bus.</span><span class="ees">Puede que haya perdido el bus.</span></li>
+      <li><span class="een">You should have called me!</span><span class="ees">¡Deberías haberme llamado!</span></li>
+      <li><span class="een">They can't have arrived yet.</span><span class="ees">No pueden haber llegado todavía.</span></li>
+    </ul>
+  </div></div>`,
+  quiz:[
+    {q:'You ____ wear a seatbelt. It\'s the law. (obligación fuerte)', opts:['should','might','must','could'], ans:2},
+    {q:'You ____ come if you don\'t want to. (no es necesario)', opts:["mustn't","don't have to","shouldn't","couldn't"], ans:1},
+    {q:'She ____ be tired — she worked 12 hours. (deducción lógica)', opts:['might','must','should','could'], ans:1},
+    {q:'That ____ be John — he\'s in Spain! (imposible)', opts:["mustn't","shouldn't","can't","might not"], ans:2},
+    {q:'It ____ rain tomorrow — check the forecast. (posibilidad)', opts:['must','will','might','should'], ans:2},
+    {q:'You ____ smoke inside the building. (prohibición)', opts:["don't have to","shouldn't","mustn't","might not"], ans:2},
+    {q:'You ____ see a doctor about that cough. (consejo)', opts:['must','should','might','could'], ans:1},
+    {q:'She ____ have forgotten — she always forgets! (deducción pasada)', opts:['should','might','must','could'], ans:2},
+    {q:'I ____ have told you earlier. I\'m sorry. (arrepentimiento pasado)', opts:['must','should','might','would'], ans:1},
+    {q:'He ____ have missed the bus — that\'s why he\'s late. (posibilidad pasada)', opts:['must','should','might','will'], ans:2},
+  ]
+},
+{
+  title:'Estilo Indirecto', sub:'Reported Speech', icon:'💬',
+  tag:'Unidad A5',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">💬</div><div><h2>Reported Speech — Estilo Indirecto</h2><p>Reportar lo que alguien dijo</p></div></div><div class="cb">
+    <div class="tip"><strong>Regla principal:</strong> Al reportar, los tiempos retroceden un nivel (backshift) y los pronombres cambian.</div>
+    <table class="gt"><tr><th>Estilo Directo</th><th>Estilo Indirecto</th></tr>
+    <tr><td>Present Simple → </td><td>Past Simple</td></tr>
+    <tr><td>Past Simple → </td><td>Past Perfect</td></tr>
+    <tr><td>Present Perfect → </td><td>Past Perfect</td></tr>
+    <tr><td>will → </td><td>would</td></tr>
+    <tr><td>can → </td><td>could</td></tr>
+    <tr><td>am/is/are → </td><td>was/were</td></tr>
+    </table>
+    <div class="seclabel">Verbos de reporte comunes</div>
+    <div class="vg">
+      <div class="vi"><div class="ven">say / tell</div><div class="ves">decir</div></div>
+      <div class="vi"><div class="ven">ask</div><div class="ves">preguntar/pedir</div></div>
+      <div class="vi"><div class="ven">explain</div><div class="ves">explicar</div></div>
+      <div class="vi"><div class="ven">promise</div><div class="ves">prometer</div></div>
+      <div class="vi"><div class="ven">admit</div><div class="ves">admitir</div></div>
+      <div class="vi"><div class="ven">deny</div><div class="ves">negar</div></div>
+      <div class="vi"><div class="ven">warn</div><div class="ves">advertir</div></div>
+      <div class="vi"><div class="ven">suggest</div><div class="ves">sugerir</div></div>
+    </div>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">📋</div><div><h2>Ejemplos y preguntas reportadas</h2></div></div><div class="cb">
+    <div class="seclabel">Afirmaciones</div>
+    <ul class="el">
+      <li><span class="een">"I am tired." → He said he <strong>was</strong> tired.</span><span class="ees">Dijo que estaba cansado.</span></li>
+      <li><span class="een">"I will call you." → She said she <strong>would call</strong> me.</span><span class="ees">Dijo que me llamaría.</span></li>
+      <li><span class="een">"I have finished." → He said he <strong>had finished</strong>.</span><span class="ees">Dijo que había terminado.</span></li>
+    </ul>
+    <div class="seclabel">Preguntas reportadas (sin inversión)</div>
+    <ul class="el">
+      <li><span class="een">"Where do you live?" → She asked where I <strong>lived</strong>.</span><span class="ees">Preguntó dónde vivía.</span></li>
+      <li><span class="een">"Are you ready?" → He asked if I <strong>was</strong> ready.</span><span class="ees">Preguntó si estaba listo.</span></li>
+    </ul>
+    <div class="tip to"><strong>say vs tell:</strong> He <strong>said</strong> he was tired. / He <strong>told me</strong> he was tired. (tell necesita objeto)</div>
+  </div></div>`,
+  quiz:[
+    {q:'"I am happy." → She said she ____ happy.', opts:['is','was','were','has been'], ans:1},
+    {q:'"I will help you." → He said he ____ help me.', opts:['will','would','can','could'], ans:1},
+    {q:'"I have eaten." → She said she ____ eaten.', opts:['has','had','have','was'], ans:1},
+    {q:'"I can swim." → He said he ____ swim.', opts:['can','could','would','might'], ans:1},
+    {q:'"Where do you live?" → She asked where I ____ .', opts:['live','lived','am living','had lived'], ans:1},
+    {q:'"Are you tired?" → He asked if I ____ tired.', opts:['am','are','was','were'], ans:2},
+    {q:'She ____ she was leaving. (say — correcto)', opts:['told','said','asked','told me'], ans:1},
+    {q:'He ____ me he was leaving. (tell — correcto)', opts:['said','said me','told','told to'], ans:2},
+    {q:'"I didn\'t do it." → She said she ____ done it.', opts:["didn't","hadn't","wouldn't have","hasn't"], ans:1},
+    {q:'"Don\'t touch that!" → He warned me ____ touch it.', opts:['not to','to not','don\'t','not'], ans:0},
+  ]
+},
+{
+  title:'Cláusulas Relativas', sub:'Relative Clauses', icon:'🔗',
+  tag:'Unidad A6',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">🔗</div><div><h2>Cláusulas Relativas</h2><p>Defining & Non-defining</p></div></div><div class="cb">
+    <div class="rule"><h4>Pronombres relativos</h4><table class="gt">
+    <tr><th>Pronombre</th><th>Uso</th><th>Ejemplo</th></tr>
+    <tr><td><strong>who</strong></td><td>Personas (sujeto/objeto)</td><td>The man <strong>who</strong> called me is my boss.</td></tr>
+    <tr><td><strong>whom</strong></td><td>Personas (objeto — formal)</td><td>The woman <strong>whom</strong> I met was kind.</td></tr>
+    <tr><td><strong>which</strong></td><td>Cosas / animales</td><td>The book <strong>which</strong> I read was great.</td></tr>
+    <tr><td><strong>that</strong></td><td>Personas / cosas (informal)</td><td>The car <strong>that</strong> I want is expensive.</td></tr>
+    <tr><td><strong>whose</strong></td><td>Posesión</td><td>The girl <strong>whose</strong> bag was stolen.</td></tr>
+    <tr><td><strong>where</strong></td><td>Lugar</td><td>The city <strong>where</strong> I was born.</td></tr>
+    <tr><td><strong>when</strong></td><td>Tiempo</td><td>The year <strong>when</strong> it happened.</td></tr>
+    </table></div>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">📌</div><div><h2>Defining vs Non-defining</h2></div></div><div class="cb">
+    <div class="rule"><h4>Defining (sin comas) — da información esencial</h4><p>
+    The woman <strong>who lives next door</strong> is a doctor.<br>
+    (sin esa cláusula, no sabemos de qué mujer se habla)
+    </p></div>
+    <div class="rule"><h4>Non-defining (con comas) — da información extra</h4><p>
+    My sister, <strong>who lives in London</strong>, is coming to visit.<br>
+    (ya sabemos quién es mi hermana; la cláusula solo añade info)<br>
+    <strong>Nota:</strong> En non-defining NO se puede usar "that".
+    </p></div>
+    <div class="tip to"><strong>Omisión del relativo:</strong> En cláusulas defining donde el relativo es objeto, se puede omitir.<br>
+    The book (that/which) I read was great. ✅ → The book I read was great. ✅</div>
+    <ul class="el" style="margin-top:12px">
+      <li><span class="een">The student who answered first won.</span><span class="ees">El estudiante que respondió primero ganó.</span></li>
+      <li><span class="een">Paris, which is the capital of France, is beautiful.</span><span class="ees">París, que es la capital de Francia, es hermosa.</span></li>
+      <li><span class="een">That's the house where I grew up.</span><span class="ees">Esa es la casa donde crecí.</span></li>
+    </ul>
+  </div></div>`,
+  quiz:[
+    {q:'The man ____ called me is my teacher.', opts:['which','whose','who','whom'], ans:2},
+    {q:'The book ____ I read was fascinating.', opts:['who','whom','whose','which'], ans:3},
+    {q:'She lives in a house ____ was built in 1920.', opts:['who','that','whom','whose'], ans:1},
+    {q:'The girl ____ father is a doctor studies here.', opts:['who','which','whose','that'], ans:2},
+    {q:'Paris, ____ is the capital of France, is beautiful. (non-defining)', opts:['that','which','who','whose'], ans:1},
+    {q:'That\'s the restaurant ____ we had dinner.', opts:['which','that','where','who'], ans:2},
+    {q:'My brother, ____ works in New York, is visiting. (non-defining)', opts:['that','which','who','whose'], ans:2},
+    {q:'The year ____ I was born was 1990.', opts:['where','which','who','when'], ans:3},
+    {q:'The woman ____ I spoke to was very helpful.', opts:['who','which','whom','whose'], ans:2},
+    {q:'That\'s the student ____ essay won the prize.', opts:['who','which','that','whose'], ans:3},
+  ]
+},
+{
+  title:'Phrasal Verbs y Vocabulario', sub:'Phrasal Verbs & Advanced Vocab', icon:'🚀',
+  tag:'Unidad A7',
+  theory:`
+  <div class="card"><div class="ch"><div class="ci">🚀</div><div><h2>Phrasal Verbs esenciales</h2><p>Verbo + partícula(s)</p></div></div><div class="cb">
+    <div class="tip"><strong>Un phrasal verb = verbo + preposición/adverbio con significado nuevo.</strong><br>
+    give UP ≠ give · look OUT ≠ look</div>
+    <table class="gt"><tr><th>Phrasal Verb</th><th>Significado</th><th>Ejemplo</th></tr>
+    <tr><td><strong>give up</strong></td><td>rendirse / dejar de</td><td>Don't give up!</td></tr>
+    <tr><td><strong>look up</strong></td><td>buscar (diccionario)</td><td>Look it up online.</td></tr>
+    <tr><td><strong>look after</strong></td><td>cuidar</td><td>She looks after her sister.</td></tr>
+    <tr><td><strong>find out</strong></td><td>descubrir / enterarse</td><td>I found out the truth.</td></tr>
+    <tr><td><strong>put off</strong></td><td>posponer</td><td>Stop putting it off!</td></tr>
+    <tr><td><strong>carry on</strong></td><td>continuar</td><td>Carry on working.</td></tr>
+    <tr><td><strong>run out of</strong></td><td>quedarse sin</td><td>We ran out of coffee.</td></tr>
+    <tr><td><strong>set up</strong></td><td>establecer / crear</td><td>He set up a company.</td></tr>
+    <tr><td><strong>take up</strong></td><td>empezar (hobby)</td><td>She took up painting.</td></tr>
+    <tr><td><strong>turn down</strong></td><td>rechazar / bajar volumen</td><td>He turned down the offer.</td></tr>
+    <tr><td><strong>get along</strong></td><td>llevarse bien</td><td>They get along well.</td></tr>
+    <tr><td><strong>break down</strong></td><td>averiarse / derrumbarse</td><td>My car broke down.</td></tr>
+    </table>
+  </div></div>
+
+  <div class="card"><div class="ch"><div class="ci">📖</div><div><h2>Vocabulario avanzado de uso frecuente</h2></div></div><div class="cb">
+    <div class="seclabel">Conectores y transiciones</div>
+    <div class="vg">
+      <div class="vi"><div class="ven">however</div><div class="ves">sin embargo</div></div>
+      <div class="vi"><div class="ven">therefore</div><div class="ves">por lo tanto</div></div>
+      <div class="vi"><div class="ven">furthermore</div><div class="ves">además</div></div>
+      <div class="vi"><div class="ven">nevertheless</div><div class="ves">no obstante</div></div>
+      <div class="vi"><div class="ven">consequently</div><div class="ves">en consecuencia</div></div>
+      <div class="vi"><div class="ven">in addition</div><div class="ves">además de eso</div></div>
+      <div class="vi"><div class="ven">on the other hand</div><div class="ves">por otro lado</div></div>
+      <div class="vi"><div class="ven">in contrast</div><div class="ves">en contraste</div></div>
+    </div>
+    <div class="seclabel">Adjetivos de opinión avanzados</div>
+    <div class="vg">
+      <div class="vi"><div class="ven">outstanding</div><div class="ves">sobresaliente</div></div>
+      <div class="vi"><div class="ven">remarkable</div><div class="ves">notable / sorprendente</div></div>
+      <div class="vi"><div class="ven">controversial</div><div class="ves">polémico</div></div>
+      <div class="vi"><div class="ven">essential</div><div class="ves">esencial / indispensable</div></div>
+      <div class="vi"><div class="ven">feasible</div><div class="ves">factible / viable</div></div>
+      <div class="vi"><div class="ven">adequate</div><div class="ves">adecuado / suficiente</div></div>
+    </div>
+  </div></div>`,
+  quiz:[
+    {q:'"Give up" significa:', opts:['dar arriba','rendirse / dejar de','subir','regalar'], ans:1},
+    {q:'We ____ of milk. (run out — pasado)', opts:['ran out','run out','running out','runned out'], ans:0},
+    {q:'"Look after" significa:', opts:['mirar después','buscar','cuidar','mirar arriba'], ans:2},
+    {q:'He ____ the offer. (rechazar — turn down)', opts:['turned down','turned up','put down','set down'], ans:0},
+    {q:'"Find out" significa:', opts:['salir afuera','descubrir / enterarse','buscar','encontrar afuera'], ans:1},
+    {q:'She ____ painting last year. (empezar hobby — take up)', opts:['took up','set up','put up','gave up'], ans:0},
+    {q:'"However" conecta ideas de:', opts:['adición','resultado','contraste','causa'], ans:2},
+    {q:'"Therefore" significa:', opts:['sin embargo','además','por lo tanto','no obstante'], ans:2},
+    {q:'My car ____. Now I need a mechanic. (averiarse)', opts:['broke down','put off','ran out','gave up'], ans:0},
+    {q:'"Carry on" significa:', opts:['cargar','llevar','continuar','terminar'], ans:2},
+  ]
+}
+];
+
+// ═══════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════
 let currentLevel = 'basic';
 let currentUnit  = 0;
 
-function units(){ return currentLevel==='basic' ? BASIC_UNITS : INTER_UNITS; }
+function units(){
+  if(currentLevel==='basic') return BASIC_UNITS;
+  if(currentLevel==='inter') return INTER_UNITS;
+  return ADVANCED_UNITS;
+}
 
 // ═══════════════════════════════════════════════════
 // RENDER
@@ -898,6 +1262,7 @@ function setLevel(lvl){
   currentUnit  = 0;
   document.getElementById('tabBasic').classList.toggle('active', lvl==='basic');
   document.getElementById('tabInter').classList.toggle('active', lvl==='inter');
+  document.getElementById('tabAdv').classList.toggle('active', lvl==='advanced');
   buildSidebar();
   buildMobNav();
   renderUnit(0);
@@ -906,7 +1271,8 @@ function setLevel(lvl){
 function buildSidebar(){
   const sb = document.getElementById('sidebar');
   const us = units();
-  sb.innerHTML = `<div class="sb-label">${currentLevel==='basic'?'Nivel Básico — A1/A2':'Nivel Intermedio — B1'}</div>`
+  const labels = {basic:'Nivel Básico — A1/A2', inter:'Nivel Intermedio — B1', advanced:'Nivel Avanzado — B2/C1'};
+  sb.innerHTML = `<div class="sb-label">${labels[currentLevel]}</div>`
     + us.map((u,i)=>`<button class="sb-btn${i===currentUnit?' active':''}" onclick="goUnit(${i})"><span class="sb-num">${i+1}</span>${u.title}</button>`).join('');
 }
 

@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap + Análisis Comercial + Mezcla Comercial — Pneumología USA | Clínica Conquista</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #060B2A;
+    --navy-mid: #1D3B73;
+    --navy-light: #2A4A8F;
+    --gold: #B8923D;
+    --gold-light: #D4AF6A;
+    --gold-pale: #F0DEB8;
+    --cream: #F7F5EF;
+    --beige: #D8CDBA;
+    --charcoal: #2C2C2C;
+    --white: #FFFFFF;
+    --green: #059669;
+    --green-light: #D1FAE5;
+    --red: #DC2626;
+    --red-light: #FEE2E2;
+    --blue: #2563EB;
+    --blue-light: #DBEAFE;
+    --purple: #7C3AED;
+    --purple-light: #EDE9FE;
+    --orange: #EA580C;
+    --orange-light: #FFEDD5;
+    --shadow: 0 4px 24px rgba(6,11,42,0.10);
+    --shadow-md: 0 8px 32px rgba(6,11,42,0.14);
+    --shadow-gold: 0 6px 24px rgba(184,146,61,0.22);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  /* ─────────────────────── HERO ─────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #0A1035 55%, #12204A 100%);
+    padding: 64px 64px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; top:-80px; right:-80px;
+    width:420px; height:420px; border-radius:50%;
+    background: radial-gradient(circle, rgba(184,146,61,0.16) 0%, transparent 65%);
+  }
+  .hero::after {
+    content:'';
+    position:absolute; bottom:-60px; left:35%;
+    width:280px; height:280px; border-radius:50%;
+    background: radial-gradient(circle, rgba(29,59,115,0.35) 0%, transparent 65%);
+  }
+  .hero-inner { max-width:1280px; margin:0 auto; position:relative; z-index:1; }
+  .hero-eyebrow {
+    font-size:11px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow::before {
+    content:''; display:block; width:32px; height:2px; background:var(--gold);
+  }
+  .hero-title {
+    font-family:'Playfair Display',serif;
+    font-size:56px; font-weight:900; color:var(--white);
+    line-height:1.07; margin-bottom:14px; max-width:800px;
+  }
+  .hero-title span { color:var(--gold); }
+  .hero-subtitle {
+    font-size:17px; color:rgba(255,255,255,0.55);
+    font-weight:300; max-width:640px; line-height:1.65; margin-bottom:36px;
+  }
+  .hero-pills { display:flex; gap:10px; flex-wrap:wrap; }
+  .hero-pill {
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(184,146,61,0.3);
+    color:var(--gold-light); font-size:12px; font-weight:600;
+    padding:7px 15px; border-radius:30px; letter-spacing:0.5px;
+  }
+  .hero-bottom {
+    max-width:1280px; margin:36px auto 0;
+    display:flex; gap:40px; flex-wrap:wrap;
+    padding-top:28px;
+    border-top:1px solid rgba(184,146,61,0.2);
+  }
+  .hero-stat { text-align:center; }
+  .hero-stat-num {
+    font-family:'Playfair Display',serif;
+    font-size:36px; font-weight:700; color:var(--gold); line-height:1;
+  }
+  .hero-stat-label {
+    font-size:11px; color:rgba(255,255,255,0.4);
+    font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-top:4px;
+  }
+
+  /* ─────────────────────── NAV INDEX ─────────────────────── */
+  .nav-index {
+    background:var(--navy);
+    padding:18px 64px;
+    position:sticky; top:0; z-index:100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width:1280px; margin:0 auto;
+    display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+  }
+  .nav-label {
+    font-size:10px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:rgba(255,255,255,0.3);
+    margin-right:10px;
+  }
+  .nav-link {
+    font-size:11.5px; font-weight:600; color:rgba(255,255,255,0.65);
+    text-decoration:none; padding:6px 14px; border-radius:20px;
+    transition:all 0.2s; letter-spacing:0.3px;
+  }
+  .nav-link:hover { background:rgba(184,146,61,0.2); color:var(--gold-light); }
+
+  /* ─────────────────────── LAYOUT ─────────────────────── */
+  .main { max-width:1280px; margin:0 auto; padding:56px 64px 80px; }
+
+  /* ─────────────────────── SECTION HEADERS ─────────────────────── */
+  .part-header {
+    display:flex; align-items:center; gap:20px;
+    margin-bottom:40px; padding-bottom:20px;
+    border-bottom:2px solid var(--gold);
+  }
+  .part-num {
+    width:56px; height:56px; border-radius:12px;
+    background:var(--navy); border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:22px;
+    font-weight:700; color:var(--gold); flex-shrink:0;
+  }
+  .part-label {
+    font-size:10px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:5px;
+  }
+  .part-title {
+    font-family:'Playfair Display',serif;
+    font-size:32px; font-weight:700; color:var(--navy); line-height:1.1;
+  }
+  .part-desc {
+    font-size:13.5px; color:#9CA3AF; margin-top:5px;
+  }
+  .section-divider {
+    height:1px; background:var(--beige); margin:56px 0;
+  }
+
+  /* ─────────────────────── DIDACTIC BOX ─────────────────────── */
+  .didactic-box {
+    background:linear-gradient(135deg, var(--navy) 0%, #0D1840 100%);
+    border-radius:14px; padding:28px 32px; margin-bottom:32px;
+    border-left:4px solid var(--gold);
+  }
+  .didactic-box .db-label {
+    font-size:9.5px; font-weight:700; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:8px;
+  }
+  .didactic-box .db-title {
+    font-family:'Playfair Display',serif;
+    font-size:18px; font-weight:700; color:var(--white); margin-bottom:10px;
+  }
+  .didactic-box .db-text {
+    font-size:13.5px; color:rgba(255,255,255,0.7); line-height:1.7;
+  }
+  .didactic-box .db-text strong { color:var(--gold-light); }
+
+  /* ─────────────────────── PART 1: ANÁLISIS COMERCIAL ─────────────────────── */
+
+  /* Market cards */
+  .market-grid {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:18px; margin-bottom:36px;
+  }
+  .market-card {
+    background:var(--white); border-radius:14px;
+    padding:26px; box-shadow:var(--shadow);
+    border-top:4px solid var(--gold);
+  }
+  .mc-icon { font-size:28px; margin-bottom:12px; }
+  .mc-title {
+    font-family:'Playfair Display',serif;
+    font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px;
+  }
+  .mc-text { font-size:12.5px; color:#6B7280; line-height:1.6; margin-bottom:14px; }
+  .mc-stat {
+    font-family:'Playfair Display',serif;
+    font-size:28px; font-weight:700; color:var(--gold); line-height:1;
+  }
+  .mc-stat-label {
+    font-size:10px; color:#9CA3AF; font-weight:600;
+    letter-spacing:1px; text-transform:uppercase; margin-top:3px;
+  }
+
+  /* Demand table */
+  .demand-table {
+    width:100%; border-collapse:collapse;
+    border-radius:14px; overflow:hidden;
+    box-shadow:var(--shadow); margin-bottom:36px;
+  }
+  .demand-table thead tr { background:var(--navy); }
+  .demand-table thead th {
+    padding:14px 18px; text-align:left;
+    font-size:10.5px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+  }
+  .demand-table tbody tr {
+    background:var(--white); border-bottom:1px solid var(--cream);
+  }
+  .demand-table tbody tr:nth-child(even) { background:#FAFAFA; }
+  .demand-table tbody td {
+    padding:13px 18px; font-size:12.5px; color:var(--charcoal);
+    vertical-align:middle; line-height:1.5;
+  }
+
+  /* Competition matrix */
+  .comp-grid {
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:18px; margin-bottom:36px;
+  }
+  .comp-card {
+    background:var(--white); border-radius:14px;
+    padding:24px; box-shadow:var(--shadow);
+  }
+  .comp-card-header {
+    display:flex; align-items:center; gap:12px; margin-bottom:14px;
+  }
+  .comp-badge {
+    font-size:10px; font-weight:700; padding:4px 12px;
+    border-radius:20px; letter-spacing:1px; text-transform:uppercase;
+  }
+  .badge-threat { background:#FEE2E2; color:#991B1B; }
+  .badge-opp   { background:#D1FAE5; color:#065F46; }
+  .comp-name {
+    font-size:14.5px; font-weight:700; color:var(--navy);
+  }
+  .comp-detail {
+    font-size:12px; color:#6B7280; line-height:1.6;
+  }
+  .comp-vs {
+    margin-top:12px; padding:10px 14px;
+    background:var(--cream); border-radius:8px;
+    font-size:12px; color:var(--navy); font-weight:600;
+    border-left:3px solid var(--gold);
+  }
+
+  /* Economic model */
+  .econ-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:16px; margin-bottom:36px;
+  }
+  .econ-card {
+    background:var(--white); border-radius:12px;
+    padding:22px; box-shadow:var(--shadow); text-align:center;
+  }
+  .econ-scenario {
+    font-size:10px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .econ-num {
+    font-family:'Playfair Display',serif;
+    font-size:36px; font-weight:700; line-height:1;
+  }
+  .econ-label {
+    font-size:11px; color:#9CA3AF; font-weight:500;
+    margin-top:4px; letter-spacing:0.5px;
+  }
+  .econ-detail {
+    margin-top:12px; font-size:11.5px; color:#6B7280; line-height:1.5;
+  }
+
+  /* ─────────────────────── PART 2: ROADMAP ─────────────────────── */
+
+  /* Phase cards */
+  .phases-wrapper { position:relative; margin-bottom:48px; }
+  .phases-line {
+    position:absolute; top:50px; left:50px;
+    right:50px; height:3px;
+    background:linear-gradient(90deg, var(--gold), var(--gold-light), rgba(184,146,61,0.3));
+    z-index:0;
+  }
+  .phases-row {
+    display:grid; grid-template-columns:repeat(5,1fr);
+    gap:16px; position:relative; z-index:1;
+  }
+  .phase-node {
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+  }
+  .phase-circle {
+    width:72px; height:72px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; margin-bottom:14px; flex-shrink:0;
+    border:3px solid var(--gold); background:var(--navy);
+    box-shadow:var(--shadow-gold);
+  }
+  .phase-num-tag {
+    font-size:9px; font-weight:800; letter-spacing:2px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:5px;
+  }
+  .phase-name {
+    font-size:13px; font-weight:700; color:var(--navy); margin-bottom:3px;
+    line-height:1.3;
+  }
+  .phase-time {
+    font-size:10.5px; color:#9CA3AF; font-weight:500;
+  }
+
+  /* Phase detail cards */
+  .phase-details {
+    display:grid; grid-template-columns:repeat(5,1fr);
+    gap:16px; margin-bottom:48px;
+  }
+  .phase-detail-card {
+    background:var(--white); border-radius:14px;
+    padding:22px 20px; box-shadow:var(--shadow);
+    border-top:3px solid var(--gold);
+  }
+  .pd-phase {
+    font-size:9px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:8px;
+  }
+  .pd-title {
+    font-size:14px; font-weight:700; color:var(--navy); margin-bottom:12px;
+  }
+  .pd-steps { list-style:none; }
+  .pd-step {
+    font-size:11.5px; color:var(--charcoal);
+    padding:6px 0; border-bottom:1px solid var(--cream);
+    display:flex; gap:8px; align-items:flex-start; line-height:1.4;
+  }
+  .pd-step:last-child { border-bottom:none; }
+  .pd-step-icon { color:var(--gold); font-size:11px; flex-shrink:0; margin-top:2px; }
+  .pd-kpi {
+    margin-top:14px; background:var(--cream); border-radius:8px;
+    padding:10px 12px;
+  }
+  .pd-kpi-label {
+    font-size:9px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:4px;
+  }
+  .pd-kpi-val {
+    font-size:13px; font-weight:700; color:var(--navy);
+  }
+
+  /* Week-by-week for Phase 0 */
+  .weeks-detail {
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:18px; margin-bottom:48px;
+  }
+  .week-card {
+    background:var(--white); border-radius:14px;
+    padding:24px; box-shadow:var(--shadow);
+    border-left:4px solid var(--gold);
+  }
+  .wc-week {
+    font-size:10px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+  }
+  .wc-title {
+    font-family:'Playfair Display',serif;
+    font-size:17px; font-weight:700; color:var(--navy); margin-bottom:12px;
+  }
+  .wc-tasks { list-style:none; }
+  .wc-task {
+    font-size:12.5px; color:var(--charcoal);
+    padding:7px 0; border-bottom:1px solid var(--cream);
+    display:flex; gap:10px; align-items:flex-start; line-height:1.45;
+  }
+  .wc-task:last-child { border-bottom:none; }
+  .task-check {
+    width:18px; height:18px; border-radius:4px;
+    background:var(--navy); display:flex; align-items:center;
+    justify-content:center; flex-shrink:0; margin-top:1px;
+    font-size:9px; color:var(--gold); font-weight:700;
+  }
+
+  /* Patient Journey */
+  .journey-steps {
+    display:grid; grid-template-columns:repeat(6,1fr);
+    gap:12px; margin-bottom:36px; position:relative;
+  }
+  .journey-steps::before {
+    content:''; position:absolute; top:38px; left:calc(8.33% + 10px);
+    right:calc(8.33% + 10px); height:2px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light));
+    z-index:0;
+  }
+  .journey-step {
+    text-align:center; position:relative; z-index:1;
+  }
+  .journey-icon {
+    width:60px; height:60px; border-radius:50%;
+    background:var(--navy); border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; margin:0 auto 10px;
+  }
+  .journey-label {
+    font-size:11px; font-weight:700; color:var(--navy); margin-bottom:3px;
+  }
+  .journey-sub { font-size:10px; color:#9CA3AF; line-height:1.4; }
+
+  /* ─────────────────────── PART 3: MEZCLA COMERCIAL ─────────────────────── */
+
+  /* 7P overview */
+  .p7-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:16px; margin-bottom:48px;
+  }
+  .p7-card {
+    background:var(--white); border-radius:14px;
+    padding:24px; box-shadow:var(--shadow); text-align:center;
+    transition:transform 0.15s, box-shadow 0.15s;
+  }
+  .p7-card:hover {
+    transform:translateY(-3px); box-shadow:var(--shadow-gold);
+  }
+  .p7-letter {
+    font-family:'Playfair Display',serif;
+    font-size:48px; font-weight:900; color:var(--navy);
+    line-height:1; margin-bottom:6px;
+  }
+  .p7-word {
+    font-size:13px; font-weight:700; color:var(--gold); margin-bottom:8px;
+    text-transform:uppercase; letter-spacing:1px;
+  }
+  .p7-desc { font-size:11.5px; color:#6B7280; line-height:1.5; }
+
+  /* P detail sections */
+  .p-section {
+    background:var(--white); border-radius:16px;
+    padding:32px 36px; box-shadow:var(--shadow);
+    margin-bottom:24px; border-left:5px solid var(--gold);
+  }
+  .ps-header {
+    display:flex; align-items:center; gap:16px; margin-bottom:20px;
+  }
+  .ps-letter-badge {
+    width:52px; height:52px; border-radius:10px;
+    background:var(--navy); display:flex; align-items:center;
+    justify-content:center; font-family:'Playfair Display',serif;
+    font-size:24px; font-weight:700; color:var(--gold); flex-shrink:0;
+  }
+  .ps-title {
+    font-family:'Playfair Display',serif;
+    font-size:22px; font-weight:700; color:var(--navy);
+  }
+  .ps-subtitle { font-size:12.5px; color:#9CA3AF; }
+  .ps-body { font-size:13px; color:var(--charcoal); line-height:1.7; }
+  .ps-body strong { color:var(--navy); }
+  .ps-grid {
+    display:grid; gap:12px; margin-top:18px;
+  }
+  .ps-grid-2 { grid-template-columns:repeat(2,1fr); }
+  .ps-grid-3 { grid-template-columns:repeat(3,1fr); }
+  .ps-item {
+    background:var(--cream); border-radius:10px;
+    padding:16px; border-left:3px solid var(--gold);
+  }
+  .psi-title { font-size:13px; font-weight:700; color:var(--navy); margin-bottom:5px; }
+  .psi-text  { font-size:12px; color:#6B7280; line-height:1.55; }
+  .psi-price {
+    font-family:'Playfair Display',serif;
+    font-size:24px; font-weight:700; color:var(--gold);
+    margin-bottom:2px;
+  }
+  .psi-price-label { font-size:10.5px; color:#9CA3AF; font-weight:500; }
+
+  /* Promotion channels visual */
+  .promo-channels {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:16px; margin-top:18px;
+  }
+  .promo-channel {
+    border-radius:12px; padding:20px;
+    border:1px solid var(--beige);
+  }
+  .promo-ch-header {
+    display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  }
+  .promo-ch-icon {
+    width:38px; height:38px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; flex-shrink:0;
+  }
+  .promo-ch-name { font-size:13.5px; font-weight:700; color:var(--navy); }
+  .promo-ch-role { font-size:10px; color:var(--gold); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+  .promo-ch-desc { font-size:11.5px; color:#6B7280; line-height:1.55; }
+
+  /* Pricing tiers */
+  .pricing-tiers {
+    display:grid; grid-template-columns:repeat(3,1fr);
+    gap:18px; margin-top:18px;
+  }
+  .tier-card {
+    border-radius:14px; padding:26px;
+    box-shadow:var(--shadow); text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .tier-card.featured {
+    background:var(--navy); color:var(--white);
+  }
+  .tier-card.standard { background:var(--white); }
+  .tier-label {
+    font-size:10px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .tier-card.featured .tier-label { color:var(--gold); }
+  .tier-card.standard .tier-label { color:#9CA3AF; }
+  .tier-name {
+    font-family:'Playfair Display',serif;
+    font-size:20px; font-weight:700; margin-bottom:6px;
+  }
+  .tier-card.featured .tier-name { color:var(--white); }
+  .tier-card.standard .tier-name { color:var(--navy); }
+  .tier-price {
+    font-family:'Playfair Display',serif;
+    font-size:44px; font-weight:900; line-height:1; margin-bottom:4px;
+  }
+  .tier-card.featured .tier-price { color:var(--gold); }
+  .tier-card.standard .tier-price { color:var(--navy); }
+  .tier-currency { font-size:13px; font-weight:500; }
+  .tier-period { font-size:11px; opacity:0.6; margin-bottom:16px; }
+  .tier-items { list-style:none; text-align:left; }
+  .tier-item {
+    font-size:12px; padding:6px 0;
+    border-bottom:1px solid;
+    display:flex; gap:8px;
+  }
+  .tier-card.featured .tier-item { border-color:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8); }
+  .tier-card.standard .tier-item { border-color:var(--cream); color:#6B7280; }
+  .tier-item:last-child { border-bottom:none; }
+  .tier-item::before { content:'✓'; color:var(--gold); font-weight:700; flex-shrink:0; }
+  .featured-badge {
+    position:absolute; top:14px; right:-22px;
+    background:var(--gold); color:var(--navy);
+    font-size:9px; font-weight:800; padding:5px 28px;
+    letter-spacing:1px; text-transform:uppercase;
+    transform:rotate(45deg); transform-origin:center;
+  }
+
+  /* Script WhatsApp */
+  .script-box {
+    background:var(--navy); border-radius:14px;
+    padding:28px 32px; margin-top:18px;
+  }
+  .script-title {
+    font-size:11px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:12px;
+  }
+  .script-bubble {
+    background:rgba(255,255,255,0.08); border-radius:12px 12px 12px 0;
+    padding:14px 18px; margin-bottom:10px; max-width:85%;
+  }
+  .script-bubble.right {
+    border-radius:12px 12px 0 12px;
+    margin-left:auto; background:rgba(184,146,61,0.2);
+  }
+  .script-sender {
+    font-size:9.5px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; margin-bottom:5px;
+  }
+  .script-bubble .script-sender { color:rgba(255,255,255,0.4); }
+  .script-bubble.right .script-sender { color:var(--gold); }
+  .script-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
+  .script-bubble.right .script-text { color:var(--gold-light); }
+
+  /* KPI dashboard */
+  .kpi-dashboard {
+    background:var(--navy); border-radius:16px;
+    padding:36px 40px; margin-bottom:48px;
+    box-shadow:var(--shadow-gold);
+  }
+  .kpi-dash-title {
+    font-family:'Playfair Display',serif;
+    font-size:24px; font-weight:700; color:var(--white); margin-bottom:5px;
+  }
+  .kpi-dash-sub {
+    font-size:12.5px; color:rgba(255,255,255,0.35);
+    margin-bottom:28px; letter-spacing:1px;
+  }
+  .kpi-dash-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  .kpi-item {
+    background:rgba(255,255,255,0.06);
+    border-radius:10px; padding:20px;
+    border:1px solid rgba(184,146,61,0.18);
+  }
+  .kpi-val {
+    font-family:'Playfair Display',serif;
+    font-size:34px; font-weight:700;
+    color:var(--gold); line-height:1; margin-bottom:4px;
+  }
+  .kpi-lbl { font-size:11px; color:rgba(255,255,255,0.55); font-weight:500; }
+  .kpi-note { font-size:10px; color:rgba(255,255,255,0.25); margin-top:4px; }
+
+  /* SWOT */
+  .swot-grid {
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:0; border-radius:14px; overflow:hidden;
+    box-shadow:var(--shadow); margin-bottom:48px;
+  }
+  .swot-cell { padding:28px 30px; }
+  .swot-cell.s { background:#F0FDF4; }
+  .swot-cell.w { background:#FEF2F2; }
+  .swot-cell.o { background:#EFF6FF; }
+  .swot-cell.t { background:#FFF7ED; }
+  .swot-letter {
+    font-family:'Playfair Display',serif;
+    font-size:42px; font-weight:900; line-height:1; margin-bottom:4px;
+  }
+  .swot-cell.s .swot-letter { color:#059669; }
+  .swot-cell.w .swot-letter { color:#DC2626; }
+  .swot-cell.o .swot-letter { color:#2563EB; }
+  .swot-cell.t .swot-letter { color:#EA580C; }
+  .swot-word {
+    font-size:11px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; margin-bottom:14px;
+  }
+  .swot-cell.s .swot-word { color:#059669; }
+  .swot-cell.w .swot-word { color:#DC2626; }
+  .swot-cell.o .swot-word { color:#2563EB; }
+  .swot-cell.t .swot-word { color:#EA580C; }
+  .swot-items { list-style:none; }
+  .swot-item {
+    font-size:12.5px; color:#374151;
+    padding:5px 0; border-bottom:1px dashed rgba(0,0,0,0.08);
+    display:flex; gap:8px; line-height:1.45;
+  }
+  .swot-item:last-child { border-bottom:none; }
+  .swot-item::before { content:'→'; font-weight:700; flex-shrink:0; }
+  .swot-cell.s .swot-item::before { color:#059669; }
+  .swot-cell.w .swot-item::before { color:#DC2626; }
+  .swot-cell.o .swot-item::before { color:#2563EB; }
+  .swot-cell.t .swot-item::before { color:#EA580C; }
+
+  /* ─────────────────────── FOOTER ─────────────────────── */
+  .page-footer {
+    background:var(--navy); padding:36px 64px; text-align:center;
+  }
+  .footer-logo {
+    font-family:'Playfair Display',serif;
+    font-size:20px; font-weight:700; color:var(--white); letter-spacing:1px; margin-bottom:6px;
+  }
+  .footer-logo span { color:var(--gold); }
+  .footer-sub { font-size:11.5px; color:rgba(255,255,255,0.35); }
+  .footer-tag { margin-top:10px; font-size:10px; color:rgba(255,255,255,0.15); letter-spacing:1px; }
+
+  /* util */
+  .tag-pill {
+    display:inline-block; font-size:10px; font-weight:700;
+    padding:3px 10px; border-radius:20px; letter-spacing:0.5px;
+  }
+  .tag-green  { background:var(--green-light); color:#065F46; }
+  .tag-red    { background:var(--red-light); color:#991B1B; }
+  .tag-blue   { background:var(--blue-light); color:#1E40AF; }
+  .tag-gold   { background:var(--gold-pale); color:#7A5C1A; }
+  .tag-navy   { background:var(--navy); color:var(--gold); }
+  .highlight-row { background:rgba(184,146,61,0.08) !important; }
+  .mt-24 { margin-top:24px; }
+  .mt-32 { margin-top:32px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════ HERO ════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Clínica Conquista · Alpha Strategy Group · Confidencial</div>
+    <h1 class="hero-title">Roadmap para <span>Pacientes Estadounidenses</span><br>en Neumología</h1>
+    <p class="hero-subtitle">Análisis comercial exhaustivo + Hoja de ruta de implementación + Propuesta de mezcla comercial completa para captar pacientes latinos y brasileños en Estados Unidos.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">🫁 Neumología</span>
+      <span class="hero-pill">🇺🇸 Mercado EUA</span>
+      <span class="hero-pill">🇧🇷 Diáspora Brasileña</span>
+      <span class="hero-pill">🌎 Comunidad Latina</span>
+      <span class="hero-pill">📱 Telemedicina</span>
+      <span class="hero-pill">✈️ Turismo Médico</span>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-stat"><div class="hero-stat-num">68M+</div><div class="hero-stat-label">Hispanos en EUA</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">1.6M</div><div class="hero-stat-label">Brasileños en EUA</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">$350</div><div class="hero-stat-label">Neumólogo sin seguro</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">5 meses</div><div class="hero-stat-label">Espera promedio EUA</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">48h</div><div class="hero-stat-label">Nuestra disponibilidad</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-index">
+  <div class="nav-inner">
+    <span class="nav-label">Ir a:</span>
+    <a class="nav-link" href="#analisis">I. Análisis Comercial</a>
+    <a class="nav-link" href="#roadmap">II. Roadmap</a>
+    <a class="nav-link" href="#mezcla">III. Mezcla Comercial</a>
+    <a class="nav-link" href="#kpis">IV. KPIs</a>
+    <a class="nav-link" href="#swot">V. FODA</a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ════════════════════════════════════════
+     PARTE I — ANÁLISIS COMERCIAL EXHAUSTIVO
+════════════════════════════════════════ -->
+<div id="analisis">
+  <div class="part-header">
+    <div class="part-num">I</div>
+    <div>
+      <div class="part-label">Análisis Comercial Exhaustivo</div>
+      <div class="part-title">¿Por qué vender Neumología a latinos en EUA?</div>
+      <div class="part-desc">Entender el mercado antes de invertir un solo dólar en publicidad.</div>
+    </div>
+  </div>
+
+  <!-- Didactic box -->
+  <div class="didactic-box">
+    <div class="db-label">¿Qué es un análisis comercial?</div>
+    <div class="db-title">Antes de vender, hay que entender el escenario</div>
+    <div class="db-text">
+      Un análisis comercial responde tres preguntas fundamentales: <strong>¿Existe un mercado real?</strong> (demanda), <strong>¿quién más lo está atendiendo?</strong> (competencia) y <strong>¿cuánto dinero se puede generar?</strong> (modelo económico). Sin este análisis, cualquier inversión en marketing es un disparo a ciegas. Con él, cada decisión tiene base y justificación.
+    </div>
+  </div>
+
+  <!-- 1.1 Tamaño del mercado -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;">1.1 — Tamaño del Mercado y Oportunidad</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Los números que justifican la estrategia</p>
+
+  <div class="market-grid">
+    <div class="market-card">
+      <div class="mc-icon">🌎</div>
+      <div class="mc-title">Población Latina en EUA</div>
+      <div class="mc-text">Los latinos son el grupo étnico de mayor crecimiento en EUA. Más de 1 de cada 5 estadounidenses es de origen latino o hispano, con alta concentración en Florida, Texas, California y Nueva York — los estados con más brasileños.</div>
+      <div class="mc-stat">68.4M</div>
+      <div class="mc-stat-label">Hispanos residentes en EUA (2024)</div>
+    </div>
+    <div class="market-card">
+      <div class="mc-icon">🇧🇷</div>
+      <div class="mc-title">Comunidad Brasileña</div>
+      <div class="mc-text">La comunidad brasileña se concentra principalmente en Florida (Miami, Orlando), Massachusetts (Boston), Nueva Jersey (Newark) y Nueva York. Muchos viajan a Brasil anualmente — oportunidad de turismo médico combinado.</div>
+      <div class="mc-stat">1.6M</div>
+      <div class="mc-stat-label">Brasileños estimados en EUA</div>
+    </div>
+    <div class="market-card">
+      <div class="mc-icon">🫁</div>
+      <div class="mc-title">Prevalencia Respiratoria</div>
+      <div class="mc-text">Asma, DPOC, rinitis alérgica y secuelas de COVID-19 son altamente prevalentes en la comunidad latina en EUA. Factores como trabajo en construcción, limpieza y gastronomía aumentan la exposición a irritantes pulmonares.</div>
+      <div class="mc-stat">1 de 3</div>
+      <div class="mc-stat-label">Latinos con condición respiratoria sin diagnosticar</div>
+    </div>
+    <div class="market-card">
+      <div class="mc-icon">💸</div>
+      <div class="mc-title">Costo vs. Acceso</div>
+      <div class="mc-text">Una consulta con neumólogo en EUA cuesta entre $300 y $600 sin seguro. Muchos latinos trabajan de forma informal o tienen seguros con deducibles altos de $3,000+, lo que significa que pagan de bolsillo hasta cubrir ese umbral.</div>
+      <div class="mc-stat">$350–600</div>
+      <div class="mc-stat-label">Costo consulta neumólogo EUA sin seguro</div>
+    </div>
+    <div class="market-card">
+      <div class="mc-icon">⏳</div>
+      <div class="mc-title">Tiempo de Espera</div>
+      <div class="mc-text">El tiempo promedio para conseguir una cita con especialista pulmonar en EUA es de 3 a 6 meses en ciudades grandes. Esto genera frustración, deterioro de la condición y disposición a buscar alternativas — incluyendo telemedicina internacional.</div>
+      <div class="mc-stat">3–6 meses</div>
+      <div class="mc-stat-label">Espera promedio para neumólogo en EUA</div>
+    </div>
+    <div class="market-card">
+      <div class="mc-icon">📱</div>
+      <div class="mc-title">Adopción de Telemedicina</div>
+      <div class="mc-text">Post-COVID, la telemedicina es ampliamente aceptada. El 78% de los pacientes que usaron teleconsulta durante la pandemia están dispuestos a usarla nuevamente. Para la comunidad latina, la preferencia por médico hispanohablante aumenta aún más esta disposición.</div>
+      <div class="mc-stat">78%</div>
+      <div class="mc-stat-label">Pacientes dispuestos a teleconsulta post-COVID</div>
+    </div>
+  </div>
+
+  <!-- 1.2 Análisis de demanda -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:32px 0 8px;">1.2 — Análisis de Demanda: Lo que el mercado busca</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Condiciones neumológicas de mayor prevalencia y búsqueda entre latinos en EUA</p>
+
+  <div class="didactic-box" style="margin-bottom:20px;">
+    <div class="db-label">¿Por qué esto importa?</div>
+    <div class="db-title">El contenido que creas debe hablar del problema que el paciente ya tiene</div>
+    <div class="db-text">La gente no busca "neumólogo" — busca <strong>"por qué me falta el aire"</strong>, <strong>"tos que no se cura"</strong> o <strong>"secuelas de COVID respiratorio"</strong>. Si la clínica aparece en esas búsquedas, el paciente llega con el problema ya reconocido y listo para agendar.</div>
+  </div>
+
+  <table class="demand-table">
+    <thead>
+      <tr>
+        <th>Condición</th>
+        <th>Prevalencia en latinos EUA</th>
+        <th>Síntoma que dispara la búsqueda</th>
+        <th>Intención</th>
+        <th>Contenido recomendado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight-row">
+        <td><strong>Secuela de COVID-19</strong><br><span style="font-size:11px;color:#9CA3AF;">Long COVID respiratorio</span></td>
+        <td><span class="tag-pill tag-red">Alta — 1 de cada 4 infectados</span></td>
+        <td>Falta de aire persistente, fatiga, tos crónica</td>
+        <td><span class="tag-pill tag-green">Urgente</span></td>
+        <td>Reels/TikTok: "¿Tuviste COVID y aún tienes falta de aire?"</td>
+      </tr>
+      <tr>
+        <td><strong>Asma</strong><br><span style="font-size:11px;color:#9CA3AF;">Asma ocupacional y alérgica</span></td>
+        <td><span class="tag-pill tag-red">Alta — 14% latinos vs 8% media nacional</span></td>
+        <td>Silbidos al respirar, tos nocturna, pecho apretado</td>
+        <td><span class="tag-pill tag-green">Alta</span></td>
+        <td>Carrusel: "5 señales de que tienes asma sin saberlo"</td>
+      </tr>
+      <tr>
+        <td><strong>DPOC / Enfisema</strong><br><span style="font-size:11px;color:#9CA3AF;">Enfermedad pulmonar obstructiva</span></td>
+        <td><span class="tag-pill tag-gold">Media — mayor en fumadores 40+</span></td>
+        <td>Dificultad para respirar al hacer esfuerzo</td>
+        <td><span class="tag-pill tag-blue">Media</span></td>
+        <td>Post educativo: "¿Qué es la espirometría y cuándo hacerla?"</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><strong>Rinitis / Sinusitis crónica</strong><br><span style="font-size:11px;color:#9CA3AF;">Alta prevalencia en inmigrantes</span></td>
+        <td><span class="tag-pill tag-gold">Media-alta — cambio climático y alergias</span></td>
+        <td>Congestión crónica, ronquidos, falta de sueño</td>
+        <td><span class="tag-pill tag-blue">Media</span></td>
+        <td>Video: "¿Por qué los inmigrantes tienen más alergias en EUA?"</td>
+      </tr>
+      <tr>
+        <td><strong>Apnea del sueño</strong><br><span style="font-size:11px;color:#9CA3AF;">Subdiagnosticada en latinos</span></td>
+        <td><span class="tag-pill tag-gold">Alta — prevalencia 30%+ en obesos</span></td>
+        <td>Ronquidos fuertes, cansancio extremo, somnolencia</td>
+        <td><span class="tag-pill tag-green">Alta — pareja lo nota</span></td>
+        <td>Reels: "¿Tu pareja dice que dejas de respirar en la noche?"</td>
+      </tr>
+      <tr>
+        <td><strong>Neumonía recurrente</strong><br><span style="font-size:11px;color:#9CA3AF;">Post-COVID e inmunosuprimidos</span></td>
+        <td><span class="tag-pill tag-red">Alta en mayores de 50</span></td>
+        <td>Fiebre, tos con flema, dificultad al respirar</td>
+        <td><span class="tag-pill tag-green">Urgente</span></td>
+        <td>Post: "Cuándo una tos es señal de neumonía — no esperes"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 1.3 Análisis de competencia -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:32px 0 8px;">1.3 — Análisis de Competencia</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">¿Contra qué compite Clínica Conquista en la mente del paciente latino en EUA?</p>
+
+  <div class="didactic-box" style="margin-bottom:20px;">
+    <div class="db-label">Concepto clave</div>
+    <div class="db-title">La competencia no es solo otra clínica — es también la inacción del paciente</div>
+    <div class="db-text">El mayor competidor no es otra clínica en Brasil. Es la <strong>postergación</strong>: el paciente que dice "ya me voy a atender después". El segundo competidor es la <strong>automedicación</strong>. Y el tercero son las <strong>clínicas comunitarias gratuitas</strong> que existen en EUA pero no tienen neumólogo disponible rápido. Conquistar el mercado requiere ganarle a los tres.</div>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <span class="comp-badge badge-threat">Competidor directo</span>
+      </div>
+      <div class="comp-name">🏥 Clínicas comunitarias en EUA (FQHCs)</div>
+      <div class="comp-detail">Son centros de salud federales que atienden a personas sin seguro a bajo costo o gratis. Tienen neumólogos en algunos casos, pero la espera puede ser de meses y la atención es masificada — sin enfoque en idioma ni calidez cultural.</div>
+      <div class="comp-vs">▶ Nuestra ventaja: consulta en 48h, en tu idioma, con atención personalizada.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <span class="comp-badge badge-threat">Competidor indirecto</span>
+      </div>
+      <div class="comp-name">💊 Automedicación y remedios caseros</div>
+      <div class="comp-detail">Muchos latinos en EUA recurren a inhaladores sin receta (comprados en México o Brasil), remedios de herbolaria o simplemente ignoran los síntomas. Esto es un competidor silencioso que hay que combatir con educación médica.</div>
+      <div class="comp-vs">▶ Nuestra ventaja: contenido educativo que muestra las consecuencias de no diagnosticar.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <span class="comp-badge badge-threat">Competidor emergente</span>
+      </div>
+      <div class="comp-name">🌐 Plataformas de telemedicina globales</div>
+      <div class="comp-detail">Plataformas como Teladoc, MDLive o Conexa Saúde ofrecen teleconsultas. Sin embargo, no se especializan en comunidades latinas/brasileñas, no tienen neumólogos disponibles inmediatamente y cobran en dólares con planes de suscripción complejos.</div>
+      <div class="comp-vs">▶ Nuestra ventaja: especialización cultural, idioma, precio en reales y relación directa por WhatsApp.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-header">
+        <span class="comp-badge badge-opp">Oportunidad</span>
+      </div>
+      <div class="comp-name">✅ Espacio no ocupado: neumólogo PT/ES en Brasil vía telemedicina</div>
+      <div class="comp-detail">Actualmente no existe en Brasil una clínica con presencia digital activa en EUA que ofrezca teleconsultas de neumología en portugués/español con agendamiento por WhatsApp y precio accesible. Este espacio está completamente vacío.</div>
+      <div class="comp-vs">▶ Clínica Conquista puede ser la primera en ocupar este posicionamiento. First-mover advantage.</div>
+    </div>
+  </div>
+
+  <!-- 1.4 Modelo económico -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:32px 0 8px;">1.4 — Modelo Económico: ¿Cuánto puede generar esto?</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Proyección de ingresos por escenario — conservative, realista y optimista</p>
+
+  <div class="didactic-box" style="margin-bottom:20px;">
+    <div class="db-label">Cómo leer estos números</div>
+    <div class="db-title">Proyección basada en precio, volumen y ticket promedio</div>
+    <div class="db-text">Los cálculos asumen un precio de teleconsulta de <strong>R$250 (aprox. $50 USD)</strong> — precio que representa un 85% de descuento frente al neumólogo en EUA pero un margen saludable para la clínica. Con el Programa Saúde Vida Sudoeste, hay opciones desde R$150. El ticket puede crecer con paquetes que incluyan espirometría + retorno.</div>
+  </div>
+
+  <div class="econ-grid">
+    <div class="econ-card" style="border-top:3px solid #9CA3AF;">
+      <div class="econ-scenario" style="color:#9CA3AF;">Base / Mes 1–2</div>
+      <div class="econ-num" style="color:#374151;">5</div>
+      <div class="econ-label">Teleconsultas / mes</div>
+      <div class="econ-detail">
+        <strong>Ingreso:</strong> R$1.250/mes<br>
+        <strong>Perfil:</strong> Solo orgánico, sin ads<br>
+        <strong>Foco:</strong> Validar el proceso<br>
+        <strong>CAC:</strong> R$0 (orgánico)
+      </div>
+    </div>
+    <div class="econ-card" style="border-top:3px solid #3B82F6;">
+      <div class="econ-scenario" style="color:#3B82F6;">Conservador / Mes 3</div>
+      <div class="econ-num" style="color:#1D4ED8;">15</div>
+      <div class="econ-label">Teleconsultas / mes</div>
+      <div class="econ-detail">
+        <strong>Ingreso:</strong> R$3.750/mes<br>
+        <strong>Perfil:</strong> Orgánico + pequeños ads<br>
+        <strong>Inversión ads:</strong> R$500/mes<br>
+        <strong>CAC:</strong> ~R$33
+      </div>
+    </div>
+    <div class="econ-card" style="border-top:3px solid var(--gold);">
+      <div class="econ-scenario" style="color:var(--gold);">Realista / Mes 4–6</div>
+      <div class="econ-num" style="color:var(--gold);">30</div>
+      <div class="econ-label">Teleconsultas / mes</div>
+      <div class="econ-detail">
+        <strong>Ingreso:</strong> R$7.500/mes<br>
+        <strong>Perfil:</strong> Ads activos + referidos<br>
+        <strong>Inversión ads:</strong> R$1.500/mes<br>
+        <strong>CAC:</strong> ~R$50
+      </div>
+    </div>
+    <div class="econ-card" style="border-top:3px solid var(--green);">
+      <div class="econ-scenario" style="color:var(--green);">Optimista / Mes 9–12</div>
+      <div class="econ-num" style="color:var(--green);">60</div>
+      <div class="econ-label">Teleconsultas / mes</div>
+      <div class="econ-detail">
+        <strong>Ingreso:</strong> R$15.000/mes<br>
+        <strong>Perfil:</strong> Canal establecido + boca a boca<br>
+        <strong>Inversión ads:</strong> R$3.000/mes<br>
+        <strong>CAC:</strong> ~R$50
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--white);border-radius:14px;padding:24px 28px;box-shadow:var(--shadow);border-left:5px solid var(--green);margin-bottom:32px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">💡 Nota estratégica</div>
+    <div style="font-size:13px;color:var(--charcoal);line-height:1.65;">
+      Estos números son solo de teleconsultas de neumología al mercado EUA. <strong>No incluyen</strong> el revenue de pacientes que vienen presencialmente durante viajes a Brasil (turismo médico), ni el efecto multiplicador de pacientes que recomiendan la clínica a su red de compatriotas. El boca a boca en comunidades de diáspora es extremadamente poderoso — un solo paciente satisfecho puede traer 5 a 10 referidos en el primer año.
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════════════════════════════════
+     PARTE II — ROADMAP
+════════════════════════════════ -->
+<div id="roadmap">
+  <div class="part-header">
+    <div class="part-num">II</div>
+    <div>
+      <div class="part-label">Hoja de Ruta — Roadmap</div>
+      <div class="part-title">De cero a 60 pacientes/mes en 12 meses</div>
+      <div class="part-desc">Cada fase tiene objetivos claros, tareas concretas y métricas de éxito medibles.</div>
+    </div>
+  </div>
+
+  <div class="didactic-box">
+    <div class="db-label">¿Qué es un roadmap?</div>
+    <div class="db-title">Un mapa del camino, no una lista de deseos</div>
+    <div class="db-text">
+      Un roadmap divide un objetivo ambicioso en fases ejecutables. Cada fase tiene un propósito diferente: la primera construye la <strong>base técnica</strong>, la segunda genera <strong>presencia orgánica</strong>, la tercera activa <strong>tráfico pago</strong>, la cuarta <strong>escala</strong> y la quinta <strong>consolida</strong>. Saltarse una fase es como construir el piso 10 sin haber puesto los cimientos. <strong>El orden importa.</strong>
+    </div>
+  </div>
+
+  <!-- Visual timeline -->
+  <div class="phases-wrapper">
+    <div class="phases-line"></div>
+    <div class="phases-row">
+      <div class="phase-node">
+        <div class="phase-circle">🏗️</div>
+        <div class="phase-num-tag">Fase 0</div>
+        <div class="phase-name">Fundación</div>
+        <div class="phase-time">Semanas 1–2</div>
+      </div>
+      <div class="phase-node">
+        <div class="phase-circle">🌱</div>
+        <div class="phase-num-tag">Fase 1</div>
+        <div class="phase-name">Activación Orgánica</div>
+        <div class="phase-time">Mes 1–2</div>
+      </div>
+      <div class="phase-node">
+        <div class="phase-circle">🚀</div>
+        <div class="phase-num-tag">Fase 2</div>
+        <div class="phase-name">Tráfico Pago</div>
+        <div class="phase-time">Mes 2–3</div>
+      </div>
+      <div class="phase-node">
+        <div class="phase-circle">⚡</div>
+        <div class="phase-num-tag">Fase 3</div>
+        <div class="phase-name">Escala</div>
+        <div class="phase-time">Mes 4–6</div>
+      </div>
+      <div class="phase-node">
+        <div class="phase-circle">🏆</div>
+        <div class="phase-num-tag">Fase 4</div>
+        <div class="phase-name">Consolidación</div>
+        <div class="phase-time">Mes 7–12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase detail cards -->
+  <div class="phase-details">
+    <div class="phase-detail-card">
+      <div class="pd-phase">Fase 0 · Semanas 1–2</div>
+      <div class="pd-title">🏗️ Fundación</div>
+      <ul class="pd-steps">
+        <li class="pd-step"><span class="pd-step-icon">→</span>Configurar WhatsApp Business bilingüe (PT + ES)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Crear landing page dedicada para pacientes en el exterior</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Definir forma de pago internacional (Wise / PayPal)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Establecer protocolo de teleconsulta (plataforma, horarios)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Optimizar perfil de Instagram en PT + ES</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Registrar en Google Meu Negócio con "Teleconsulta disponível"</li>
+      </ul>
+      <div class="pd-kpi">
+        <div class="pd-kpi-label">Meta de fase</div>
+        <div class="pd-kpi-val">Infraestructura 100% lista</div>
+      </div>
+    </div>
+    <div class="phase-detail-card">
+      <div class="pd-phase">Fase 1 · Mes 1–2</div>
+      <div class="pd-title">🌱 Orgánico</div>
+      <ul class="pd-steps">
+        <li class="pd-step"><span class="pd-step-icon">→</span>Publicar 3x/semana en IG y Facebook en PT y ES</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Entrar en grupos de brasileños en Miami, Orlando, Newark</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Contactar igrejas brasileiras en Florida y NJ</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Publicar 4 Reels educativos sobre neumología</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Primer TikTok en espanhol: "¿Por qué tienes más alergias en EUA?"</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Colectar primeros 3 testimonios de pacientes</li>
+      </ul>
+      <div class="pd-kpi">
+        <div class="pd-kpi-label">Meta de fase</div>
+        <div class="pd-kpi-val">5 primeras teleconsultas</div>
+      </div>
+    </div>
+    <div class="phase-detail-card">
+      <div class="pd-phase">Fase 2 · Mes 2–3</div>
+      <div class="pd-title">🚀 Tráfico Pago</div>
+      <ul class="pd-steps">
+        <li class="pd-step"><span class="pd-step-icon">→</span>Meta Ads: segmentar por idioma PT/ES en ciudades clave</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Google Ads: keywords de alta intención en PT y ES</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Retargeting para visitantes de landing page</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Test A/B de 3 creativos diferentes en Meta</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Presupuesto inicial: R$800–1.200/mes en ads</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Medir CPL (costo por lead) por canal</li>
+      </ul>
+      <div class="pd-kpi">
+        <div class="pd-kpi-label">Meta de fase</div>
+        <div class="pd-kpi-val">15 teleconsultas/mes</div>
+      </div>
+    </div>
+    <div class="phase-detail-card">
+      <div class="pd-phase">Fase 3 · Mes 4–6</div>
+      <div class="pd-title">⚡ Escala</div>
+      <ul class="pd-steps">
+        <li class="pd-step"><span class="pd-step-icon">→</span>Escalar creativos ganadores (2-3x presupuesto)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Activar programa de referidos: paciente recomienda y gana descuento</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Alianza con 2 micro-influencers latinos en salud (5K–50K)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Lanzar paquete premium: consulta + espirometria presencial</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Activar turismo médico: "Agenda antes de viajar a Brasil"</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Primer newsletter para pacientes del exterior (WhatsApp broadcast)</li>
+      </ul>
+      <div class="pd-kpi">
+        <div class="pd-kpi-label">Meta de fase</div>
+        <div class="pd-kpi-val">30 teleconsultas/mes</div>
+      </div>
+    </div>
+    <div class="phase-detail-card">
+      <div class="pd-phase">Fase 4 · Mes 7–12</div>
+      <div class="pd-title">🏆 Consolidación</div>
+      <ul class="pd-steps">
+        <li class="pd-step"><span class="pd-step-icon">→</span>Sistematizar proceso de atención para volumen alto</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Segundo neumólogo para ampliar horarios disponibles</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Lanzar canal de YouTube en PT: neumología educativa</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Crear comunidad cerrada de pacientes (WhatsApp o Telegram)</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Medir NPS mensual — objetivo: 70+</li>
+        <li class="pd-step"><span class="pd-step-icon">→</span>Expandir a otras especialidades con modelo probado</li>
+      </ul>
+      <div class="pd-kpi">
+        <div class="pd-kpi-label">Meta de fase</div>
+        <div class="pd-kpi-val">60 teleconsultas/mes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fase 0 detallada semana a semana -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;">Fase 0 detallada — Semana a Semana</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Las primeras dos semanas son las más críticas. Sin esta base, todo lo demás falla.</p>
+
+  <div class="weeks-detail">
+    <div class="week-card">
+      <div class="wc-week">Semana 1 — Infraestructura Digital</div>
+      <div class="wc-title">Construir la base técnica</div>
+      <ul class="wc-tasks">
+        <li class="wc-task"><div class="task-check">1</div>Crear número de WhatsApp exclusivo para pacientes en el exterior. Horario de atención en zona horaria EST (Miami, Nueva York)</li>
+        <li class="wc-task"><div class="task-check">2</div>Configurar mensajes automáticos en PT y ES: bienvenida, horarios, cómo agendar y preguntas frecuentes</li>
+        <li class="wc-task"><div class="task-check">3</div>Crear una landing page simple con: qué es la teleconsulta, cómo funciona, precio, botón de WhatsApp y formulario básico</li>
+        <li class="wc-task"><div class="task-check">4</div>Definir plataforma de videollamada: Google Meet (gratis y confiable), Zoom o plataforma de telemedicina certificada</li>
+        <li class="wc-task"><div class="task-check">5</div>Abrir cuenta en Wise.com para recibir pagos internacionales sin perder dinero en conversión de moneda</li>
+      </ul>
+    </div>
+    <div class="week-card">
+      <div class="wc-week">Semana 2 — Procesos y Presencia</div>
+      <div class="wc-title">Sistematizar y aparecer online</div>
+      <ul class="wc-tasks">
+        <li class="wc-task"><div class="task-check">1</div>Crear protocolo escrito de teleconsulta: qué pasa antes, durante y después de la consulta (confirmación, link, laudo, seguimiento)</li>
+        <li class="wc-task"><div class="task-check">2</div>Optimizar Instagram: bio en PT + ES, foto de perfil, destaque "Teleconsulta", link directo a WhatsApp</li>
+        <li class="wc-task"><div class="task-check">3</div>Actualizar Google Meu Negócio: agregar categoría "Telemedicina disponível", horarios, fotos y descripción mencionando atención al exterior</li>
+        <li class="wc-task"><div class="task-check">4</div>Preparar 4 primeros posts y 2 primeros Reels para la semana de lanzamiento</li>
+        <li class="wc-task"><div class="task-check">5</div>Crear script de atención para WhatsApp — respuestas estándar en PT y ES para el equipo</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Journey del paciente -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;">Jornada del Paciente — De la duda al diagnóstico</h3>
+  <p style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Mapa visual de cómo el paciente latino en EUA llega a agendar con la Clínica Conquista</p>
+
+  <div class="journey-steps">
+    <div class="journey-step">
+      <div class="journey-icon">🤔</div>
+      <div class="journey-label">Reconoce síntoma</div>
+      <div class="journey-sub">Falta de aire, tos, fatiga post-COVID</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-icon">🔍</div>
+      <div class="journey-label">Busca en Google / IG</div>
+      <div class="journey-sub">"neumólogo en español" / "tos que no cura"</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-icon">👀</div>
+      <div class="journey-label">Descubre la clínica</div>
+      <div class="journey-sub">Reels, post, anuncio o grupo de Facebook</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-icon">💡</div>
+      <div class="journey-label">Entiende la propuesta</div>
+      <div class="journey-sub">Precio, idioma, disponibilidad en 48h</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-icon">📲</div>
+      <div class="journey-label">Contacta por WhatsApp</div>
+      <div class="journey-sub">Respuesta rápida en PT/ES, proceso claro</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-icon">✅</div>
+      <div class="journey-label">Agenda y paga</div>
+      <div class="journey-sub">Wise / PayPal / Pix — simple y seguro</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════════════════════════════════
+     PARTE III — MEZCLA COMERCIAL
+════════════════════════════════ -->
+<div id="mezcla">
+  <div class="part-header">
+    <div class="part-num">III</div>
+    <div>
+      <div class="part-label">Propuesta de Mezcla Comercial</div>
+      <div class="part-title">Las 7 P's del Marketing de Servicios</div>
+      <div class="part-desc">Cómo estructurar cada elemento del negocio para maximizar captación y retención de pacientes en EUA.</div>
+    </div>
+  </div>
+
+  <div class="didactic-box">
+    <div class="db-label">¿Qué son las 7 P's?</div>
+    <div class="db-title">El marketing de servicios va más allá del producto y el precio</div>
+    <div class="db-text">
+      El modelo clásico de marketing tiene 4 P's (Producto, Precio, Plaza, Promoción). Pero para servicios de salud, se agregan 3 más: <strong>Personas</strong> (quiénes atienden), <strong>Procesos</strong> (cómo se atiende) y <strong>Evidencia Física</strong> (qué pruebas visibles de calidad existen). Las 7 juntas construyen una propuesta de valor completa e irrefutable para el paciente.
+    </div>
+  </div>
+
+  <!-- Overview 7P cards -->
+  <div class="p7-grid">
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Producto</div><div class="p7-desc">La teleconsulta de neumología y los paquetes complementarios que se ofrecen</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Precio</div><div class="p7-desc">Estrategia de precios accesibles frente al mercado americano con tiers claros</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Plaza</div><div class="p7-desc">Canales de distribución: telemedicina + presencial en visita al Brasil</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Promoción</div><div class="p7-desc">Cómo y dónde comunicar la propuesta de valor a la diáspora latina</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Personas</div><div class="p7-desc">El equipo médico y de atención — idioma, calidez cultural y credenciales</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Procesos</div><div class="p7-desc">El flujo completo desde el primer contacto hasta el laudo final</div></div>
+    <div class="p7-card"><div class="p7-letter">P</div><div class="p7-word">Evidencia Física</div><div class="p7-desc">Señales de confianza: CRM visible, reseñas, fotos, certificados</div></div>
+  </div>
+
+  <!-- P1: Producto -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P1</div>
+      <div>
+        <div class="ps-title">Producto — La Oferta de Neumología</div>
+        <div class="ps-subtitle">Qué se vende exactamente y cómo se empaqueta</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      El <strong>producto principal</strong> es la teleconsulta de neumología por videoconferencia, en portugués o español, con neumólogo registrado en el CRM. Pero vender solo la consulta es dejar dinero sobre la mesa. La estrategia de producto incluye <strong>tres niveles</strong>:
+    </div>
+    <div class="ps-grid ps-grid-3">
+      <div class="ps-item">
+        <div class="psi-title">🎯 Consulta Online Básica</div>
+        <div class="psi-text">Videoconsulta de 30–40 min con neumólogo. Anamnesis completa, orientación diagnóstica, indicación de exámenes, orientación de tratamiento. Laudo por escrito vía WhatsApp en 24h.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">⭐ Paquete Seguimiento</div>
+        <div class="psi-text">Consulta inicial + 2 retornos (ideal para pacientes crónicos: asma, DPOC, post-COVID). El retorno puede ser más breve y con descuento. Genera recurrencia — el paciente no busca otro médico.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">✈️ Paquete Turismo Médico</div>
+        <div class="psi-text">Para el paciente que viene a Brasil: consulta presencial + espirometría + exámenes complementarios en el mismo día. Solución completa. Ideal para diagnósticos que requieren examen físico.</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:14px 18px;background:var(--cream);border-radius:10px;border-left:3px solid var(--navy);">
+      <strong style="font-size:12px;color:var(--navy);">💡 Diferencial de producto:</strong>
+      <span style="font-size:12.5px;color:#6B7280;"> El laudo enviado por WhatsApp en 24h y la posibilidad de retorno por mensaje para dudas menores son detalles que el paciente en EUA valora enormemente — cosas que no obtiene ni pagando $350 en EUA.</span>
+    </div>
+  </div>
+
+  <!-- P2: Precio -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P2</div>
+      <div>
+        <div class="ps-title">Precio — Estrategia de Precios</div>
+        <div class="ps-subtitle">Cómo fijar precios que atraigan al mercado externo sin devaluar el servicio</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      La estrategia de precios tiene que lograr dos cosas simultáneamente: <strong>parecer extraordinariamente barata frente al neumólogo en EUA</strong> (lo es — en dólares) y <strong>ser sostenible y digna para la clínica</strong> (en reales, el precio es competitivo y justo). El secreto está en comunicar el precio en reales pero mostrar la equivalencia en dólares para que el paciente vea el valor.
+    </div>
+    <div class="pricing-tiers">
+      <div class="tier-card standard">
+        <div class="tier-label">Acceso</div>
+        <div class="tier-name">Consulta Simple</div>
+        <div class="tier-price">R$200<span class="tier-currency"></span></div>
+        <div class="tier-period">≈ $40 USD · única</div>
+        <ul class="tier-items">
+          <li class="tier-item">Teleconsulta 30 min</li>
+          <li class="tier-item">Laudo por WhatsApp</li>
+          <li class="tier-item">Indicación de exámenes</li>
+          <li class="tier-item">Prescripción si necesaria</li>
+        </ul>
+      </div>
+      <div class="tier-card featured">
+        <div class="featured-badge">Popular</div>
+        <div class="tier-label">Más elegido</div>
+        <div class="tier-name">Paquete Seguimiento</div>
+        <div class="tier-price">R$480<span class="tier-currency"></span></div>
+        <div class="tier-period">≈ $96 USD · 3 consultas</div>
+        <ul class="tier-items">
+          <li class="tier-item">Consulta inicial completa</li>
+          <li class="tier-item">2 retornos de seguimiento</li>
+          <li class="tier-item">Laudo + evolución clínica</li>
+          <li class="tier-item">Dúvidas por WhatsApp entre citas</li>
+          <li class="tier-item">Ahorro de R$120 vs individual</li>
+        </ul>
+      </div>
+      <div class="tier-card standard">
+        <div class="tier-label">Premium</div>
+        <div class="tier-name">Turismo Médico</div>
+        <div class="tier-price">R$650<span class="tier-currency"></span></div>
+        <div class="tier-period">≈ $130 USD · presencial</div>
+        <ul class="tier-items">
+          <li class="tier-item">Consulta presencial completa</li>
+          <li class="tier-item">Espirometría incluida</li>
+          <li class="tier-item">Examen físico pulmonar</li>
+          <li class="tier-item">Laudo y plan terapéutico</li>
+          <li class="tier-item">Seguimiento por teleconsulta</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:14px 18px;background:#F0FDF4;border-radius:10px;border-left:3px solid var(--green);">
+      <strong style="font-size:12px;color:var(--green);">📌 Argumento de precio para los anuncios:</strong>
+      <span style="font-size:12.5px;color:#374151;"> "El mismo especialista que en EUA te cobraría $350 — aquí, por $40. En tu idioma. En 48 horas."</span>
+    </div>
+  </div>
+
+  <!-- P3: Plaza -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P3</div>
+      <div>
+        <div class="ps-title">Plaza — Distribución y Acceso</div>
+        <div class="ps-subtitle">Cómo y dónde el paciente accede al servicio desde EUA</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      En servicios médicos para el exterior, "plaza" significa <strong>todos los puntos de contacto</strong> donde el paciente puede encontrar, contactar y acceder al servicio. Hay dos modalidades principales: telemedicina (acceso remoto desde cualquier estado de EUA) y presencial (cuando el paciente visita Brasil).
+    </div>
+    <div class="ps-grid ps-grid-2">
+      <div class="ps-item">
+        <div class="psi-title">📱 Canal Principal — WhatsApp</div>
+        <div class="psi-text">El agendamiento, confirmación, pago y entrega del laudo ocurren por WhatsApp. Es el canal donde la comunidad brasileña y latina ya opera diariamente. Número exclusivo para EUA, con horario de atención en Eastern Time.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">🖥️ Canal Secundario — Landing Page</div>
+        <div class="psi-text">Página dedicada para pacientes en el exterior, en PT y ES, con información sobre teleconsulta, precios, cómo funciona el proceso y botón de WhatsApp. Recibe tráfico de Google Ads y redes sociales.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">📹 Plataforma de Videollamada</div>
+        <div class="psi-text">Google Meet o Whereby (ambas no requieren descarga). El link se envía por WhatsApp 30 minutos antes de la consulta. El paciente solo necesita un teléfono con cámara y conexión a internet.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">✈️ Acceso Presencial — Turismo Médico</div>
+        <div class="psi-text">Para los pacientes que viajan a Brasil, la clínica ofrece consulta presencial con espirometría y exámenes en el mismo día. El agendamiento se hace con semanas de anticipación, antes de que el paciente viaje.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Promoción -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P4</div>
+      <div>
+        <div class="ps-title">Promoción — Comunicación y Captación</div>
+        <div class="ps-subtitle">Dónde aparecer, qué decir y cómo convertir atención en consultas agendadas</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      La promoción para este mercado opera en dos niveles: <strong>contenido orgánico</strong> (construye autoridad y confianza a largo plazo) y <strong>tráfico pago</strong> (genera leads de forma inmediata y escalable). Ambos son necesarios — uno sin el otro limita los resultados.
+    </div>
+    <div class="promo-channels">
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:#25D366;">📱</div>
+          <div><div class="promo-ch-name">WhatsApp</div><div class="promo-ch-role">Conversión · Alta prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Canal de cierre. Toda campaña termina en WhatsApp. Grupos de brasileños, broadcasts de salud, status con tips de neumología. Respuesta en menos de 2h en horario EST.</div>
+      </div>
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:linear-gradient(45deg,#E1306C,#833AB4);">📸</div>
+          <div><div class="promo-ch-name">Instagram</div><div class="promo-ch-role">Awareness + Ads · Alta prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Reels educativos en PT y ES, carruseles de síntomas, testimonios. Meta Ads segmentados por idioma + ubicación en EUA. CPM bajo para audiencias en PT/ES en EUA.</div>
+      </div>
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:#1877F2;">👥</div>
+          <div><div class="promo-ch-name">Facebook</div><div class="promo-ch-role">Comunidad · Alta prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Grupos de brasileños/latinos en Miami, Orlando, Newark, Houston. Posts educativos (no publicitarios directos). Facebook Ads para 35+ — audiencia dominante en esta red.</div>
+      </div>
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:#000;">🎵</div>
+          <div><div class="promo-ch-name">TikTok</div><div class="promo-ch-role">Alcance jóvenes · Media prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Vídeos cortos en español para latinos 18–35. Tendencias de salud. El algoritmo de TikTok distribuye contenido en español de forma orgánica a audiencia hispana sin necesidad de seguidores previos.</div>
+      </div>
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:#EA4335;">🔍</div>
+          <div><div class="promo-ch-name">Google Ads</div><div class="promo-ch-role">Intención alta · Media prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Captura pacientes con intención activa. Keywords: "neumólogo online en español", "consulta pulmão português online", "médico brasileiro EUA telemedicina". Alto costo por click pero alta conversión.</div>
+      </div>
+      <div class="promo-channel">
+        <div class="promo-ch-header">
+          <div class="promo-ch-icon" style="background:var(--navy);">🤝</div>
+          <div><div class="promo-ch-name">Partnerships</div><div class="promo-ch-role">Boca a boca · Media prioridad</div></div>
+        </div>
+        <div class="promo-ch-desc">Igrejas brasileiras, asociaciones latinas, farmacias y mercados hispanos. Un cartaz o anuncio en una iglesia brasileña en Miami puede generar más leads que una semana de ads pagos.</div>
+      </div>
+    </div>
+
+    <!-- Script WhatsApp -->
+    <div class="script-box mt-32">
+      <div class="script-title">📲 Script de Atención WhatsApp — Primer Contacto</div>
+
+      <div class="script-bubble right">
+        <div class="script-sender">Paciente · EUA</div>
+        <div class="script-text">Oi, vi o post sobre consulta de pneumologista online. Estou nos EUA e tenho tido muito falta de ar desde que tive COVID. Como funciona?</div>
+      </div>
+
+      <div class="script-bubble">
+        <div class="script-sender">Equipo Clínica Conquista</div>
+        <div class="script-text">Olá! 😊 Seja bem-vindo(a) à Clínica Conquista. Que ótimo que nos encontrou!<br><br>
+        Sim, fazemos teleconsulta com nosso pneumologista direto para quem está nos EUA — por videoconferência, em português, e você agenda em até 48 horas.<br><br>
+        O valor é <strong>R$250</strong> (equivalente a aproximadamente $50 dólares), com laudo enviado pelo WhatsApp em até 24h após a consulta.<br><br>
+        Gostaria de agendar? Posso verificar os horários disponíveis agora mesmo 🗓️</div>
+      </div>
+
+      <div class="script-bubble right">
+        <div class="script-sender">Paciente · EUA</div>
+        <div class="script-text">Sim! Quero agendar. Como pago?</div>
+      </div>
+
+      <div class="script-bubble">
+        <div class="script-sender">Equipo Clínica Conquista</div>
+        <div class="script-text">Perfeito! Aceitamos pagamento via <strong>Wise</strong>, <strong>PayPal</strong> ou <strong>Pix</strong> para conta brasileira.<br><br>
+        Me diz: qual horário funciona melhor para você? Temos disponibilidade <strong>segunda, quarta e sexta</strong> entre 18h e 21h (horário de Brasília) — que seria entre 15h e 18h no horário de Miami.<br><br>
+        Qual dia prefere? 📅</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5: Personas -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P5</div>
+      <div>
+        <div class="ps-title">Personas — El Equipo que Atiende</div>
+        <div class="ps-subtitle">En salud, las personas son el producto. El médico ES la marca.</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      Para el paciente latino en EUA, <strong>confiar en el médico es más importante que confiar en la clínica</strong>. El nombre, la cara, el idioma y la forma de comunicar del neumólogo son factores decisivos. El equipo de atención (quien responde el WhatsApp) es la primera impresión y puede ganar o perder la consulta en 5 minutos.
+    </div>
+    <div class="ps-grid ps-grid-2">
+      <div class="ps-item">
+        <div class="psi-title">🩺 El Neumólogo — Cara de la Estrategia</div>
+        <div class="psi-text">Publicar nombre completo, foto profesional, CRM y áreas de actuación. Hacer contenido con el médico hablando — Reels, shorts, videos cortos explicando condiciones. El paciente que siente que ya "conoce" al médico convierte mucho más. Bilingüe PT/ES es un diferencial enorme.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">📞 Equipo de Atención — WhatsApp</div>
+        <div class="psi-text">La persona que responde el WhatsApp debe dominar PT y ES, tener calidez cultural (entender cómo habla un brasileiro vs un mexicano), responder en menos de 2 horas en horario EUA y conocer el protocolo de preguntas frecuentes de memoria. Esta persona hace o deshace la conversión.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P6: Procesos -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P6</div>
+      <div>
+        <div class="ps-title">Procesos — Cómo Funciona la Teleconsulta</div>
+        <div class="ps-subtitle">Un proceso claro reduce la fricción y aumenta la tasa de conversión</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      El paciente en EUA tiene miedo de lo desconocido: ¿Cómo voy a pagar? ¿Cómo recibiré el laudo? ¿Valdrá en EUA? Un proceso documentado y comunicado con claridad elimina estas objeciones <strong>antes</strong> de que el paciente las pregunte.
+    </div>
+    <div class="ps-grid ps-grid-3">
+      <div class="ps-item">
+        <div class="psi-title">Paso 1: Agendamiento</div>
+        <div class="psi-text">Paciente contacta por WhatsApp → Equipo verifica horarios → Confirma fecha/hora → Envía link de pago (Wise/PayPal) → Paciente paga → Confirmación automática de cita.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">Paso 2: La Consulta</div>
+        <div class="psi-text">30 min antes: envío del link de videollamada. Consulta: 30–40 min con anamnesis, revisión de exámenes anteriores, orientación diagnóstica, indicación de próximos pasos y prescripción si es necesario.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">Paso 3: Post-consulta</div>
+        <div class="psi-text">Laudo escrito por WhatsApp en 24h. Indicación de exámenes (pueden hacerse en EUA o en Brasil). Ventana de 7 días para dúdas menores por mensaje. Oferta de paquete de retorno con descuento.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P7: Evidencia Física -->
+  <div class="p-section">
+    <div class="ps-header">
+      <div class="ps-letter-badge">P7</div>
+      <div>
+        <div class="ps-title">Evidencia Física — Señales de Confianza</div>
+        <div class="ps-subtitle">En telemedicina, la confianza se construye con pruebas visibles antes de que el paciente pague</div>
+      </div>
+    </div>
+    <div class="ps-body">
+      Cuando el paciente no puede ver físicamente la clínica, necesita otras señales para confiar. Estas señales se llaman <strong>evidencia física</strong>: elementos concretos y verificables que demuestran que la clínica es real, seria y calificada. Sin ellos, el paciente desconfía y no convierte.
+    </div>
+    <div class="ps-grid ps-grid-3">
+      <div class="ps-item">
+        <div class="psi-title">📋 CRM Visible del Médico</div>
+        <div class="psi-text">Publicar el número de CRM del neumólogo en todos los materiales. El paciente puede verificarlo en el sitio del CFM. Esto elimina el miedo a un médico falso o no registrado.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">⭐ Google Reviews</div>
+        <div class="psi-text">Mínimo 15 reseñas con nota 4.8+. Pedir activamente a cada paciente satisfecho que deje una reseña en Google. Las reseñas son el primer elemento que un nuevo paciente revisa antes de contactar.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">📸 Fotos Reales de la Clínica</div>
+        <div class="psi-text">Fachada, sala de espera, consultorio, equipo médico. El paciente que nunca fue a Brasil quiere ver con sus propios ojos que la clínica existe. Instagram y Google Meu Negócio son los mejores escaparates.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">💬 Testimonios de Pacientes</div>
+        <div class="psi-text">Video o texto de pacientes del exterior que ya usaron el servicio. "Fiz a consulta do Miami e em 2 dias recebi meu laudo. Valeu cada centavo." — Estes depoimentos convertam mais do que qualquer anúncio.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">🏥 CNPJ y Registro Legal</div>
+        <div class="psi-text">CNPJ 52.828.296/0001-37 publicado en el sitio y materiales. El paciente más desconfiado puede verificar que la empresa existe legalmente en Brasil. Un dato que cuesta cero y vale mucho.</div>
+      </div>
+      <div class="ps-item">
+        <div class="psi-title">📄 Laudo Profesional</div>
+        <div class="psi-text">El laudo enviado después de la consulta debe ser en papel timbrado digital, con logo, nombre del médico, CRM, fecha y assinatura digital. Un laudo bien estructurado genera confianza y recomendación inmediata.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════════════════════════════════
+     PARTE IV — KPIs
+════════════════════════════════ -->
+<div id="kpis">
+  <div class="part-header">
+    <div class="part-num">IV</div>
+    <div>
+      <div class="part-label">Métricas de Éxito</div>
+      <div class="part-title">KPIs para medir si la estrategia funciona</div>
+      <div class="part-desc">Sin medición no hay mejora. Estos son los indicadores que deben revisarse mensualmente.</div>
+    </div>
+  </div>
+
+  <div class="didactic-box">
+    <div class="db-label">¿Qué es un KPI?</div>
+    <div class="db-title">Un número que te dice si vas por buen camino</div>
+    <div class="db-text">
+      KPI significa Key Performance Indicator — indicador clave de desempeño. No es suficiente con "publicar más" o "invertir en ads". Necesitas saber: ¿cuánto cuesta conseguir un paciente? ¿qué porcentaje de contactos convierte? ¿qué canal genera más resultado por real invertido? <strong>Sin estos números, el marketing es gasto. Con ellos, es inversión.</strong>
+    </div>
+  </div>
+
+  <div class="kpi-dashboard">
+    <div class="kpi-dash-title">Dashboard de KPIs — Meta a 6 Meses</div>
+    <div class="kpi-dash-sub">REVISAR MENSUALMENTE Y AJUSTAR LA ESTRATEGIA SEGÚN LOS RESULTADOS</div>
+    <div class="kpi-dash-grid">
+      <div class="kpi-item">
+        <div class="kpi-val">30</div>
+        <div class="kpi-lbl">Teleconsultas / mes</div>
+        <div class="kpi-note">Meta al 6° mes de operación</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">15%</div>
+        <div class="kpi-lbl">Tasa de conversión</div>
+        <div class="kpi-note">Contacto WhatsApp → Agendamiento</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">R$50</div>
+        <div class="kpi-lbl">CAC (Costo Adq. Cliente)</div>
+        <div class="kpi-note">Costo de adquisición por paciente</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">&lt;2h</div>
+        <div class="kpi-lbl">Tiempo de respuesta</div>
+        <div class="kpi-note">WhatsApp en horario EUA</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">4.8★</div>
+        <div class="kpi-lbl">Nota Google Reviews</div>
+        <div class="kpi-note">Mínimo para credibilidad externa</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">40%</div>
+        <div class="kpi-lbl">Tasa de retorno</div>
+        <div class="kpi-note">Pacientes que regresan (paquetes)</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">70+</div>
+        <div class="kpi-lbl">NPS Score</div>
+        <div class="kpi-note">Net Promoter Score mensual</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-val">3x</div>
+        <div class="kpi-lbl">ROAS (Retorno en Ads)</div>
+        <div class="kpi-note">R$3 ingresados por R$1 invertido en ads</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════════════════════════════════
+     PARTE V — FODA / SWOT
+════════════════════════════════ -->
+<div id="swot">
+  <div class="part-header">
+    <div class="part-num">V</div>
+    <div>
+      <div class="part-label">Análisis FODA</div>
+      <div class="part-title">Fortalezas, Oportunidades, Debilidades y Amenazas</div>
+      <div class="part-desc">El mapa completo de la posición estratégica de Clínica Conquista en el mercado EUA.</div>
+    </div>
+  </div>
+
+  <div class="didactic-box">
+    <div class="db-label">¿Cómo usar el FODA?</div>
+    <div class="db-title">No es solo un cuadro bonito — es una hoja de decisiones</div>
+    <div class="db-text">
+      Un FODA bien usado responde: <strong>¿cómo uso mis Fortalezas para aprovechar las Oportunidades?</strong> ¿Cómo uso las Fortalezas para minimizar las Amenazas? ¿Cómo supero las Debilidades para aprovechar las Oportunidades? ¿Cómo evito que las Debilidades me expongan a las Amenazas? Cada cruce genera una decisión estratégica concreta.
+    </div>
+  </div>
+
+  <div class="swot-grid">
+    <div class="swot-cell s">
+      <div class="swot-letter">F</div>
+      <div class="swot-word">Fortalezas</div>
+      <ul class="swot-items">
+        <li class="swot-item">Ubicación en Brasil = precio muy competitivo en USD</li>
+        <li class="swot-item">Neumólogo disponible en 48h vs. 3–6 meses en EUA</li>
+        <li class="swot-item">Atención en portugués y español — diferencial único</li>
+        <li class="swot-item">Portafolio amplio (espirometría, Holter, ECG) para turismo médico</li>
+        <li class="swot-item">Programa Saúde Vida Sudoeste para precios escalonados</li>
+        <li class="swot-item">WhatsApp como canal nativo de la comunidad brasileña/latina</li>
+      </ul>
+    </div>
+    <div class="swot-cell o">
+      <div class="swot-letter">O</div>
+      <div class="swot-word">Oportunidades</div>
+      <ul class="swot-items">
+        <li class="swot-item">68M+ latinos en EUA subatendidos en salud respiratoria</li>
+        <li class="swot-item">Secuelas de COVID: demanda enorme y creciente</li>
+        <li class="swot-item">Ninguna clínica brasileña ocupa este posicionamiento digital actualmente</li>
+        <li class="swot-item">Telemedicina normalizada post-COVID — barreras caídas</li>
+        <li class="swot-item">Alta frecuencia de viajes de la diáspora al Brasil (turismo médico)</li>
+        <li class="swot-item">Comunidades de diáspora con alto poder de recomendación</li>
+      </ul>
+    </div>
+    <div class="swot-cell w">
+      <div class="swot-letter">D</div>
+      <div class="swot-word">Debilidades</div>
+      <ul class="swot-items">
+        <li class="swot-item">Clínica nueva — bajo reconocimiento de marca fuera de Vitória da Conquista</li>
+        <li class="swot-item">Presencia digital aún incipiente (sitio sin SEO, sin páginas por especialidad)</li>
+        <li class="swot-item">Sin equipo de atención bilingüe consolidado para el exterior</li>
+        <li class="swot-item">Sin historial de pacientes internacionales o testimonios del exterior</li>
+        <li class="swot-item">Proceso de pago internacional no estructurado aún</li>
+        <li class="swot-item">Médico no visible públicamente (sin foto, CRM ni bio publicados)</li>
+      </ul>
+    </div>
+    <div class="swot-cell t">
+      <div class="swot-letter">A</div>
+      <div class="swot-word">Amenazas</div>
+      <ul class="swot-items">
+        <li class="swot-item">Plataformas de telemedicina global que pueden copiar el modelo con más recursos</li>
+        <li class="swot-item">Regulaciones cambiantes de telemedicina internacional en Brasil o EUA</li>
+        <li class="swot-item">Desconfianza cultural del paciente hacia servicios médicos no locales</li>
+        <li class="swot-item">Competidores locales en EUA que empiecen a ofrecer atención en español</li>
+        <li class="swot-item">Variación cambiante BRL/USD que puede afectar la percepción de precio</li>
+        <li class="swot-item">Dependencia de un único neumólogo — riesgo de capacidad y rotación</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Strategic moves from FODA -->
+  <div style="background:var(--white);border-radius:14px;padding:32px 36px;box-shadow:var(--shadow);margin-bottom:32px;">
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:6px;">Cruces Estratégicos del FODA</div>
+    <div style="font-size:13px;color:#9CA3AF;margin-bottom:20px;">Cómo convertir el análisis en decisiones concretas</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+      <div style="background:var(--green-light);border-radius:10px;padding:18px;border-left:4px solid var(--green);">
+        <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">F + O → APROVECHAR</div>
+        <div style="font-size:12.5px;color:#065F46;line-height:1.6;">Usar el precio bajo en USD + disponibilidad en 48h + idioma nativo para ocupar el espacio digital que actualmente nadie ocupa en EUA para neumología brasileña. Primer mover gana.</div>
+      </div>
+      <div style="background:var(--blue-light);border-radius:10px;padding:18px;border-left:4px solid var(--blue);">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">F + A → DEFENDER</div>
+        <div style="font-size:12.5px;color:#1E40AF;line-height:1.6;">Construir marca personal del neumólogo con CRM visible y testimonios reales para diferenciarse de plataformas genéricas. La relación humana y cultural es difícil de replicar por plataformas masivas.</div>
+      </div>
+      <div style="background:var(--orange-light);border-radius:10px;padding:18px;border-left:4px solid var(--orange);">
+        <div style="font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">D + O → SUPERAR</div>
+        <div style="font-size:12.5px;color:#9A3412;line-height:1.6;">La falta de reconocimiento de marca se supera con contenido educativo consistente + primeros testimonios de pacientes del exterior. La oportunidad es grande — no es necesario ser conocido para ser el primero en ocupar el espacio.</div>
+      </div>
+      <div style="background:var(--red-light);border-radius:10px;padding:18px;border-left:4px solid var(--red);">
+        <div style="font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">D + A → MITIGAR</div>
+        <div style="font-size:12.5px;color:#991B1B;line-height:1.6;">Estructurar el proceso de pago internacional y el protocolo de atención antes de invertir en ads. Una mala experiencia del primer paciente en EUA puede destruir la reputación en la comunidad antes de que la estrategia arranque.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footer-logo">Clínica <span>Conquista</span></div>
+  <div class="footer-sub">Exames e Especialidades Médicas · São Borja 569, Bairro Patagônia, Vitória da Conquista – BA · Brasil</div>
+  <div class="footer-tag">Roadmap + Análisis Comercial + Mezcla Comercial · Elaborado por Alpha Strategy Group · Junio 2026 · Confidencial</div>
+</div>
+
+</body>
+</html>

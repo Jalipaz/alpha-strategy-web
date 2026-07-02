@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário de Conteúdo — Junho 2026 · 10 Posts | Clínica Conquista</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --navy: #060B2A;
+    --navy-mid: #1D3B73;
+    --gold: #B8923D;
+    --gold-light: #D4AF6A;
+    --gold-pale: #F0DEB8;
+    --cream: #F7F5EF;
+    --beige: #D8CDBA;
+    --charcoal: #2C2C2C;
+    --white: #FFFFFF;
+    --shadow: 0 4px 24px rgba(6,11,42,0.11);
+    --shadow-gold: 0 4px 20px rgba(184,146,61,0.22);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #0D1840 60%, #162355 100%);
+    padding: 48px 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,146,61,0.18) 0%, transparent 70%);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,146,61,0.08) 0%, transparent 70%);
+  }
+  .header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+  }
+  .brand-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .brand-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+  .header-month {
+    font-family: 'Playfair Display', serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -2px;
+    text-align: right;
+  }
+  .header-year {
+    font-size: 17px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    text-align: right;
+    letter-spacing: 5px;
+  }
+  .gold-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), rgba(184,146,61,0.15), transparent);
+    max-width: 1300px;
+    margin: 28px auto 0;
+  }
+
+  /* ── LEGEND BAR ── */
+  .legend-bar {
+    background: var(--navy);
+    padding: 14px 60px;
+  }
+  .legend-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .legend-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-right: 6px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .c-edu   { background: #3B82F6; }
+  .c-esp   { background: #B8923D; }
+  .c-exam  { background: #10B981; }
+  .c-prev  { background: #8B5CF6; }
+  .c-fem   { background: #EC4899; }
+  .c-cta   { background: #F59E0B; }
+  .c-date  { background: #EF4444; }
+  .c-trust { background: #6B7280; }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 60px 64px;
+  }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 44px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 3px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-bottom: 24px;
+  }
+
+  /* ── CALENDAR GRID ── */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 9px;
+    margin-bottom: 52px;
+  }
+  .day-header {
+    text-align: center;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 11px 0;
+    background: var(--navy);
+    border-radius: 6px;
+  }
+  .day-empty {
+    min-height: 90px;
+    background: transparent;
+  }
+  /* Days with no post — inactive */
+  .day-inactive {
+    background: rgba(255,255,255,0.45);
+    border-radius: 10px;
+    min-height: 90px;
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border: 1px solid rgba(216,205,186,0.4);
+  }
+  .day-inactive .day-num {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--beige);
+  }
+  /* Days WITH post — active */
+  .day-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 12px 13px 13px;
+    min-height: 140px;
+    box-shadow: var(--shadow);
+    border-top: 3px solid transparent;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(6,11,42,0.15);
+  }
+  .day-card.holiday {
+    background: linear-gradient(135deg, #fff8f0 0%, #fff4e6 100%);
+  }
+  .day-number {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pillar-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .post-format {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-bottom: 7px;
+    display: inline-block;
+  }
+  .fmt-feed   { background: #EEF2FF; color: #3730A3; }
+  .fmt-story  { background: #FFF7ED; color: #C2410C; }
+  .fmt-reel   { background: #F0FDF4; color: #166534; }
+  .fmt-caro   { background: #FDF4FF; color: #7E22CE; }
+  .fmt-feriado{ background: #FEF2F2; color: #991B1B; }
+  .post-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 5px;
+  }
+  .post-desc {
+    font-size: 11px;
+    color: #6B7280;
+    line-height: 1.45;
+  }
+  .post-num-badge {
+    position: absolute;
+    bottom: 9px; right: 10px;
+    font-size: 9px;
+    font-weight: 800;
+    color: rgba(6,11,42,0.18);
+    letter-spacing: 1px;
+  }
+
+  /* pillar border colors */
+  .p-edu   { border-top-color: #3B82F6; }
+  .p-esp   { border-top-color: #B8923D; }
+  .p-exam  { border-top-color: #10B981; }
+  .p-prev  { border-top-color: #8B5CF6; }
+  .p-fem   { border-top-color: #EC4899; }
+  .p-cta   { border-top-color: #F59E0B; }
+  .p-date  { border-top-color: #EF4444; }
+  .p-trust { border-top-color: #6B7280; }
+
+  /* ── POSTS LIST ── */
+  .posts-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 52px;
+  }
+  .post-detail {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 26px 28px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 20px;
+    align-items: flex-start;
+    transition: box-shadow 0.15s;
+  }
+  .post-detail:hover {
+    box-shadow: var(--shadow-gold);
+  }
+  .post-num-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .post-detail-date {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .post-detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .post-detail-copy {
+    font-size: 12.5px;
+    color: #6B7280;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .post-detail-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .meta-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .meta-navy  { background: var(--navy); color: var(--gold); }
+  .meta-cream { background: var(--cream); color: var(--navy-mid); border: 1px solid var(--beige); }
+  .meta-gold  { background: var(--gold-pale); color: #7A5C1A; }
+
+  /* ── HASHTAGS ── */
+  .hashtag-section {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin-bottom: 48px;
+  }
+  .hashtag-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+  .hashtag-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+  }
+  .hashtag-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .hashtag-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .hashtag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .hashtag {
+    font-size: 11px;
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.75);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--beige);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-sub {
+    font-size: 11px;
+    color: #9CA3AF;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-tag">Calendário de Conteúdo · 10 Posts</div>
+      <div class="brand-name">Clínica Conquista</div>
+      <div class="brand-sub">Exames e Especialidades Médicas · Bairro Patagônia · Vitória da Conquista – BA</div>
+    </div>
+    <div>
+      <div class="header-month">JUNHO</div>
+      <div class="header-year">2 0 2 6</div>
+    </div>
+  </div>
+  <div class="gold-line"></div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span class="legend-label">Pilares:</span>
+    <div class="legend-item"><div class="legend-dot c-edu"></div>Educação em Saúde</div>
+    <div class="legend-item"><div class="legend-dot c-esp"></div>Especialidade</div>
+    <div class="legend-item"><div class="legend-dot c-exam"></div>Exame</div>
+    <div class="legend-item"><div class="legend-dot c-prev"></div>Saúde Preventiva</div>
+    <div class="legend-item"><div class="legend-dot c-fem"></div>Saúde da Mulher</div>
+    <div class="legend-item"><div class="legend-dot c-cta"></div>Agendamento / CTA</div>
+    <div class="legend-item"><div class="legend-dot c-date"></div>Data Especial</div>
+    <div class="legend-item"><div class="legend-dot c-trust"></div>Confiança / Marca</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number">10</div>
+      <div class="stat-label">Posts no Mês</div>
+      <div class="stat-sub">IG + Facebook</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2–3</div>
+      <div class="stat-label">Posts por Semana</div>
+      <div class="stat-sub">Cadência sustentável</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Pilares Ativos</div>
+      <div class="stat-sub">Conteúdo diversificado</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Datas Especiais</div>
+      <div class="stat-sub">Corpus · Namorados · São João</div>
+    </div>
+  </div>
+
+  <!-- CALENDAR GRID -->
+  <div class="section-title">Grade do Mês</div>
+  <div class="section-sub">Dias com post destacados em branco · dias sem publicação em cinza</div>
+
+  <div class="calendar-grid">
+    <!-- HEADERS -->
+    <div class="day-header">SEG</div>
+    <div class="day-header">TER</div>
+    <div class="day-header">QUA</div>
+    <div class="day-header">QUI</div>
+    <div class="day-header">SEX</div>
+    <div class="day-header">SÁB</div>
+    <div class="day-header">DOM</div>
+
+    <!-- WEEK 1 -->
+    <!-- Dia 1 — POST 1 -->
+    <div class="day-card p-trust">
+      <div class="day-number">1 <div class="pillar-dot" style="background:#6B7280;"></div></div>
+      <span class="post-format fmt-feed">Feed</span>
+      <div class="post-title">Bem-vindos a junho!</div>
+      <div class="post-desc">Post de abertura — quem somos, onde estamos.</div>
+      <span class="post-num-badge">POST 01</span>
+    </div>
+    <!-- Dia 2 inativo -->
+    <div class="day-inactive"><span class="day-num">2</span></div>
+    <!-- Dia 3 — POST 2 -->
+    <div class="day-card p-edu">
+      <div class="day-number">3 <div class="pillar-dot" style="background:#3B82F6;"></div></div>
+      <span class="post-format fmt-caro">Carrossel</span>
+      <div class="post-title">Por que fazer check-up anual?</div>
+      <div class="post-desc">5 motivos para não adiar sua consulta preventiva.</div>
+      <span class="post-num-badge">POST 02</span>
+    </div>
+    <!-- Dia 4 — FERIADO — POST 3 -->
+    <div class="day-card holiday p-date">
+      <div class="day-number">4 <div class="pillar-dot" style="background:#EF4444;"></div></div>
+      <span class="post-format fmt-feriado">Feriado</span>
+      <div class="post-title">Corpus Christi 🕊️</div>
+      <div class="post-desc">Mensagem de fé, descanso e cuidado com a saúde.</div>
+      <span class="post-num-badge">POST 03</span>
+    </div>
+    <!-- Dia 5 inativo -->
+    <div class="day-inactive"><span class="day-num">5</span></div>
+    <!-- Dia 6 inativo -->
+    <div class="day-inactive"><span class="day-num">6</span></div>
+    <!-- Domingo vazio -->
+    <div class="day-empty"></div>
+
+    <!-- WEEK 2 -->
+    <!-- Dia 8 inativo -->
+    <div class="day-inactive"><span class="day-num">8</span></div>
+    <!-- Dia 9 — POST 4 -->
+    <div class="day-card p-esp">
+      <div class="day-number">9 <div class="pillar-dot" style="background:#B8923D;"></div></div>
+      <span class="post-format fmt-feed">Feed</span>
+      <div class="post-title">Especialidade: Cardiologia</div>
+      <div class="post-desc">Cuide do coração. Conheça nosso especialista e quando consultar.</div>
+      <span class="post-num-badge">POST 04</span>
+    </div>
+    <!-- Dia 10 inativo -->
+    <div class="day-inactive"><span class="day-num">10</span></div>
+    <!-- Dia 11 — POST 5 -->
+    <div class="day-card p-fem">
+      <div class="day-number">11 <div class="pillar-dot" style="background:#EC4899;"></div></div>
+      <span class="post-format fmt-caro">Carrossel</span>
+      <div class="post-title">A importância do pré-natal</div>
+      <div class="post-desc">Acompanhamento desde o início — saúde da mãe e do bebê.</div>
+      <span class="post-num-badge">POST 05</span>
+    </div>
+    <!-- Dia 12 — NAMORADOS — POST 6 -->
+    <div class="day-card holiday p-date">
+      <div class="day-number">12 <div class="pillar-dot" style="background:#EF4444;"></div></div>
+      <span class="post-format fmt-feriado">Namorados</span>
+      <div class="post-title">Dia dos Namorados 💛</div>
+      <div class="post-desc">O maior presente é cuidar da saúde juntos.</div>
+      <span class="post-num-badge">POST 06</span>
+    </div>
+    <!-- Dia 13 inativo -->
+    <div class="day-inactive"><span class="day-num">13</span></div>
+    <!-- Domingo vazio -->
+    <div class="day-empty"></div>
+
+    <!-- WEEK 3 -->
+    <!-- Dia 15 inativo -->
+    <div class="day-inactive"><span class="day-num">15</span></div>
+    <!-- Dia 16 — POST 7 -->
+    <div class="day-card p-esp">
+      <div class="day-number">16 <div class="pillar-dot" style="background:#B8923D;"></div></div>
+      <span class="post-format fmt-caro">Carrossel</span>
+      <div class="post-title">Especialidade: Neurologia</div>
+      <div class="post-desc">Dores de cabeça, tontura ou formigamento? Conheça o especialista.</div>
+      <span class="post-num-badge">POST 07</span>
+    </div>
+    <!-- Dia 17 inativo -->
+    <div class="day-inactive"><span class="day-num">17</span></div>
+    <!-- Dia 18 inativo -->
+    <div class="day-inactive"><span class="day-num">18</span></div>
+    <!-- Dia 19 — POST 8 -->
+    <div class="day-card p-prev">
+      <div class="day-number">19 <div class="pillar-dot" style="background:#8B5CF6;"></div></div>
+      <span class="post-format fmt-feed">Feed</span>
+      <div class="post-title">Junho: saúde do homem</div>
+      <div class="post-desc">5 exames preventivos que todo homem deve fazer.</div>
+      <span class="post-num-badge">POST 08</span>
+    </div>
+    <!-- Dia 20 inativo -->
+    <div class="day-inactive"><span class="day-num">20</span></div>
+    <!-- Domingo vazio -->
+    <div class="day-empty"></div>
+
+    <!-- WEEK 4 -->
+    <!-- Dia 22 inativo -->
+    <div class="day-inactive"><span class="day-num">22</span></div>
+    <!-- Dia 23 inativo -->
+    <div class="day-inactive"><span class="day-num">23</span></div>
+    <!-- Dia 24 — SÃO JOÃO — POST 9 -->
+    <div class="day-card holiday p-date">
+      <div class="day-number">24 <div class="pillar-dot" style="background:#EF4444;"></div></div>
+      <span class="post-format fmt-feriado">São João</span>
+      <div class="post-title">Feliz Festa Junina! 🎉</div>
+      <div class="post-desc">Alegria, saúde e comunidade no Bairro Patagônia.</div>
+      <span class="post-num-badge">POST 09</span>
+    </div>
+    <!-- Dia 25 inativo -->
+    <div class="day-inactive"><span class="day-num">25</span></div>
+    <!-- Dia 26 inativo -->
+    <div class="day-inactive"><span class="day-num">26</span></div>
+    <!-- Dia 27 inativo -->
+    <div class="day-inactive"><span class="day-num">27</span></div>
+    <!-- Domingo vazio -->
+    <div class="day-empty"></div>
+
+    <!-- WEEK 5 -->
+    <!-- Dia 29 inativo -->
+    <div class="day-inactive"><span class="day-num">29</span></div>
+    <!-- Dia 30 — POST 10 -->
+    <div class="day-card p-trust">
+      <div class="day-number">30 <div class="pillar-dot" style="background:#6B7280;"></div></div>
+      <span class="post-format fmt-feed">Feed</span>
+      <div class="post-title">Obrigado, junho! 🌟</div>
+      <div class="post-desc">Gratidão aos pacientes. Julho vem com ainda mais cuidado.</div>
+      <span class="post-num-badge">POST 10</span>
+    </div>
+    <!-- Dias vazios para completar semana -->
+    <div class="day-empty"></div>
+    <div class="day-empty"></div>
+    <div class="day-empty"></div>
+    <div class="day-empty"></div>
+    <div class="day-empty"></div>
+  </div>
+
+  <!-- POSTS DETAIL LIST -->
+  <div class="section-title">Briefing dos 10 Posts</div>
+  <div class="section-sub">Orientações de copy, formato e hashtags para cada publicação do mês</div>
+
+  <div class="posts-list">
+
+    <div class="post-detail">
+      <div class="post-num-circle">1</div>
+      <div>
+        <div class="post-detail-date">Segunda, 01/06 · Marca / Confiança</div>
+        <div class="post-detail-title">Bem-vindos a junho na Clínica Conquista!</div>
+        <div class="post-detail-copy">Post institucional de abertura do mês. Mostrar a fachada, ambiente ou equipe da clínica. Mensagem acolhedora com ênfase na localização no Bairro Patagônia. Tom: confiante e próximo da comunidade local. Frase âncora: <em>"Sua saúde mais perto de você."</em></div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Foto real da clínica</span>
+          <span class="meta-tag meta-gold">Pilar: Confiança</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">2</div>
+      <div>
+        <div class="post-detail-date">Quarta, 03/06 · Saúde Preventiva</div>
+        <div class="post-detail-title">Por que fazer check-up anual?</div>
+        <div class="post-detail-copy">Carrossel de 5 slides: 1) Detectar doenças antes dos sintomas / 2) Economizar em tratamentos futuros / 3) Controlar pressão, glicemia e colesterol / 4) Saúde mental e física juntas / 5) CTA: agendar na Clínica Conquista. Visual limpo em azul marinho e dourado.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Carrossel IG + Facebook</span>
+          <span class="meta-tag meta-cream">5 slides</span>
+          <span class="meta-tag meta-gold">Pilar: Preventivo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">3</div>
+      <div>
+        <div class="post-detail-date">Quinta, 04/06 · Corpus Christi 🕊️</div>
+        <div class="post-detail-title">Feriado com mensagem de fé e saúde</div>
+        <div class="post-detail-copy">Post de data especial. Visual sobrio: fundo creme, tipografia azul marinho, detalhe dourado. Mensagem breve e positiva ligando fé ao bem-estar. Sem CTA comercial. Informar que a clínica retorna na segunda-feira. Tom: humano, espiritual e acolhedor.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Data especial</span>
+          <span class="meta-tag meta-gold">Sem CTA comercial</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">4</div>
+      <div>
+        <div class="post-detail-date">Terça, 09/06 · Especialidade</div>
+        <div class="post-detail-title">Especialidade da Semana: Cardiologia</div>
+        <div class="post-detail-copy">Apresentação da especialidade com foto do médico (ou imagem médica limpa) + principais condições tratadas: hipertensão, arritmia, insuficiência cardíaca, prevenção cardiovascular. CTA: "Cuide do seu coração — agende pelo WhatsApp." Visual com destaque dourado.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Foto especialista</span>
+          <span class="meta-tag meta-gold">Pilar: Especialidade</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">5</div>
+      <div>
+        <div class="post-detail-date">Quinta, 11/06 · Saúde da Mulher</div>
+        <div class="post-detail-title">Pré-natal: cada consulta conta</div>
+        <div class="post-detail-copy">Carrossel com timeline do pré-natal por trimestre: quais consultas fazer, quais exames são indicados, importância do acompanhamento obstétrico. Tom empático e encorajador. Último slide: "Na Clínica Conquista acompanhamos cada etapa com você." Visual com toque rosa suave sobre fundo creme.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Carrossel IG + Facebook</span>
+          <span class="meta-tag meta-cream">Saúde da Mulher</span>
+          <span class="meta-tag meta-gold">Obstetrícia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">6</div>
+      <div>
+        <div class="post-detail-date">Sexta, 12/06 · Dia dos Namorados 💛</div>
+        <div class="post-detail-title">O maior presente é cuidar juntos</div>
+        <div class="post-detail-copy">Post especial Dia dos Namorados. Visual casal + tons dourado e azul marinho. Mensagem: "Quem ama cuida — inclusive da saúde. Agendem uma consulta em casal e invistam no bem-estar de quem vocês mais amam." CTA suave sem pressão comercial.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Data especial</span>
+          <span class="meta-tag meta-gold">Pilar: Confiança</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">7</div>
+      <div>
+        <div class="post-detail-date">Terça, 16/06 · Especialidade</div>
+        <div class="post-detail-title">Especialidade da Semana: Neurologia</div>
+        <div class="post-detail-copy">Carrossel educativo: sintomas neurológicos que não devem ser ignorados — dor de cabeça frequente, tontura, formigamento nos membros, lapsos de memória, visão dupla. Cada slide = 1 sintoma + orientação. Último slide CTA: "Temos neurologista disponível — agende agora."</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Carrossel IG + Facebook</span>
+          <span class="meta-tag meta-cream">5 slides</span>
+          <span class="meta-tag meta-gold">Pilar: Especialidade</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">8</div>
+      <div>
+        <div class="post-detail-date">Sexta, 19/06 · Saúde Preventiva</div>
+        <div class="post-detail-title">Junho é o mês da saúde do homem</div>
+        <div class="post-detail-copy">Post visual com 5 exames que todo homem deve fazer: PSA (próstata), glicemia, colesterol total, eletrocardiograma e aferição de pressão arterial. Tom de desafio gentil: "Quando foi sua última consulta?" Todos os exames disponíveis na Clínica Conquista.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Gráfico / Infográfico</span>
+          <span class="meta-tag meta-gold">Pilar: Preventivo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">9</div>
+      <div>
+        <div class="post-detail-date">Quarta, 24/06 · Festa Junina 🎉</div>
+        <div class="post-detail-title">Feliz São João, Bairro Patagônia!</div>
+        <div class="post-detail-copy">Post comemorativo com visual festivo dentro da paleta da clínica — detalhes em dourado e fundo azul marinho. Mensagem leve de comunidade e pertencimento: "Que a alegria de São João esteja na sua casa e na sua saúde!" Sem CTA comercial — apenas celebração.</div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Data especial</span>
+          <span class="meta-tag meta-gold">Sem CTA comercial</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-detail">
+      <div class="post-num-circle">10</div>
+      <div>
+        <div class="post-detail-date">Terça, 30/06 · Marca / Confiança</div>
+        <div class="post-detail-title">Obrigado, junho! Até julho.</div>
+        <div class="post-detail-copy">Post de encerramento do mês. Agradecer a confiança dos pacientes da comunidade. Mensagem positiva sobre o próximo mês. Visual institucional: azul marinho + dourado. Frase âncora: <em>"Cada consulta é um passo em direção a uma vida mais saudável. Obrigado por confiar na Clínica Conquista."</em></div>
+        <div class="post-detail-meta">
+          <span class="meta-tag meta-navy">Feed IG + Facebook</span>
+          <span class="meta-tag meta-cream">Foto da equipe</span>
+          <span class="meta-tag meta-gold">Pilar: Confiança</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HASHTAGS -->
+  <div class="hashtag-section">
+    <div class="hashtag-title">Banco de Hashtags — Junho 2026</div>
+    <div class="hashtag-sub">USE 15–20 HASHTAGS POR POST · MISTURE OS TRÊS GRUPOS EM CADA PUBLICAÇÃO</div>
+    <div class="hashtag-groups">
+      <div>
+        <div class="hashtag-group-title">📍 Localização & Clínica</div>
+        <div class="hashtag-list">
+          <span class="hashtag">#ClinicaConquista</span>
+          <span class="hashtag">#VitoriaDaConquista</span>
+          <span class="hashtag">#BairroPatagonia</span>
+          <span class="hashtag">#SaudeVDC</span>
+          <span class="hashtag">#MedicoVDC</span>
+          <span class="hashtag">#SaudeConquista</span>
+          <span class="hashtag">#PatagoniaBA</span>
+          <span class="hashtag">#SaudeSudoeste</span>
+        </div>
+      </div>
+      <div>
+        <div class="hashtag-group-title">🩺 Especialidades & Exames</div>
+        <div class="hashtag-list">
+          <span class="hashtag">#Cardiologia</span>
+          <span class="hashtag">#Neurologia</span>
+          <span class="hashtag">#Ginecologia</span>
+          <span class="hashtag">#Obstetrícia</span>
+          <span class="hashtag">#MedicinaPreventiva</span>
+          <span class="hashtag">#ExamesMedicos</span>
+          <span class="hashtag">#CheckUp</span>
+          <span class="hashtag">#SaudePreventiva</span>
+        </div>
+      </div>
+      <div>
+        <div class="hashtag-group-title">💙 Saúde & Engajamento</div>
+        <div class="hashtag-list">
+          <span class="hashtag">#SaudeEmDia</span>
+          <span class="hashtag">#SaudeDaMulher</span>
+          <span class="hashtag">#SaudeDoHomem</span>
+          <span class="hashtag">#Prenatal</span>
+          <span class="hashtag">#AtendimentoHumanizado</span>
+          <span class="hashtag">#CuideSuaSaude</span>
+          <span class="hashtag">#SaudeVidaSudoeste</span>
+          <span class="hashtag">#VidaSaudavel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Clínica <span>Conquista</span></div>
+    <div class="footer-sub">Exames e Especialidades Médicas · São Borja 569, Bairro Patagônia, Vitória da Conquista – BA · Seg–Sáb mediante agendamento</div>
+    <div style="margin-top:10px; font-size:10px; color:#ccc; letter-spacing:1px;">Calendário elaborado por Alpha Strategy Group · Junho 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

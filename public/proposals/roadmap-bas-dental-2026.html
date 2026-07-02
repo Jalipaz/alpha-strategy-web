@@ -1,0 +1,1195 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bas Dental — Roadmap de Crecimiento 2026</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:         #F0F9FF;
+      --bg2:        #E0F2FE;
+      --sky:        #4FC3F7;
+      --teal:       #4DD0E1;
+      --sky-light:  #87CEEB;
+      --sky-dim:    rgba(79,195,247,0.13);
+      --text:       #0C2D4A;
+      --muted:      #5A7A8E;
+      --grad-sky:   linear-gradient(135deg, #4FC3F7, #4DD0E1);
+      --grad-hero:  linear-gradient(135deg, #0C2D4A 0%, #1565C0 50%, #4FC3F7 100%);
+      --white:      #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
+
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--grad-sky); transition: width 0.35s ease; z-index: 9999; }
+
+    .slide-deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    @media (min-width: 769px) {
+      .slide-deck { max-width: calc(100vh * 16 / 9); max-height: calc(100vw * 9 / 16); margin: auto; position: absolute; inset: 0; }
+    }
+
+    .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 64px; opacity: 0; visibility: hidden; transition: opacity 0.4s ease; background: var(--bg); overflow: hidden; }
+    .slide.active { opacity: 1; visibility: visible; }
+    .slide-content { width: 100%; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px; overflow: hidden; }
+
+    .nav-controls { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; z-index: 9999; background: rgba(240,249,255,0.93); backdrop-filter: blur(10px); border: 1px solid rgba(79,195,247,0.30); padding: 8px 20px; border-radius: 40px; box-shadow: 0 2px 14px rgba(12,45,74,0.10); }
+    .nav-btn { background: var(--sky-dim); border: 1px solid rgba(79,195,247,0.35); color: var(--sky); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px; transition: all 0.2s; }
+    .nav-btn:hover { background: var(--sky); color: #fff; }
+    .slide-counter { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+
+    .slide-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--sky); opacity: 0.9; }
+    .slide-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 4.8vw, 60px); font-weight: 700; line-height: 1.1; background: var(--grad-sky); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center; }
+    .slide-subtitle { font-size: clamp(13px, 1.7vw, 18px); color: var(--muted); font-weight: 400; line-height: 1.55; max-width: 700px; text-align: center; }
+    h2.section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(20px, 3.2vw, 38px); font-weight: 700; line-height: 1.15; color: var(--text); }
+    h2.section-title span { background: var(--grad-sky); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .sky-line { width: 52px; height: 3px; background: var(--grad-sky); border-radius: 2px; }
+
+    .card { background: var(--white); border: 1px solid rgba(79,195,247,0.20); border-radius: 14px; padding: 20px 24px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .card:hover { border-color: rgba(79,195,247,0.50); box-shadow: 0 4px 16px rgba(79,195,247,0.12); }
+    .card-icon { font-size: 26px; margin-bottom: 8px; display: block; }
+    .card-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(12px, 1.4vw, 16px); font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .card-body { font-size: clamp(10px, 1.1vw, 13px); color: var(--muted); line-height: 1.5; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; width: 100%; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; width: 100%; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; width: 100%; }
+
+    .bullet-list { list-style: none; width: 100%; display: flex; flex-direction: column; gap: 7px; }
+    .bullet-list li { display: flex; align-items: flex-start; gap: 10px; font-size: clamp(11px, 1.2vw, 14px); color: var(--text); line-height: 1.45; }
+    .bullet-list li::before { content: '▸'; color: var(--sky); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; align-items: start; }
+    .split-left { display: flex; flex-direction: column; gap: 14px; }
+    .split-right { display: flex; flex-direction: column; gap: 11px; }
+
+    .stat-box { background: var(--white); border: 1px solid rgba(79,195,247,0.22); border-radius: 12px; padding: 16px 20px; text-align: center; }
+    .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px, 3vw, 36px); font-weight: 700; background: var(--grad-sky); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: clamp(10px, 1.1vw, 12px); color: var(--muted); margin-top: 3px; line-height: 1.3; }
+
+    .pill { display: inline-block; background: var(--sky-dim); border: 1px solid rgba(79,195,247,0.30); border-radius: 20px; padding: 3px 10px; font-size: clamp(9px, 0.9vw, 11px); color: var(--sky); font-weight: 600; letter-spacing: 0.5px; }
+    .pill.red { background: rgba(239,68,68,0.10); border-color: rgba(239,68,68,0.25); color: #DC2626; }
+    .pill.green { background: rgba(34,197,94,0.10); border-color: rgba(34,197,94,0.25); color: #16A34A; }
+    .pill.orange { background: rgba(249,115,22,0.10); border-color: rgba(249,115,22,0.25); color: #EA580C; }
+
+    .foda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
+    .foda-card { border-radius: 12px; padding: 16px 18px; }
+    .foda-card.f { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); }
+    .foda-card.o { background: rgba(79,195,247,0.08); border: 1px solid rgba(79,195,247,0.25); }
+    .foda-card.d { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25); }
+    .foda-card.a { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+    .foda-label { font-family: 'Space Grotesk', sans-serif; font-size: clamp(11px, 1.3vw, 14px); font-weight: 700; margin-bottom: 8px; }
+    .foda-card.f .foda-label { color: #16A34A; }
+    .foda-card.o .foda-label { color: var(--sky); }
+    .foda-card.d .foda-label { color: #EA580C; }
+    .foda-card.a .foda-label { color: #DC2626; }
+
+    .pilar-card { background: var(--white); border-top: 3px solid var(--sky); border-radius: 0 0 14px 14px; padding: 18px 20px; }
+    .pilar-num { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--sky); text-transform: uppercase; }
+    .pilar-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(12px, 1.4vw, 16px); font-weight: 700; color: var(--text); margin: 4px 0; }
+
+    .timeline-row { display: flex; gap: 14px; width: 100%; align-items: stretch; }
+    .timeline-month { background: var(--grad-sky); color: white; border-radius: 10px; padding: 10px 14px; min-width: 80px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: clamp(10px, 1.2vw, 14px); font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .timeline-tasks { background: var(--white); border: 1px solid rgba(79,195,247,0.20); border-radius: 10px; padding: 10px 14px; flex: 1; font-size: clamp(9px, 1.0vw, 12px); color: var(--text); line-height: 1.6; }
+
+    .kpi-row { display: flex; align-items: center; gap: 14px; padding: 10px 16px; background: var(--white); border-radius: 10px; border: 1px solid rgba(79,195,247,0.18); }
+    .kpi-icon { font-size: 20px; flex-shrink: 0; }
+    .kpi-name { font-size: clamp(11px, 1.2vw, 14px); font-weight: 600; color: var(--text); flex: 1; }
+    .kpi-target { font-family: 'Space Grotesk', sans-serif; font-size: clamp(12px, 1.4vw, 16px); font-weight: 700; background: var(--grad-sky); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .kpi-period { font-size: clamp(9px, 1vw, 11px); color: var(--muted); }
+
+    .hero-slide { background: var(--grad-hero) !important; }
+    .hero-slide .slide-label { color: rgba(135,206,235,0.9); }
+    .hero-slide .slide-title { background: linear-gradient(135deg, #FFFFFF, #87CEEB); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-slide .slide-subtitle { color: rgba(255,255,255,0.75); }
+    .hero-slide .sky-line { background: linear-gradient(135deg, #FFFFFF, #4DD0E1); }
+
+    .promo-card { background: var(--white); border-radius: 14px; padding: 16px 18px; border-left: 4px solid var(--sky); }
+    .promo-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(11px, 1.3vw, 15px); font-weight: 700; color: var(--text); margin-bottom: 5px; }
+    .promo-desc { font-size: clamp(9px, 1.0vw, 12px); color: var(--muted); line-height: 1.5; }
+    .promo-tag { display: inline-block; margin-top: 6px; }
+
+    .persona-card { background: var(--white); border-radius: 14px; padding: 18px 20px; border: 1px solid rgba(79,195,247,0.25); }
+    .persona-avatar { font-size: 32px; margin-bottom: 8px; }
+    .persona-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(12px, 1.4vw, 16px); font-weight: 700; color: var(--text); }
+    .persona-age { font-size: clamp(10px, 1.1vw, 12px); color: var(--sky); font-weight: 600; margin-bottom: 8px; }
+    .persona-detail { font-size: clamp(9px, 1.0vw, 12px); color: var(--muted); line-height: 1.6; }
+
+    .big-quote { border-left: 3px solid var(--sky); padding: 10px 16px; background: var(--sky-dim); border-radius: 0 10px 10px 0; font-size: clamp(12px, 1.4vw, 16px); color: var(--text); font-style: italic; line-height: 1.55; }
+
+    .chart-wrap { width: 100%; max-height: 260px; position: relative; }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="slide-deck" id="deck">
+
+  <!-- SLIDE 1 — PORTADA -->
+  <div class="slide hero-slide active" id="s1">
+    <div class="slide-content" style="text-align:center; gap:22px;">
+      <div class="slide-label">Alpha Strategy Group · Propuesta Estratégica 2026</div>
+      <div class="sky-line" style="margin:0 auto;"></div>
+      <div class="slide-title" style="font-size:clamp(36px,5.5vw,72px);">Bas Dental</div>
+      <div class="slide-title" style="font-size:clamp(18px,2.8vw,34px); margin-top:-10px;">Roadmap de Crecimiento de Pacientes</div>
+      <div class="slide-subtitle">Análisis de mercado · Estrategia comercial · Plan de captación y retención<br>Santa Cruz de la Sierra, Bolivia · 2026</div>
+      <div style="display:flex; gap:20px; justify-content:center; margin-top:8px;">
+        <div class="stat-box" style="background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.20);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">306</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.70);">Pacientes actuales</div>
+        </div>
+        <div class="stat-box" style="background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.20);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">600+</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.70);">Meta a 12 meses</div>
+        </div>
+        <div class="stat-box" style="background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.20);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">+96%</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.70);">Crecimiento objetivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — DIAGNÓSTICO ACTUAL -->
+  <div class="slide" id="s2">
+    <div class="slide-content">
+      <div class="slide-label">Diagnóstico</div>
+      <h2 class="section-title">¿Dónde estamos <span>hoy</span>?</h2>
+      <div class="sky-line"></div>
+      <div class="grid-4" style="margin-top:6px;">
+        <div class="stat-box">
+          <div class="stat-num">306</div>
+          <div class="stat-label">Pacientes registrados</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">~80</div>
+          <div class="stat-label">Pacientes activos en ortodoncia</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4to</div>
+          <div class="stat-label">Anillo, San Aurelio · Zona media</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Canales digitales (IG + FB)</div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:4px;">
+        <div class="card">
+          <div class="card-title">Lo que funciona bien</div>
+          <ul class="bullet-list">
+            <li>Base activa de pacientes en control de ortodoncia (ingreso recurrente)</li>
+            <li>Presencia en Instagram y Facebook con contenido constante</li>
+            <li>Servicios diversificados: ortodoncia, estética, limpieza, preventivo</li>
+            <li>Atención familiar (niños, adultos, adultos mayores)</li>
+            <li>Nuevo nombre Bas Dental = oportunidad de reposicionamiento</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Brechas identificadas</div>
+          <ul class="bullet-list">
+            <li>Sin ficha en Google My Business optimizada (cero visibilidad en búsquedas)</li>
+            <li>Sin programa formal de referidos para activar boca a boca</li>
+            <li>Sin convenios con empresas o colegios cercanos</li>
+            <li>Sin estrategia de reactivación de pacientes inactivos</li>
+            <li>Sin paquetes o promociones estructuradas que reduzcan la barrera de entrada</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — ANÁLISIS DE MERCADO -->
+  <div class="slide" id="s3">
+    <div class="slide-content">
+      <div class="slide-label">Análisis de Mercado</div>
+      <h2 class="section-title">Mercado odontológico en <span>Santa Cruz</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:6px;">
+        <div class="card">
+          <span class="card-icon">🏙️</span>
+          <div class="card-title">Tamaño del mercado</div>
+          <div class="card-body">Santa Cruz supera los 2.2 millones de habitantes. Más del 60% de la población adulta requiere atención dental al menos una vez al año. La demanda está altamente desatendida en zonas intermedias como el 4to–5to anillo.</div>
+        </div>
+        <div class="card">
+          <span class="card-icon">📈</span>
+          <div class="card-title">Tendencias clave</div>
+          <div class="card-body">Boom de la ortodoncia entre 12–35 años. Creciente demanda de estética dental (blanqueamiento, carillas). Mayor conciencia preventiva post-pandemia. Búsquedas "dentista cerca de mí" en Google crecen +40% anual.</div>
+        </div>
+        <div class="card">
+          <span class="card-icon">💰</span>
+          <div class="card-title">Perfil económico de la zona</div>
+          <div class="card-body">San Aurelio / 4to anillo: clase media trabajadora con capacidad de inversión en salud. Precio sensible pero dispuesta a pagar si percibe valor y calidad. Financiamiento en cuotas es factor decisivo.</div>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-icon">📱</span>
+          <div class="card-title">Comportamiento digital</div>
+          <div class="card-body">El 78% de los pacientes busca dentista en Google o Instagram antes de llamar. Las reseñas y fotos de antes/después son el principal factor de confianza. WhatsApp es el canal de conversión #1 en Bolivia.</div>
+        </div>
+        <div class="card">
+          <span class="card-icon">🦷</span>
+          <div class="card-title">Servicios más demandados</div>
+          <div class="card-body"><strong>1. Ortodoncia</strong> (brackets y alineadores) · <strong>2. Blanqueamiento</strong> · <strong>3. Limpieza profesional</strong> · <strong>4. Extracción y urgencias</strong> · <strong>5. Carillas estéticas</strong>. Precio promedio consulta: Bs 80–150.</div>
+        </div>
+        <div class="card">
+          <span class="card-icon">🎯</span>
+          <div class="card-title">Oportunidad de captura</div>
+          <div class="card-body">Radio de 3km alrededor de la clínica tiene ~120,000 personas. Con una tasa de penetración del 0.5%, el potencial inmediato es <strong>600 pacientes nuevos</strong> sin moverse de zona.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — COMPETENCIA -->
+  <div class="slide" id="s4">
+    <div class="slide-content">
+      <div class="slide-label">Análisis Competitivo</div>
+      <h2 class="section-title">El <span>entorno competitivo</span> en Santa Cruz</h2>
+      <div class="sky-line"></div>
+      <div class="big-quote" style="width:100%; margin-top:4px;">
+        "En Bolivia, el 70% de las clínicas dentales opera sin estrategia digital activa — ahí está la ventaja competitiva disponible."
+      </div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="card" style="border-top:3px solid #DC2626;">
+          <div class="card-title" style="color:#DC2626;">Competencia directa</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>Clínicas establecidas en 4to–5to anillo con 5+ años</li>
+            <li>Odontólogos independientes sin diferenciador claro</li>
+            <li>Riesgo: mayor reconocimiento de nombre en la zona</li>
+            <li>Debilidad: mayoría sin estrategia digital estructurada</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid var(--sky);">
+          <div class="card-title">Nuestra ventaja diferencial</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>Nuevo nombre Bas Dental = posicionamiento fresco</li>
+            <li>Estrategia de contenido activa en redes sociales</li>
+            <li>Atención familiar completa bajo un mismo techo</li>
+            <li>Apoyo de Alpha Strategy = marketing profesional</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top:3px solid #16A34A;">
+          <div class="card-title" style="color:#16A34A;">Espacios sin explotar</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>Google Maps: pocas clínicas con ficha completa y reseñas</li>
+            <li>WhatsApp marketing: casi nadie lo usa bien</li>
+            <li>Convenios empresariales: mercado virgen en la zona</li>
+            <li>Rebranding activo: ningún competidor lo está haciendo ahora</li>
+          </ul>
+        </div>
+      </div>
+      <div style="width:100%; background:var(--white); border-radius:12px; padding:14px 18px; border:1px solid rgba(79,195,247,0.20);">
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:clamp(11px,1.3vw,14px); font-weight:600; margin-bottom:10px;">Comparativa de posicionamiento digital</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:160px;">
+            <div style="font-size:clamp(9px,1vw,11px); color:var(--muted); margin-bottom:4px;">Google My Business</div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span class="pill green">Bas Dental: en proceso</span>
+              <span class="pill red">Competencia media: sin optimizar</span>
+            </div>
+          </div>
+          <div style="flex:1; min-width:160px;">
+            <div style="font-size:clamp(9px,1vw,11px); color:var(--muted); margin-bottom:4px;">Redes Sociales</div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span class="pill green">Bas Dental: activo</span>
+              <span class="pill orange">Competencia: esporádico</span>
+            </div>
+          </div>
+          <div style="flex:1; min-width:160px;">
+            <div style="font-size:clamp(9px,1vw,11px); color:var(--muted); margin-bottom:4px;">Programa de referidos</div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span class="pill green">Bas Dental: a implementar</span>
+              <span class="pill red">Competencia: ausente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — BUYER PERSONAS -->
+  <div class="slide" id="s5">
+    <div class="slide-content">
+      <div class="slide-label">Segmentos Objetivo</div>
+      <h2 class="section-title">¿A quién le <span>hablamos</span>?</h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="persona-card">
+          <div class="persona-avatar">👩‍👧‍👦</div>
+          <div class="persona-name">La Mamá Protectora</div>
+          <div class="persona-age">Beatriz, 32–45 años</div>
+          <div class="persona-detail">
+            <strong>Quién es:</strong> Madre de familia, trabaja, vive en San Aurelio o zonas cercanas. Decide la salud de toda la familia.<br><br>
+            <strong>Qué busca:</strong> Un dentista de confianza, cercano, que atienda bien a sus hijos y que tenga precios razonables.<br><br>
+            <strong>Cómo capto su atención:</strong> Contenido sobre salud bucal infantil, promo de "consulta familiar", testimonios de otras mamás. Canal: Facebook e IG.
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-avatar">🧑‍🎓</div>
+          <div class="persona-name">El Joven Estético</div>
+          <div class="persona-age">Carlos, 16–28 años</div>
+          <div class="persona-detail">
+            <strong>Quién es:</strong> Estudiante o profesional joven. Consciente de su imagen, activo en redes sociales. Influenciado por lo que ve en Instagram.<br><br>
+            <strong>Qué busca:</strong> Brackets, blanqueamiento, resultados visibles. Quiere pagar en cuotas.<br><br>
+            <strong>Cómo capto su atención:</strong> Antes/después impactantes, contenido de transformación estética, precio accesible con facilidad de pago. Canal: Instagram + Reels.
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-avatar">👨‍💼</div>
+          <div class="persona-name">El Adulto Preventivo</div>
+          <div class="persona-age">Roberto, 35–55 años</div>
+          <div class="persona-detail">
+            <strong>Quién es:</strong> Trabajador o empresario, vive cerca, no ha ido al dentista en años. Siente que "algo le duele pero lo posterga".<br><br>
+            <strong>Qué busca:</strong> Atención rápida, sin complicaciones, confiable. Le importa la experiencia.<br><br>
+            <strong>Cómo capto su atención:</strong> Contenido de urgencia/prevención, acceso fácil por WhatsApp, promo de primera consulta gratis. Canal: Facebook + Google.
+          </div>
+        </div>
+      </div>
+      <div class="big-quote" style="width:100%;">
+        Cada segmento tiene un mensaje diferente, un canal diferente y una oferta diferente — pero todos convergen en <strong>Bas Dental</strong> como su dentista de confianza en Santa Cruz.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 — FODA -->
+  <div class="slide" id="s6">
+    <div class="slide-content">
+      <div class="slide-label">Análisis Estratégico</div>
+      <h2 class="section-title">FODA — <span>Bas Dental</span></h2>
+      <div class="sky-line"></div>
+      <div class="foda-grid" style="margin-top:8px;">
+        <div class="foda-card f">
+          <div class="foda-label">✅ Fortalezas</div>
+          <ul class="bullet-list">
+            <li>Base de 306 pacientes con historial real</li>
+            <li>Servicios completos: ortodoncia, estética, preventivo, familiar</li>
+            <li>Pacientes de ortodoncia = ingreso mensual recurrente y estable</li>
+            <li>Presencia activa en redes con estrategia de contenido</li>
+            <li>Rebranding a Bas Dental = oportunidad de relanzamiento</li>
+          </ul>
+        </div>
+        <div class="foda-card o">
+          <div class="foda-label">🚀 Oportunidades</div>
+          <ul class="bullet-list">
+            <li>Zona de 120,000+ personas con escasa competencia digital</li>
+            <li>Google Maps: primeras posiciones disponibles (GMB sin competencia fuerte)</li>
+            <li>Empresas y colegios cercanos sin convenio odontológico</li>
+            <li>Crecimiento explosivo de demanda estética entre 15–30 años</li>
+            <li>Base de pacientes inactivos reactivable con campañas específicas</li>
+          </ul>
+        </div>
+        <div class="foda-card d">
+          <div class="foda-label">⚠️ Debilidades</div>
+          <ul class="bullet-list">
+            <li>Sin posicionamiento en Google (GMB sin optimizar)</li>
+            <li>Sin sistema estructurado de referidos ni fidelización</li>
+            <li>Reconocimiento de marca aún bajo — nombre nuevo en construcción</li>
+            <li>Sin campañas pagadas activas en Meta/Google Ads</li>
+            <li>Dependencia de tráfico orgánico en redes para nuevos pacientes</li>
+          </ul>
+        </div>
+        <div class="foda-card a">
+          <div class="foda-label">🔴 Amenazas</div>
+          <ul class="bullet-list">
+            <li>Nuevas clínicas con inversión publicitaria mayor</li>
+            <li>Pacientes que migran a clínicas en zonas más céntricas</li>
+            <li>Percepción de precio sin contexto de valor ni calidad visible</li>
+            <li>Estancamiento si no se activa captación fuera de redes propias</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 — ESTRATEGIA: 5 PILARES -->
+  <div class="slide" id="s7">
+    <div class="slide-content">
+      <div class="slide-label">Estrategia de Crecimiento</div>
+      <h2 class="section-title">Los <span>5 Pilares</span> del Crecimiento</h2>
+      <div class="sky-line"></div>
+      <div class="grid-5" style="margin-top:10px;">
+        <div class="pilar-card">
+          <div class="pilar-num">Pilar 01</div>
+          <div style="font-size:24px; margin:6px 0;">🏷️</div>
+          <div class="pilar-title">Relanzamiento de Marca</div>
+          <div class="card-body">Activar Bas Dental con campaña de lanzamiento que genere buzz local y captura de leads desde el primer día.</div>
+        </div>
+        <div class="pilar-card" style="border-color:var(--teal);">
+          <div class="pilar-num" style="color:var(--teal);">Pilar 02</div>
+          <div style="font-size:24px; margin:6px 0;">📍</div>
+          <div class="pilar-title">Captación Digital</div>
+          <div class="card-body">Google My Business + Meta Ads + contenido orgánico para aparecer donde el paciente ya está buscando.</div>
+        </div>
+        <div class="pilar-card" style="border-color:#16A34A;">
+          <div class="pilar-num" style="color:#16A34A;">Pilar 03</div>
+          <div style="font-size:24px; margin:6px 0;">🤝</div>
+          <div class="pilar-title">Programa de Referidos</div>
+          <div class="card-body">Convertir a los 306 pacientes actuales en embajadores activos que traigan amigos y familiares con incentivos.</div>
+        </div>
+        <div class="pilar-card" style="border-color:#EA580C;">
+          <div class="pilar-num" style="color:#EA580C;">Pilar 04</div>
+          <div style="font-size:24px; margin:6px 0;">🏢</div>
+          <div class="pilar-title">Convenios Corporativos</div>
+          <div class="card-body">Canal B2B: empresas, colegios e instituciones cercanas que puedan referir pacientes en volumen.</div>
+        </div>
+        <div class="pilar-card" style="border-color:#9333EA;">
+          <div class="pilar-num" style="color:#9333EA;">Pilar 05</div>
+          <div style="font-size:24px; margin:6px 0;">💙</div>
+          <div class="pilar-title">Retención y Fidelización</div>
+          <div class="card-body">Mantener y crecer el valor por paciente: recordatorios, seguimiento y experiencia que genere reseñas.</div>
+        </div>
+      </div>
+      <div style="width:100%; background:var(--sky-dim); border-radius:12px; padding:12px 18px; border:1px solid rgba(79,195,247,0.25);">
+        <div style="font-size:clamp(11px,1.2vw,14px); color:var(--text); text-align:center; font-weight:500;">
+          Los 5 pilares actúan simultáneamente — captación digital y referidos traen pacientes nuevos, mientras retención y convenios multiplican el ingreso por paciente existente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 — PILAR 1: RELANZAMIENTO -->
+  <div class="slide" id="s8">
+    <div class="slide-content">
+      <div class="slide-label">Pilar 01 · Relanzamiento de Marca</div>
+      <h2 class="section-title"><span>Bas Dental</span> — El lanzamiento que genera pacientes</h2>
+      <div class="sky-line"></div>
+      <div class="split" style="margin-top:8px; gap:28px;">
+        <div class="split-left">
+          <div class="card">
+            <div class="card-title">Campaña de lanzamiento (semanas 1–4)</div>
+            <ul class="bullet-list">
+              <li><strong>Nombre nuevo, misma confianza:</strong> comunicar la transición a pacientes actuales vía WhatsApp personalizado</li>
+              <li><strong>Evento de apertura:</strong> jornada de consultas gratuitas el primer fin de semana bajo el nombre Bas Dental</li>
+              <li><strong>Kit de identidad:</strong> nuevo logo, señalética, uniformes, papelería — primera impresión física poderosa</li>
+              <li><strong>Video de presentación:</strong> Reels de 30" mostrando instalaciones, equipo y el nuevo nombre en vivo</li>
+              <li><strong>Cambio en GMB + redes:</strong> actualizar todos los perfiles digitales el día D</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Oferta de lanzamiento (mes 1–2)</div>
+            <ul class="bullet-list">
+              <li>Primera consulta de evaluación: <strong>GRATIS</strong></li>
+              <li>Limpieza profesional a precio de lanzamiento: Bs 120 (precio normal: Bs 200)</li>
+              <li>Combo familiar: 4 limpiezas + 4 fluoraciones al precio de 3</li>
+              <li>Sorteo entre los primeros 50 pacientes nuevos: blanqueamiento dental gratuito</li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-right">
+          <div class="card">
+            <div class="card-title">Meta del relanzamiento</div>
+            <div class="card-body" style="font-size:clamp(12px,1.3vw,15px); line-height:1.7;">
+              🎯 <strong>50 consultas nuevas</strong> en el primer mes<br>
+              📲 <strong>+300 seguidores</strong> en Instagram en 30 días<br>
+              ⭐ <strong>20 reseñas</strong> en Google My Business<br>
+              📞 <strong>100% de pacientes actuales</strong> notificados del cambio de nombre
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Mensajes clave del relanzamiento</div>
+            <ul class="bullet-list">
+              <li>"Nuevo nombre, la misma sonrisa de siempre"</li>
+              <li>"Bas Dental: tu clínica dental en Santa Cruz, ahora más cerca"</li>
+              <li>"Cuidamos tu sonrisa desde el primer día"</li>
+              <li>Hashtag sugerido: <strong>#BasDental #TuSonrisaEnSantaCruz</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 — PILAR 2: CAPTACIÓN DIGITAL -->
+  <div class="slide" id="s9">
+    <div class="slide-content">
+      <div class="slide-label">Pilar 02 · Captación Digital</div>
+      <h2 class="section-title">Aparecer donde el <span>paciente busca</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="card">
+          <span class="card-icon">📍</span>
+          <div class="card-title">Google My Business (GMB)</div>
+          <ul class="bullet-list">
+            <li>Crear/optimizar ficha con nombre Bas Dental, dirección exacta, horarios, fotos del consultorio</li>
+            <li>Subir 20+ fotos de alta calidad: antes/después, instalaciones, equipo</li>
+            <li>Activar mensajes directos desde Google para consultas rápidas</li>
+            <li>Generar campaña de reseñas: pedir a los 306 pacientes actuales que dejen una</li>
+            <li>Publicar en GMB cada semana (promociones, novedades)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon">📱</span>
+          <div class="card-title">Meta Ads (Instagram + Facebook)</div>
+          <ul class="bullet-list">
+            <li>Campaña de captación local: segmentar por radio 5km, 18–50 años</li>
+            <li>Objetivo: mensajes a WhatsApp directamente desde el anuncio</li>
+            <li>Formato: carrusel antes/después + video testimonial + oferta de primera consulta</li>
+            <li>Presupuesto sugerido: USD 50–80/mes para empezar</li>
+            <li>A/B testing: probar 3 creativos distintos en el primer mes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon">💬</span>
+          <div class="card-title">WhatsApp Business</div>
+          <ul class="bullet-list">
+            <li>Perfil profesional de Bas Dental con catálogo de servicios y precios</li>
+            <li>Respuesta automática de bienvenida + menú de servicios</li>
+            <li>Campaña mensual a base existente: recordatorio de control, promo del mes</li>
+            <li>Enlace directo en bio de Instagram y en anuncios de Meta</li>
+            <li>Tiempo de respuesta máximo: 2 horas en horario laboral</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:4px;">
+        <div class="card">
+          <div class="card-title">Contenido orgánico que convierte</div>
+          <ul class="bullet-list">
+            <li><strong>Antes/después:</strong> el contenido de mayor conversión — publicar 4x/mes</li>
+            <li><strong>Testimonios en video:</strong> pacientes de ortodoncia hablando de su resultado</li>
+            <li><strong>Tips de salud bucal:</strong> posicionan al doctor como experto</li>
+            <li><strong>Detrás de escena:</strong> humaniza la clínica y genera confianza</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Funnel de conversión digital</div>
+          <div class="card-body" style="font-size:clamp(11px,1.2vw,14px); line-height:2;">
+            👁️ <strong>Ve el contenido</strong> en IG/FB/Google →<br>
+            💬 <strong>Manda mensaje</strong> por WhatsApp →<br>
+            📅 <strong>Agenda cita</strong> (primera consulta gratis) →<br>
+            🦷 <strong>Se convierte en paciente</strong> activo
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 — PILAR 3: REFERIDOS -->
+  <div class="slide" id="s10">
+    <div class="slide-content">
+      <div class="slide-label">Pilar 03 · Programa de Referidos</div>
+      <h2 class="section-title">Tus pacientes, tu mejor <span>canal de ventas</span></h2>
+      <div class="sky-line"></div>
+      <div class="big-quote" style="width:100%; margin-top:4px;">
+        Un paciente satisfecho puede traer entre 2 y 5 personas de su círculo cercano — con un sistema estructurado, ese flujo se vuelve predecible y continuo.
+      </div>
+      <div class="grid-3" style="margin-top:10px;">
+        <div class="card">
+          <div class="card-title">Estructura del programa</div>
+          <ul class="bullet-list">
+            <li>Nombre: <strong>"Trae un amigo a Bas Dental"</strong></li>
+            <li>Por cada paciente nuevo referido: el paciente que lo trajo recibe <strong>un servicio gratis</strong> (limpieza o fluoración)</li>
+            <li>El paciente nuevo recibe: <strong>consulta de evaluación gratuita</strong></li>
+            <li>Registro simple: el nuevo paciente menciona el nombre de quien lo refirió al agendar</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Cómo activarlo</div>
+          <ul class="bullet-list">
+            <li>Mensaje de WhatsApp personalizado a los 306 pacientes actuales presentando el programa</li>
+            <li>Tarjeta física (o digital por WhatsApp) con el código/nombre del paciente</li>
+            <li>Recordatorio mensual por WhatsApp a quienes aún no han referido a nadie</li>
+            <li>Tabla de ranking: los top 5 referidores reciben premio especial al final del trimestre</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Proyección del programa</div>
+          <div class="card-body" style="font-size:clamp(11px,1.2vw,14px); line-height:2;">
+            📊 Si el <strong>20% de los 306 pacientes</strong> refiere a 1 persona:<br>
+            → <strong>+61 pacientes nuevos</strong> en 3 meses<br><br>
+            📊 Si el <strong>30% refiere a 2 personas</strong>:<br>
+            → <strong>+184 pacientes nuevos</strong> en 6 meses<br><br>
+            💰 Costo por adquisición: <strong>una limpieza gratis</strong> (vs. Bs 300+ en publicidad)
+          </div>
+        </div>
+      </div>
+      <div style="width:100%; background:var(--sky-dim); border-radius:12px; padding:12px 18px; border:1px solid rgba(79,195,247,0.25); display:flex; align-items:center; gap:16px;">
+        <div style="font-size:28px;">💡</div>
+        <div style="font-size:clamp(11px,1.2vw,14px); color:var(--text);">
+          <strong>Activación inmediata:</strong> El programa de referidos no requiere ninguna inversión en publicidad. Solo requiere un mensaje de WhatsApp bien redactado enviado esta semana.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 — PILAR 4: CONVENIOS -->
+  <div class="slide" id="s11">
+    <div class="slide-content">
+      <div class="slide-label">Pilar 04 · Convenios Corporativos</div>
+      <h2 class="section-title">El canal <span>B2B</span> que ningún competidor usa</h2>
+      <div class="sky-line"></div>
+      <div class="split" style="margin-top:8px; gap:28px; align-items:stretch;">
+        <div class="split-left">
+          <div class="card">
+            <div class="card-title">¿Qué es un convenio corporativo?</div>
+            <div class="card-body" style="font-size:clamp(11px,1.2vw,14px); line-height:1.7;">
+              Un acuerdo formal con empresas, colegios o instituciones por el cual Bas Dental ofrece <strong>precios preferenciales</strong> a sus empleados/alumnos a cambio de <strong>volumen garantizado de pacientes</strong>.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Targets prioritarios en la zona</div>
+            <ul class="bullet-list">
+              <li>Empresas industriales / logísticas del 4to–5to anillo (50–200 empleados)</li>
+              <li>Colegios privados cercanos (profesores + padres de familia)</li>
+              <li>Policlínicos y clínicas médicas (referencia cruzada de pacientes)</li>
+              <li>Clubes deportivos, gimnasios, instituciones del barrio</li>
+              <li>Cooperativas y sindicatos con carnet de salud activo</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Qué ofrece Bas Dental</div>
+            <ul class="bullet-list">
+              <li><strong>10–20% de descuento</strong> en servicios para empleados/alumnos</li>
+              <li>Jornada de revisión gratuita en las instalaciones de la empresa</li>
+              <li>Facturación mensual o trimestral para facilitar el pago corporativo</li>
+              <li>Carnet o código de empleado para acceder al beneficio</li>
+            </ul>
+          </div>
+        </div>
+        <div class="split-right">
+          <div class="card">
+            <div class="card-title">Propuesta de valor para la empresa</div>
+            <ul class="bullet-list">
+              <li>Beneficio laboral diferenciador sin costo para la empresa</li>
+              <li>Reduce ausentismo por problemas dentales</li>
+              <li>Mejora el bienestar del equipo</li>
+              <li>Certificado de "empresa con beneficios de salud" para postular a candidatos</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Plan de acción (mes 2–3)</div>
+            <ul class="bullet-list">
+              <li>Identificar 10 empresas/colegios en radio 3km</li>
+              <li>Preparar carta de presentación + dossier Bas Dental con propuesta de convenio</li>
+              <li>Visita presencial a los decisores (RRHH o dirección)</li>
+              <li>Meta: cerrar <strong>3 convenios activos</strong> en los primeros 90 días</li>
+            </ul>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">×12</div>
+            <div class="stat-label">Un solo convenio con empresa de 50 empleados puede generar hasta 12 nuevos pacientes al mes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12 — PILAR 5: RETENCIÓN -->
+  <div class="slide" id="s12">
+    <div class="slide-content">
+      <div class="slide-label">Pilar 05 · Retención y Fidelización</div>
+      <h2 class="section-title">Hacer que el paciente <span>regrese y recomiende</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="card">
+          <span class="card-icon">🔔</span>
+          <div class="card-title">Sistema de recordatorios</div>
+          <ul class="bullet-list">
+            <li>Recordatorio de control de ortodoncia: WhatsApp 2 días antes de la cita</li>
+            <li>Cumpleaños: mensaje personalizado + oferta especial de regalo</li>
+            <li>Reactivación de inactivos: pacientes sin visita en +6 meses reciben mensaje personalizado</li>
+            <li>Recordatorio anual de limpieza profesional a todos los pacientes del historial</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon">⭐</span>
+          <div class="card-title">Generación de reseñas</div>
+          <ul class="bullet-list">
+            <li>Al finalizar cada tratamiento: pedir reseña en Google con enlace directo</li>
+            <li>Pacientes con ortodoncia finalizada: testimonial en video para redes (con consentimiento)</li>
+            <li>Meta: 50 reseñas en Google en 6 meses (promedio 4.8+ estrellas)</li>
+            <li>Las reseñas son el activo digital más poderoso a largo plazo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-icon">🎁</span>
+          <div class="card-title">Programa de fidelidad</div>
+          <ul class="bullet-list">
+            <li><strong>"Puntos Bas Dental":</strong> acumula por cada servicio realizado</li>
+            <li>100 puntos = 1 limpieza gratis · 200 puntos = 1 blanqueamiento con descuento</li>
+            <li>Pacientes de ortodoncia reciben tarjeta de control personalizada con logo Bas Dental</li>
+            <li>Kit de bienvenida para nuevos pacientes: cepillo + hilo dental + tarjeta del doctor</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:6px;">
+        <div class="card">
+          <div class="card-title">Reactivación de pacientes inactivos (oportunidad inmediata)</div>
+          <ul class="bullet-list">
+            <li>De los 306 registrados, se estima que +100 no han regresado en 6+ meses</li>
+            <li>Campaña de WhatsApp: "Te echamos de menos en Bas Dental — tu próxima limpieza tiene 30% off"</li>
+            <li>Potencial de recuperar 30–50 pacientes en el primer mes sin ningún costo publicitario</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Experiencia en clínica</div>
+          <ul class="bullet-list">
+            <li>Tiempo de espera máximo: 15 minutos (o avisar al paciente)</li>
+            <li>Sala de espera cómoda con pantalla mostrando contenido de Bas Dental</li>
+            <li>Música ambiental y aroma agradable (elimina el "miedo al dentista")</li>
+            <li>Cobros con QR y transferencia — facilidad de pago = más cierres</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13 — PLAN DE PROMOCIONES -->
+  <div class="slide" id="s13">
+    <div class="slide-content">
+      <div class="slide-label">Plan Promocional</div>
+      <h2 class="section-title">Promociones que <span>convierten</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="promo-card">
+          <div class="promo-name">🦷 Primera Consulta Gratis</div>
+          <div class="promo-desc">Oferta permanente para nuevos pacientes. Elimina la barrera de entrada. El costo real es mínimo — el valor del paciente captado es alto. Se activa desde el anuncio de Meta hasta el link en bio.</div>
+          <span class="pill green promo-tag">Captación · Permanente</span>
+        </div>
+        <div class="promo-card">
+          <div class="promo-name">✨ Pack Sonrisa Perfecta</div>
+          <div class="promo-desc">Limpieza + blanqueamiento + revisión completa a precio especial. Paquete con nombre atractivo, diseñado para el segmento joven estético. Válido 1 mes. Comunicado en redes y por WhatsApp.</div>
+          <span class="pill orange promo-tag">Estética · Mensual</span>
+        </div>
+        <div class="promo-card">
+          <div class="promo-name">👨‍👩‍👧 Promo Familia Bas Dental</div>
+          <div class="promo-desc">2 adultos + 2 niños: limpiezas y fluoraciones al precio de 3. Activada en agosto (Día del Niño) y diciembre. Aumenta el ticket promedio por visita y convierte a toda la familia en pacientes.</div>
+          <span class="pill promo-tag">Familiar · Estacional</span>
+        </div>
+        <div class="promo-card">
+          <div class="promo-name">🎓 Campaña Vuelta al Colegio</div>
+          <div class="promo-desc">Revisión dental gratuita para niños en enero-febrero. Llega a las mamás a través de grupos de WhatsApp de colegios. Genera confianza y captación de familias completas como pacientes.</div>
+          <span class="pill promo-tag">Estacional · Enero-Feb</span>
+        </div>
+        <div class="promo-card">
+          <div class="promo-name">💝 Promo Día de la Madre</div>
+          <div class="promo-desc">Blanqueamiento + limpieza al 40% off para mamás. 27 de mayo. Contenido emocional en redes + historia de "el mejor regalo para mamá". Alta conversión por urgencia de fecha.</div>
+          <span class="pill orange promo-tag">Estacional · 27 Mayo</span>
+        </div>
+        <div class="promo-card">
+          <div class="promo-name">🔰 Cuotas Sin Recargo en Ortodoncia</div>
+          <div class="promo-desc">Facilitar el inicio de ortodoncia con cuota inicial accesible. Comunicar precio mensual en lugar de precio total. Elimina la percepción de que los brackets son "caros". Impacto directo en cierres.</div>
+          <span class="pill green promo-tag">Ortodoncia · Permanente</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14 — CALENDARIO DE EJECUCIÓN -->
+  <div class="slide" id="s14">
+    <div class="slide-content">
+      <div class="slide-label">Plan de Ejecución</div>
+      <h2 class="section-title">Calendario de <span>acciones</span> — 6 meses</h2>
+      <div class="sky-line"></div>
+      <div style="width:100%; display:flex; flex-direction:column; gap:9px; margin-top:8px;">
+        <div class="timeline-row">
+          <div class="timeline-month">MES 1<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Lanzamiento</span></div>
+          <div class="timeline-tasks">
+            ✅ Actualizar todos los perfiles digitales con nombre Bas Dental · Crear/optimizar Google My Business · Campañas de anuncio de cambio de nombre por WhatsApp a 306 pacientes · Ofrecer consulta gratuita de lanzamiento · Activar oferta de limpieza a precio especial · Grabar 3 Reels de presentación
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-month">MES 2<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Captación</span></div>
+          <div class="timeline-tasks">
+            ✅ Lanzar Meta Ads con presupuesto USD 50/mes · Activar programa de referidos (mensaje WhatsApp a base) · Iniciar proceso de convenios corporativos (5 visitas) · Primera campaña de recolección de reseñas en Google · Publicar primeros testimoniales en video
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-month">MES 3<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Escala</span></div>
+          <div class="timeline-tasks">
+            ✅ Optimizar anuncios de Meta según resultados del mes 2 · Cerrar primer convenio corporativo · Campaña de reactivación a pacientes inactivos (+6 meses sin visita) · Lanzar Pack Sonrisa Perfecta · Análisis de métricas y ajuste de estrategia
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-month">MES 4<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Consolidar</span></div>
+          <div class="timeline-tasks">
+            ✅ Campaña Día de la Madre (27 mayo) · Promo familia para mayo · Segundo convenio corporativo · Implementar sistema de puntos Bas Dental · Revisar progreso: meta de 420 pacientes activos
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-month">MES 5<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Crecer</span></div>
+          <div class="timeline-tasks">
+            ✅ Campaña Día del Padre (junio) · Ampliar presupuesto Meta Ads si ROI positivo · Tercer convenio corporativo cerrado · Revisión del programa de referidos: premiar al top 5 referidores · Encuesta de satisfacción a pacientes
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-month">MES 6<br><span style="font-size:10px; font-weight:400; opacity:0.8;">Evaluar</span></div>
+          <div class="timeline-tasks">
+            ✅ Revisión total de KPIs · Campaña Vuelta al Colegio (anticipo enero) · Meta: 500+ pacientes registrados · Planificación del roadmap Q3–Q4 · Presentación de resultados
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15 — PROYECCIÓN DE CRECIMIENTO -->
+  <div class="slide" id="s15">
+    <div class="slide-content">
+      <div class="slide-label">Proyecciones</div>
+      <h2 class="section-title">Curva de <span>crecimiento</span> esperada</h2>
+      <div class="sky-line"></div>
+      <div class="chart-wrap" style="max-height:300px;">
+        <canvas id="growthChart"></canvas>
+      </div>
+      <div class="grid-4" style="margin-top:6px;">
+        <div class="stat-box">
+          <div class="stat-num">306</div>
+          <div class="stat-label">Pacientes hoy (línea base)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">420</div>
+          <div class="stat-label">Meta mes 4 (+37%)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">520</div>
+          <div class="stat-label">Meta mes 8 (+70%)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">650+</div>
+          <div class="stat-label">Meta mes 12 (+112%)</div>
+        </div>
+      </div>
+      <div style="width:100%; background:var(--sky-dim); border-radius:10px; padding:10px 16px; border:1px solid rgba(79,195,247,0.25); font-size:clamp(10px,1.1vw,13px); color:var(--muted); text-align:center;">
+        Proyección conservadora (escenario base). Escenario optimista con Meta Ads activo + 3 convenios corporativos cerrados podría alcanzar 800+ pacientes en 12 meses.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16 — KPIs -->
+  <div class="slide" id="s16">
+    <div class="slide-content">
+      <div class="slide-label">Medición</div>
+      <h2 class="section-title">KPIs para <span>medir el éxito</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-2" style="margin-top:8px;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="kpi-row">
+            <div class="kpi-icon">👥</div>
+            <div class="kpi-name">Nuevos pacientes por mes</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">+25–40</div>
+              <div class="kpi-period">pacientes/mes</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">📍</div>
+            <div class="kpi-name">Posición en Google Maps "dentista Santa Cruz"</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">Top 5</div>
+              <div class="kpi-period">en 90 días</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">⭐</div>
+            <div class="kpi-name">Reseñas en Google My Business</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">50+</div>
+              <div class="kpi-period">en 6 meses</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">🤝</div>
+            <div class="kpi-name">Pacientes ingresados por referidos</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">30%</div>
+              <div class="kpi-period">del total nuevos</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">🏢</div>
+            <div class="kpi-name">Convenios corporativos activos</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">3</div>
+              <div class="kpi-period">en 90 días</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="kpi-row">
+            <div class="kpi-icon">📲</div>
+            <div class="kpi-name">Seguidores en Instagram</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">+500</div>
+              <div class="kpi-period">en 6 meses</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">💬</div>
+            <div class="kpi-name">Consultas recibidas por WhatsApp/mes</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">60+</div>
+              <div class="kpi-period">por mes</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">🔁</div>
+            <div class="kpi-name">Tasa de conversión consulta → paciente</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">70%+</div>
+              <div class="kpi-period">objetivo</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-name">Ingreso mensual (proyectado)</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">+40%</div>
+              <div class="kpi-period">vs. línea base</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-icon">😊</div>
+            <div class="kpi-name">Pacientes totales activos</div>
+            <div style="text-align:right;">
+              <div class="kpi-target">650+</div>
+              <div class="kpi-period">en 12 meses</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17 — INVERSIÓN -->
+  <div class="slide" id="s17">
+    <div class="slide-content">
+      <div class="slide-label">Inversión y ROI</div>
+      <h2 class="section-title">¿Cuánto se invierte, <span>cuánto retorna</span>?</h2>
+      <div class="sky-line"></div>
+      <div class="grid-3" style="margin-top:8px;">
+        <div class="card" style="border-top:3px solid var(--sky);">
+          <div class="card-title">Inversión Mes 1–2 (Lanzamiento)</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>Kit de identidad visual (logo, papelería): Bs 400–600</li>
+            <li>Señalética interior/exterior: Bs 300–500</li>
+            <li>Meta Ads primer mes: USD 50 (~Bs 350)</li>
+            <li>Material impreso (tarjetas, flyers): Bs 200</li>
+            <li>WhatsApp Business: gratis</li>
+            <li>Google My Business: gratis</li>
+          </ul>
+          <div style="margin-top:10px; font-family:'Space Grotesk',sans-serif; font-size:clamp(14px,1.6vw,18px); font-weight:700; background:var(--grad-sky); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Total: ~Bs 1,400–1,650</div>
+        </div>
+        <div class="card" style="border-top:3px solid var(--teal);">
+          <div class="card-title">Inversión Mensual Recurrente (mes 3+)</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>Meta Ads: USD 50–80/mes (~Bs 350–560)</li>
+            <li>Gestión de redes (Alpha Strategy): incluido en plan</li>
+            <li>Incentivos programa de referidos: Bs 100–150/mes (limpiezas gratis)</li>
+            <li>WhatsApp marketing: gratis</li>
+            <li>Materiales promocionales: Bs 100/mes</li>
+          </ul>
+          <div style="margin-top:10px; font-family:'Space Grotesk',sans-serif; font-size:clamp(14px,1.6vw,18px); font-weight:700; background:var(--grad-sky); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Total: ~Bs 550–810/mes</div>
+        </div>
+        <div class="card" style="border-top:3px solid #16A34A;">
+          <div class="card-title" style="color:#16A34A;">Retorno Esperado (ROI)</div>
+          <ul class="bullet-list" style="margin-top:8px;">
+            <li>1 paciente nuevo de ortodoncia = Bs 200+/mes por 18–24 meses</li>
+            <li>10 nuevos pacientes/mes de ortodoncia = Bs 2,000+/mes extra</li>
+            <li>Limpieza estética = Bs 150–300 por consulta</li>
+            <li>Break even: se cubre la inversión con <strong>5–8 pacientes nuevos/mes</strong></li>
+            <li>A 25 pacientes nuevos/mes: ROI de <strong>400%+</strong></li>
+          </ul>
+          <div style="margin-top:10px; font-family:'Space Grotesk',sans-serif; font-size:clamp(14px,1.6vw,18px); font-weight:700; color:#16A34A;">Break even en semana 3</div>
+        </div>
+      </div>
+      <div class="big-quote" style="width:100%;">
+        La inversión publicitaria mensual en Meta Ads se recupera con <strong>2 pacientes nuevos de ortodoncia</strong>. El resto es ganancia pura — y el activo de pacientes sigue creciendo.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 18 — PRÓXIMOS PASOS -->
+  <div class="slide" id="s18">
+    <div class="slide-content">
+      <div class="slide-label">Acción Inmediata</div>
+      <h2 class="section-title">Qué hacemos <span>esta semana</span></h2>
+      <div class="sky-line"></div>
+      <div class="grid-2" style="margin-top:8px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="card" style="border-left:4px solid var(--sky);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:var(--sky); color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">1</div>
+              <div class="card-title" style="margin:0;">Crear Google My Business hoy</div>
+            </div>
+            <div class="card-body">Buscar "Bas Dental" en Google Maps → Agregar/reclamar ficha → Completar con fotos, horarios, teléfono, y enlace a WhatsApp. Sin costo. Impacto inmediato en visibilidad.</div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--teal);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:var(--teal); color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">2</div>
+              <div class="card-title" style="margin:0;">Enviar mensaje de relanzamiento a los 306 pacientes</div>
+            </div>
+            <div class="card-body">Redactar mensaje cálido de "Ahora somos Bas Dental — gracias por ser parte de esta historia". Incluir oferta exclusiva para pacientes actuales. Enviar por WhatsApp esta semana.</div>
+          </div>
+          <div class="card" style="border-left:4px solid #16A34A;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:#16A34A; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">3</div>
+              <div class="card-title" style="margin:0;">Activar el programa de referidos</div>
+            </div>
+            <div class="card-body">Lanzar "Trae un amigo a Bas Dental" con el mismo mensaje de relanzamiento. El programa se activa solo con una comunicación bien redactada.</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="card" style="border-left:4px solid #EA580C;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:#EA580C; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">4</div>
+              <div class="card-title" style="margin:0;">Actualizar todos los perfiles digitales</div>
+            </div>
+            <div class="card-body">Instagram, Facebook, WhatsApp Business: cambiar a Bas Dental con nueva foto de perfil, bio actualizada, y pin de storie con la oferta de lanzamiento.</div>
+          </div>
+          <div class="card" style="border-left:4px solid #9333EA;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:#9333EA; color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">5</div>
+              <div class="card-title" style="margin:0;">Grabar 3 Reels de presentación</div>
+            </div>
+            <div class="card-body">Video 1: "Ahora somos Bas Dental" · Video 2: recorrido por las instalaciones · Video 3: el doctor presenta los servicios. Sin producción costosa — solo teléfono y luz natural.</div>
+          </div>
+          <div class="card" style="border-left:4px solid var(--sky); background:var(--sky-dim);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <div style="background:var(--sky); color:white; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex-shrink:0;">6</div>
+              <div class="card-title" style="margin:0;">Activar Meta Ads desde la semana 2</div>
+            </div>
+            <div class="card-body">Crear primer anuncio en Facebook/Instagram: "Primera consulta gratis en Bas Dental — agenda hoy por WhatsApp". Segmentar a radio 5km. USD 50 para 30 días.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 19 — CIERRE -->
+  <div class="slide hero-slide" id="s19">
+    <div class="slide-content" style="text-align:center; gap:22px;">
+      <div class="slide-label">Conclusión</div>
+      <div class="sky-line" style="margin:0 auto;"></div>
+      <div class="slide-title" style="font-size:clamp(28px,4.5vw,56px);">Bas Dental tiene todo lo que necesita para doblar su base de pacientes en 12 meses.</div>
+      <div class="slide-subtitle" style="font-size:clamp(13px,1.6vw,18px);">
+        Los 306 pacientes actuales son el activo más poderoso — la estrategia los convierte en embajadores mientras la captación digital y los convenios llenan la agenda con pacientes nuevos cada semana.
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; width:100%; margin-top:8px;">
+        <div class="stat-box" style="background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.22);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">5</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Pilares de crecimiento simultáneos</div>
+        </div>
+        <div class="stat-box" style="background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.22);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Bs 550</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Inversión mensual mínima requerida</div>
+        </div>
+        <div class="stat-box" style="background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.22);">
+          <div class="stat-num" style="background:linear-gradient(135deg,#fff,#87CEEB); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">+112%</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.75);">Crecimiento de pacientes en 12 meses</div>
+        </div>
+      </div>
+      <div style="margin-top:10px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:12px; padding:10px 20px; color:rgba(255,255,255,0.9); font-size:clamp(11px,1.2vw,14px);">
+          📞 +591 75573977
+        </div>
+        <div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:12px; padding:10px 20px; color:rgba(255,255,255,0.9); font-size:clamp(11px,1.2vw,14px);">
+          📍 San Aurelio, 4to Anillo N°8, Santa Cruz
+        </div>
+        <div style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:12px; padding:10px 20px; color:rgba(255,255,255,0.9); font-size:clamp(11px,1.2vw,14px);">
+          💙 Alpha Strategy Group · 2026
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end slide-deck -->
+
+<!-- NAV -->
+<div class="nav-controls">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
+  <span class="slide-counter" id="counter">1 / 19</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function updateProgress() {
+    const pct = ((current + 1) / total) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  }
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, current + dir));
+    slides[current].classList.add('active');
+    updateProgress();
+    if (current === 14) setTimeout(renderChart, 100);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  updateProgress();
+
+  function renderChart() {
+    const canvas = document.getElementById('growthChart');
+    if (!canvas || canvas._chartRendered) return;
+    canvas._chartRendered = true;
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Hoy', 'Mes 2', 'Mes 3', 'Mes 4', 'Mes 5', 'Mes 6', 'Mes 7', 'Mes 8', 'Mes 9', 'Mes 10', 'Mes 11', 'Mes 12'],
+        datasets: [
+          {
+            label: 'Pacientes registrados',
+            data: [306, 340, 370, 420, 455, 490, 520, 550, 575, 600, 625, 650],
+            borderColor: '#4FC3F7',
+            backgroundColor: 'rgba(79,195,247,0.10)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#4FC3F7',
+            pointRadius: 4,
+            borderWidth: 2.5,
+          },
+          {
+            label: 'Escenario optimista',
+            data: [306, 360, 410, 480, 530, 590, 640, 690, 730, 760, 790, 820],
+            borderColor: '#4DD0E1',
+            backgroundColor: 'rgba(77,208,225,0.05)',
+            fill: false,
+            tension: 0.4,
+            pointBackgroundColor: '#4DD0E1',
+            pointRadius: 3,
+            borderWidth: 1.5,
+            borderDash: [5, 4],
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { labels: { color: '#5A7A8E', font: { family: 'Inter', size: 12 }, boxWidth: 16 } },
+          tooltip: { backgroundColor: '#0C2D4A', titleFont: { family: 'Space Grotesk' }, bodyFont: { family: 'Inter' } }
+        },
+        scales: {
+          y: {
+            min: 280,
+            grid: { color: 'rgba(79,195,247,0.10)' },
+            ticks: { color: '#5A7A8E', font: { family: 'Inter', size: 11 } }
+          },
+          x: {
+            grid: { color: 'rgba(79,195,247,0.08)' },
+            ticks: { color: '#5A7A8E', font: { family: 'Inter', size: 11 } }
+          }
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
+

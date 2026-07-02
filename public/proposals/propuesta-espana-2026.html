@@ -9,18 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:         #09111f;
-      --bg2:        #0f1d30;
-      --navy:       #152842;
-      --gold:       #D4AF37;
-      --gold-light: #F0C840;
-      --gold-dim:   rgba(212,175,55,0.18);
-      --white:      #EDF2FA;
-      --muted:      #8A9BBE;
+      --bg:         #F8FAFC;
+      --bg2:        #F1F5F9;
+      --navy:       #E8EFF8;
+      --gold:       #B8860B;
+      --gold-light: #D4AF37;
+      --gold-dim:   rgba(184,134,11,0.12);
+      --white:      #0F172A;
+      --muted:      #64748B;
       --accent:     #2563EB;
-      --grad-gold:  linear-gradient(135deg, #D4AF37, #F0C840);
-      --grad-navy:  linear-gradient(135deg, #09111f, #152842);
-      --grad-hero:  linear-gradient(135deg, #0B1728 0%, #1A3054 100%);
+      --grad-gold:  linear-gradient(135deg, #B8860B, #D4AF37);
+      --grad-navy:  linear-gradient(135deg, #F1F5F9, #E8EFF8);
+      --grad-hero:  linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -88,7 +88,7 @@
       transform: translateX(-50%);
       display: flex; align-items: center; gap: 18px;
       z-index: 9999;
-      background: rgba(9,17,31,0.8);
+      background: rgba(248,250,252,0.92);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(212,175,55,0.2);
       padding: 8px 20px; border-radius: 40px;
@@ -100,7 +100,7 @@
       border-radius: 50%; cursor: pointer; font-size: 16px;
       transition: all 0.2s;
     }
-    .nav-btn:hover { background: var(--gold); color: var(--bg); }
+    .nav-btn:hover { background: var(--gold); color: #fff; }
     .slide-counter { color: var(--muted); font-size: 13px; letter-spacing: 1px; }
 
     /* ── Typography helpers ── */
@@ -235,7 +235,7 @@
     }
     .popular-badge {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--grad-gold); color: var(--bg);
+      background: var(--grad-gold); color: #fff;
       font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; padding: 3px 12px; border-radius: 20px;
     }
@@ -281,7 +281,7 @@
     .diff-table td {
       font-size: clamp(11px, 1.2vw, 14px); color: var(--white);
       padding: 10px 14px; line-height: 1.4;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(15,23,42,0.06);
     }
     .diff-table tr:hover td { background: rgba(212,175,55,0.04); }
     .check { color: var(--gold); font-weight: 700; }
@@ -291,7 +291,7 @@
     .cta-btn {
       display: inline-block;
       background: var(--grad-gold);
-      color: var(--bg);
+      color: #fff;
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(14px, 1.6vw, 18px);
       font-weight: 700; padding: 14px 40px;

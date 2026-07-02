@@ -8,16 +8,16 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --navy: #0D1847;
-  --navy-mid: #1A237E;
-  --navy-light: #283593;
-  --gold: #F9A825;
-  --gold-light: #FFD54F;
-  --white: #FFFFFF;
-  --white-70: rgba(255,255,255,0.7);
-  --white-20: rgba(255,255,255,0.15);
-  --green-dark: #0A2E1A;
-  --green-mid: #1B5E20;
+  --navy: #F8FAFC;
+  --navy-mid: #E8EFF8;
+  --navy-light: #F1F5F9;
+  --gold: #B8860B;
+  --gold-light: #D4AF37;
+  --white: #0F172A;
+  --white-70: rgba(15,23,42,0.62);
+  --white-20: rgba(15,23,42,0.05);
+  --green-dark: #F0FDF4;
+  --green-mid: #DCFCE7;
 }
 
 body {
@@ -133,7 +133,7 @@ body {
 
 /* ── Section Dividers ── */
 .slide-section {
-  background: linear-gradient(135deg, #0A1650 0%, #1A237E 50%, #0D1847 100%);
+  background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #F0F4FF 100%);
 }
 .slide-section .slide-title { font-size: clamp(44px, 6.5vw, 80px); }
 .section-num {
@@ -149,22 +149,22 @@ body {
   content: 'EJERCICIO PRÁCTICO';
   position: absolute; top: 22px; left: 32px;
   font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
-  color: #69F0AE; border-left: 2px solid #69F0AE; padding-left: 10px;
+  color: #16A34A; border-left: 2px solid #16A34A; padding-left: 10px;
 }
-.slide-exercise .logo-stamp { color: #69F0AE; }
+.slide-exercise .logo-stamp { color: #16A34A; }
 .exercise-box {
-  background: rgba(105,240,174,0.08);
-  border: 1px solid rgba(105,240,174,0.3);
+  background: rgba(22,163,74,0.06);
+  border: 1px solid rgba(22,163,74,0.25);
   border-radius: 12px; padding: 28px 32px; margin-top: 20px; width: 100%; text-align: left;
 }
 .exercise-step {
   display: flex; align-items: flex-start; gap: 14px;
-  margin-bottom: 14px; font-size: 14px; color: var(--white-70); line-height: 1.5;
+  margin-bottom: 14px; font-size: 14px; color: #475569; line-height: 1.5;
 }
 .exercise-step:last-child { margin-bottom: 0; }
 .step-num {
   min-width: 28px; height: 28px; border-radius: 50%;
-  background: var(--gold); color: var(--navy); font-weight: 800;
+  background: var(--gold); color: #fff; font-weight: 800;
   font-size: 12px; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
@@ -202,7 +202,7 @@ body {
   text-align: left;
 }
 .error-icon { font-size: 22px; flex-shrink: 0; }
-.error-title { font-size: 14px; font-weight: 700; color: #EF9A9A; margin-bottom: 2px; }
+.error-title { font-size: 14px; font-weight: 700; color: #B91C1C; margin-bottom: 2px; }
 .error-desc { font-size: 12px; color: var(--white-70); }
 
 /* ── Tool cards ── */
@@ -217,16 +217,16 @@ body {
 
 /* ── CTA slide ── */
 .slide-cta {
-  background: linear-gradient(135deg, #0A1650 0%, #1A237E 40%, #0D1440 100%);
+  background: linear-gradient(135deg, #F0F4FF 0%, #E0E7FF 40%, #F0F4FF 100%);
 }
 .cta-badge {
-  background: var(--gold); color: var(--navy);
+  background: var(--gold); color: #fff;
   font-size: 11px; font-weight: 800; letter-spacing: 2px;
   text-transform: uppercase; padding: 6px 20px; border-radius: 999px;
   margin-bottom: 20px; display: inline-block;
 }
 .cta-btn {
-  margin-top: 28px; background: var(--gold); color: var(--navy);
+  margin-top: 28px; background: var(--gold); color: #fff;
   font-size: 15px; font-weight: 800; padding: 16px 40px;
   border-radius: 999px; border: none; cursor: pointer;
   letter-spacing: 0.5px; display: inline-block; text-decoration: none;
@@ -273,7 +273,7 @@ body {
   display: flex; align-items: center; gap: 16px; z-index: 1000;
 }
 .nav-btn {
-  background: var(--white-20); border: 1px solid rgba(255,255,255,0.2);
+  background: var(--white-20); border: 1px solid rgba(15,23,42,0.12);
   color: var(--white); width: 38px; height: 38px; border-radius: 50%;
   cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
   transition: background 0.2s;
@@ -335,8 +335,8 @@ body {
 <!-- ═══════════════════════════════════════════════════════════════
      SLIDE 1 — PORTADA
 ════════════════════════════════════════════════════════════════ -->
-<div class="slide active" style="background: linear-gradient(135deg, #050E38 0%, #1A237E 50%, #050E38 100%);">
-  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 60% 40%, rgba(249,168,37,0.12) 0%, transparent 60%);pointer-events:none;"></div>
+<div class="slide active" style="background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #EEF2FF 100%);">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 60% 40%, rgba(184,134,11,0.08) 0%, transparent 60%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
 
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;z-index:1;">
@@ -414,7 +414,7 @@ body {
       <div style="font-size:16px;color:var(--gold);padding:0 3px;">→</div>
       <div style="flex:1;background:rgba(105,55,200,0.15);padding:12px 10px;text-align:center;border-top:3px solid rgba(105,55,200,0.6);">
         <div style="font-size:20px;margin-bottom:4px;">🎵</div>
-        <div style="font-size:11px;font-weight:700;color:#CE93D8;">Ve en TikTok</div>
+        <div style="font-size:11px;font-weight:700;color:#7B1FA2;">Ve en TikTok</div>
         <div style="font-size:10px;color:var(--white-70);margin-top:3px;">Video viral de la clínica</div>
       </div>
       <div style="font-size:16px;color:var(--gold);padding:0 3px;">→</div>
@@ -487,23 +487,23 @@ body {
     <h2 style="font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:20px;">El error más común de las <span class="gold">clínicas dentales</span> en redes</h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
       <div>
-        <div style="font-size:11px;font-weight:700;color:#EF9A9A;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid rgba(229,57,53,0.4);">❌ Lo que hacen mal</div>
+        <div style="font-size:11px;font-weight:700;color:#B91C1C;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid rgba(229,57,53,0.4);">❌ Lo que hacen mal</div>
         <ul class="check-list" style="list-style:none;">
-          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#EF9A9A;font-weight:700;">✗</span> Publicar solo cuando "hay tiempo"</li>
-          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#EF9A9A;font-weight:700;">✗</span> Solo hablar de precios y promociones</li>
-          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#EF9A9A;font-weight:700;">✗</span> Fotos oscuras o de baja calidad</li>
-          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#EF9A9A;font-weight:700;">✗</span> No responder comentarios ni DMs</li>
-          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#EF9A9A;font-weight:700;">✗</span> Copiar el contenido de otra clínica</li>
+          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#B91C1C;font-weight:700;">✗</span> Publicar solo cuando "hay tiempo"</li>
+          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#B91C1C;font-weight:700;">✗</span> Solo hablar de precios y promociones</li>
+          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#B91C1C;font-weight:700;">✗</span> Fotos oscuras o de baja calidad</li>
+          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#B91C1C;font-weight:700;">✗</span> No responder comentarios ni DMs</li>
+          <li style="border-color:rgba(229,57,53,0.2);"><span style="color:#B91C1C;font-weight:700;">✗</span> Copiar el contenido de otra clínica</li>
         </ul>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;color:#69F0AE;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid rgba(105,240,174,0.4);">✅ Lo que vamos a lograr hoy</div>
+        <div style="font-size:11px;font-weight:700;color:#16A34A;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid rgba(105,240,174,0.4);">✅ Lo que vamos a lograr hoy</div>
         <ul style="list-style:none;">
-          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#69F0AE;font-weight:700;">✓</span> Calendario claro y sostenible</li>
-          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#69F0AE;font-weight:700;">✓</span> Contenido que educa y genera confianza</li>
-          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#69F0AE;font-weight:700;">✓</span> Fórmula para escribir posts fácil</li>
-          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#69F0AE;font-weight:700;">✓</span> Herramientas que ahorran tiempo</li>
-          <li style="font-size:13px;color:var(--white-70);padding:8px 0;display:flex;gap:10px;"><span style="color:#69F0AE;font-weight:700;">✓</span> Tu plan de acción para esta semana</li>
+          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#16A34A;font-weight:700;">✓</span> Calendario claro y sostenible</li>
+          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#16A34A;font-weight:700;">✓</span> Contenido que educa y genera confianza</li>
+          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#16A34A;font-weight:700;">✓</span> Fórmula para escribir posts fácil</li>
+          <li style="font-size:13px;color:var(--white-70);padding:8px 0;border-bottom:1px solid var(--white-20);display:flex;gap:10px;"><span style="color:#16A34A;font-weight:700;">✓</span> Herramientas que ahorran tiempo</li>
+          <li style="font-size:13px;color:var(--white-70);padding:8px 0;display:flex;gap:10px;"><span style="color:#16A34A;font-weight:700;">✓</span> Tu plan de acción para esta semana</li>
         </ul>
       </div>
     </div>
@@ -602,22 +602,22 @@ body {
 <div class="slide slide-exercise">
   <div class="logo-stamp">Alpha Strategy Group</div>
   <div style="width:100%;">
-    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#69F0AE;">Ejercicio 1 — Clasifica los posts</h2>
+    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#16A34A;">Ejercicio 1 — Clasifica los posts</h2>
     <p style="font-size:13px;color:var(--white-70);margin-bottom:14px;">Asigna cada idea al pilar correcto: Educación · Servicios · Transformaciones · Confianza · Fechas</p>
     <div class="exercise-box">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">1. "¿Cómo sé si tengo una caries?"</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">2. Foto del equipo de la clínica</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">3. Antes y después de ortodoncia</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">4. "Descuento en limpieza este mes"</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">5. "¿En qué consiste una limpieza profesional?"</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">6. Reel mostrando la sala de espera</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">7. Alimentos que causan caries</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">8. Testimonio de paciente con brackets</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">9. Brackets metálicos vs. estéticos</div>
-        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(255,255,255,0.05);border-radius:6px;">10. "¿Cada cuánto necesito una limpieza?"</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">1. "¿Cómo sé si tengo una caries?"</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">2. Foto del equipo de la clínica</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">3. Antes y después de ortodoncia</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">4. "Descuento en limpieza este mes"</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">5. "¿En qué consiste una limpieza profesional?"</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">6. Reel mostrando la sala de espera</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">7. Alimentos que causan caries</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">8. Testimonio de paciente con brackets</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">9. Brackets metálicos vs. estéticos</div>
+        <div style="font-size:12px;color:var(--white);padding:8px 12px;background:rgba(15,23,42,0.04);border-radius:6px;">10. "¿Cada cuánto necesito una limpieza?"</div>
       </div>
-      <div style="margin-top:12px;font-size:11px;color:#69F0AE;">⏱ 5 minutos — escribe el pilar al lado de cada número</div>
+      <div style="margin-top:12px;font-size:11px;color:#16A34A;">⏱ 5 minutos — escribe el pilar al lado de cada número</div>
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -650,21 +650,21 @@ body {
         <div class="formula-label">🎣 Hook</div>
         <div style="font-size:22px;font-weight:900;color:var(--gold);margin:8px 0;">1ª línea</div>
         <div class="formula-desc">Detiene el scroll. Hace que lean. Provoca curiosidad, miedo o promesa.</div>
-        <div style="margin-top:10px;font-size:11px;color:#FFD54F;font-style:italic;">"¿Sabías que el 80% de los adultos tiene sarro sin saberlo?"</div>
+        <div style="margin-top:10px;font-size:11px;color:#B8860B;font-style:italic;">"¿Sabías que el 80% de los adultos tiene sarro sin saberlo?"</div>
       </div>
       <div class="formula-arrow">→</div>
       <div class="formula-block">
         <div class="formula-label">📝 Cuerpo</div>
         <div style="font-size:22px;font-weight:900;color:var(--gold);margin:8px 0;">Valor</div>
         <div class="formula-desc">Educa, informa o muestra. 3 a 5 puntos concretos. Sin tecnicismos.</div>
-        <div style="margin-top:10px;font-size:11px;color:#FFD54F;font-style:italic;">"Las señales son: encías rojas, mal aliento, sangrado..."</div>
+        <div style="margin-top:10px;font-size:11px;color:#B8860B;font-style:italic;">"Las señales son: encías rojas, mal aliento, sangrado..."</div>
       </div>
       <div class="formula-arrow">→</div>
       <div class="formula-block">
         <div class="formula-label">📣 CTA</div>
         <div style="font-size:22px;font-weight:900;color:var(--gold);margin:8px 0;">Acción</div>
         <div class="formula-desc">Di qué hacer. Un solo llamado claro: escribir, llamar, guardar, compartir.</div>
-        <div style="margin-top:10px;font-size:11px;color:#FFD54F;font-style:italic;">"¿Cuándo fue tu última limpieza? Escríbenos para agendar."</div>
+        <div style="margin-top:10px;font-size:11px;color:#B8860B;font-style:italic;">"¿Cuándo fue tu última limpieza? Escríbenos para agendar."</div>
       </div>
     </div>
     <div style="margin-top:16px;background:rgba(249,168,37,0.1);border-radius:8px;padding:12px 18px;font-size:12px;color:var(--white-70);">
@@ -734,21 +734,21 @@ body {
         </ul>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;color:#90CAF9;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">📲 Stories (IG/FB)</div>
+        <div style="font-size:11px;font-weight:700;color:#1565C0;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">📲 Stories (IG/FB)</div>
         <ul style="list-style:none;">
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#90CAF9;">→</span> Recordatorios de citas</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#90CAF9;">→</span> Detrás de cámaras</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#90CAF9;">→</span> Encuestas y preguntas</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;display:flex;gap:8px;line-height:1.5;"><span style="color:#90CAF9;">→</span> Difusión de nuevos posts</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#1565C0;">→</span> Recordatorios de citas</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#1565C0;">→</span> Detrás de cámaras</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#1565C0;">→</span> Encuestas y preguntas</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;display:flex;gap:8px;line-height:1.5;"><span style="color:#1565C0;">→</span> Difusión de nuevos posts</li>
         </ul>
       </div>
       <div>
-        <div style="font-size:11px;font-weight:700;color:#CE93D8;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">🎵 TikTok (video corto)</div>
+        <div style="font-size:11px;font-weight:700;color:#7B1FA2;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">🎵 TikTok (video corto)</div>
         <ul style="list-style:none;">
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#CE93D8;">→</span> Hook visual en los primeros 3s</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#CE93D8;">→</span> Transformaciones y antes/después</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#CE93D8;">→</span> Tips rápidos (15–30 seg)</li>
-          <li style="font-size:12px;color:var(--white-70);padding:6px 0;display:flex;gap:8px;line-height:1.5;"><span style="color:#CE93D8;">→</span> Tendencias con audio viral</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#7B1FA2;">→</span> Hook visual en los primeros 3s</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#7B1FA2;">→</span> Transformaciones y antes/después</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;border-bottom:1px solid var(--white-20);display:flex;gap:8px;line-height:1.5;"><span style="color:#7B1FA2;">→</span> Tips rápidos (15–30 seg)</li>
+          <li style="font-size:12px;color:var(--white-70);padding:6px 0;display:flex;gap:8px;line-height:1.5;"><span style="color:#7B1FA2;">→</span> Tendencias con audio viral</li>
         </ul>
       </div>
     </div>
@@ -762,46 +762,46 @@ body {
 <!-- ═══════════════════════════════════════════════════════════════
      SLIDE 15b — TIKTOK PARA DENTISTAS
 ════════════════════════════════════════════════════════════════ -->
-<div class="slide" style="background:linear-gradient(135deg,#0D0A2A 0%,#1A0D3A 50%,#0D0A2A 100%);">
+<div class="slide" style="background:linear-gradient(135deg,#F5F0FF 0%,#EDE7F6 50%,#F5F0FF 100%);">
   <div class="logo-stamp">Alpha Strategy Group</div>
   <div class="section-tag">Módulo 03</div>
   <div style="width:100%;">
-    <h2 style="font-size:clamp(20px,2.5vw,32px);font-weight:800;margin-bottom:6px;">TikTok para clínicas dentales — <span style="color:#CE93D8;">qué funciona</span></h2>
+    <h2 style="font-size:clamp(20px,2.5vw,32px);font-weight:800;margin-bottom:6px;">TikTok para clínicas dentales — <span style="color:#7B1FA2;">qué funciona</span></h2>
     <p style="font-size:12px;color:var(--white-70);margin-bottom:16px;">El algoritmo de TikTok premia el contenido auténtico, no el producido. Aquí tu ventaja como dentista.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px;">
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">🦷</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Antes / Después</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Antes / Después</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">Transición en video: paciente con brackets vs. sonrisa final al retirarlos. Alto engagement garantizado.</div>
       </div>
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">💡</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Tips en 15 segundos</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Tips en 15 segundos</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">"3 señales de que tienes caries y no lo sabes" — directo, rápido, con texto en pantalla.</div>
       </div>
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">🎬</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Day in the Life</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Day in the Life</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">"Un día haciendo limpiezas y poniendo brackets" — humaniza la clínica y genera confianza.</div>
       </div>
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">😂</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Humor dental</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Humor dental</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">"Cuando el paciente dice que no come dulces pero tiene 3 caries" — tendencias con audio viral.</div>
       </div>
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">❓</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Mitos vs. Realidad</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Mitos vs. Realidad</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">"¿Los brackets duelen todo el tiempo? La verdad..." o "¿La limpieza daña el esmalte?"</div>
       </div>
       <div style="background:rgba(105,55,200,0.15);border:1px solid rgba(206,147,216,0.3);border-radius:12px;padding:16px 14px;text-align:center;">
         <div style="font-size:28px;margin-bottom:8px;">📲</div>
-        <div style="font-size:12px;font-weight:700;color:#CE93D8;margin-bottom:6px;">Responde preguntas</div>
+        <div style="font-size:12px;font-weight:700;color:#7B1FA2;margin-bottom:6px;">Responde preguntas</div>
         <div style="font-size:11px;color:var(--white-70);line-height:1.5;">"¿Cuánto duran los brackets?" "¿La limpieza duele?" — responde con video, cada uno es un post.</div>
       </div>
     </div>
     <div style="background:rgba(206,147,216,0.1);border:1px solid rgba(206,147,216,0.25);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--white-70);">
-      🎵 <strong style="color:#CE93D8;">Clave TikTok:</strong> Subtítulos automáticos ON · Audio original o viral · Publicar 3–5x/semana · Los primeros 3 segundos lo son todo.
+      🎵 <strong style="color:#7B1FA2;">Clave TikTok:</strong> Subtítulos automáticos ON · Audio original o viral · Publicar 3–5x/semana · Los primeros 3 segundos lo son todo.
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -813,7 +813,7 @@ body {
 <div class="slide slide-exercise">
   <div class="logo-stamp">Alpha Strategy Group</div>
   <div style="width:100%;">
-    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#69F0AE;">Ejercicio 2 — Escribe tu primer post</h2>
+    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#16A34A;">Ejercicio 2 — Escribe tu primer post</h2>
     <p style="font-size:13px;color:var(--white-70);margin-bottom:14px;">Usa la fórmula Hook → Cuerpo → CTA para escribir un post real de tu clínica.</p>
     <div class="exercise-box">
       <div class="exercise-step">
@@ -832,7 +832,7 @@ body {
         <div class="step-num">4</div>
         <div><strong style="color:var(--white);">Escribe el CTA:</strong><span style="color:var(--white-70);"> ¿qué quieres que haga el paciente? Escríbenos, comenta, guarda este post, llama.</span></div>
       </div>
-      <div style="margin-top:10px;font-size:11px;color:#69F0AE;">⏱ 8 minutos — al terminar, comparte tu hook con el grupo</div>
+      <div style="margin-top:10px;font-size:11px;color:#16A34A;">⏱ 8 minutos — al terminar, comparte tu hook con el grupo</div>
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -874,10 +874,10 @@ body {
         <div style="margin-top:8px;font-size:10px;color:var(--white-70);background:var(--white-20);border-radius:6px;padding:5px;">Reutiliza contenido</div>
       </div>
       <div class="card" style="text-align:center;background:rgba(105,55,200,0.12);border-color:rgba(206,147,216,0.4);">
-        <div style="font-size:40px;font-weight:900;color:#CE93D8;line-height:1;">3-5</div>
+        <div style="font-size:40px;font-weight:900;color:#7B1FA2;line-height:1;">3-5</div>
         <div style="font-size:13px;font-weight:700;color:var(--white);margin:8px 0 4px;">🎵 TikTok</div>
         <div style="font-size:11px;color:var(--white-70);">Videos cortos 15–60s<br>Consistencia es clave</div>
-        <div style="margin-top:8px;font-size:10px;color:#CE93D8;background:rgba(206,147,216,0.1);border-radius:6px;padding:5px;">Mayor alcance orgánico</div>
+        <div style="margin-top:8px;font-size:10px;color:#7B1FA2;background:rgba(206,147,216,0.1);border-radius:6px;padding:5px;">Mayor alcance orgánico</div>
       </div>
       <div class="card" style="text-align:center;">
         <div style="font-size:40px;font-weight:900;color:var(--gold);line-height:1;">1</div>
@@ -944,36 +944,36 @@ body {
       <div style="font-size:10px;font-weight:700;color:var(--gold);text-align:center;padding:5px 0;">MIÉ</div>
       <div style="font-size:10px;font-weight:700;color:var(--gold);text-align:center;padding:5px 0;">JUE</div>
       <div style="font-size:10px;font-weight:700;color:var(--gold);text-align:center;padding:5px 0;">VIE</div>
-      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-align:center;padding:5px 0;">SÁB</div>
-      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-align:center;padding:5px 0;">DOM</div>
+      <div style="font-size:10px;font-weight:700;color:rgba(15,23,42,0.3);text-align:center;padding:5px 0;">SÁB</div>
+      <div style="font-size:10px;font-weight:700;color:rgba(15,23,42,0.3);text-align:center;padding:5px 0;">DOM</div>
 
       <div style="background:rgba(249,168,37,0.15);border:1px solid rgba(249,168,37,0.35);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
         <div style="font-size:10px;font-weight:700;color:var(--gold);">📚 IG+FB</div>
         <div style="color:var(--white-70);margin-top:2px;">Post educativo + imagen</div>
-        <div style="color:#CE93D8;margin-top:4px;font-size:9px;">🎵 TikTok: tip rápido</div>
+        <div style="color:#7B1FA2;margin-top:4px;font-size:9px;">🎵 TikTok: tip rápido</div>
       </div>
       <div style="background:var(--white-20);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
-        <div style="font-size:10px;font-weight:700;color:#90CAF9;">Story IG</div>
+        <div style="font-size:10px;font-weight:700;color:#1565C0;">Story IG</div>
         <div style="color:var(--white-70);margin-top:2px;">Detrás de cámaras</div>
-        <div style="color:#CE93D8;margin-top:4px;font-size:9px;">🎵 TikTok: responde DM</div>
+        <div style="color:#7B1FA2;margin-top:4px;font-size:9px;">🎵 TikTok: responde DM</div>
       </div>
       <div style="background:rgba(249,168,37,0.15);border:1px solid rgba(249,168,37,0.35);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
         <div style="font-size:10px;font-weight:700;color:var(--gold);">🦷 IG+FB</div>
         <div style="color:var(--white-70);margin-top:2px;">Video/Reel de servicio</div>
-        <div style="color:#CE93D8;margin-top:4px;font-size:9px;">🎵 TikTok: mismo video</div>
+        <div style="color:#7B1FA2;margin-top:4px;font-size:9px;">🎵 TikTok: mismo video</div>
       </div>
       <div style="background:var(--white-20);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
-        <div style="font-size:10px;font-weight:700;color:#90CAF9;">Story IG</div>
+        <div style="font-size:10px;font-weight:700;color:#1565C0;">Story IG</div>
         <div style="color:var(--white-70);margin-top:2px;">Encuesta / pregunta</div>
-        <div style="color:#CE93D8;margin-top:4px;font-size:9px;">🎵 TikTok: mito vs realidad</div>
+        <div style="color:#7B1FA2;margin-top:4px;font-size:9px;">🎵 TikTok: mito vs realidad</div>
       </div>
       <div style="background:rgba(249,168,37,0.15);border:1px solid rgba(249,168,37,0.35);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
         <div style="font-size:10px;font-weight:700;color:var(--gold);">💙 IG+FB</div>
         <div style="color:var(--white-70);margin-top:2px;">Equipo / testimonio</div>
-        <div style="color:#CE93D8;margin-top:4px;font-size:9px;">🎵 TikTok: day in the life</div>
+        <div style="color:#7B1FA2;margin-top:4px;font-size:9px;">🎵 TikTok: day in the life</div>
       </div>
       <div style="background:rgba(105,55,200,0.1);border:1px solid rgba(206,147,216,0.2);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;">
-        <div style="font-size:10px;font-weight:700;color:#CE93D8;">🎵 TikTok</div>
+        <div style="font-size:10px;font-weight:700;color:#7B1FA2;">🎵 TikTok</div>
         <div style="color:var(--white-70);margin-top:2px;">Antes/después o humor dental</div>
       </div>
       <div style="background:var(--white-20);border-radius:6px;padding:7px 5px;font-size:9px;min-height:70px;opacity:0.4;">
@@ -981,7 +981,7 @@ body {
       </div>
     </div>
     <div style="margin-top:10px;font-size:10px;color:var(--white-70);">
-      <span style="color:var(--gold);font-weight:700;">●</span> IG+FB feed &nbsp;|&nbsp; <span style="color:#90CAF9;font-weight:700;">●</span> Stories &nbsp;|&nbsp; <span style="color:#CE93D8;font-weight:700;">●</span> TikTok &nbsp;|&nbsp; 1 video grabado = TikTok + Reel + FB Video → máximo alcance, mínimo esfuerzo
+      <span style="color:var(--gold);font-weight:700;">●</span> IG+FB feed &nbsp;|&nbsp; <span style="color:#1565C0;font-weight:700;">●</span> Stories &nbsp;|&nbsp; <span style="color:#7B1FA2;font-weight:700;">●</span> TikTok &nbsp;|&nbsp; 1 video grabado = TikTok + Reel + FB Video → máximo alcance, mínimo esfuerzo
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -993,24 +993,24 @@ body {
 <div class="slide slide-exercise">
   <div class="logo-stamp">Alpha Strategy Group</div>
   <div style="width:100%;">
-    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#69F0AE;">Ejercicio 3 — Tu primera semana</h2>
+    <h2 style="font-size:clamp(22px,3vw,36px);font-weight:800;margin-bottom:6px;color:#16A34A;">Ejercicio 3 — Tu primera semana</h2>
     <p style="font-size:13px;color:var(--white-70);margin-bottom:14px;">Llena los 3 posts de tu próxima semana usando los pilares y la fórmula.</p>
     <div class="exercise-box">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
         <div style="background:rgba(105,240,174,0.06);border:1px solid rgba(105,240,174,0.2);border-radius:8px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:#69F0AE;margin-bottom:8px;">POST 1 — LUNES (IG+FB)</div>
+          <div style="font-size:11px;font-weight:700;color:#16A34A;margin-bottom:8px;">POST 1 — LUNES (IG+FB)</div>
           <div style="font-size:11px;color:var(--white-70);line-height:1.8;">Pilar: _______________<br>Tema: _______________<br>Hook: _______________<br>Formato: imagen / carrusel</div>
         </div>
         <div style="background:rgba(105,240,174,0.06);border:1px solid rgba(105,240,174,0.2);border-radius:8px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:#69F0AE;margin-bottom:8px;">POST 2 — MIÉ (IG+FB+TikTok)</div>
+          <div style="font-size:11px;font-weight:700;color:#16A34A;margin-bottom:8px;">POST 2 — MIÉ (IG+FB+TikTok)</div>
           <div style="font-size:11px;color:var(--white-70);line-height:1.8;">Pilar: _______________<br>Tema: _______________<br>Hook visual: _______________<br>Formato: video/reel 30s</div>
         </div>
         <div style="background:rgba(105,55,200,0.1);border:1px solid rgba(206,147,216,0.3);border-radius:8px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:#CE93D8;margin-bottom:8px;">TikTok EXTRA — VIE</div>
+          <div style="font-size:11px;font-weight:700;color:#7B1FA2;margin-bottom:8px;">TikTok EXTRA — VIE</div>
           <div style="font-size:11px;color:var(--white-70);line-height:1.8;">Tipo: tip / mito / humor<br>Tema: _______________<br>Hook (primeros 3s): _______________<br>Duración: 15–30s</div>
         </div>
       </div>
-      <div style="margin-top:10px;font-size:11px;color:#69F0AE;">⏱ 8 minutos — quién quiere compartir su planificación?</div>
+      <div style="margin-top:10px;font-size:11px;color:#16A34A;">⏱ 8 minutos — quién quiere compartir su planificación?</div>
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -1065,7 +1065,7 @@ body {
       </div>
     </div>
     <div style="margin-top:14px;background:rgba(249,168,37,0.1);border-radius:8px;padding:12px 18px;font-size:12px;color:var(--white-70);">
-      💡 <strong style="color:var(--gold);">Flujo recomendado:</strong> Idea en Notion → Caption con ChatGPT → Diseño en Canva → <span style="color:#CE93D8;">Video en CapCut → Publica en TikTok → Descarga sin marca de agua → Sube como Reel → Comparte en Facebook</span>
+      💡 <strong style="color:var(--gold);">Flujo recomendado:</strong> Idea en Notion → Caption con ChatGPT → Diseño en Canva → <span style="color:#7B1FA2;">Video en CapCut → Publica en TikTok → Descarga sin marca de agua → Sube como Reel → Comparte en Facebook</span>
     </div>
   </div>
   <div class="brand-bar"></div>
@@ -1080,14 +1080,14 @@ body {
   <div style="width:100%;">
     <h2 style="font-size:clamp(20px,2.5vw,30px);font-weight:800;margin-bottom:14px;">Cómo pedirle ideas a <span class="gold">ChatGPT</span></h2>
     <p style="font-size:13px;color:var(--white-70);margin-bottom:16px;">Usa este prompt base — cópialo y adáptalo a tu clínica:</p>
-    <div style="background:rgba(30,30,60,0.8);border:1px solid rgba(249,168,37,0.3);border-radius:10px;padding:20px 24px;text-align:left;font-family:monospace;font-size:12px;line-height:1.7;color:#E8EAF6;margin-bottom:14px;">
-      <span style="color:#69F0AE;">Eres el community manager de mi clínica dental.</span><br>
-      <span style="color:var(--white-70);">Ayúdame a crear <span style="color:var(--gold);">5 ideas de contenido</span> para Instagram, Facebook y TikTok esta semana.</span><br>
-      <span style="color:var(--white-70);">La clínica ofrece: <span style="color:var(--gold);">[ortodoncia / limpieza dental / tratamiento de caries]</span></span><br>
-      <span style="color:var(--white-70);">La audiencia es: <span style="color:var(--gold);">[adultos de 25-45 años, familias, jóvenes]</span></span><br>
-      <span style="color:var(--white-70);">Para Instagram: <span style="color:var(--gold);">hook, 3 puntos de valor y CTA en el caption.</span></span><br>
-      <span style="color:var(--white-70);">Para TikTok: <span style="color:#CE93D8;">hook visual en 3 segundos + estructura de video de 30s.</span></span><br>
-      <span style="color:var(--white-70);">El tono debe ser: <span style="color:var(--gold);">cercano, educativo, sin tecnicismos.</span></span>
+    <div style="background:rgba(30,30,60,0.9);border:1px solid rgba(249,168,37,0.3);border-radius:10px;padding:20px 24px;text-align:left;font-family:monospace;font-size:12px;line-height:1.7;color:#E8EAF6;margin-bottom:14px;">
+      <span style="color:#4ADE80;">Eres el community manager de mi clínica dental.</span><br>
+      <span style="color:rgba(232,234,246,0.75);">Ayúdame a crear <span style="color:#F0C840;">5 ideas de contenido</span> para Instagram, Facebook y TikTok esta semana.</span><br>
+      <span style="color:rgba(232,234,246,0.75);">La clínica ofrece: <span style="color:#F0C840;">[ortodoncia / limpieza dental / tratamiento de caries]</span></span><br>
+      <span style="color:rgba(232,234,246,0.75);">La audiencia es: <span style="color:#F0C840;">[adultos de 25-45 años, familias, jóvenes]</span></span><br>
+      <span style="color:rgba(232,234,246,0.75);">Para Instagram: <span style="color:#F0C840;">hook, 3 puntos de valor y CTA en el caption.</span></span><br>
+      <span style="color:rgba(232,234,246,0.75);">Para TikTok: <span style="color:#C084FC;">hook visual en 3 segundos + estructura de video de 30s.</span></span><br>
+      <span style="color:rgba(232,234,246,0.75);">El tono debe ser: <span style="color:#F0C840;">cercano, educativo, sin tecnicismos.</span></span>
     </div>
     <div style="background:rgba(249,168,37,0.1);border-radius:8px;padding:12px 18px;font-size:12px;color:var(--white-70);">
       ✏️ Siempre revisa y personaliza el resultado de IA antes de publicar — agrega el nombre de tu clínica y datos reales.
@@ -1099,11 +1099,11 @@ body {
 <!-- ═══════════════════════════════════════════════════════════════
      SLIDE 24 — SECCIÓN 6
 ════════════════════════════════════════════════════════════════ -->
-<div class="slide slide-section" style="background:linear-gradient(135deg,#1A0505,#3E0000,#1A0505);">
-  <div class="section-num" style="color:rgba(229,57,53,0.12);">06</div>
+<div class="slide slide-section" style="background:linear-gradient(135deg,#FFF0F0,#FFE4E4,#FFF0F0);">
+  <div class="section-num" style="color:rgba(229,57,53,0.15);">06</div>
   <div class="logo-stamp">Alpha Strategy Group</div>
   <div style="max-width:640px;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#EF9A9A;margin-bottom:16px;text-transform:uppercase;">Módulo 06</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#B91C1C;margin-bottom:16px;text-transform:uppercase;">Módulo 06</div>
     <h1 class="slide-title">Errores que Destruyen tu Imagen en Redes</h1>
     <p class="slide-subtitle">Evitar esto vale más que cualquier estrategia.</p>
   </div>

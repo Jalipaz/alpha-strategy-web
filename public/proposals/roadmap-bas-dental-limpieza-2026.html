@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap Campaña Limpieza Dental — Bas Dental 2026</title>
+  <style>
+    :root {
+      --celeste: #87CEEB;
+      --azul: #4FC3F7;
+      --turquesa: #4DD0E1;
+      --azul-oscuro: #0277BD;
+      --azul-medio: #0288D1;
+      --blanco: #FFFFFF;
+      --gris-claro: #F0F9FF;
+      --gris-texto: #374151;
+      --verde: #22C55E;
+      --naranja: #F59E0B;
+      --rojo: #EF4444;
+      --morado: #8B5CF6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #E0F7FA 0%, #E3F2FD 50%, #F0F9FF 100%);
+      min-height: 100vh;
+      color: var(--gris-texto);
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--azul-medio) 0%, var(--turquesa) 100%);
+      padding: 48px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    header h1 {
+      font-size: clamp(26px, 5vw, 42px);
+      color: #fff;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    header h1 span { color: #B3E5FC; }
+    header p {
+      color: rgba(255,255,255,0.88);
+      font-size: 16px;
+      max-width: 560px;
+      margin: 0 auto 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      padding: 14px 22px;
+      color: #fff;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .stat-box .num { font-size: 28px; font-weight: 800; }
+    .stat-box .lbl { font-size: 11px; opacity: 0.85; letter-spacing: 0.5px; margin-top: 2px; }
+
+    /* MAIN CONTAINER */
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* INTRO */
+    .intro-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+      border-left: 5px solid var(--turquesa);
+      box-shadow: 0 4px 20px rgba(77,208,225,0.15);
+    }
+    .intro-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--azul-oscuro); }
+    .intro-card p { font-size: 14.5px; line-height: 1.7; color: #4B5563; }
+    .intro-card .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .tag {
+      font-size: 12px; font-weight: 600; padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .tag-azul { background: #E0F7FA; color: var(--azul-medio); }
+    .tag-verde { background: #DCFCE7; color: #16A34A; }
+    .tag-naranja { background: #FEF3C7; color: #D97706; }
+    .tag-morado { background: #EDE9FE; color: #7C3AED; }
+
+    /* PHASE HEADER */
+    .phase-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 40px 0 18px;
+    }
+    .phase-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .phase-title h2 { font-size: 20px; font-weight: 800; }
+    .phase-title p { font-size: 13px; color: #6B7280; margin-top: 2px; }
+    .phase-badge {
+      margin-left: auto;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 5px 12px; border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* TASK CARDS */
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .task-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-top: 4px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .task-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    .task-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .task-num {
+      width: 32px; height: 32px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .task-title { font-size: 14.5px; font-weight: 700; line-height: 1.3; flex: 1; }
+    .task-desc { font-size: 13px; color: #6B7280; line-height: 1.6; margin-bottom: 12px; }
+    .task-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .meta-chip {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .chip-tiempo { background: #F3F4F6; color: #4B5563; }
+    .chip-resp { background: #EFF6FF; color: #2563EB; }
+    .chip-prio-alta { background: #FEE2E2; color: #DC2626; }
+    .chip-prio-media { background: #FEF3C7; color: #D97706; }
+    .chip-prio-baja { background: #DCFCE7; color: #16A34A; }
+
+    .task-checklist {
+      list-style: none;
+      margin-top: 10px;
+      padding: 0;
+      border-top: 1px solid #F3F4F6;
+      padding-top: 10px;
+    }
+    .task-checklist li {
+      font-size: 12.5px; color: #4B5563;
+      padding: 4px 0;
+      display: flex; align-items: flex-start; gap: 6px;
+      line-height: 1.4;
+    }
+    .task-checklist li::before {
+      content: '☐';
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: -1px;
+      color: #9CA3AF;
+    }
+
+    /* COLOR THEMES PER PHASE */
+    .ph1 .task-card { border-top-color: #4FC3F7; }
+    .ph1 .task-num { background: #E0F7FA; color: #0277BD; }
+    .ph1 .phase-icon { background: #E0F7FA; }
+    .ph1 .phase-badge { background: #E0F7FA; color: #0277BD; }
+
+    .ph2 .task-card { border-top-color: #4DD0E1; }
+    .ph2 .task-num { background: #E0F2F1; color: #00695C; }
+    .ph2 .phase-icon { background: #E0F2F1; }
+    .ph2 .phase-badge { background: #E0F2F1; color: #00695C; }
+
+    .ph3 .task-card { border-top-color: #A5B4FC; }
+    .ph3 .task-num { background: #EDE9FE; color: #7C3AED; }
+    .ph3 .phase-icon { background: #EDE9FE; }
+    .ph3 .phase-badge { background: #EDE9FE; color: #7C3AED; }
+
+    .ph4 .task-card { border-top-color: #86EFAC; }
+    .ph4 .task-num { background: #DCFCE7; color: #16A34A; }
+    .ph4 .phase-icon { background: #DCFCE7; }
+    .ph4 .phase-badge { background: #DCFCE7; color: #16A34A; }
+
+    .ph5 .task-card { border-top-color: #FCA5A5; }
+    .ph5 .task-num { background: #FEE2E2; color: #DC2626; }
+    .ph5 .phase-icon { background: #FEE2E2; }
+    .ph5 .phase-badge { background: #FEE2E2; color: #DC2626; }
+
+    .ph6 .task-card { border-top-color: #FCD34D; }
+    .ph6 .task-num { background: #FEF3C7; color: #92400E; }
+    .ph6 .phase-icon { background: #FEF3C7; }
+    .ph6 .phase-badge { background: #FEF3C7; color: #92400E; }
+
+    /* TIMELINE BAR */
+    .timeline-section {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin: 40px 0 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .timeline-section h2 { font-size: 18px; font-weight: 800; margin-bottom: 22px; color: var(--azul-oscuro); }
+    .timeline-bar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .tl-phase {
+      border-radius: 10px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .tl-phase .tl-num { font-size: 10px; font-weight: 700; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase; }
+    .tl-phase .tl-name { font-size: 12px; font-weight: 700; margin-top: 4px; }
+    .tl-phase .tl-dur { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+    .tl1 { background: #E0F7FA; color: #0277BD; }
+    .tl2 { background: #E0F2F1; color: #00695C; }
+    .tl3 { background: #EDE9FE; color: #7C3AED; }
+    .tl4 { background: #DCFCE7; color: #16A34A; }
+    .tl5 { background: #FEE2E2; color: #DC2626; }
+    .tl6 { background: #FEF3C7; color: #92400E; }
+
+    /* PRESUPUESTO */
+    .budget-section {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-top: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .budget-section h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: var(--azul-oscuro); }
+    .budget-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .budget-table th {
+      background: var(--gris-claro);
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 700;
+      color: #374151;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    .budget-table td { padding: 10px 16px; border-bottom: 1px solid #F3F4F6; }
+    .budget-table tr:last-child td { border-bottom: none; }
+    .budget-table .total-row td { font-weight: 800; background: #F0F9FF; color: var(--azul-oscuro); border-top: 2px solid var(--turquesa); }
+    .budget-cat { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; }
+
+    /* KPIs */
+    .kpi-section {
+      background: linear-gradient(135deg, var(--azul-medio), var(--turquesa));
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-top: 24px;
+      color: #fff;
+    }
+    .kpi-section h2 { font-size: 18px; font-weight: 800; margin-bottom: 20px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .kpi-card {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .kpi-card .kpi-icon { font-size: 26px; margin-bottom: 6px; }
+    .kpi-card .kpi-val { font-size: 24px; font-weight: 800; }
+    .kpi-card .kpi-lbl { font-size: 12px; opacity: 0.85; margin-top: 4px; line-height: 1.3; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #9CA3AF;
+      font-size: 12px;
+    }
+    footer strong { color: var(--azul-medio); }
+
+    /* DIVIDER */
+    .section-divider {
+      border: none;
+      border-top: 2px dashed #E5E7EB;
+      margin: 8px 0 0;
+    }
+
+    @media (max-width: 600px) {
+      .timeline-bar { grid-template-columns: repeat(3, 1fr); }
+      .header-stats { gap: 12px; }
+      .stat-box .num { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">Campaña Interna · Santa Cruz, Bolivia</div>
+  <h1>Roadmap <span>Campaña de Limpieza Dental</span></h1>
+  <p>Plan maestro paso a paso para ejecutar la campaña de limpieza en la zona de <strong style="color:#fff">Bas Dental</strong></p>
+  <div class="header-stats">
+    <div class="stat-box">
+      <div class="num">6</div>
+      <div class="lbl">Fases del proyecto</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">30+</div>
+      <div class="lbl">Tareas definidas</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">~4 sem</div>
+      <div class="lbl">Tiempo total</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">100%</div>
+      <div class="lbl">Hecho en casa</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <h2>¿De qué se trata esta campaña?</h2>
+    <p>
+      Bas Dental lanzará una campaña de limpieza dental en su zona de influencia (San Aurelio, 4to anillo, Santa Cruz de la Sierra).
+      La campaña incluye entrega de <strong>kits de limpieza dental</strong> a pacientes, distribución de <strong>folletos informativos</strong>,
+      instalación de <strong>letreros en la clínica</strong>, <strong>cuadros de decoración interior</strong> con la nueva marca,
+      y <strong>uniformes para el equipo</strong>. Este roadmap divide todo el trabajo en fases claras con responsables y plazos.
+    </p>
+    <div class="tags">
+      <span class="tag tag-azul">Limpieza Dental</span>
+      <span class="tag tag-verde">Kits para pacientes</span>
+      <span class="tag tag-naranja">Material impreso</span>
+      <span class="tag tag-morado">Señalética &amp; Deco</span>
+      <span class="tag tag-azul">Uniformes</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       FASE 1 — ESTRATEGIA & PLANIFICACIÓN
+  ════════════════════════════════════════ -->
+  <div class="ph1">
+    <div class="phase-title">
+      <div class="phase-icon">🎯</div>
+      <div>
+        <h2>Fase 1 — Estrategia &amp; Planificación</h2>
+        <p>Definir objetivos, audiencia, mensaje y presupuesto general antes de producir cualquier material.</p>
+      </div>
+      <div class="phase-badge">Semana 1 · Días 1–3</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">01</div>
+          <div class="task-title">Definir objetivo de la campaña</div>
+        </div>
+        <div class="task-desc">
+          Acordar la meta concreta: ¿cuántos pacientes nuevos captar? ¿cuántas limpiezas agendar durante la campaña? ¿en qué periodo de tiempo?
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Dr. / Gerente</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Definir número de kits a entregar (ej. 100 kits mes 1)</li>
+          <li>Definir radio de distribución en la zona (cuadras alrededor de la clínica)</li>
+          <li>Fijar fecha de inicio y fin de campaña</li>
+          <li>Definir mensaje central de la campaña</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">02</div>
+          <div class="task-title">Definir audiencia objetivo</div>
+        </div>
+        <div class="task-desc">
+          Identificar a quién va dirigida la campaña: familias del barrio, pacientes existentes o nuevos prospectos en un radio de 5–10 cuadras.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Gerente</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Mapear zonas residenciales cercanas a la clínica</li>
+          <li>Decidir si incluir pacientes actuales en el kit</li>
+          <li>Definir rango de edad prioritario (familias, niños, adultos)</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">03</div>
+          <div class="task-title">Presupuesto general de campaña</div>
+        </div>
+        <div class="task-desc">
+          Estimar el costo total de todos los materiales: kits, folletos, letreros, cuadros y uniformes. Asignar partida a cada ítem.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Gerente + Contabilidad</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Cotizar kits de limpieza con proveedor dental</li>
+          <li>Cotizar imprenta local para folletos y letreros</li>
+          <li>Cotizar bordado/impresión de uniformes</li>
+          <li>Aprobar presupuesto total</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">04</div>
+          <div class="task-title">Cronograma de ejecución</div>
+        </div>
+        <div class="task-desc">
+          Crear el calendario de actividades con fechas específicas para producción, montaje, entrega y seguimiento.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Alpha Strategy</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Asignar fechas a cada fase de este roadmap</li>
+          <li>Definir fecha de lanzamiento oficial</li>
+          <li>Establecer revisiones semanales de avance</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ════════════════════════════════════════
+       FASE 2 — DISEÑO GRÁFICO
+  ════════════════════════════════════════ -->
+  <div class="ph2">
+    <div class="phase-title">
+      <div class="phase-icon">🎨</div>
+      <div>
+        <h2>Fase 2 — Diseño Gráfico</h2>
+        <p>Crear todos los artes visuales con la identidad de Bas Dental antes de enviar a producción.</p>
+      </div>
+      <div class="phase-badge">Semana 1–2 · Días 4–10</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">05</div>
+          <div class="task-title">Diseño de folleto informativo</div>
+        </div>
+        <div class="task-desc">
+          Folleto tamaño A5 o tríptico con información sobre la campaña, servicios de limpieza y cómo agendar una cita en Bas Dental.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2 días</span>
+          <span class="meta-chip chip-resp">👤 Diseñador</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Definir texto y copy del folleto</li>
+          <li>Usar paleta celeste/turquesa/blanco de Bas Dental</li>
+          <li>Incluir logo nuevo "Bas Dental", teléfonos y dirección</li>
+          <li>Incluir QR de WhatsApp para agendar cita</li>
+          <li>Versión frente y dorso (o tríptico)</li>
+          <li>Enviar a revisión del cliente antes de imprimir</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">06</div>
+          <div class="task-title">Diseño de letreros para la clínica</div>
+        </div>
+        <div class="task-desc">
+          Señalética exterior e interior con la nueva marca Bas Dental. Incluir letrero fachada, letrero de campaña de limpieza y señales internas.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2 días</span>
+          <span class="meta-chip chip-resp">👤 Diseñador</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Letrero fachada exterior (nombre "Bas Dental" + logo)</li>
+          <li>Banner campaña: "¡Limpieza Dental Gratis con tu Kit!" o similar</li>
+          <li>Letrero sala de espera con mensaje de bienvenida</li>
+          <li>Señal de dirección/entrada</li>
+          <li>Definir materiales: lona, acrílico, vinil, impresión en madera</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">07</div>
+          <div class="task-title">Diseño de cuadros de decoración</div>
+        </div>
+        <div class="task-desc">
+          Cuadros para sala de espera y consultorio. Mensajes motivacionales sobre salud bucal, imagen de marca, ilustraciones dentales cálidas.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2 días</span>
+          <span class="meta-chip chip-resp">👤 Diseñador</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Cuadro 1: Slogan o frase de la clínica (ej. "Tu sonrisa, nuestro trabajo")</li>
+          <li>Cuadro 2: Infografía de pasos para una buena higiene dental</li>
+          <li>Cuadro 3: Ilustración dental decorativa (estilo cálido y amigable)</li>
+          <li>Cuadro 4: "Bienvenido a Bas Dental" + logo + redes sociales</li>
+          <li>Definir tamaños (ej. 40x50cm, 30x40cm)</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">08</div>
+          <div class="task-title">Diseño de uniformes</div>
+        </div>
+        <div class="task-desc">
+          Definir estilo y arte para camisas/polos/scrubs del equipo con el logo Bas Dental. El uniforme refuerza la identidad de marca.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Diseñador + Dr.</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Elegir tipo de prenda: polo, scrub, camiseta</li>
+          <li>Color base: celeste o blanco (acorde a paleta Bas Dental)</li>
+          <li>Posición del logo: pecho izquierdo y/o espalda</li>
+          <li>Cantidad de prendas por miembro del equipo</li>
+          <li>Arte final en vector (SVG/AI) para bordado o serigrafía</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">09</div>
+          <div class="task-title">Diseño de etiqueta para kits</div>
+        </div>
+        <div class="task-desc">
+          Etiqueta o sticker para pegar en las bolsas/kits de limpieza. Incluye logo, nombre de campaña y contacto de la clínica.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Diseñador</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Logo Bas Dental centrado</li>
+          <li>Frase: "Kit de Limpieza Dental · Un regalo para tu sonrisa"</li>
+          <li>Teléfono + dirección + red social</li>
+          <li>Formato: sticker adhesivo circular o rectangular</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">10</div>
+          <div class="task-title">Revisión y aprobación de todos los artes</div>
+        </div>
+        <div class="task-desc">
+          El cliente (Dr./Gerente de Bas Dental) revisa y aprueba cada arte antes de enviarlo a producción. Sin aprobación, no se imprime.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1–2 días</span>
+          <span class="meta-chip chip-resp">👤 Cliente + Diseñador</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Presentar todos los artes en PDF o imagen de alta resolución</li>
+          <li>Registrar correcciones y aplicarlas</li>
+          <li>Obtener aprobación escrita (WhatsApp, email o firma)</li>
+          <li>Exportar artes finales en formato imprimible (PDF 300dpi)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ════════════════════════════════════════
+       FASE 3 — PRODUCCIÓN & COMPRAS
+  ════════════════════════════════════════ -->
+  <div class="ph3">
+    <div class="phase-title">
+      <div class="phase-icon">🛒</div>
+      <div>
+        <h2>Fase 3 — Producción &amp; Compras</h2>
+        <p>Ordenar y fabricar todos los materiales físicos con proveedores locales en Santa Cruz.</p>
+      </div>
+      <div class="phase-badge">Semana 2–3 · Días 11–20</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">11</div>
+          <div class="task-title">Compra de insumos para kits de limpieza</div>
+        </div>
+        <div class="task-desc">
+          Adquirir todos los productos para armar los kits: cepillo dental, pasta dental, hilo dental y funda/bolsa personalizada.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2–3 días</span>
+          <span class="meta-chip chip-resp">👤 Clínica / Gerente</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Cotizar cepillos dentales al por mayor (suaves, tamaño adulto y niño)</li>
+          <li>Cotizar pasta dental (tubos pequeños 25ml–50ml)</li>
+          <li>Cotizar hilo dental individual (paquetes pequeños)</li>
+          <li>Cotizar bolsas transparentes o ecológicas con cierre</li>
+          <li>Opcionales: pastilla reveladora de placa, tarjeta de instrucciones</li>
+          <li>Comprar cantidad según objetivo definido en Fase 1</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">12</div>
+          <div class="task-title">Impresión de folletos</div>
+        </div>
+        <div class="task-desc">
+          Enviar arte aprobado a imprenta local. Mínimo 500 folletos para la primera ronda de distribución.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 3–5 días hábiles</span>
+          <span class="meta-chip chip-resp">👤 Imprenta + Clínica</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Confirmar proveedor de impresión en Santa Cruz</li>
+          <li>Enviar arte en PDF 300dpi (CMYK)</li>
+          <li>Papel: couché 150g o 170g, full color, ambas caras</li>
+          <li>Cantidad recomendada: 500–1000 folletos</li>
+          <li>Solicitar muestra antes de tirada completa</li>
+          <li>Retirar y verificar calidad al recibir</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">13</div>
+          <div class="task-title">Producción de letreros y señalética</div>
+        </div>
+        <div class="task-desc">
+          Mandar a fabricar los letreros de fachada, banner de campaña y señales interiores con proveedor de rotulación o imprenta especializada.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 5–7 días hábiles</span>
+          <span class="meta-chip chip-resp">👤 Rotulista + Clínica</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Letrero fachada: acrílico o lona banner con estructura</li>
+          <li>Banner campaña: lona 150x60cm o 200x80cm con ploteo</li>
+          <li>Señales interiores: vinil sobre PVC espumado o madera MDF</li>
+          <li>Verificar medidas exactas antes de ordenar</li>
+          <li>Confirmar incluye instalación o comprar herrajes</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">14</div>
+          <div class="task-title">Producción de cuadros decorativos</div>
+        </div>
+        <div class="task-desc">
+          Imprimir y enmarcar los cuadros de decoración para sala de espera y consultorio. Pueden hacerse en imprenta con bastidor o con impresión fotográfica.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 3–5 días hábiles</span>
+          <span class="meta-chip chip-resp">👤 Imprenta / Enmarcado</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Elegir entre: impresión en tela canvas, papel fotográfico enmarcado, o MDF pintado</li>
+          <li>Tamaños según espacio real de la clínica</li>
+          <li>Definir con o sin marco (marco plateado/blanco acorde a paleta)</li>
+          <li>Verificar resolución de archivos (mínimo 150dpi en tamaño real)</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">15</div>
+          <div class="task-title">Producción de uniformes</div>
+        </div>
+        <div class="task-desc">
+          Llevar arte a taller de serigrafía o bordado. Confirmar tallas de cada integrante del equipo y tipo de prenda.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 5–7 días hábiles</span>
+          <span class="meta-chip chip-resp">👤 Taller + Clínica</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Tomar medidas/tallas de todo el personal</li>
+          <li>Elegir técnica: bordado (más duradero) o serigrafía/sublimación</li>
+          <li>Ordenar al menos 1 extra por talla como reserva</li>
+          <li>Confirmar plazo de entrega antes del lanzamiento</li>
+          <li>Verificar calidad y acabado al recibir</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">16</div>
+          <div class="task-title">Impresión de etiquetas para kits</div>
+        </div>
+        <div class="task-desc">
+          Mandar a imprimir los stickers/etiquetas para las bolsas de kits. Material: adhesivo brillante o mate para mejor presentación.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2–3 días hábiles</span>
+          <span class="meta-chip chip-resp">👤 Imprenta</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Formato recomendado: sticker 10x7cm o circular 8cm</li>
+          <li>Material: papel adhesivo brillante o mate con troquelado</li>
+          <li>Cantidad: igual al número de kits planificados + 20% extra</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ════════════════════════════════════════
+       FASE 4 — ENSAMBLAJE & PREPARACIÓN
+  ════════════════════════════════════════ -->
+  <div class="ph4">
+    <div class="phase-title">
+      <div class="phase-icon">📦</div>
+      <div>
+        <h2>Fase 4 — Ensamblaje &amp; Preparación</h2>
+        <p>Armar los kits, instalar letreros, colgar cuadros y preparar la clínica para el lanzamiento.</p>
+      </div>
+      <div class="phase-badge">Semana 3 · Días 21–24</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">17</div>
+          <div class="task-title">Armado de kits de limpieza dental</div>
+        </div>
+        <div class="task-desc">
+          Ensamblar físicamente cada kit: meter cepillo, pasta, hilo dental y tarjeta informativa en la bolsa, y pegar la etiqueta personalizada.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1–2 días</span>
+          <span class="meta-chip chip-resp">👤 Personal clínica</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Verificar que todos los insumos llegaron completos</li>
+          <li>Armar línea de ensamblaje: bolsa → cepillo → pasta → hilo → tarjeta</li>
+          <li>Pegar etiqueta en la parte exterior de la bolsa</li>
+          <li>Contar y empaquetar en cajas por grupos de 10 o 20 kits</li>
+          <li>Almacenar en lugar seco y ordenado hasta distribución</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">18</div>
+          <div class="task-title">Instalación de letreros y señalética</div>
+        </div>
+        <div class="task-desc">
+          Colocar el letrero de fachada, banner de campaña y señales interiores en la clínica antes del día de lanzamiento.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Técnico + Clínica</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Coordinar técnico o rotulista para instalación de fachada</li>
+          <li>Verificar que el letrero exterior es visible desde la calle</li>
+          <li>Colgar banner de campaña en lugar de alto tráfico (entrada o ventana)</li>
+          <li>Instalar señales interiores en sala de espera y pasillos</li>
+          <li>Fotografiar resultado final para redes sociales</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">19</div>
+          <div class="task-title">Colocación de cuadros decorativos</div>
+        </div>
+        <div class="task-desc">
+          Colgar los cuadros en sala de espera, consultorio y recepción. Definir disposición que refuerce la experiencia del paciente.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Personal clínica</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Medir espacios en paredes antes de colgar</li>
+          <li>Usar nivel para colgar derecho (imprescindible)</li>
+          <li>Sala de espera: cuadro de bienvenida + infografía dental</li>
+          <li>Consultorio: cuadro motivacional o decorativo</li>
+          <li>Fotografiar el resultado para contenido de RRSS</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">20</div>
+          <div class="task-title">Entrega y prueba de uniformes</div>
+        </div>
+        <div class="task-desc">
+          Distribuir uniformes al equipo, verificar tallas y acordar que todo el personal los use desde el día de lanzamiento en adelante.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Gerente + Personal</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Verificar talla y acabado de cada prenda</li>
+          <li>Hacer prueba fotográfica del equipo con uniforme</li>
+          <li>Acordar fecha obligatoria de uso (desde lanzamiento)</li>
+          <li>Publicar foto del equipo uniformado en redes sociales</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ════════════════════════════════════════
+       FASE 5 — LANZAMIENTO & DISTRIBUCIÓN
+  ════════════════════════════════════════ -->
+  <div class="ph5">
+    <div class="phase-title">
+      <div class="phase-icon">🚀</div>
+      <div>
+        <h2>Fase 5 — Lanzamiento &amp; Distribución</h2>
+        <p>Ejecutar la campaña en campo: distribuir folletos, entregar kits y activar la comunicación en redes.</p>
+      </div>
+      <div class="phase-badge">Semana 4 · Días 25–28</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">21</div>
+          <div class="task-title">Distribución de folletos en la zona</div>
+        </div>
+        <div class="task-desc">
+          Salir a distribuir folletos en el barrio de San Aurelio y zonas aledañas al 4to anillo. Cubrir tiendas, edificios residenciales y casas.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2–3 días</span>
+          <span class="meta-chip chip-resp">👤 Personal + Promotor</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Asignar rutas de distribución a cada persona</li>
+          <li>Llevar folletos en mano + kits de muestra</li>
+          <li>Hablar brevemente con vecinos al entregar ("somos Bas Dental, nueva campaña...")</li>
+          <li>Dejar folletos en tiendas, farmacias, peluquerías del barrio</li>
+          <li>Registrar cuántos folletos se entregaron por zona</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">22</div>
+          <div class="task-title">Entrega de kits a pacientes existentes</div>
+        </div>
+        <div class="task-desc">
+          Obsequiar un kit a cada paciente que llega a la clínica durante la campaña. Aprovechar el momento para hablar de los servicios disponibles.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 2–4 semanas (campaña activa)</span>
+          <span class="meta-chip chip-resp">👤 Recepcionista</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Colocar kits en recepción bien visibles</li>
+          <li>Registrar nombre del paciente que recibe el kit</li>
+          <li>Invitar al paciente a agendar su limpieza dental profesional</li>
+          <li>Entregar también el folleto junto con el kit</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">23</div>
+          <div class="task-title">Lanzamiento en redes sociales</div>
+        </div>
+        <div class="task-desc">
+          Publicar el inicio de la campaña en Instagram y Facebook con fotos de los kits, la clínica renovada, uniformes y material visual.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ Día del lanzamiento + seguimiento</span>
+          <span class="meta-chip chip-resp">👤 Alpha Strategy</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Post de anuncio: "¡Comienza nuestra campaña de limpieza dental!"</li>
+          <li>Stories mostrando los kits, folletos y la clínica decorada</li>
+          <li>Reels del equipo con uniformes nuevos</li>
+          <li>Stories de distribución de kits en campo</li>
+          <li>Invitación a agendar limpieza con enlace o número de WhatsApp</li>
+          <li>Mantener 4x/sem en Instagram durante la campaña</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">24</div>
+          <div class="task-title">Campaña de WhatsApp a base de pacientes</div>
+        </div>
+        <div class="task-desc">
+          Enviar mensaje personalizado a los 306 pacientes registrados informando sobre la campaña y ofreciendo agendar su limpieza.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día</span>
+          <span class="meta-chip chip-resp">👤 Recepcionista + Gerente</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Redactar mensaje corto y cálido (no spamear)</li>
+          <li>Adjuntar imagen visual de la campaña</li>
+          <li>Incluir enlace directo para agendar por WhatsApp</li>
+          <li>Enviar en horario apropiado (mañana 9–11am o tarde 4–6pm)</li>
+          <li>Registrar respuestas y agendar citas</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- ════════════════════════════════════════
+       FASE 6 — SEGUIMIENTO & MEDICIÓN
+  ════════════════════════════════════════ -->
+  <div class="ph6">
+    <div class="phase-title">
+      <div class="phase-icon">📊</div>
+      <div>
+        <h2>Fase 6 — Seguimiento &amp; Medición</h2>
+        <p>Medir el impacto de la campaña, consolidar aprendizajes y planificar la siguiente ronda.</p>
+      </div>
+      <div class="phase-badge">Semana 4–5 · Post-campaña</div>
+    </div>
+
+    <div class="tasks-grid">
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">25</div>
+          <div class="task-title">Registro de citas agendadas por campaña</div>
+        </div>
+        <div class="task-desc">
+          Llevar un registro de cuántos pacientes mencionaron el kit o el folleto al agendar, para medir el impacto directo de la campaña.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ Durante toda la campaña</span>
+          <span class="meta-chip chip-resp">👤 Recepcionista</span>
+          <span class="meta-chip chip-prio-alta">Alta prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Crear hoja de Excel o Google Sheets simple para tracking</li>
+          <li>Columnas: Nombre, Fecha, ¿Cómo llegó? (kit / folleto / redes / referido)</li>
+          <li>Actualizar diariamente</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">26</div>
+          <div class="task-title">Análisis de métricas de redes sociales</div>
+        </div>
+        <div class="task-desc">
+          Revisar el alcance, interacciones y seguidores ganados en Instagram y Facebook durante el periodo de campaña.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 día (fin de campaña)</span>
+          <span class="meta-chip chip-resp">👤 Alpha Strategy</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Revisar alcance total de posts de campaña en Instagram</li>
+          <li>Revisar interacciones en Facebook (likes, shares, comentarios)</li>
+          <li>Comparar followers antes y después de la campaña</li>
+          <li>Identificar el post con mejor rendimiento</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">27</div>
+          <div class="task-title">Informe de resultados de campaña</div>
+        </div>
+        <div class="task-desc">
+          Preparar un resumen ejecutivo con todos los resultados: kits entregados, folletos distribuidos, citas agendadas y métricas de redes.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1–2 días</span>
+          <span class="meta-chip chip-resp">👤 Alpha Strategy</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Cantidad total de kits entregados</li>
+          <li>Cantidad de folletos distribuidos</li>
+          <li>Número de citas nuevas generadas por campaña</li>
+          <li>Alcance en redes sociales</li>
+          <li>Presupuesto ejecutado vs. planificado</li>
+          <li>Recomendaciones para siguiente campaña</li>
+        </ul>
+      </div>
+
+      <div class="task-card">
+        <div class="task-header">
+          <div class="task-num">28</div>
+          <div class="task-title">Reunión de cierre y próxima campaña</div>
+        </div>
+        <div class="task-desc">
+          Reunión final con el cliente para presentar resultados, validar aprendizajes y acordar si se repite la campaña o se evoluciona a una siguiente etapa.
+        </div>
+        <div class="task-meta">
+          <span class="meta-chip chip-tiempo">⏱ 1 reunión</span>
+          <span class="meta-chip chip-resp">👤 Alpha Strategy + Cliente</span>
+          <span class="meta-chip chip-prio-media">Media prioridad</span>
+        </div>
+        <ul class="task-checklist">
+          <li>Presentar informe de resultados</li>
+          <li>Identificar qué funcionó y qué mejorar</li>
+          <li>Proponer fecha de próxima campaña (mensual o trimestral)</li>
+          <li>Decidir si se aumenta el volumen de kits en siguiente ronda</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIMELINE VISUAL -->
+  <div class="timeline-section">
+    <h2>Vista de línea de tiempo — 4 semanas</h2>
+    <div class="timeline-bar">
+      <div class="tl-phase tl1">
+        <div class="tl-num">Fase 1</div>
+        <div class="tl-name">Estrategia</div>
+        <div class="tl-dur">Días 1–3</div>
+      </div>
+      <div class="tl-phase tl2">
+        <div class="tl-num">Fase 2</div>
+        <div class="tl-name">Diseño</div>
+        <div class="tl-dur">Días 4–10</div>
+      </div>
+      <div class="tl-phase tl3">
+        <div class="tl-num">Fase 3</div>
+        <div class="tl-name">Producción</div>
+        <div class="tl-dur">Días 11–20</div>
+      </div>
+      <div class="tl-phase tl4">
+        <div class="tl-num">Fase 4</div>
+        <div class="tl-name">Ensamblaje</div>
+        <div class="tl-dur">Días 21–24</div>
+      </div>
+      <div class="tl-phase tl5">
+        <div class="tl-num">Fase 5</div>
+        <div class="tl-name">Lanzamiento</div>
+        <div class="tl-dur">Días 25–28</div>
+      </div>
+      <div class="tl-phase tl6">
+        <div class="tl-num">Fase 6</div>
+        <div class="tl-name">Seguimiento</div>
+        <div class="tl-dur">Post 28</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#6B7280;margin-top:8px;">
+      * Los tiempos son estimados. Las fases de producción (Fase 3) pueden correr en paralelo una vez aprobados los artes de Fase 2.
+    </p>
+  </div>
+
+  <!-- PRESUPUESTO ESTIMADO -->
+  <div class="budget-section">
+    <h2>Presupuesto estimado (referencia en Bs.)</h2>
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th>Ítem</th>
+          <th>Cantidad</th>
+          <th>Costo unit. est.</th>
+          <th>Total est. (Bs.)</th>
+          <th>Prioridad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="budget-cat" style="background:#4FC3F7;"></span>Kits de limpieza (cepillo + pasta + hilo)</td>
+          <td>100 kits</td>
+          <td>Bs. 25–35</td>
+          <td>Bs. 2,500–3,500</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#4DD0E1;"></span>Bolsas personalizadas para kits</td>
+          <td>100–120 un.</td>
+          <td>Bs. 3–5</td>
+          <td>Bs. 300–600</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#86EFAC;"></span>Impresión de folletos A5</td>
+          <td>500 un.</td>
+          <td>Bs. 1.5–2</td>
+          <td>Bs. 750–1,000</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#A5B4FC;"></span>Stickers/etiquetas para kits</td>
+          <td>120 un.</td>
+          <td>Bs. 1–2</td>
+          <td>Bs. 120–240</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#FCA5A5;"></span>Letreros y señalética (fachada + interior)</td>
+          <td>3–4 piezas</td>
+          <td>Bs. 150–400</td>
+          <td>Bs. 600–1,600</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#FCD34D;"></span>Cuadros decorativos enmarcados</td>
+          <td>4 cuadros</td>
+          <td>Bs. 80–150</td>
+          <td>Bs. 320–600</td>
+          <td><span class="meta-chip chip-prio-media" style="display:inline;">Media</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#6EE7B7;"></span>Uniformes (polo/scrub con logo)</td>
+          <td>5–8 prendas</td>
+          <td>Bs. 80–150</td>
+          <td>Bs. 400–1,200</td>
+          <td><span class="meta-chip chip-prio-media" style="display:inline;">Media</span></td>
+        </tr>
+        <tr>
+          <td><span class="budget-cat" style="background:#D1D5DB;"></span>Diseño gráfico (todos los artes)</td>
+          <td>1 paquete</td>
+          <td>—</td>
+          <td>Bs. 500–1,000</td>
+          <td><span class="meta-chip chip-prio-alta" style="display:inline;">Alta</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="3"><strong>TOTAL ESTIMADO</strong></td>
+          <td><strong>Bs. 5,490 – 9,740</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <p style="font-size:12px;color:#9CA3AF;margin-top:12px;">
+      * Precios referenciales para Santa Cruz de la Sierra. Cotizar con proveedores locales para valores exactos. El rango depende de calidad de materiales y cantidades.
+    </p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-section">
+    <h2>Metas clave a medir (KPIs)</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-val">100</div>
+        <div class="kpi-lbl">Kits entregados en la primera ronda</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📄</div>
+        <div class="kpi-val">500</div>
+        <div class="kpi-lbl">Folletos distribuidos en la zona</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🦷</div>
+        <div class="kpi-val">20+</div>
+        <div class="kpi-lbl">Citas de limpieza nuevas agendadas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-val">+15%</div>
+        <div class="kpi-lbl">Crecimiento de seguidores en RRSS</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">📱</div>
+        <div class="kpi-val">5K+</div>
+        <div class="kpi-lbl">Alcance de posts de campaña</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-val">4.8+</div>
+        <div class="kpi-lbl">Rating en Google/Facebook</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Roadmap preparado por <strong>Alpha Strategy Group</strong> para <strong>Bas Dental</strong> · Santa Cruz de la Sierra, Bolivia · Junio 2026
+</footer>
+
+</body>
+</html>

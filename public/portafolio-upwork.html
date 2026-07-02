@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio — Alpha Strategy Group</title>
+  <meta name="description" content="Portafolio de Alpha Strategy Group: gestión de redes sociales y sitios web creados para clientes en logística, salud y energía." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:         #0B1220;
+      --bg2:        #0F1B30;
+      --panel:      rgba(255,255,255,0.04);
+      --panel-b:    rgba(255,255,255,0.09);
+      --white:      #F1F5F9;
+      --muted:      #8A99B3;
+      --gold:       #D4AF37;
+      --gold-dim:   rgba(212,175,55,0.14);
+      --grad-gold:  linear-gradient(135deg, #B8860B, #D4AF37);
+      --accent:     #2563EB;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* Top bar (brand + language switch only, no site nav/CTA) */
+    .topbar { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); background: rgba(11,17,48,0.96); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand-link { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #FF6B35, #E91E8C); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: #fff; box-shadow: 0 4px 16px rgba(255,107,53,0.3); flex-shrink: 0; }
+    .logo-text { font-weight: 700; font-size: 16px; color: #fff; letter-spacing: 0.02em; }
+    .logo-text span { color: #00D4FF; }
+    .lang-switch { display: flex; gap: 4px; }
+    .lang-btn { border: 1px solid transparent; background: transparent; color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; }
+    .lang-btn.active { background: rgba(0,212,255,0.15); color: #00D4FF; border-color: rgba(0,212,255,0.3); }
+
+    /* Hero */
+    .hero { padding: 90px 0 70px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:800px; height:500px; background: radial-gradient(ellipse, rgba(212,175,55,0.14) 0%, transparent 70%); pointer-events:none; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px, 6vw, 56px); font-weight: 700; line-height: 1.12; margin-bottom: 18px; }
+    .hero h1 span { background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); max-width: 620px; margin: 0 auto; }
+
+    /* Section shared */
+    section.block { padding: 60px 0; }
+    .section-head { text-align: center; margin-bottom: 44px; }
+    .section-head .eyebrow { margin-bottom: 10px; }
+    .section-head h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; }
+    .section-head p { color: var(--muted); max-width: 560px; margin: 12px auto 0; font-size: 15px; }
+
+    /* Client cards */
+    .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .client-card { background: var(--panel); border: 1px solid var(--panel-b); border-radius: 18px; padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; transition: border-color .2s, transform .2s; }
+    .client-card:hover { border-color: rgba(212,175,55,0.4); transform: translateY(-4px); }
+    .client-visual { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .client-name { font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 600; }
+    .client-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gold); }
+    .client-desc { color: var(--muted); font-size: 13.5px; flex: 1; }
+    .client-meta { font-size: 12px; color: var(--muted); border-top: 1px solid var(--panel-b); padding-top: 12px; }
+    .client-link { display: inline-flex; align-items: center; gap: 6px; color: var(--white); text-decoration: none; font-size: 13px; font-weight: 600; border: 1px solid var(--panel-b); padding: 8px 16px; border-radius: 50px; align-self: flex-start; transition: border-color .2s, background .2s; }
+    .client-link:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .badge-past { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px; color: #FCA5A5; background: rgba(252,165,165,0.1); border: 1px solid rgba(252,165,165,0.25); padding: 3px 10px; border-radius: 50px; width: fit-content; }
+    .badge-active { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .5px; color: #86EFAC; background: rgba(134,239,172,0.1); border: 1px solid rgba(134,239,172,0.25); padding: 3px 10px; border-radius: 50px; width: fit-content; }
+
+    /* Video gallery */
+    .video-section { margin-top: 40px; border-top: 1px solid var(--panel-b); padding-top: 36px; }
+    .video-section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 720px; margin: 0 auto; }
+    .video-item { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid var(--panel-b); }
+    .video-item iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    @media (max-width: 700px) { .video-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Sites */
+    .sites { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .site-card { background: var(--panel); border: 1px solid var(--panel-b); border-radius: 18px; overflow: hidden; text-decoration: none; color: var(--white); display: flex; flex-direction: column; transition: border-color .2s, transform .2s; }
+    .site-card:hover { border-color: rgba(37,99,235,0.5); transform: translateY(-4px); }
+    .site-preview { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .site-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+    .site-name { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; }
+    .site-desc { color: var(--muted); font-size: 13px; }
+    .site-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); }
+
+    footer { border-top: 1px solid var(--panel-b); padding: 28px 0; text-align: center; color: var(--muted); font-size: 12.5px; }
+
+    @media (max-width: 860px) {
+      .clients, .sites { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-link">
+        <div class="logo-icon">A</div>
+        <span class="logo-text">ALPHA STRATEGY <span>GROUP</span></span>
+      </div>
+      <div class="lang-switch">
+        <button class="lang-btn" data-set-lang="es">ES</button>
+        <button class="lang-btn" data-set-lang="en">EN</button>
+        <button class="lang-btn" data-set-lang="pt">PT</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Portafolio</p>
+      <h1 data-i18n="hero.title">Resultados que <span>construimos</span><br/>con nuestros clientes</h1>
+      <p data-i18n="hero.desc">Gestión de redes sociales y desarrollo de sitios web para negocios en logística, salud y energía — con sede en Miami, operando en Bolivia y USA.</p>
+    </div>
+  </header>
+
+  <section class="block" id="clientes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="clients.eyebrow">Clientes</p>
+        <h2 data-i18n="clients.title">Gestión de redes sociales</h2>
+        <p data-i18n="clients.desc">Contenido, estrategia y calendario editorial para marcas activas y pasadas.</p>
+      </div>
+      <div class="clients">
+
+        <div class="client-card">
+          <div class="client-visual" style="background:linear-gradient(135deg,#0057FF,#4D96FF);">🚛</div>
+          <span class="badge-active" data-i18n="badge.active">Cliente activo</span>
+          <div class="client-name">Logicargo Group</div>
+          <div class="client-tag" data-i18n="logicargo.tag">Logística · Santa Cruz, Bolivia</div>
+          <p class="client-desc" data-i18n="logicargo.desc">Transporte y logística internacional. Gestión de redes sociales con calendario de contenido mensual.</p>
+          <a class="client-link" href="https://www.facebook.com/logicargo.com.bo" target="_blank" data-i18n="client.link">Ver Facebook ↗</a>
+        </div>
+
+        <div class="client-card">
+          <div class="client-visual" style="background:linear-gradient(135deg,#4FC3F7,#4DD0E1);">🦷</div>
+          <span class="badge-active" data-i18n="badge.active">Cliente activo</span>
+          <div class="client-name">Bas Dental</div>
+          <div class="client-tag" data-i18n="basdental.tag">Clínica dental · Santa Cruz, Bolivia</div>
+          <p class="client-desc" data-i18n="basdental.desc">Clínica odontológica (Teodent Clínica Dental). Ortodoncia, estética y limpieza dental. 28 posts/mes entre Instagram y Facebook.</p>
+          <a class="client-link" href="https://www.facebook.com/Teodentclinica" target="_blank" data-i18n="client.link">Ver Facebook ↗</a>
+        </div>
+
+        <div class="client-card">
+          <div class="client-visual" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);">☀️</div>
+          <span class="badge-past" data-i18n="badge.past">Cliente hasta may. 2026</span>
+          <div class="client-name" data-i18n="solcruz.name">Solcruz Energía Solar</div>
+          <div class="client-tag" data-i18n="solcruz.tag">Energía solar · Santa Cruz, Bolivia</div>
+          <p class="client-desc" data-i18n="solcruz.desc">Instalación de paneles solares. Gestión de redes sociales durante el periodo de colaboración.</p>
+          <div class="client-meta" data-i18n="solcruz.meta">Colaboración finalizada en mayo de 2026.</div>
+          <a class="client-link" href="https://www.facebook.com/profile.php?id=61586042463514" target="_blank" data-i18n="client.link">Ver Facebook ↗</a>
+        </div>
+
+      </div>
+
+      <div class="video-section">
+        <div class="video-section-head">
+          <div class="client-visual" style="background:linear-gradient(135deg,#0057FF,#4D96FF);width:44px;height:44px;font-size:20px;">🚛</div>
+          <div>
+            <div class="client-name" style="font-size:16px;" data-i18n="video.title">Logicargo Group — contenido en video</div>
+            <p class="client-desc" style="margin:0;" data-i18n="video.desc">Videos creados y gestionados por Alpha Strategy Group para redes sociales.</p>
+          </div>
+        </div>
+        <div class="video-grid">
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/19Y446IVSW4ym2ykDbgLjrfq2x5inZ3wC/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1SsbycWagl7K4ELt57ahnm8W7WzFYLo4I/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1XoyxnH3dMwUkKa4z90l_vl0UyVCJcDoY/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+        </div>
+      </div>
+
+      <div class="video-section">
+        <div class="video-section-head">
+          <div class="client-visual" style="background:linear-gradient(135deg,#4FC3F7,#4DD0E1);width:44px;height:44px;font-size:20px;">🦷</div>
+          <div>
+            <div class="client-name" style="font-size:16px;" data-i18n="video.title.basdental">Bas Dental — contenido en video</div>
+            <p class="client-desc" style="margin:0;" data-i18n="video.desc">Videos creados y gestionados por Alpha Strategy Group para redes sociales.</p>
+          </div>
+        </div>
+        <div class="video-grid">
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1QR8JyQJQpieGgtDdCAaNf03XJm7Mrqxv/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1jRZAA64LLPWAYb3wDG38JYYBSYvTAIMz/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/14M4l0siDz6_I23m7m6rTB4-KmD_HHaaY/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+        </div>
+      </div>
+
+      <div class="video-section">
+        <div class="video-section-head">
+          <div class="client-visual" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);width:44px;height:44px;font-size:20px;">☀️</div>
+          <div>
+            <div class="client-name" style="font-size:16px;" data-i18n="video.title.solcruz">Solcruz — contenido en video</div>
+            <p class="client-desc" style="margin:0;" data-i18n="video.desc">Videos creados y gestionados por Alpha Strategy Group para redes sociales.</p>
+          </div>
+        </div>
+        <div class="video-grid">
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1QylIGjwxBoxJYbmecSzzGBAVZRNZ0IbX/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1xKbtWm2VJcEvwmy9dCvHl8ceWx3H2X_f/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="video-item"><iframe src="https://drive.google.com/file/d/1qtSoKKt6ojbcUpbmmGUsxq6LBmVzPzH-/preview" loading="lazy" allow="autoplay" allowfullscreen></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="sitios" style="background:var(--bg2);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="sites.eyebrow">Desarrollo web</p>
+        <h2 data-i18n="sites.title">Sitios que hemos creado</h2>
+        <p data-i18n="sites.desc">Landing pages y plataformas construidas para clientes y proyectos propios.</p>
+      </div>
+      <div class="sites">
+
+        <a class="site-card" href="https://www.alphastrategygroupusa.com/xcargo.html" target="_blank">
+          <div class="site-preview" style="background:linear-gradient(135deg,#020C1B,#0057FF);">🚢</div>
+          <div class="site-body">
+            <div class="site-tag" data-i18n="xcargo.tag">Logística</div>
+            <div class="site-name">X Cargo Logistics Bolivia</div>
+            <p class="site-desc" data-i18n="xcargo.desc">Landing comercial para importaciones desde China: flete marítimo, aéreo y despacho aduanero.</p>
+          </div>
+        </a>
+
+        <a class="site-card" href="https://www.alphastrategygroupusa.com/scripts/dentasoft.html" target="_blank">
+          <div class="site-preview" style="background:linear-gradient(135deg,#4FC3F7,#0F172A);">🦷</div>
+          <div class="site-body">
+            <div class="site-tag" data-i18n="dentasoft.tag">Software · Salud</div>
+            <div class="site-name">DentaSoft</div>
+            <p class="site-desc" data-i18n="dentasoft.desc">Plataforma de gestión para clínicas dentales: pacientes, citas y recibos.</p>
+          </div>
+        </a>
+
+        <a class="site-card" href="https://www.alphastrategygroupusa.com/ingles-usa.html" target="_blank">
+          <div class="site-preview" style="background:linear-gradient(135deg,#B8860B,#0F172A);">🎓</div>
+          <div class="site-body">
+            <div class="site-tag" data-i18n="english.tag">Educación</div>
+            <div class="site-name" data-i18n="english.name">Inglés Profesional para Latinos en USA</div>
+            <p class="site-desc" data-i18n="english.desc">Landing y curso completo de inglés con niveles básico, intermedio y avanzado.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">Alpha Strategy Group © 2026</div>
+  </footer>
+
+  <script>
+    const translations = {
+      es: {
+        'hero.eyebrow': 'Portafolio',
+        'hero.title': 'Resultados que <span>construimos</span><br/>con nuestros clientes',
+        'hero.desc': 'Gestión de redes sociales y desarrollo de sitios web para negocios en logística, salud y energía — con sede en Miami, operando en Bolivia y USA.',
+        'clients.eyebrow': 'Clientes',
+        'clients.title': 'Gestión de redes sociales',
+        'clients.desc': 'Contenido, estrategia y calendario editorial para marcas activas y pasadas.',
+        'badge.active': 'Cliente activo',
+        'badge.past': 'Cliente hasta may. 2026',
+        'logicargo.tag': 'Logística · Santa Cruz, Bolivia',
+        'logicargo.desc': 'Transporte y logística internacional. Gestión de redes sociales con calendario de contenido mensual.',
+        'basdental.tag': 'Clínica dental · Santa Cruz, Bolivia',
+        'basdental.desc': 'Clínica odontológica (Teodent Clínica Dental). Ortodoncia, estética y limpieza dental. 28 posts/mes entre Instagram y Facebook.',
+        'solcruz.name': 'Solcruz Energía Solar',
+        'solcruz.tag': 'Energía solar · Santa Cruz, Bolivia',
+        'solcruz.desc': 'Instalación de paneles solares. Gestión de redes sociales durante el periodo de colaboración.',
+        'solcruz.meta': 'Colaboración finalizada en mayo de 2026.',
+        'client.link': 'Ver Facebook ↗',
+        'video.title': 'Logicargo Group — contenido en video',
+        'video.title.basdental': 'Bas Dental — contenido en video',
+        'video.title.solcruz': 'Solcruz — contenido en video',
+        'video.desc': 'Videos creados y gestionados por Alpha Strategy Group para redes sociales.',
+        'sites.eyebrow': 'Desarrollo web',
+        'sites.title': 'Sitios que hemos creado',
+        'sites.desc': 'Landing pages y plataformas construidas para clientes y proyectos propios.',
+        'xcargo.tag': 'Logística',
+        'xcargo.desc': 'Landing comercial para importaciones desde China: flete marítimo, aéreo y despacho aduanero.',
+        'dentasoft.tag': 'Software · Salud',
+        'dentasoft.desc': 'Plataforma de gestión para clínicas dentales: pacientes, citas y recibos.',
+        'english.tag': 'Educación',
+        'english.name': 'Inglés Profesional para Latinos en USA',
+        'english.desc': 'Landing y curso completo de inglés con niveles básico, intermedio y avanzado.',
+      },
+      en: {
+        'hero.eyebrow': 'Portfolio',
+        'hero.title': 'Results we <span>build</span><br/>with our clients',
+        'hero.desc': 'Social media management and web development for logistics, health, and energy businesses — based in Miami, operating in Bolivia and the USA.',
+        'clients.eyebrow': 'Clients',
+        'clients.title': 'Social media management',
+        'clients.desc': 'Content, strategy, and editorial calendars for active and past brands.',
+        'badge.active': 'Active client',
+        'badge.past': 'Client until May 2026',
+        'logicargo.tag': 'Logistics · Santa Cruz, Bolivia',
+        'logicargo.desc': 'International transportation and logistics. Social media management with a monthly content calendar.',
+        'basdental.tag': 'Dental clinic · Santa Cruz, Bolivia',
+        'basdental.desc': 'Dental clinic (Teodent Clínica Dental). Orthodontics, cosmetic dentistry, and cleanings. 28 posts/month across Instagram and Facebook.',
+        'solcruz.name': 'Solcruz Solar Energy',
+        'solcruz.tag': 'Solar energy · Santa Cruz, Bolivia',
+        'solcruz.desc': 'Solar panel installation. Social media management during our collaboration period.',
+        'solcruz.meta': 'Collaboration ended in May 2026.',
+        'client.link': 'View Facebook ↗',
+        'video.title': 'Logicargo Group — video content',
+        'video.title.basdental': 'Bas Dental — video content',
+        'video.title.solcruz': 'Solcruz — video content',
+        'video.desc': 'Videos created and managed by Alpha Strategy Group for social media.',
+        'sites.eyebrow': 'Web development',
+        'sites.title': "Sites we've built",
+        'sites.desc': "Landing pages and platforms built for clients and our own projects.",
+        'xcargo.tag': 'Logistics',
+        'xcargo.desc': 'Commercial landing page for imports from China: ocean freight, air freight, and customs clearance.',
+        'dentasoft.tag': 'Software · Health',
+        'dentasoft.desc': 'Management platform for dental clinics: patients, appointments, and receipts.',
+        'english.tag': 'Education',
+        'english.name': 'Professional English for Latinos in the USA',
+        'english.desc': 'Landing page and full English course with basic, intermediate, and advanced levels.',
+      },
+      pt: {
+        'hero.eyebrow': 'Portfólio',
+        'hero.title': 'Resultados que <span>construímos</span><br/>com nossos clientes',
+        'hero.desc': 'Gestão de redes sociais e desenvolvimento de sites para negócios de logística, saúde e energia — sediados em Miami, operando na Bolívia e nos EUA.',
+        'clients.eyebrow': 'Clientes',
+        'clients.title': 'Gestão de redes sociais',
+        'clients.desc': 'Conteúdo, estratégia e calendário editorial para marcas ativas e passadas.',
+        'badge.active': 'Cliente ativo',
+        'badge.past': 'Cliente até mai. 2026',
+        'logicargo.tag': 'Logística · Santa Cruz, Bolívia',
+        'logicargo.desc': 'Transporte e logística internacional. Gestão de redes sociais com calendário de conteúdo mensal.',
+        'basdental.tag': 'Clínica odontológica · Santa Cruz, Bolívia',
+        'basdental.desc': 'Clínica odontológica (Teodent Clínica Dental). Ortodontia, estética e limpeza dental. 28 posts/mês entre Instagram e Facebook.',
+        'solcruz.name': 'Solcruz Energia Solar',
+        'solcruz.tag': 'Energia solar · Santa Cruz, Bolívia',
+        'solcruz.desc': 'Instalação de painéis solares. Gestão de redes sociais durante o período de colaboração.',
+        'solcruz.meta': 'Colaboração encerrada em maio de 2026.',
+        'client.link': 'Ver Facebook ↗',
+        'video.title': 'Logicargo Group — conteúdo em vídeo',
+        'video.title.basdental': 'Bas Dental — conteúdo em vídeo',
+        'video.title.solcruz': 'Solcruz — conteúdo em vídeo',
+        'video.desc': 'Vídeos criados e gerenciados pela Alpha Strategy Group para redes sociais.',
+        'sites.eyebrow': 'Desenvolvimento web',
+        'sites.title': 'Sites que criamos',
+        'sites.desc': 'Landing pages e plataformas desenvolvidas para clientes e projetos próprios.',
+        'xcargo.tag': 'Logística',
+        'xcargo.desc': 'Landing comercial para importações da China: frete marítimo, aéreo e despacho aduaneiro.',
+        'dentasoft.tag': 'Software · Saúde',
+        'dentasoft.desc': 'Plataforma de gestão para clínicas odontológicas: pacientes, consultas e recibos.',
+        'english.tag': 'Educação',
+        'english.name': 'Inglês Profissional para Latinos nos EUA',
+        'english.desc': 'Landing page e curso completo de inglês com níveis básico, intermediário e avançado.',
+      },
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) el.innerHTML = translations[lang][key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+      });
+      localStorage.setItem('portfolioLang', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.getAttribute('data-set-lang')));
+    });
+
+    setLang(localStorage.getItem('portfolioLang') || 'es');
+  </script>
+
+</body>
+</html>

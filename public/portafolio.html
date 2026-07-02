@@ -30,15 +30,31 @@
     }
     .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
 
-    /* Nav */
-    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: rgba(11,18,32,0.85); border-bottom: 1px solid var(--panel-b); }
-    .nav-inner { max-width: 1140px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; }
-    .brand span { color: var(--gold); }
-    .nav-right { display: flex; align-items: center; gap: 18px; }
-    .lang-switch { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--panel-b); border-radius: 50px; padding: 3px; }
-    .lang-btn { border: none; background: transparent; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .5px; padding: 5px 11px; border-radius: 50px; cursor: pointer; }
-    .lang-btn.active { background: var(--grad-gold); color: #10151f; }
+    /* Nav (matches main site navbar) */
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); background: rgba(11,17,48,0.96); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #FF6B35, #E91E8C); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; color: #fff; box-shadow: 0 4px 16px rgba(255,107,53,0.3); flex-shrink: 0; }
+    .logo-text { font-weight: 700; font-size: 16px; color: #fff; letter-spacing: 0.02em; }
+    .logo-text span { color: #00D4FF; }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a.active { color: #00D4FF; font-weight: 600; }
+    .nav-links a:hover { color: #fff; }
+    .lang-switch { display: flex; gap: 4px; }
+    .lang-btn { border: 1px solid transparent; background: transparent; color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; }
+    .lang-btn.active { background: rgba(0,212,255,0.15); color: #00D4FF; border-color: rgba(0,212,255,0.3); }
+    .nav-cta { background: linear-gradient(135deg, #FF6B35, #E91E8C); color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; padding: 4px; }
+    .mobile-menu { display: none; background: rgba(11,17,48,0.98); border-top: 1px solid rgba(255,255,255,0.08); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 12px 24px; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .mobile-menu a.active { color: #00D4FF; }
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta, .nav-right .lang-switch { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
 
     /* Hero */
     .hero { padding: 90px 0 70px; text-align: center; position: relative; overflow: hidden; }
@@ -98,13 +114,37 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <div class="brand">Alpha Strategy <span>Group</span></div>
+      <a href="/" class="brand-link">
+        <div class="logo-icon">A</div>
+        <span class="logo-text">ALPHA STRATEGY <span>GROUP</span></span>
+      </a>
       <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/" data-site-link="home" data-i18n="site.home">Inicio</a>
+          <a href="/services" data-site-link="services" data-i18n="site.services">Servicios</a>
+          <a href="/about" data-site-link="about" data-i18n="site.about">Nosotros</a>
+          <a href="/portafolio.html" class="active" data-i18n="site.portfolio">Portafolio</a>
+          <a href="/contact" data-site-link="contact" data-i18n="site.contact">Contacto</a>
+        </div>
         <div class="lang-switch">
           <button class="lang-btn" data-set-lang="es">ES</button>
           <button class="lang-btn" data-set-lang="en">EN</button>
           <button class="lang-btn" data-set-lang="pt">PT</button>
         </div>
+        <a href="/contact" class="nav-cta" id="navCta" data-site-link="contact" data-i18n="site.cta">Comenzar</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/" data-site-link="home" data-i18n="site.home">Inicio</a>
+      <a href="/services" data-site-link="services" data-i18n="site.services">Servicios</a>
+      <a href="/about" data-site-link="about" data-i18n="site.about">Nosotros</a>
+      <a href="/portafolio.html" class="active" data-i18n="site.portfolio">Portafolio</a>
+      <a href="/contact" data-site-link="contact" data-i18n="site.contact">Contacto</a>
+      <div class="lang-switch" style="padding:12px 24px;">
+        <button class="lang-btn" data-set-lang="es">ES</button>
+        <button class="lang-btn" data-set-lang="en">EN</button>
+        <button class="lang-btn" data-set-lang="pt">PT</button>
       </div>
     </div>
   </nav>
@@ -250,6 +290,12 @@
   <script>
     const translations = {
       es: {
+        'site.home': 'Inicio',
+        'site.services': 'Servicios',
+        'site.about': 'Nosotros',
+        'site.portfolio': 'Portafolio',
+        'site.contact': 'Contacto',
+        'site.cta': 'Comenzar',
         'hero.eyebrow': 'Portafolio',
         'hero.title': 'Resultados que <span>construimos</span><br/>con nuestros clientes',
         'hero.desc': 'Gestión de redes sociales y desarrollo de sitios web para negocios en logística, salud y energía — con sede en Miami, operando en Bolivia y USA.',
@@ -283,6 +329,12 @@
         'english.desc': 'Landing y curso completo de inglés con niveles básico, intermedio y avanzado.',
       },
       en: {
+        'site.home': 'Home',
+        'site.services': 'Services',
+        'site.about': 'About',
+        'site.portfolio': 'Portfolio',
+        'site.contact': 'Contact',
+        'site.cta': 'Get Started',
         'hero.eyebrow': 'Portfolio',
         'hero.title': 'Results we <span>build</span><br/>with our clients',
         'hero.desc': 'Social media management and web development for logistics, health, and energy businesses — based in Miami, operating in Bolivia and the USA.',
@@ -316,6 +368,12 @@
         'english.desc': 'Landing page and full English course with basic, intermediate, and advanced levels.',
       },
       pt: {
+        'site.home': 'Início',
+        'site.services': 'Serviços',
+        'site.about': 'Sobre',
+        'site.portfolio': 'Portfólio',
+        'site.contact': 'Contato',
+        'site.cta': 'Começar',
         'hero.eyebrow': 'Portfólio',
         'hero.title': 'Resultados que <span>construímos</span><br/>com nossos clientes',
         'hero.desc': 'Gestão de redes sociais e desenvolvimento de sites para negócios de logística, saúde e energia — sediados em Miami, operando na Bolívia e nos EUA.',
@@ -350,11 +408,17 @@
       },
     };
 
+    const sitePaths = { home: '', services: '/services', about: '/about', contact: '/contact' };
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) el.innerHTML = translations[lang][key];
+      });
+      document.querySelectorAll('[data-site-link]').forEach(el => {
+        const page = el.getAttribute('data-site-link');
+        el.href = `/${lang}${sitePaths[page]}`;
       });
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
@@ -365,6 +429,10 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => setLang(btn.getAttribute('data-set-lang')));
     });
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 
     setLang(localStorage.getItem('portfolioLang') || 'es');
   </script>

@@ -122,6 +122,20 @@ export default function Navbar() {
               );
             })}
 
+            <a
+              href="/portafolio.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'rgba(255,255,255,0.75)',
+                textDecoration: 'none',
+                fontSize: '14px',
+                fontWeight: 500,
+              }}
+            >
+              {t('portfolio')}
+            </a>
+
             {/* Language switcher */}
             <div style={{ display: 'flex', gap: '4px' }}>
               {locales.map((loc) => (
@@ -228,6 +242,23 @@ export default function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+                <a
+                  href="/portafolio.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: 'block',
+                    padding: '12px 0',
+                    color: 'rgba(255,255,255,0.85)',
+                    textDecoration: 'none',
+                    fontSize: '16px',
+                    fontWeight: 500,
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  }}
+                >
+                  {t('portfolio')}
+                </a>
                 <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
                   {locales.map((loc) => (
                     <Link

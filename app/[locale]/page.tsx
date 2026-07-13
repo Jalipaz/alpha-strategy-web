@@ -28,7 +28,9 @@ function CountUp({ to, suffix = '', duration = 1600 }: { to: number; suffix?: st
 
   return <span ref={ref}>{val}{suffix}</span>;
 }
-import { BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages, ArrowRight, MapPin, CheckCircle, Monitor, Smartphone, Search, ShieldCheck, Settings2, Languages as Lang } from 'lucide-react';
+import { BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages, ArrowRight, MapPin, CheckCircle, Monitor, Smartphone, Search, ShieldCheck, Settings2, Languages as Lang, Mail } from 'lucide-react';
+
+const CONTACT_EMAIL = 'info@alphastrategygroupusa.com';
 
 const iconMap: Record<string, React.ElementType> = {
   BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages,
@@ -614,9 +616,7 @@ export default function HomePage() {
               >
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <a
-                    href="https://wa.me/59175025505"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`mailto:${CONTACT_EMAIL}`}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
@@ -806,9 +806,7 @@ export default function HomePage() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <a
-                href="https://wa.me/59175025505"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${CONTACT_EMAIL}`}
                 style={{
                   background: 'rgba(255,255,255,0.1)',
                   border: '2px solid rgba(255,255,255,0.3)',
@@ -821,7 +819,7 @@ export default function HomePage() {
                   display: 'inline-flex', alignItems: 'center', gap: '8px',
                 }}
               >
-                {t('contact.whatsapp')}
+                <Mail size={18} /> {t('contact.emailCta')}
               </a>
             </motion.div>
           </div>

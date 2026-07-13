@@ -4,7 +4,7 @@ import { routing } from '@/i18n/routing';
 import { getMessages } from 'next-intl/server';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import FloatingEmail from '@/components/FloatingEmail';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -30,7 +30,7 @@ export default async function LocaleLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <FloatingWhatsApp />
+          <FloatingEmail />
         </NextIntlClientProvider>
       </body>
     </html>

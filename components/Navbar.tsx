@@ -13,6 +13,8 @@ const locales = [
   { code: 'pt', label: 'PT' },
 ];
 
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+
 export default function Navbar() {
   const t = useTranslations('nav');
   const locale = useLocale();
@@ -37,44 +39,57 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0, filter: 'blur(4px)' }}
-      animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-      transition={{ type: 'spring', stiffness: 220, damping: 26, mass: 0.7 }}
+      initial={{ y: -56, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: EASE_OUT }}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
-        transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
-        background: scrolled ? 'rgba(11, 17, 48, 0.96)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        transition: `background 220ms ${EASE_OUT.join(',')}, border-color 220ms`,
+        background: scrolled ? 'rgba(18, 22, 28, 0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(14px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
           {/* Logo */}
           <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 6 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+            <div
               style={{
-                width: '36px', height: '36px',
-                background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                borderRadius: '8px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontWeight: 800, fontSize: '18px', color: '#fff',
-                boxShadow: '0 4px 16px rgba(255,107,53,0.3)',
+                width: '30px',
+                height: '30px',
+                border: '1.5px solid var(--accent)',
+                borderRadius: '7px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: '14px',
+                color: 'var(--accent)',
               }}
-            >A</motion.div>
-            <span style={{ fontWeight: 700, fontSize: '16px', color: '#fff', letterSpacing: '0.02em' }}>
-              ALPHA STRATEGY <span style={{ color: '#00D4FF' }}>GROUP</span>
+            >
+              A
+            </div>
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 600,
+                fontSize: '15px',
+                color: 'var(--ink)',
+                letterSpacing: '0.01em',
+              }}
+            >
+              ALPHA STRATEGY <span style={{ color: 'var(--ink-dim)' }}>GROUP</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="desktop-nav">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }} className="desktop-nav">
             {navLinks.map((link) => {
               const isActive = pathWithoutLocale === link.href;
               return (
@@ -82,11 +97,11 @@ export default function Navbar() {
                   <Link
                     href={`/${locale}${link.href === '/' ? '' : link.href}`}
                     style={{
-                      color: isActive ? '#00D4FF' : 'rgba(255,255,255,0.75)',
+                      color: isActive ? 'var(--ink)' : 'var(--ink-dim)',
                       textDecoration: 'none',
                       fontSize: '14px',
                       fontWeight: isActive ? 600 : 500,
-                      transition: 'color 0.2s',
+                      transition: 'color 160ms',
                       display: 'block',
                     }}
                   >
@@ -97,10 +112,11 @@ export default function Navbar() {
                       layoutId="nav-underline"
                       style={{
                         position: 'absolute',
-                        bottom: 0, left: 0, right: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
                         height: '2px',
-                        background: 'linear-gradient(90deg, #00D4FF, #0077FF)',
-                        borderRadius: '2px',
+                        background: 'var(--accent)',
                       }}
                     />
                   ) : (
@@ -109,12 +125,13 @@ export default function Navbar() {
                       initial="initial"
                       style={{
                         position: 'absolute',
-                        bottom: 0, left: 0, right: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
                         height: '2px',
-                        background: 'linear-gradient(90deg, rgba(0,212,255,0.5), rgba(0,119,255,0.5))',
-                        borderRadius: '2px',
+                        background: 'var(--line)',
                         transformOrigin: 'left',
-                        transition: 'transform 0.2s ease, opacity 0.2s ease',
+                        transition: `transform 160ms ${EASE_OUT.join(',')}, opacity 160ms`,
                       }}
                     />
                   )}
@@ -127,7 +144,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: 'rgba(255,255,255,0.75)',
+                color: 'var(--ink-dim)',
                 textDecoration: 'none',
                 fontSize: '14px',
                 fontWeight: 500,
@@ -136,22 +153,30 @@ export default function Navbar() {
               {t('portfolio')}
             </a>
 
-            {/* Language switcher */}
-            <div style={{ display: 'flex', gap: '4px' }}>
+            {/* Language switcher — styled as route codes */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '2px',
+                border: '1px solid var(--line)',
+                borderRadius: '8px',
+                padding: '3px',
+              }}
+            >
               {locales.map((loc) => (
                 <Link
                   key={loc.code}
                   href={`/${loc.code}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`}
+                  className="tabular"
                   style={{
-                    padding: '4px 8px',
-                    borderRadius: '6px',
+                    padding: '4px 9px',
+                    borderRadius: '5px',
                     fontSize: '12px',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     textDecoration: 'none',
-                    background: locale === loc.code ? 'rgba(0,212,255,0.15)' : 'transparent',
-                    color: locale === loc.code ? '#00D4FF' : 'rgba(255,255,255,0.5)',
-                    border: locale === loc.code ? '1px solid rgba(0,212,255,0.3)' : '1px solid transparent',
-                    transition: 'all 0.2s',
+                    background: locale === loc.code ? 'var(--accent)' : 'transparent',
+                    color: locale === loc.code ? 'var(--accent-ink)' : 'var(--ink-faint)',
+                    transition: 'background 160ms, color 160ms',
                   }}
                 >
                   {loc.label}
@@ -160,19 +185,18 @@ export default function Navbar() {
             </div>
 
             {/* CTA */}
-            <motion.div whileHover={{ scale: 1.06, y: -2 }} whileTap={{ scale: 0.96 }} transition={{ type: 'spring', stiffness: 340, damping: 20 }}>
+            <motion.div whileTap={{ scale: 0.97 }}>
               <Link
                 href={`/${locale}/contact`}
                 style={{
-                  background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                  color: '#fff',
+                  background: 'var(--accent)',
+                  color: 'var(--accent-ink)',
                   padding: '10px 20px',
-                  borderRadius: '8px',
+                  borderRadius: '100px',
                   fontSize: '14px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
-                  boxShadow: '0 4px 16px rgba(255,107,53,0.25)',
                   display: 'inline-block',
                 }}
               >
@@ -184,9 +208,10 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <motion.button
             onClick={() => setOpen(!open)}
-            whileTap={{ scale: 0.9 }}
-            style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', display: 'none', padding: '4px' }}
+            whileTap={{ scale: 0.92 }}
+            style={{ background: 'none', border: 'none', color: 'var(--ink)', cursor: 'pointer', display: 'none', padding: '4px' }}
             className="mobile-menu-btn"
+            aria-label={open ? 'Close menu' : 'Open menu'}
           >
             <AnimatePresence mode="wait">
               {open ? (
@@ -209,11 +234,11 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.22, ease: EASE_OUT }}
               style={{
                 overflow: 'hidden',
-                background: 'rgba(11,17,48,0.98)',
-                borderTop: '1px solid rgba(255,255,255,0.08)',
+                background: 'var(--bg)',
+                borderTop: '1px solid var(--line)',
               }}
               className="mobile-menu"
             >
@@ -221,9 +246,9 @@ export default function Navbar() {
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -28, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 24, mass: 0.6, delay: i * 0.06 }}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, ease: EASE_OUT, delay: i * 0.04 }}
                   >
                     <Link
                       href={`/${locale}${link.href === '/' ? '' : link.href}`}
@@ -231,11 +256,11 @@ export default function Navbar() {
                       style={{
                         display: 'block',
                         padding: '12px 0',
-                        color: pathWithoutLocale === link.href ? '#00D4FF' : 'rgba(255,255,255,0.85)',
+                        color: pathWithoutLocale === link.href ? 'var(--accent)' : 'var(--ink)',
                         textDecoration: 'none',
                         fontSize: '16px',
                         fontWeight: pathWithoutLocale === link.href ? 600 : 500,
-                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        borderBottom: '1px solid var(--line-soft)',
                       }}
                     >
                       {link.label}
@@ -250,11 +275,11 @@ export default function Navbar() {
                   style={{
                     display: 'block',
                     padding: '12px 0',
-                    color: 'rgba(255,255,255,0.85)',
+                    color: 'var(--ink)',
                     textDecoration: 'none',
                     fontSize: '16px',
                     fontWeight: 500,
-                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    borderBottom: '1px solid var(--line-soft)',
                   }}
                 >
                   {t('portfolio')}
@@ -265,15 +290,16 @@ export default function Navbar() {
                       key={loc.code}
                       href={`/${loc.code}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`}
                       onClick={() => setOpen(false)}
+                      className="tabular"
                       style={{
-                        padding: '6px 12px',
+                        padding: '6px 14px',
                         borderRadius: '6px',
                         fontSize: '13px',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         textDecoration: 'none',
-                        background: locale === loc.code ? 'rgba(0,212,255,0.15)' : 'rgba(255,255,255,0.05)',
-                        color: locale === loc.code ? '#00D4FF' : 'rgba(255,255,255,0.5)',
-                        border: locale === loc.code ? '1px solid rgba(0,212,255,0.3)' : '1px solid rgba(255,255,255,0.1)',
+                        background: locale === loc.code ? 'var(--accent)' : 'var(--surface)',
+                        color: locale === loc.code ? 'var(--accent-ink)' : 'var(--ink-faint)',
+                        border: locale === loc.code ? 'none' : '1px solid var(--line)',
                       }}
                     >
                       {loc.label}
@@ -286,12 +312,12 @@ export default function Navbar() {
                   style={{
                     display: 'inline-block',
                     marginTop: '16px',
-                    background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                    color: '#fff',
+                    background: 'var(--accent)',
+                    color: 'var(--accent-ink)',
                     padding: '12px 24px',
-                    borderRadius: '8px',
+                    borderRadius: '100px',
                     fontSize: '15px',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     textDecoration: 'none',
                   }}
                 >

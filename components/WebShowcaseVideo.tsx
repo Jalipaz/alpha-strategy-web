@@ -23,10 +23,10 @@ export default function WebShowcaseVideo() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
       style={{
-        borderRadius: '16px',
+        borderRadius: '14px',
         overflow: 'hidden',
-        boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,119,255,0.15)',
-        background: '#0D1B3E',
+        boxShadow: '0 24px 64px rgba(0,0,0,0.45), 0 0 0 1px var(--line)',
+        background: 'var(--surface)',
         opacity: ready ? 1 : 0,
         transition: 'opacity 0.6s ease',
       }}

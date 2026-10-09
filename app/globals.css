@@ -1,17 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --navy: #0B1130;
-  --navy-light: #131B3A;
-  --navy-card: #0F1A3E;
-  --orange: #FF6B35;
-  --pink: #E91E8C;
-  --blue: #00B4D8;
-  --cyan: #00D4FF;
-  --blue-dark: #0077FF;
-  --white: #FFFFFF;
-  --gray: #8892B0;
+  /* Departures — global trade board */
+  --bg: #12161c;
+  --bg-elevated: #161b22;
+  --surface: #1b2029;
+  --surface-hover: #222836;
+  --line: #2a3140;
+  --line-soft: rgba(245, 241, 232, 0.07);
+
+  --ink: #f5f1e8;
+  --ink-dim: #a7aebd;
+  --ink-faint: #868fa3;
+
+  --accent: #e8a33d;
+  --accent-ink: #1c1304;
+  --accent-dim: rgba(232, 163, 61, 0.14);
+  --accent-line: rgba(232, 163, 61, 0.3);
+
+  --whatsapp: #25d366;
+
+  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-body: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-mono: var(--font-space-mono), "Space Mono", monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 * {
@@ -23,66 +37,52 @@ html {
 }
 
 body {
-  background-color: var(--navy);
-  color: var(--white);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Accessibility: visible focus ring */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* Accessibility: visible focus ring, themed */
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--navy);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 212, 255, 0.3);
-  border-radius: 3px;
+  background: var(--line);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 212, 255, 0.6);
+  background: var(--accent-line);
 }
 
 /* Selection highlight */
 ::selection {
-  background: rgba(255, 107, 53, 0.35);
-  color: #fff;
+  background: var(--accent-dim);
+  color: var(--ink);
 }
 
-.gradient-warm {
-  background: linear-gradient(135deg, var(--orange), var(--pink));
+/* Tabular figures for data/stats — the one legitimate monospace use */
+.tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
-.gradient-cool {
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-}
-
-.gradient-text-warm {
-  background: linear-gradient(135deg, var(--orange), var(--pink));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-cool {
-  background: linear-gradient(135deg, var(--cyan), var(--blue-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.glass {
-  background: rgba(19, 27, 58, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.measure {
+  max-width: 68ch;
 }

@@ -3,7 +3,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { MapPin, Globe, Share2, ExternalLink } from 'lucide-react';
+import { MapPin, Globe, Share2, Link2 } from 'lucide-react';
+
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -12,79 +14,84 @@ export default function Footer() {
   const locale = useLocale();
 
   const footerLinkStyle: React.CSSProperties = {
-    color: '#8892B0',
+    color: 'var(--ink-dim)',
     textDecoration: 'none',
     fontSize: '14px',
-    transition: 'color 0.2s',
+    transition: 'color 160ms',
     display: 'inline-block',
   };
 
   return (
-    <footer style={{ background: '#060D26', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '60px', paddingBottom: '32px' }}>
+    <footer style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--line)', paddingTop: '64px', paddingBottom: '32px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '48px', marginBottom: '48px' }}>
-
           {/* Brand */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ gridColumn: 'span 1' }}
+            transition={{ duration: 0.5, ease: EASE_OUT }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <motion.div
-                whileHover={{ scale: 1.08, rotate: 5 }}
-                transition={{ duration: 0.2 }}
+              <div
                 style={{
-                  width: '36px', height: '36px',
-                  background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                  borderRadius: '8px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontWeight: 800, fontSize: '18px', color: '#fff',
+                  width: '30px',
+                  height: '30px',
+                  border: '1.5px solid var(--accent)',
+                  borderRadius: '7px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  color: 'var(--accent)',
                   flexShrink: 0,
-                  boxShadow: '0 4px 16px rgba(255,107,53,0.25)',
                 }}
-              >A</motion.div>
-              <span style={{ fontWeight: 700, fontSize: '15px', color: '#fff' }}>
-                ALPHA STRATEGY <span style={{ color: '#00D4FF' }}>GROUP</span>
+              >
+                A
+              </div>
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '15px', color: 'var(--ink)' }}>
+                ALPHA STRATEGY <span style={{ color: 'var(--ink-dim)' }}>GROUP</span>
               </span>
             </div>
-            <p style={{ color: '#8892B0', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>
+            <p style={{ color: 'var(--ink-dim)', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px' }}>
               {t('tagline')}
             </p>
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ display: 'flex', gap: '14px' }}>
               <motion.a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, color: '#E91E8C' }}
-                style={{ color: '#8892B0', display: 'inline-flex', transition: 'color 0.2s' }}
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ color: 'var(--ink-dim)', display: 'inline-flex' }}
                 aria-label="Instagram"
               >
-                <Share2 size={20} />
+                <Share2 size={19} strokeWidth={1.6} />
               </motion.a>
               <motion.a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, color: '#00B4D8' }}
-                style={{ color: '#8892B0', display: 'inline-flex', transition: 'color 0.2s' }}
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ color: 'var(--ink-dim)', display: 'inline-flex' }}
                 aria-label="LinkedIn"
               >
-                <ExternalLink size={20} />
+                <Link2 size={19} strokeWidth={1.6} />
               </motion.a>
             </div>
           </motion.div>
 
           {/* Navigation */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.05 }}
           >
-            <h4 style={{ color: '#fff', fontWeight: 600, fontSize: '14px', marginBottom: '16px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <h4 style={{ color: 'var(--ink)', fontWeight: 600, fontSize: '13px', marginBottom: '16px', letterSpacing: '0.07em', textTransform: 'uppercase' }}>
               Navigation
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -94,28 +101,27 @@ export default function Footer() {
                 { href: '/about', label: tNav('about') },
                 { href: '/contact', label: tNav('contact') },
               ].map((link) => (
-                <motion.div key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
-                  <Link
-                    href={`/${locale}${link.href === '/' ? '' : link.href}`}
-                    style={footerLinkStyle}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#00D4FF')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#8892B0')}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
+                <Link
+                  key={link.href}
+                  href={`/${locale}${link.href === '/' ? '' : link.href}`}
+                  style={footerLinkStyle}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-dim)')}
+                >
+                  {link.label}
+                </Link>
               ))}
             </div>
           </motion.div>
 
           {/* Services */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.1 }}
           >
-            <h4 style={{ color: '#fff', fontWeight: 600, fontSize: '14px', marginBottom: '16px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <h4 style={{ color: 'var(--ink)', fontWeight: 600, fontSize: '13px', marginBottom: '16px', letterSpacing: '0.07em', textTransform: 'uppercase' }}>
               Services
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -127,57 +133,59 @@ export default function Footer() {
                 'Language Training',
                 'Personal Branding',
               ].map((s) => (
-                <motion.div key={s} whileHover={{ x: 4 }} transition={{ duration: 0.15 }}>
-                  <Link
-                    href={`/${locale}/services`}
-                    style={footerLinkStyle}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#FF6B35')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#8892B0')}
-                  >
-                    {s}
-                  </Link>
-                </motion.div>
+                <Link
+                  key={s}
+                  href={`/${locale}/services`}
+                  style={footerLinkStyle}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--ink-dim)')}
+                >
+                  {s}
+                </Link>
               ))}
             </div>
           </motion.div>
 
           {/* Location */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.15 }}
           >
-            <h4 style={{ color: '#fff', fontWeight: 600, fontSize: '14px', marginBottom: '16px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <h4 style={{ color: 'var(--ink)', fontWeight: 600, fontSize: '13px', marginBottom: '16px', letterSpacing: '0.07em', textTransform: 'uppercase' }}>
               Location
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <MapPin size={16} style={{ color: '#00D4FF', flexShrink: 0, marginTop: '2px' }} />
-                <span style={{ color: '#8892B0', fontSize: '14px' }}>{tContact('info.location')}</span>
+                <MapPin size={16} strokeWidth={1.6} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ color: 'var(--ink-dim)', fontSize: '14px' }}>{tContact('info.location')}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <Globe size={16} style={{ color: '#00D4FF', flexShrink: 0, marginTop: '2px' }} />
-                <span style={{ color: '#8892B0', fontSize: '14px' }}>{tContact('info.reach')}</span>
+                <Globe size={16} strokeWidth={1.6} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                <span style={{ color: 'var(--ink-dim)', fontSize: '14px' }}>{tContact('info.reach')}</span>
               </div>
             </div>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}
+        <div
+          style={{
+            borderTop: '1px solid var(--line)',
+            paddingTop: '24px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
         >
-          <p style={{ color: '#8892B0', fontSize: '13px' }}>
+          <p style={{ color: 'var(--ink-faint)', fontSize: '13px' }}>
             © {new Date().getFullYear()} Alpha Strategy Group. {t('rights')}
           </p>
-          <p style={{ color: '#8892B0', fontSize: '13px' }}>
-            Miami, FL · USA
+          <p className="tabular" style={{ color: 'var(--ink-faint)', fontSize: '13px' }}>
+            MIA · USA
           </p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

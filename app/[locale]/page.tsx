@@ -1,97 +1,69 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
+import FlipStat from '../../components/FlipStat';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  MapPin,
+  CheckCircle2,
+  Monitor,
+  Smartphone,
+  Search,
+  ShieldCheck,
+  Settings2,
+  Languages as LangIcon,
+  Mail,
+} from 'lucide-react';
 
 const AnimatedHeroBg = dynamic(() => import('../../components/AnimatedHeroBg'), { ssr: false });
 const WebShowcaseVideo = dynamic(() => import('../../components/WebShowcaseVideo'), { ssr: false });
 
-function CountUp({ to, suffix = '', duration = 1600 }: { to: number; suffix?: string; duration?: number }) {
-  const [val, setVal] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!inView) return;
-    let frame = 0;
-    const total = Math.round(duration / 16);
-    const timer = setInterval(() => {
-      frame++;
-      setVal(Math.round((frame / total) * to));
-      if (frame >= total) clearInterval(timer);
-    }, 16);
-    return () => clearInterval(timer);
-  }, [inView, to, duration]);
-
-  return <span ref={ref}>{val}{suffix}</span>;
-}
-import { BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages, ArrowRight, MapPin, CheckCircle, Monitor, Smartphone, Search, ShieldCheck, Settings2, Languages as Lang, Mail } from 'lucide-react';
-
 const CONTACT_EMAIL = 'info@alphastrategygroupusa.com';
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-const iconMap: Record<string, React.ElementType> = {
-  BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages,
+const SERVICE_CODES = ['STR', 'MKT', 'AUT', 'EXP', 'DEV', 'LNG'];
+const featureIcons = [Monitor, Smartphone, Search, ShieldCheck, Settings2, LangIcon];
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
 
-const serviceColors = [
-  { from: '#FF6B35', to: '#E91E8C' },
-  { from: '#E91E8C', to: '#9C27B0' },
-  { from: '#00B4D8', to: '#0077FF' },
-  { from: '#0077FF', to: '#00B4D8' },
-  { from: '#FF6B35', to: '#FF9800' },
-  { from: '#00D4FF', to: '#00B4D8' },
-];
-
-// Crisp ease-out spring — matches Remotion's bezier(0.16, 1, 0.3, 1)
-const SPRING_ENTER = { type: 'spring' as const, stiffness: 300, damping: 28, mass: 0.6 };
-// Slower editorial spring for large elements
-const SPRING_SLOW = { type: 'spring' as const, stiffness: 180, damping: 22, mass: 0.8 };
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 36, filter: 'blur(4px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: SPRING_ENTER },
+const fadeLeft: Variants = {
+  hidden: { opacity: 0, x: -32 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
 
-const fadeLeft = {
-  hidden: { opacity: 0, x: -40, filter: 'blur(4px)' },
-  show: { opacity: 1, x: 0, filter: 'blur(0px)', transition: SPRING_SLOW },
+const fadeRight: Variants = {
+  hidden: { opacity: 0, x: 32 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE_OUT } },
 };
 
-const fadeRight = {
-  hidden: { opacity: 0, x: 40, filter: 'blur(4px)' },
-  show: { opacity: 1, x: 0, filter: 'blur(0px)', transition: SPRING_SLOW },
-};
-
-const stagger = {
+const stagger: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
 
-const staggerFast = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.05 } },
-};
-
-const featureIcons = [Monitor, Smartphone, Search, ShieldCheck, Settings2, Lang];
-
-// Kinetic per-word animation — each word slides up with a spring
+// Signature hero entrance — per-word reveal, used once.
 function KineticWords({ text, style }: { text: string; style?: React.CSSProperties }) {
   const words = text.split(' ');
   return (
     <span style={{ display: 'inline', ...style }}>
       {words.map((word, i) => (
-        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.25em' }}>
+        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.26em' }}>
           <motion.span
             style={{ display: 'inline-block' }}
             variants={{
-              hidden: { y: '110%', opacity: 0 },
+              hidden: { y: '108%', opacity: 0 },
               show: {
                 y: '0%',
                 opacity: 1,
-                transition: { type: 'spring', stiffness: 260, damping: 22, mass: 0.6, delay: i * 0.06 },
+                transition: { duration: 0.6, ease: EASE_OUT, delay: i * 0.045 },
               },
             }}
           >
@@ -100,6 +72,24 @@ function KineticWords({ text, style }: { text: string; style?: React.CSSProperti
         </span>
       ))}
     </span>
+  );
+}
+
+function Reveal({
+  children,
+  variants = fadeUp,
+  margin = '-80px',
+}: {
+  children: React.ReactNode;
+  variants?: Variants;
+  margin?: string;
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: margin as `${number}px` });
+  return (
+    <motion.div ref={ref} variants={variants} initial="hidden" animate={inView ? 'show' : 'hidden'}>
+      {children}
+    </motion.div>
   );
 }
 
@@ -115,139 +105,89 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        background: 'linear-gradient(135deg, #060D26 0%, #0B1130 50%, #0A1A3E 100%)',
-      }}>
-        {/* Dot grid */}
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }} />
-
-        {/* Canvas orb background */}
+      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden', background: 'var(--bg)' }}>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            backgroundImage: 'radial-gradient(rgba(245,241,232,0.035) 1px, transparent 1px)',
+            backgroundSize: '36px 36px',
+          }}
+        />
         <AnimatedHeroBg />
 
-        {/* Animated orbs */}
-        <motion.div
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: [1, 1.05, 1], opacity: [0.7, 1, 0.7], y: [0, -24, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute', top: '10%', left: '3%', width: '560px', height: '560px',
-            background: 'radial-gradient(circle, rgba(233,30,140,0.14) 0%, transparent 70%)',
-            borderRadius: '50%', pointerEvents: 'none',
-          }}
-        />
-        <motion.div
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: [1, 1.08, 1], opacity: [0.6, 1, 0.6], y: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-          style={{
-            position: 'absolute', bottom: '5%', right: '3%', width: '640px', height: '640px',
-            background: 'radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%)',
-            borderRadius: '50%', pointerEvents: 'none',
-          }}
-        />
-        <motion.div
-          initial={{ scale: 0.4, opacity: 0 }}
-          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.9, 0.5], y: [0, -12, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-          style={{
-            position: 'absolute', top: '50%', right: '20%', width: '300px', height: '300px',
-            background: 'radial-gradient(circle, rgba(255,107,53,0.09) 0%, transparent 70%)',
-            borderRadius: '50%', pointerEvents: 'none',
-          }}
-        />
-
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '120px 24px 80px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '140px 24px 80px', position: 'relative', zIndex: 1, width: '100%' }}>
           <motion.div variants={stagger} initial="hidden" animate="show">
-            {/* Badge */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 16, scale: 0.92 },
-                show: { opacity: 1, y: 0, scale: 1, transition: { ...SPRING_ENTER, delay: 0 } },
-              }}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                background: 'rgba(0,212,255,0.08)',
-                border: '1px solid rgba(0,212,255,0.2)',
-                borderRadius: '100px',
-                padding: '8px 18px',
-                marginBottom: '32px',
-              }}>
-              <MapPin size={14} style={{ color: '#00D4FF' }} />
-              <span style={{ color: '#00D4FF', fontSize: '13px', fontWeight: 600, letterSpacing: '0.06em' }}>
-                {t('hero.tagline')} · Miami, USA
-              </span>
-            </motion.div>
-
-            {/* Headline — kinetic per-word spring entrance */}
             <motion.h1
-              variants={staggerFast}
-              style={{ fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800, lineHeight: 1.15, marginBottom: '24px', maxWidth: '820px' }}
+              variants={fadeUp}
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(38px, 6vw, 68px)',
+                fontWeight: 700,
+                lineHeight: 1.12,
+                letterSpacing: '-0.02em',
+                marginBottom: '28px',
+                maxWidth: '820px',
+                color: 'var(--ink)',
+              }}
             >
-              <KineticWords text={t('hero.headline1')} style={{ color: '#fff', display: 'block' }} />
-              <KineticWords
-                text={t('hero.headline2')}
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B35, #E91E8C, #00B4D8)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  display: 'block',
-                }}
-              />
+              <KineticWords text={t('hero.headline1')} style={{ display: 'block' }} />
+              <KineticWords text={t('hero.headline2')} style={{ display: 'block', color: 'var(--accent)' }} />
             </motion.h1>
 
-            <motion.p variants={fadeUp} style={{
-              fontSize: 'clamp(16px, 2vw, 20px)',
-              color: '#8892B0',
-              lineHeight: 1.7,
-              maxWidth: '620px',
-              marginBottom: '40px',
-            }}>
-              {t('hero.sub')}
+            <motion.p
+              variants={fadeUp}
+              className="measure"
+              style={{
+                fontSize: 'clamp(16px, 2vw, 19px)',
+                color: 'var(--ink-dim)',
+                lineHeight: 1.7,
+                marginBottom: '20px',
+              }}
+            >
+              {t('hero.tagline')} — {t('hero.sub')}
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div variants={fadeUp}
-              style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }} transition={SPRING_ENTER}>
+            <motion.p
+              variants={fadeUp}
+              className="tabular"
+              style={{ color: 'var(--ink-faint)', fontSize: '13px', letterSpacing: '0.06em', marginBottom: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <MapPin size={14} strokeWidth={1.8} style={{ color: 'var(--accent)' }} />
+              HQ MIA · EN / ES / PT
+            </motion.p>
+
+            <motion.div variants={fadeUp} style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '72px' }}>
+              <motion.div whileTap={{ scale: 0.97 }}>
                 <Link
                   href={`/${locale}/services`}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                    color: '#fff',
-                    padding: '16px 32px',
-                    borderRadius: '10px',
+                    background: 'var(--accent)',
+                    color: 'var(--accent-ink)',
+                    padding: '15px 28px',
+                    borderRadius: '100px',
                     fontWeight: 700,
-                    fontSize: '16px',
+                    fontSize: '15px',
                     textDecoration: 'none',
-                    boxShadow: '0 8px 32px rgba(255,107,53,0.3)',
                   }}
                 >
-                  {t('hero.cta1')} <ArrowRight size={18} />
+                  {t('hero.cta1')} <ArrowRight size={17} />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.96 }} transition={SPRING_ENTER}>
+              <motion.div whileTap={{ scale: 0.97 }}>
                 <Link
                   href={`/${locale}/contact`}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    color: '#fff',
-                    padding: '16px 32px',
-                    borderRadius: '10px',
+                    background: 'transparent',
+                    border: '1px solid var(--line)',
+                    color: 'var(--ink)',
+                    padding: '15px 28px',
+                    borderRadius: '100px',
                     fontWeight: 600,
-                    fontSize: '16px',
+                    fontSize: '15px',
                     textDecoration: 'none',
                   }}
                 >
@@ -256,365 +196,241 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats — split-flap board */}
             <motion.div
               variants={stagger}
+              className="hero-stats"
               style={{
                 display: 'flex',
-                justifyContent: 'center',
-                gap: '0',
-                marginTop: '72px',
-                flexWrap: 'wrap',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '20px',
-                overflow: 'hidden',
+                border: '1px solid var(--line)',
+                borderRadius: '14px',
                 maxWidth: '680px',
               }}
             >
               {[
-                { to: 4, suffix: '+', label: 'Markets', color: { from: '#00D4FF', to: '#0077FF' } },
-                { to: 100, suffix: '+', label: 'Clients', color: { from: '#FF6B35', to: '#E91E8C' } },
-                { to: 5, suffix: '', label: 'Service Pillars', color: { from: '#E91E8C', to: '#9C27B0' } },
+                { to: '4+', label: 'Markets' },
+                { to: '100+', label: 'Clients' },
+                { to: '5', label: 'Service Pillars' },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
                   variants={fadeUp}
-                  transition={{ duration: 0.6 }}
+                  className="hero-stat-cell"
                   style={{
-                    flex: '1 1 160px',
-                    textAlign: 'center',
-                    padding: '36px 24px',
-                    borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                    position: 'relative',
-                    overflow: 'hidden',
+                    flex: '1 1 0',
+                    textAlign: 'left',
+                    padding: '28px',
+                    borderRight: i < 2 ? '1px solid var(--line)' : 'none',
                   }}
                 >
-                  <div style={{
-                    position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
-                    width: '60%', height: '2px',
-                    background: `linear-gradient(90deg, ${stat.color.from}, ${stat.color.to})`,
-                    borderRadius: '2px',
-                  }} />
-                  <div style={{
-                    fontSize: '64px',
-                    fontWeight: 800,
-                    lineHeight: 1,
-                    background: `linear-gradient(135deg, ${stat.color.from}, ${stat.color.to})`,
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    marginBottom: '10px',
-                  }}>
-                    <CountUp to={stat.to} suffix={stat.suffix} />
-                  </div>
-                  <div style={{ color: '#8892B0', fontSize: '15px', fontWeight: 500, letterSpacing: '0.02em' }}>
-                    {stat.label}
-                  </div>
+                  <FlipStat value={stat.to} label={stat.label} size={44} />
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
         </div>
+
+        <style>{`
+          @media (max-width: 560px) {
+            .hero-stats { flex-direction: column !important; }
+            .hero-stat-cell {
+              border-right: none !important;
+              border-bottom: 1px solid var(--line);
+            }
+            .hero-stat-cell:last-child { border-bottom: none; }
+          }
+        `}</style>
       </section>
 
       {/* Trust strip */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        style={{
-          background: 'rgba(255,255,255,0.02)',
-          borderTop: '1px solid rgba(255,255,255,0.05)',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
-          padding: '20px 24px',
-        }}
-      >
-        <div style={{
-          maxWidth: '1200px', margin: '0 auto',
-          display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-          gap: '12px 40px', alignItems: 'center',
-        }}>
-          {[
-            '✦ Business Strategy',
-            '✦ Digital Marketing',
-            '✦ Web Design',
-            '✦ Business Training',
-            '✦ EN / ES / PT',
-          ].map((item) => (
-            <span key={item} style={{
-              color: '#8892B0',
-              fontSize: '13px',
-              fontWeight: 500,
-              letterSpacing: '0.04em',
-              whiteSpace: 'nowrap',
-            }}>
-              {item}
+      <section style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '18px 24px' }}>
+        <div
+          style={{
+            maxWidth: '1200px', margin: '0 auto',
+            display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
+            gap: '10px 36px', alignItems: 'center',
+          }}
+        >
+          {['Business Strategy', 'Digital Marketing', 'Web Design', 'Business Training', 'EN / ES / PT'].map((item, i, arr) => (
+            <span key={item} style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+              <span style={{ color: 'var(--ink-dim)', fontSize: '13px', fontWeight: 500, letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>
+                {item}
+              </span>
+              {i < arr.length - 1 && <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--accent)' }} />}
             </span>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      {/* Services */}
-      <section id="services" style={{ padding: '100px 24px', background: '#0B1130' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6 }}
-            style={{ textAlign: 'center', marginBottom: '64px' }}
-          >
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, color: '#fff', marginBottom: '16px' }}>
-              {t('services.title')}
-            </h2>
-            <p style={{ color: '#8892B0', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
-              {t('services.subtitle')}
-            </p>
-          </motion.div>
+      {/* Services — departures manifest */}
+      <section id="services" style={{ padding: '110px 24px', background: 'var(--bg)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <Reveal>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px', marginBottom: '48px' }}>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: '12px' }}>
+                  {t('services.title')}
+                </h2>
+                <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '16px' }}>
+                  {t('services.subtitle')}
+                </p>
+              </div>
+              <span className="tabular" style={{ color: 'var(--ink-faint)', fontSize: '12px', letterSpacing: '0.08em' }}>
+                {services.length.toString().padStart(2, '0')} ACTIVE
+              </span>
+            </div>
+          </Reveal>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '24px',
-          }}>
-            {services.map((service, i) => {
-              const Icon = iconMap[service.icon];
-              const color = serviceColors[i];
-              return (
+          <div style={{ borderTop: '1px solid var(--line)' }}>
+            {services.map((service, i) => (
+              <Reveal key={i} margin="-40px">
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 48, filter: 'blur(6px)' }}
-                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 24, mass: 0.7, delay: i * 0.07 }}
-                  whileHover={{ y: -8, scale: 1.02, transition: SPRING_ENTER }}
+                  whileHover="hover"
                   style={{
-                    background: 'rgba(15, 26, 62, 0.7)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    borderRadius: '16px',
-                    padding: '32px',
-                    cursor: 'default',
+                    borderBottom: '1px solid var(--line)',
+                    padding: '26px 4px',
+                    display: 'grid',
+                    gridTemplateColumns: 'auto 1fr auto',
+                    alignItems: 'center',
+                    gap: '24px',
                     position: 'relative',
-                    overflow: 'hidden',
                   }}
                 >
-                  {/* Glow on card top */}
-                  <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
-                    background: `linear-gradient(90deg, ${color.from}, ${color.to})`,
-                    opacity: 0.7,
-                  }} />
+                  <motion.div
+                    variants={{ hover: { backgroundColor: 'var(--surface)' } }}
+                    initial={{ backgroundColor: 'rgba(0,0,0,0)' }}
+                    transition={{ duration: 0.18 }}
+                    style={{ position: 'absolute', inset: 0, borderRadius: '10px', pointerEvents: 'none' }}
+                  />
+                  <div
+                    className="tabular"
+                    style={{
+                      position: 'relative',
+                      color: 'var(--accent)',
+                      fontSize: '14px',
+                      fontWeight: 700,
+                      whiteSpace: 'nowrap',
+                      minWidth: '72px',
+                    }}
+                  >
+                    {(i + 1).toString().padStart(2, '0')} / {SERVICE_CODES[i]}
+                  </div>
 
-                  <div style={{
-                    width: '52px', height: '52px',
-                    background: `linear-gradient(135deg, ${color.from}, ${color.to})`,
-                    borderRadius: '12px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginBottom: '20px',
-                    boxShadow: `0 8px 24px ${color.from}40`,
-                  }}>
-                    {Icon && <Icon size={24} color="#fff" />}
+                  <div style={{ position: 'relative' }}>
+                    <h3 style={{ color: 'var(--ink)', fontSize: 'clamp(17px, 2vw, 20px)', fontWeight: 700, marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
+                      {service.title}
+                    </h3>
+                    <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '14px', lineHeight: 1.7, marginBottom: '10px' }}>
+                      {service.desc}
+                    </p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                      {service.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          style={{
+                            color: 'var(--ink-faint)',
+                            fontSize: '12px',
+                            fontWeight: 500,
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 style={{ color: '#fff', fontSize: '20px', fontWeight: 700, marginBottom: '12px' }}>
-                    {service.title}
-                  </h3>
-                  <p style={{ color: '#8892B0', fontSize: '15px', lineHeight: 1.7, marginBottom: '20px' }}>
-                    {service.desc}
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          background: `linear-gradient(135deg, ${color.from}15, ${color.to}15)`,
-                          border: `1px solid ${color.from}30`,
-                          color: color.from,
-                          padding: '4px 10px',
-                          borderRadius: '100px',
-                          fontSize: '12px',
-                          fontWeight: 600,
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+
+                  <motion.div
+                    variants={{ hover: { x: 4, color: 'var(--accent)' } }}
+                    style={{ position: 'relative', color: 'var(--ink-faint)', flexShrink: 0 }}
+                  >
+                    <ArrowUpRight size={20} strokeWidth={1.8} />
+                  </motion.div>
                 </motion.div>
-              );
-            })}
+              </Reveal>
+            ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ textAlign: 'center', marginTop: '48px' }}
-          >
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} style={{ display: 'inline-block' }}>
-              <Link
-                href={`/${locale}/services`}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '8px',
-                  border: '1px solid rgba(0,212,255,0.3)',
-                  color: '#00D4FF',
-                  padding: '14px 32px',
-                  borderRadius: '10px',
-                  fontWeight: 600,
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                }}
-              >
-                {t('nav.services')} <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </motion.div>
+          <Reveal>
+            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+              <motion.div whileTap={{ scale: 0.97 }} style={{ display: 'inline-block' }}>
+                <Link
+                  href={`/${locale}/services`}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    border: '1px solid var(--line)',
+                    color: 'var(--ink)',
+                    padding: '13px 28px',
+                    borderRadius: '100px',
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {t('nav.services')} <ArrowRight size={16} />
+                </Link>
+              </motion.div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Web Design Showcase */}
-      <section style={{ padding: '100px 24px', background: '#060D26', position: 'relative', overflow: 'hidden' }}>
-        {/* Background grid */}
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(rgba(0,212,255,0.04) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }} />
-        {/* Glow */}
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute', top: '50%', left: '-10%', transform: 'translateY(-50%)',
-            width: '500px', height: '500px',
-            background: 'radial-gradient(circle, rgba(0,119,255,0.12) 0%, transparent 70%)',
-            borderRadius: '50%', pointerEvents: 'none',
-          }}
-        />
-
-        <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6 }}
-            style={{ textAlign: 'center', marginBottom: '72px' }}
-          >
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(0,119,255,0.08)',
-              border: '1px solid rgba(0,119,255,0.25)',
-              borderRadius: '100px',
-              padding: '8px 18px',
-              marginBottom: '24px',
-            }}>
-              <Monitor size={14} style={{ color: '#0077FF' }} />
-              <span style={{ color: '#0077FF', fontSize: '13px', fontWeight: 600, letterSpacing: '0.06em' }}>
-                {t('webDesign.badge')}
-              </span>
+      <section style={{ padding: '110px 24px', background: 'var(--bg-elevated)', borderTop: '1px solid var(--line)' }}>
+        <div style={{ maxWidth: '1150px', margin: '0 auto' }}>
+          <Reveal>
+            <div style={{ marginBottom: '56px', maxWidth: '620px' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: '14px' }}>
+                {t('webDesign.title')}
+              </h2>
+              <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '16px', lineHeight: 1.7 }}>
+                {t('webDesign.subtitle')}
+              </p>
             </div>
-            <h2 style={{ fontSize: 'clamp(30px, 4.5vw, 54px)', fontWeight: 800, color: '#fff', marginBottom: '16px' }}>
-              {t('webDesign.title')}
-            </h2>
-            <p style={{ color: '#8892B0', fontSize: '18px', maxWidth: '620px', margin: '0 auto', lineHeight: 1.7 }}>
-              {t('webDesign.subtitle')}
-            </p>
-          </motion.div>
+          </Reveal>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px', alignItems: 'center' }}>
-            {/* Browser Mockup — Remotion WebShowcase video */}
-            <motion.div
-              variants={fadeLeft}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: '-60px' }}
-              style={{ order: 0 }}
-            >
-              <WebShowcaseVideo />
-              {/* Site types pill row */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px', justifyContent: 'center' }}>
-                {webTypes.map((type) => (
-                  <span key={type} style={{
-                    background: 'rgba(0,119,255,0.08)',
-                    border: '1px solid rgba(0,119,255,0.2)',
-                    color: '#00D4FF',
-                    padding: '5px 12px',
-                    borderRadius: '100px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                  }}>{type}</span>
-                ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '56px', alignItems: 'center' }}>
+            <Reveal variants={fadeLeft} margin="-60px">
+              <div>
+                <WebShowcaseVideo />
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+                  {webTypes.map((type) => (
+                    <span
+                      key={type}
+                      className="tabular"
+                      style={{
+                        border: '1px solid var(--line)',
+                        color: 'var(--ink-dim)',
+                        padding: '5px 12px',
+                        borderRadius: '100px',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {type}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </motion.div>
+            </Reveal>
 
-            {/* Feature grid */}
-            <motion.div
-              variants={fadeRight}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: '-60px' }}
-              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}
-            >
-              {webFeatures.map((feature, i) => {
-                const FeatureIcon = featureIcons[i];
-                const colors = [
-                  { from: '#FF6B35', to: '#E91E8C' },
-                  { from: '#00B4D8', to: '#0077FF' },
-                  { from: '#E91E8C', to: '#9C27B0' },
-                  { from: '#28CA41', to: '#00B4D8' },
-                  { from: '#9C27B0', to: '#0077FF' },
-                  { from: '#FF9800', to: '#FF6B35' },
-                ];
-                const c = colors[i];
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 28, filter: 'blur(4px)' }}
-                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 26, mass: 0.6, delay: i * 0.06 }}
-                    whileHover={{ y: -6, scale: 1.03, transition: SPRING_ENTER }}
-                    style={{
-                      background: 'rgba(15,26,62,0.7)',
-                      border: '1px solid rgba(255,255,255,0.07)',
-                      borderRadius: '14px',
-                      padding: '22px 18px',
-                      position: 'relative',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <div style={{
-                      position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
-                      background: `linear-gradient(90deg, ${c.from}, ${c.to})`,
-                    }} />
-                    <div style={{
-                      width: '40px', height: '40px',
-                      background: `linear-gradient(135deg, ${c.from}20, ${c.to}20)`,
-                      border: `1px solid ${c.from}30`,
-                      borderRadius: '10px',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: '12px',
-                    }}>
-                      <FeatureIcon size={18} style={{ color: c.from }} />
-                    </div>
-                    <div style={{ color: '#fff', fontWeight: 700, fontSize: '14px', marginBottom: '6px' }}>{feature.title}</div>
-                    <div style={{ color: '#8892B0', fontSize: '13px', lineHeight: 1.6 }}>{feature.desc}</div>
-                  </motion.div>
-                );
-              })}
+            <Reveal variants={fadeRight} margin="-60px">
+              <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '28px' }}>
+                  {webFeatures.map((feature, i) => {
+                    const FeatureIcon = featureIcons[i];
+                    return (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                        <FeatureIcon size={18} strokeWidth={1.6} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                        <div>
+                          <div style={{ color: 'var(--ink)', fontWeight: 700, fontSize: '14.5px', marginBottom: '3px' }}>{feature.title}</div>
+                          <div style={{ color: 'var(--ink-dim)', fontSize: '13.5px', lineHeight: 1.6 }}>{feature.desc}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
 
-              {/* CTA card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-                style={{ gridColumn: '1 / -1' }}
-              >
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <motion.div whileTap={{ scale: 0.98 }}>
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
                     style={{
@@ -622,209 +438,165 @@ export default function HomePage() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '10px',
-                      background: 'linear-gradient(135deg, #0077FF, #00B4D8)',
-                      color: '#fff',
-                      padding: '18px 32px',
-                      borderRadius: '12px',
+                      background: 'var(--accent)',
+                      color: 'var(--accent-ink)',
+                      padding: '16px 32px',
+                      borderRadius: '100px',
                       fontWeight: 700,
-                      fontSize: '16px',
+                      fontSize: '15px',
                       textDecoration: 'none',
-                      boxShadow: '0 12px 40px rgba(0,119,255,0.3)',
                     }}
                   >
-                    {t('webDesign.cta')} <ArrowRight size={18} />
+                    {t('webDesign.cta')} <ArrowRight size={17} />
                   </a>
                 </motion.div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* About preview */}
-      <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #060D26, #0B1130)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '64px', alignItems: 'center' }}>
-          <motion.div
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-          >
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, color: '#fff', marginBottom: '16px' }}>
-              {t('about.title')}
-            </h2>
-            <p style={{
-              fontSize: '20px', fontWeight: 600, marginBottom: '20px',
-              background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              {t('about.subtitle')}
-            </p>
-            <p style={{ color: '#8892B0', fontSize: '16px', lineHeight: 1.8, marginBottom: '32px' }}>
-              {t('about.body')}
-            </p>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} style={{ display: 'inline-block' }}>
-              <Link
-                href={`/${locale}/about`}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '8px',
-                  background: 'linear-gradient(135deg, #00B4D8, #0077FF)',
-                  color: '#fff',
-                  padding: '14px 28px',
-                  borderRadius: '10px',
-                  fontWeight: 600,
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                  boxShadow: '0 8px 24px rgba(0,180,216,0.25)',
-                }}
-              >
-                {t('nav.about')} <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-          >
-            {pillars.map((pillar, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ x: 6, scale: 1.01, transition: SPRING_ENTER }}
-                style={{
-                  background: 'rgba(15,26,62,0.7)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  borderRadius: '12px',
-                  padding: '24px',
-                  display: 'flex',
-                  gap: '16px',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <CheckCircle size={20} style={{ color: '#00D4FF', flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <div style={{ color: '#fff', fontWeight: 700, fontSize: '16px', marginBottom: '4px' }}>{pillar.label}</div>
-                  <div style={{ color: '#8892B0', fontSize: '14px' }}>{pillar.value}</div>
-                </div>
+      <section style={{ padding: '110px 24px', background: 'var(--bg)', borderTop: '1px solid var(--line)' }}>
+        <div style={{ maxWidth: '1150px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '64px', alignItems: 'start' }}>
+          <Reveal variants={fadeLeft} margin="-80px">
+            <div>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: '14px' }}>
+                {t('about.title')}
+              </h2>
+              <p style={{ fontSize: '17px', fontWeight: 600, color: 'var(--accent)', marginBottom: '18px' }}>
+                {t('about.subtitle')}
+              </p>
+              <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '15.5px', lineHeight: 1.8, marginBottom: '28px' }}>
+                {t('about.body')}
+              </p>
+              <motion.div whileTap={{ scale: 0.97 }} style={{ display: 'inline-block' }}>
+                <Link
+                  href={`/${locale}/about`}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    border: '1px solid var(--line)',
+                    color: 'var(--ink)',
+                    padding: '13px 26px',
+                    borderRadius: '100px',
+                    fontWeight: 600,
+                    fontSize: '14px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {t('nav.about')} <ArrowRight size={16} />
+                </Link>
               </motion.div>
-            ))}
+            </div>
+          </Reveal>
 
-            {/* Methodology */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,107,53,0.08), rgba(0,119,255,0.08))',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '12px',
-                padding: '24px',
-                marginTop: '8px',
-              }}
-            >
-              <div style={{ color: '#fff', fontWeight: 700, marginBottom: '16px', fontSize: '15px' }}>{t('about.methodology.title')}</div>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {steps.map((step, i) => (
-                  <div key={step} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{
-                      background: 'linear-gradient(135deg, #FF6B35, #E91E8C)',
-                      color: '#fff',
-                      borderRadius: '100px',
-                      padding: '4px 12px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                    }}>{step}</span>
-                    {i < steps.length - 1 && <ArrowRight size={14} style={{ color: '#8892B0' }} />}
+          <Reveal variants={fadeRight} margin="-80px">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {pillars.map((pillar, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: 'var(--surface)',
+                    border: '1px solid var(--line)',
+                    borderRadius: '14px',
+                    padding: '22px',
+                    display: 'flex',
+                    gap: '14px',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <CheckCircle2 size={19} strokeWidth={1.6} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ color: 'var(--ink)', fontWeight: 700, fontSize: '15px', marginBottom: '4px' }}>{pillar.label}</div>
+                    <div style={{ color: 'var(--ink-dim)', fontSize: '13.5px' }}>{pillar.value}</div>
                   </div>
-                ))}
+                </div>
+              ))}
+
+              <div
+                style={{
+                  border: '1px solid var(--line)',
+                  borderRadius: '14px',
+                  padding: '22px',
+                }}
+              >
+                <div style={{ color: 'var(--ink)', fontWeight: 700, marginBottom: '14px', fontSize: '14px' }}>{t('about.methodology.title')}</div>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+                  {steps.map((step, i) => (
+                    <div key={step} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span
+                        className="tabular"
+                        style={{
+                          border: '1px solid var(--accent-line)',
+                          color: 'var(--accent)',
+                          borderRadius: '100px',
+                          padding: '4px 12px',
+                          fontSize: '12px',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {step}
+                      </span>
+                      {i < steps.length - 1 && <ArrowRight size={13} style={{ color: 'var(--ink-faint)' }} />}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA Banner */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        style={{
-          padding: '80px 24px',
-          background: 'linear-gradient(135deg, #FF6B35, #E91E8C, #9C27B0, #0077FF)',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }} />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ maxWidth: '700px', margin: '0 auto', position: 'relative', zIndex: 1 }}
-        >
-          <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 800, color: '#fff', marginBottom: '16px' }}>
-            {t('contact.title')}
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '18px', marginBottom: '36px' }}>
-            {t('contact.subtitle')}
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href={`/${locale}/contact`}
-                style={{
-                  background: 'rgba(255,255,255,0.95)',
-                  color: '#0B1130',
-                  padding: '16px 32px',
-                  borderRadius: '10px',
-                  fontWeight: 700,
-                  fontSize: '16px',
-                  textDecoration: 'none',
-                  display: 'inline-flex', alignItems: 'center', gap: '8px',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
-                }}
-              >
-                {t('nav.contact')}
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                style={{
-                  background: 'rgba(255,255,255,0.1)',
-                  border: '2px solid rgba(255,255,255,0.3)',
-                  color: '#fff',
-                  padding: '16px 32px',
-                  borderRadius: '10px',
-                  fontWeight: 600,
-                  fontSize: '16px',
-                  textDecoration: 'none',
-                  display: 'inline-flex', alignItems: 'center', gap: '8px',
-                }}
-              >
-                <Mail size={18} /> {t('contact.emailCta')}
-              </a>
-            </motion.div>
+      <section style={{ padding: '90px 24px', background: 'var(--accent)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <Reveal>
+          <div style={{ maxWidth: '680px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px, 4vw, 44px)', fontWeight: 700, color: 'var(--accent-ink)', letterSpacing: '-0.02em', marginBottom: '14px' }}>
+              {t('contact.title')}
+            </h2>
+            <p style={{ color: 'rgba(28,19,4,0.72)', fontSize: '17px', marginBottom: '34px' }}>
+              {t('contact.subtitle')}
+            </p>
+            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <motion.div whileTap={{ scale: 0.97 }}>
+                <Link
+                  href={`/${locale}/contact`}
+                  style={{
+                    background: 'var(--accent-ink)',
+                    color: 'var(--accent)',
+                    padding: '16px 32px',
+                    borderRadius: '100px',
+                    fontWeight: 700,
+                    fontSize: '15px',
+                    textDecoration: 'none',
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  }}
+                >
+                  {t('nav.contact')}
+                </Link>
+              </motion.div>
+              <motion.div whileTap={{ scale: 0.97 }}>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  style={{
+                    background: 'transparent',
+                    border: '1.5px solid rgba(28,19,4,0.3)',
+                    color: 'var(--accent-ink)',
+                    padding: '16px 32px',
+                    borderRadius: '100px',
+                    fontWeight: 600,
+                    fontSize: '15px',
+                    textDecoration: 'none',
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  }}
+                >
+                  <Mail size={17} strokeWidth={1.8} /> {t('contact.emailCta')}
+                </a>
+              </motion.div>
+            </div>
           </div>
-        </motion.div>
-      </motion.section>
+        </Reveal>
+      </section>
     </>
   );
 }

@@ -5,15 +5,15 @@ import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
-import { BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Handshake, Globe, LineChart, Megaphone, Radar, ArrowRight, ArrowUpRight } from 'lucide-react';
 
 const AnimatedHeroBg = dynamic(() => import('../../../components/AnimatedHeroBg'), { ssr: false });
 
 const iconMap: Record<string, React.ElementType> = {
-  BarChart3, Megaphone, Zap, Globe, GraduationCap, Languages,
+  Handshake, Globe, LineChart, Megaphone, Radar,
 };
 
-const SERVICE_CODES = ['STR', 'MKT', 'AUT', 'EXP', 'DEV', 'LNG'];
+const SERVICE_CODES = ['IBD', 'EXP', 'GRW', 'MKT', 'INT'];
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 

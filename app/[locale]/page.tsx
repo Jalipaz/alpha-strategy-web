@@ -11,23 +11,15 @@ import {
   ArrowUpRight,
   MapPin,
   CheckCircle2,
-  Monitor,
-  Smartphone,
-  Search,
-  ShieldCheck,
-  Settings2,
-  Languages as LangIcon,
   Mail,
 } from 'lucide-react';
 
 const AnimatedHeroBg = dynamic(() => import('../../components/AnimatedHeroBg'), { ssr: false });
-const WebShowcaseVideo = dynamic(() => import('../../components/WebShowcaseVideo'), { ssr: false });
 
 const CONTACT_EMAIL = 'info@alphastrategygroupusa.com';
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-const SERVICE_CODES = ['STR', 'MKT', 'AUT', 'EXP', 'DEV', 'LNG'];
-const featureIcons = [Monitor, Smartphone, Search, ShieldCheck, Settings2, LangIcon];
+const SERVICE_CODES = ['IBD', 'EXP', 'GRW', 'MKT', 'INT'];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -97,10 +89,9 @@ export default function HomePage() {
   const t = useTranslations();
   const locale = useLocale();
   const services = t.raw('services.items') as Array<{ icon: string; title: string; desc: string; tags: string[] }>;
+  const markets = t.raw('markets.items') as Array<{ code: string; name: string; desc: string }>;
   const pillars = t.raw('about.pillars') as Array<{ label: string; value: string }>;
   const steps = t.raw('about.methodology.steps') as string[];
-  const webFeatures = t.raw('webDesign.features') as Array<{ title: string; desc: string }>;
-  const webTypes = t.raw('webDesign.types') as string[];
 
   return (
     <>
@@ -146,16 +137,16 @@ export default function HomePage() {
                 marginBottom: '20px',
               }}
             >
-              {t('hero.tagline')} — {t('hero.sub')}
+              {t('hero.sub')}
             </motion.p>
 
             <motion.p
               variants={fadeUp}
               className="tabular"
-              style={{ color: 'var(--ink-faint)', fontSize: '13px', letterSpacing: '0.06em', marginBottom: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}
+              style={{ color: 'var(--ink-faint)', fontSize: '13px', letterSpacing: '0.04em', marginBottom: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
               <MapPin size={14} strokeWidth={1.8} style={{ color: 'var(--accent)' }} />
-              HQ MIA · EN / ES / PT
+              {t('hero.tagline')} · Miami, USA
             </motion.p>
 
             <motion.div variants={fadeUp} style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '72px' }}>
@@ -251,7 +242,7 @@ export default function HomePage() {
             gap: '10px 36px', alignItems: 'center',
           }}
         >
-          {['Business Strategy', 'Digital Marketing', 'Web Design', 'Business Training', 'EN / ES / PT'].map((item, i, arr) => (
+          {['Business Development', 'Market Expansion', 'Commercial Strategy', 'Market Intelligence', 'EN / ES / PT'].map((item, i, arr) => (
             <span key={item} style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
               <span style={{ color: 'var(--ink-dim)', fontSize: '13px', fontWeight: 500, letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>
                 {item}
@@ -374,86 +365,55 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Web Design Showcase */}
+      {/* Markets — destinations strip, reusing the departures system */}
       <section style={{ padding: '110px 24px', background: 'var(--bg-elevated)', borderTop: '1px solid var(--line)' }}>
-        <div style={{ maxWidth: '1150px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <Reveal>
-            <div style={{ marginBottom: '56px', maxWidth: '620px' }}>
+            <div style={{ marginBottom: '48px', maxWidth: '620px' }}>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: '14px' }}>
-                {t('webDesign.title')}
+                {t('markets.title')}
               </h2>
               <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '16px', lineHeight: 1.7 }}>
-                {t('webDesign.subtitle')}
+                {t('markets.subtitle')}
               </p>
             </div>
           </Reveal>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '56px', alignItems: 'center' }}>
-            <Reveal variants={fadeLeft} margin="-60px">
-              <div>
-                <WebShowcaseVideo />
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
-                  {webTypes.map((type) => (
-                    <span
-                      key={type}
-                      className="tabular"
-                      style={{
-                        border: '1px solid var(--line)',
-                        color: 'var(--ink-dim)',
-                        padding: '5px 12px',
-                        borderRadius: '100px',
-                        fontSize: '11px',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {type}
-                    </span>
-                  ))}
+          <Reveal>
+            <div className="markets-strip" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: '14px' }}>
+              {markets.map((market, i) => (
+                <div
+                  key={market.code}
+                  className="markets-cell"
+                  style={{
+                    flex: '1 1 0',
+                    padding: '28px',
+                    borderRight: i < markets.length - 1 ? '1px solid var(--line)' : 'none',
+                  }}
+                >
+                  <div className="tabular" style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: 700, marginBottom: '10px' }}>
+                    {market.code}
+                  </div>
+                  <h3 style={{ color: 'var(--ink)', fontSize: '17px', fontWeight: 700, marginBottom: '8px', fontFamily: 'var(--font-display)' }}>
+                    {market.name}
+                  </h3>
+                  <p style={{ color: 'var(--ink-dim)', fontSize: '13.5px', lineHeight: 1.65 }}>{market.desc}</p>
                 </div>
-              </div>
-            </Reveal>
-
-            <Reveal variants={fadeRight} margin="-60px">
-              <div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '28px' }}>
-                  {webFeatures.map((feature, i) => {
-                    const FeatureIcon = featureIcons[i];
-                    return (
-                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                        <FeatureIcon size={18} strokeWidth={1.6} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '2px' }} />
-                        <div>
-                          <div style={{ color: 'var(--ink)', fontWeight: 700, fontSize: '14.5px', marginBottom: '3px' }}>{feature.title}</div>
-                          <div style={{ color: 'var(--ink-dim)', fontSize: '13.5px', lineHeight: 1.6 }}>{feature.desc}</div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <motion.div whileTap={{ scale: 0.98 }}>
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '10px',
-                      background: 'var(--accent)',
-                      color: 'var(--accent-ink)',
-                      padding: '16px 32px',
-                      borderRadius: '100px',
-                      fontWeight: 700,
-                      fontSize: '15px',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    {t('webDesign.cta')} <ArrowRight size={17} />
-                  </a>
-                </motion.div>
-              </div>
-            </Reveal>
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+
+        <style>{`
+          @media (max-width: 720px) {
+            .markets-strip { flex-direction: column !important; }
+            .markets-cell {
+              border-right: none !important;
+              border-bottom: 1px solid var(--line);
+            }
+            .markets-cell:last-child { border-bottom: none; }
+          }
+        `}</style>
       </section>
 
       {/* About preview */}

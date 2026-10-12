@@ -5,66 +5,70 @@
     "about": "About",
     "portfolio": "Portfolio",
     "contact": "Contact",
-    "cta": "Get Started"
+    "cta": "Book a Call"
   },
   "hero": {
-    "tagline": "International Consulting Firm",
-    "headline1": "We Don't Just Build Brands.",
-    "headline2": "We Build Opportunities.",
-    "sub": "Business strategy, digital marketing, and professional development to drive measurable growth in global markets.",
-    "cta1": "Explore Services",
+    "tagline": "International Business Development & Market Expansion",
+    "headline1": "From Market Opportunity",
+    "headline2": "To Commercial Growth.",
+    "sub": "We help companies identify opportunities, enter new markets, build strategic partnerships, and grow across borders.",
+    "cta1": "Our Approach",
     "cta2": "Talk to an Expert"
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "A unique triple focus that powers businesses and professionals toward global success.",
+    "subtitle": "Five integrated pillars that take your company from market opportunity to international growth.",
     "items": [
       {
-        "icon": "BarChart3",
-        "title": "Strategy & Consulting",
-        "desc": "Business diagnostics, growth plans, international expansion, and business model optimization.",
-        "tags": ["Diagnosis", "Growth Plans", "Internationalization", "Optimization"]
-      },
-      {
-        "icon": "Megaphone",
-        "title": "Digital Marketing",
-        "desc": "Social media management, strategic content creation, premium branding, Meta Ads and Google Ads campaigns.",
-        "tags": ["Social Media", "Content", "Branding", "Paid Ads"]
-      },
-      {
-        "icon": "Zap",
-        "title": "Automation & Sales",
-        "desc": "Appointment automation for clinics, conversion funnels, customer service scripts, and lead generation.",
-        "tags": ["Automation", "Funnels", "Lead Gen", "Scripts"]
+        "icon": "Handshake",
+        "title": "International Business Development",
+        "desc": "Identifying international business opportunities, B2B commercial development, strategic partnership sourcing, and support through cross-border negotiations.",
+        "tags": ["B2B Development", "Partnerships", "Prospecting", "Negotiation"]
       },
       {
         "icon": "Globe",
-        "title": "Business Expansion",
-        "desc": "B2B strategies, international market entry, strategic partnerships across Latin America, US, and Europe.",
-        "tags": ["B2B", "Expansion", "Partnerships", "Market Entry"]
+        "title": "Market Expansion & Internationalization",
+        "desc": "Market analysis and selection, market-entry strategy, international expansion plans, and adapting your value proposition for the US, Latin America, and Europe.",
+        "tags": ["Market Entry", "Expansion Plans", "Market Analysis", "Internationalization"]
       },
       {
-        "icon": "GraduationCap",
-        "title": "Professional Development",
-        "desc": "Personal branding consulting, LinkedIn optimization, interview preparation, and strategic networking.",
-        "tags": ["Personal Brand", "LinkedIn", "Networking", "Coaching"]
+        "icon": "LineChart",
+        "title": "Commercial Strategy & Growth",
+        "desc": "Growth strategy design, commercial process optimization, demand-generation systems, and sales strategy with clear KPIs.",
+        "tags": ["Growth Strategy", "Sales Systems", "KPIs", "Optimization"]
       },
       {
-        "icon": "Languages",
-        "title": "Language Training",
-        "desc": "Personalized English classes with a practical focus on business, interviews, and international environments.",
-        "tags": ["English", "Business English", "Interviews", "Professionals"]
+        "icon": "Megaphone",
+        "title": "Strategic Marketing for International Expansion",
+        "desc": "Branding and positioning, marketing aligned to commercial goals, content strategy for market entry, and digital campaigns that support expansion.",
+        "tags": ["Branding", "Positioning", "Content Strategy", "Campaigns"]
+      },
+      {
+        "icon": "Radar",
+        "title": "Market Intelligence & Strategic Consulting",
+        "desc": "Market research, competitive analysis, opportunity assessment, and strategic diagnostics to guide growth decisions.",
+        "tags": ["Market Research", "Competitive Analysis", "Diagnostics", "Insights"]
       }
+    ]
+  },
+  "markets": {
+    "title": "Where We Operate",
+    "subtitle": "Alpha builds market-entry and growth strategies across three regions.",
+    "items": [
+      { "code": "USA", "name": "United States", "desc": "Market entry and commercial growth support for companies expanding into the US." },
+      { "code": "LAT", "name": "Latin America", "desc": "Deep regional expertise across emerging and established Latin American markets." },
+      { "code": "EUR", "name": "Europe", "desc": "Positioning and partnership development for companies expanding into European markets." }
     ]
   },
   "about": {
     "title": "About Alpha Strategy Group",
-    "subtitle": "More than an agency. A global growth ecosystem.",
-    "body": "Alpha Strategy Group is an international consulting firm headquartered in Miami, with active presence in the United States, Spain, Brazil, and Latin America. We specialize in business strategy, digital marketing, and professional development — integrating three strategic dimensions to drive real, measurable growth.",
+    "subtitle": "An international consulting firm built for market expansion.",
+    "body": "Alpha Strategy Group is an international consulting firm specialized in international business development, market expansion, and commercial strategy. We help companies identify opportunities, enter new markets, build strategic partnerships, and create growth systems that strengthen their international competitiveness — combining market intelligence, strategy, business development, and results-driven marketing to support expansion across the United States, Latin America, and Europe.",
+    "pillarsTitle": "What Sets Alpha Apart",
     "pillars": [
-      { "label": "Business Growth", "value": "Scale your company in global markets" },
-      { "label": "Digital Positioning", "value": "Build a premium brand presence online" },
-      { "label": "Professional Development", "value": "Unlock high-level career opportunities" }
+      { "label": "Market Entry & Expansion", "value": "Enter new markets with the right strategy and partnerships" },
+      { "label": "Commercial Growth", "value": "Build systems and strategies that scale revenue across borders" },
+      { "label": "Strategic Intelligence", "value": "Ground every expansion decision in real market research" }
     ],
     "methodology": {
       "title": "Our Methodology",
@@ -72,8 +76,8 @@
     }
   },
   "contact": {
-    "title": "Ready to Grow?",
-    "subtitle": "Let's build your next opportunity together.",
+    "title": "Let's Explore Your Next Market.",
+    "subtitle": "Book a discovery call and let's map your expansion strategy together.",
     "whatsapp": "Message us on WhatsApp",
     "emailCta": "Email Us",
     "form": {
@@ -81,30 +85,16 @@
       "email": "Email Address",
       "company": "Company (optional)",
       "message": "How can we help you?",
-      "submit": "Send Message"
+      "submit": "Request Discovery Call"
     },
     "info": {
       "location": "2 S Biscayne Blvd, Suite 3200 #4784, Miami, FL 33131",
       "reach": "United States · Spain · Brazil · Latin America"
     }
   },
-  "webDesign": {
-    "badge": "Web Design & Development",
-    "title": "We Build Your Website",
-    "subtitle": "Professional, fast, and built to convert — your brand deserves a site that works as hard as you do.",
-    "features": [
-      { "title": "Custom Design", "desc": "Unique look and feel tailored to your brand identity." },
-      { "title": "Mobile-First", "desc": "Flawless on every screen — phone, tablet, and desktop." },
-      { "title": "SEO-Optimized", "desc": "Built to rank. Google-friendly structure from day one." },
-      { "title": "Fast & Secure", "desc": "Lightning load times and SSL encryption included." },
-      { "title": "Easy to Manage", "desc": "Simple admin panel so you stay in control." },
-      { "title": "Bilingual Ready", "desc": "English, Spanish, and Portuguese — we speak your market." }
-    ],
-    "cta": "Get Your Website",
-    "types": ["Landing Pages", "Corporate Sites", "E-Commerce", "Portfolios", "Booking Systems"]
-  },
   "footer": {
-    "tagline": "We don't just build brands — we build opportunities.",
-    "rights": "All rights reserved."
+    "tagline": "From market opportunity to commercial growth.",
+    "rights": "All rights reserved.",
+    "academyNote": "Language training & career coaching now live under Alpha Academy."
   }
 }

@@ -5,66 +5,70 @@
     "about": "Nosotros",
     "portfolio": "Portafolio",
     "contact": "Contacto",
-    "cta": "Comenzar"
+    "cta": "Agenda una Llamada"
   },
   "hero": {
-    "tagline": "Consultora Internacional",
-    "headline1": "No solo construimos marcas.",
-    "headline2": "Construimos oportunidades.",
-    "sub": "Estrategia empresarial, marketing digital y desarrollo profesional para impulsar un crecimiento real en mercados globales.",
-    "cta1": "Ver Servicios",
+    "tagline": "Desarrollo de Negocios Internacionales y Expansión de Mercados",
+    "headline1": "De la Oportunidad de Mercado",
+    "headline2": "al Crecimiento Comercial.",
+    "sub": "Ayudamos a empresas a identificar oportunidades, ingresar a nuevos mercados, construir alianzas estratégicas y crecer más allá de las fronteras.",
+    "cta1": "Nuestro Enfoque",
     "cta2": "Hablar con un Experto"
   },
   "services": {
     "title": "Nuestros Servicios",
-    "subtitle": "Un enfoque triple único que impulsa empresas y profesionales hacia el éxito internacional.",
+    "subtitle": "Cinco pilares integrados que llevan a tu empresa de la oportunidad de mercado al crecimiento internacional.",
     "items": [
       {
-        "icon": "BarChart3",
-        "title": "Estrategia & Consultoría",
-        "desc": "Diagnóstico empresarial, planes de crecimiento, internacionalización y optimización de modelos de negocio.",
-        "tags": ["Diagnóstico", "Planes de Crecimiento", "Internacionalización", "Optimización"]
-      },
-      {
-        "icon": "Megaphone",
-        "title": "Marketing Digital",
-        "desc": "Gestión de redes sociales, creación de contenido estratégico, branding premium, campañas Meta Ads y Google Ads.",
-        "tags": ["Redes Sociales", "Contenido", "Branding", "Pauta Digital"]
-      },
-      {
-        "icon": "Zap",
-        "title": "Automatización & Ventas",
-        "desc": "Automatización de agenda para clínicas, embudos de conversión, scripts de atención y captación de leads.",
-        "tags": ["Automatización", "Embudos", "Leads", "Scripts"]
+        "icon": "Handshake",
+        "title": "Desarrollo de Negocios Internacionales",
+        "desc": "Identificación de oportunidades de negocio internacionales, desarrollo comercial B2B, búsqueda de alianzas estratégicas y apoyo en negociaciones internacionales.",
+        "tags": ["Desarrollo B2B", "Alianzas", "Prospección", "Negociación"]
       },
       {
         "icon": "Globe",
-        "title": "Expansión Comercial",
-        "desc": "Estrategias B2B, entrada a mercados internacionales y alianzas estratégicas en Latinoamérica, EE.UU. y Europa.",
-        "tags": ["B2B", "Expansión", "Alianzas", "Nuevos Mercados"]
+        "title": "Expansión e Internacionalización",
+        "desc": "Análisis y selección de mercados, estrategias de entrada, planes de expansión internacional y adaptación de tu propuesta de valor para Estados Unidos, Latinoamérica y Europa.",
+        "tags": ["Entrada a Mercados", "Planes de Expansión", "Análisis de Mercado", "Internacionalización"]
       },
       {
-        "icon": "GraduationCap",
-        "title": "Desarrollo Profesional",
-        "desc": "Consultoría de marca personal, optimización de LinkedIn, preparación para entrevistas y networking estratégico.",
-        "tags": ["Marca Personal", "LinkedIn", "Networking", "Coaching"]
+        "icon": "LineChart",
+        "title": "Estrategia Comercial y Growth",
+        "desc": "Diseño de estrategias de crecimiento, optimización de procesos comerciales, sistemas de generación de demanda y estrategia de ventas con indicadores claros.",
+        "tags": ["Estrategia de Crecimiento", "Sistemas de Venta", "KPIs", "Optimización"]
       },
       {
-        "icon": "Languages",
-        "title": "Capacitación en Idiomas",
-        "desc": "Clases personalizadas de inglés con enfoque práctico en negocios, entrevistas y entornos internacionales.",
-        "tags": ["Inglés", "Inglés de Negocios", "Entrevistas", "Profesionales"]
+        "icon": "Megaphone",
+        "title": "Marketing Estratégico para Expansión Internacional",
+        "desc": "Branding y posicionamiento, marketing alineado a objetivos comerciales, estrategia de contenidos para apertura de mercados y campañas digitales que apoyan la expansión.",
+        "tags": ["Branding", "Posicionamiento", "Estrategia de Contenidos", "Campañas"]
+      },
+      {
+        "icon": "Radar",
+        "title": "Inteligencia de Mercado y Consultoría Estratégica",
+        "desc": "Investigación de mercados, análisis de competencia, evaluación de oportunidades y diagnóstico estratégico para guiar decisiones de crecimiento.",
+        "tags": ["Investigación de Mercado", "Análisis de Competencia", "Diagnóstico", "Insights"]
       }
+    ]
+  },
+  "markets": {
+    "title": "Dónde Operamos",
+    "subtitle": "Alpha construye estrategias de entrada y crecimiento en tres regiones.",
+    "items": [
+      { "code": "USA", "name": "Estados Unidos", "desc": "Apoyo en entrada a mercado y crecimiento comercial para empresas que se expanden en EE. UU." },
+      { "code": "LAT", "name": "Latinoamérica", "desc": "Experiencia regional profunda en mercados latinoamericanos emergentes y consolidados." },
+      { "code": "EUR", "name": "Europa", "desc": "Posicionamiento y desarrollo de alianzas para empresas que se expanden en mercados europeos." }
     ]
   },
   "about": {
     "title": "Sobre Alpha Strategy Group",
-    "subtitle": "Más que una agencia. Un ecosistema de crecimiento global.",
-    "body": "Alpha Strategy Group es una consultora internacional con sede en Miami, con presencia activa en Estados Unidos, España, Brasil y Latinoamérica. Nos especializamos en estrategia empresarial, marketing digital y desarrollo profesional — integrando tres dimensiones estratégicas para generar un crecimiento real y medible.",
+    "subtitle": "Una consultora internacional creada para la expansión de mercados.",
+    "body": "Alpha Strategy Group LLC es una firma internacional de consultoría especializada en desarrollo de negocios internacionales, expansión de mercados y estrategia comercial. Ayudamos a empresas a identificar oportunidades, ingresar a nuevos mercados, desarrollar alianzas estratégicas y construir sistemas de crecimiento que fortalezcan su competitividad internacional. Combinamos inteligencia de mercado, estrategia, desarrollo comercial y marketing orientado a resultados para acompañar procesos de expansión en Estados Unidos, Latinoamérica y Europa.",
+    "pillarsTitle": "Qué Hace Diferente a Alpha",
     "pillars": [
-      { "label": "Crecimiento Empresarial", "value": "Escala tu empresa en mercados globales" },
-      { "label": "Posicionamiento Digital", "value": "Construye una presencia de marca premium" },
-      { "label": "Desarrollo Profesional", "value": "Accede a oportunidades de alto nivel" }
+      { "label": "Entrada y Expansión de Mercado", "value": "Ingresa a nuevos mercados con la estrategia y las alianzas correctas" },
+      { "label": "Crecimiento Comercial", "value": "Construye sistemas y estrategias que escalan ingresos más allá de las fronteras" },
+      { "label": "Inteligencia Estratégica", "value": "Fundamenta cada decisión de expansión en investigación de mercado real" }
     ],
     "methodology": {
       "title": "Nuestra Metodología",
@@ -72,8 +76,8 @@
     }
   },
   "contact": {
-    "title": "¿Listo para Crecer?",
-    "subtitle": "Construyamos tu próxima oportunidad juntos.",
+    "title": "Exploremos tu Próximo Mercado.",
+    "subtitle": "Agenda una llamada de diagnóstico y diseñemos juntos tu estrategia de expansión.",
     "whatsapp": "Escríbenos por WhatsApp",
     "emailCta": "Escríbenos por Correo",
     "form": {
@@ -81,30 +85,16 @@
       "email": "Correo Electrónico",
       "company": "Empresa (opcional)",
       "message": "¿Cómo podemos ayudarte?",
-      "submit": "Enviar Mensaje"
+      "submit": "Solicitar Llamada de Diagnóstico"
     },
     "info": {
       "location": "2 S Biscayne Blvd, Suite 3200 #4784, Miami, FL 33131",
       "reach": "Estados Unidos · España · Brasil · Latinoamérica"
     }
   },
-  "webDesign": {
-    "badge": "Diseño & Desarrollo Web",
-    "title": "Creamos tu Sitio Web",
-    "subtitle": "Profesional, rápido y diseñado para convertir — tu marca merece un sitio que trabaje tan duro como tú.",
-    "features": [
-      { "title": "Diseño Personalizado", "desc": "Identidad visual única alineada a tu marca." },
-      { "title": "Mobile-First", "desc": "Perfecto en cualquier dispositivo — celular, tablet y escritorio." },
-      { "title": "SEO Optimizado", "desc": "Estructura amigable con Google desde el primer día." },
-      { "title": "Rápido y Seguro", "desc": "Carga ultrarrápida y certificado SSL incluido." },
-      { "title": "Fácil de Gestionar", "desc": "Panel de administración simple para que siempre tengas el control." },
-      { "title": "Bilingüe por Defecto", "desc": "Inglés, Español y Portugués — hablamos tu mercado." }
-    ],
-    "cta": "Quiero mi Sitio Web",
-    "types": ["Landing Pages", "Sitios Corporativos", "E-Commerce", "Portafolios", "Sistemas de Reservas"]
-  },
   "footer": {
-    "tagline": "No solo construimos marcas — construimos oportunidades.",
-    "rights": "Todos los derechos reservados."
+    "tagline": "De la oportunidad de mercado al crecimiento comercial.",
+    "rights": "Todos los derechos reservados.",
+    "academyNote": "Clases de inglés y coaching de carrera ahora bajo Alpha Academy."
   }
 }

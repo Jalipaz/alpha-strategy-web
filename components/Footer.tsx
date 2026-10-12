@@ -126,12 +126,11 @@ export default function Footer() {
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
-                'Business Strategy',
-                'Digital Marketing',
-                'Web Design',
-                'Business Training',
-                'Language Training',
-                'Personal Branding',
+                'Business Development',
+                'Market Expansion',
+                'Commercial Strategy',
+                'Strategic Marketing',
+                'Market Intelligence',
               ].map((s) => (
                 <Link
                   key={s}
@@ -144,6 +143,9 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
+            <p style={{ color: 'var(--ink-faint)', fontSize: '12.5px', lineHeight: 1.6, marginTop: '14px' }}>
+              {t('academyNote')}
+            </p>
           </motion.div>
 
           {/* Location */}

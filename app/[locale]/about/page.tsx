@@ -5,14 +5,14 @@ import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
-import { MapPin, Globe, ArrowRight, TrendingUp, Users, Target } from 'lucide-react';
+import { MapPin, Globe, ArrowRight, LineChart, Radar } from 'lucide-react';
 import FlipStat from '../../../components/FlipStat';
 
 const AnimatedHeroBg = dynamic(() => import('../../../components/AnimatedHeroBg'), { ssr: false });
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-const pillarIcons = [TrendingUp, Users, Target];
+const pillarIcons = [Globe, LineChart, Radar];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -165,7 +165,7 @@ export default function AboutPage() {
                 maxWidth: '600px',
               }}
             >
-              Our Three Strategic Dimensions
+              {t('about.pillarsTitle')}
             </h2>
           </Reveal>
 

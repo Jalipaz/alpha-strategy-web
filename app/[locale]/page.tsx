@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 
 const AnimatedHeroBg = dynamic(() => import('../../components/AnimatedHeroBg'), { ssr: false });
+const HeroVideo = dynamic(() => import('../../components/HeroVideo'), { ssr: false });
 
 const CONTACT_EMAIL = 'info@alphastrategygroupusa.com';
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
@@ -106,6 +107,7 @@ export default function HomePage() {
             backgroundSize: '36px 36px',
           }}
         />
+        <HeroVideo />
         <AnimatedHeroBg />
 
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '140px 24px 80px', position: 'relative', zIndex: 1, width: '100%' }}>

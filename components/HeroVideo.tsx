@@ -28,13 +28,13 @@ export default function HeroVideo() {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        opacity: visible ? 0.18 : 0,
+        opacity: visible ? 0.45 : 0,
         transition: 'opacity 1.2s ease',
         pointerEvents: 'none',
         zIndex: 0,
       }}
     >
-      <source src="/videos/brand-loop.mp4" type="video/mp4" />
+      <source src="/videos/hero-atmosphere.mp4" type="video/mp4" />
     </video>
   );
 }

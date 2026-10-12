@@ -2,6 +2,7 @@ import "./index.css";
 import { Composition } from "remotion";
 import { BrandLoop } from "./BrandLoop";
 import { WebShowcase } from "./WebShowcase";
+import { HeroAtmosphere } from "./HeroAtmosphere";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -18,6 +19,14 @@ export const RemotionRoot: React.FC = () => {
         id="WebShowcase"
         component={WebShowcase}
         durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="HeroAtmosphere"
+        component={HeroAtmosphere}
+        durationInFrames={450}
         fps={30}
         width={1920}
         height={1080}

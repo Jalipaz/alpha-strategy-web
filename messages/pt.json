@@ -23,31 +23,56 @@
         "icon": "Handshake",
         "title": "Desenvolvimento de Negócios Internacionais",
         "desc": "Identificação de oportunidades de negócio internacionais, desenvolvimento comercial B2B, busca de parcerias estratégicas e apoio em negociações internacionais.",
-        "tags": ["Desenvolvimento B2B", "Parcerias", "Prospecção", "Negociação"]
+        "tags": [
+          "Desenvolvimento B2B",
+          "Parcerias",
+          "Prospecção",
+          "Negociação"
+        ]
       },
       {
         "icon": "Globe",
         "title": "Expansão e Internacionalização",
         "desc": "Análise e seleção de mercados, estratégias de entrada, planos de expansão internacional e adaptação da sua proposta de valor para Estados Unidos, América Latina e Europa.",
-        "tags": ["Entrada em Mercados", "Planos de Expansão", "Análise de Mercado", "Internacionalização"]
+        "tags": [
+          "Entrada em Mercados",
+          "Planos de Expansão",
+          "Análise de Mercado",
+          "Internacionalização"
+        ]
       },
       {
         "icon": "LineChart",
         "title": "Estratégia Comercial e Growth",
         "desc": "Desenho de estratégias de crescimento, otimização de processos comerciais, sistemas de geração de demanda e estratégia de vendas com indicadores claros.",
-        "tags": ["Estratégia de Crescimento", "Sistemas de Vendas", "KPIs", "Otimização"]
+        "tags": [
+          "Estratégia de Crescimento",
+          "Sistemas de Vendas",
+          "KPIs",
+          "Otimização"
+        ]
       },
       {
         "icon": "Megaphone",
         "title": "Marketing Estratégico para Expansão Internacional",
         "desc": "Branding e posicionamento, marketing alinhado a objetivos comerciais, estratégia de conteúdo para entrada em mercados e campanhas digitais que apoiam a expansão.",
-        "tags": ["Branding", "Posicionamento", "Estratégia de Conteúdo", "Campanhas"]
+        "tags": [
+          "Branding",
+          "Posicionamento",
+          "Estratégia de Conteúdo",
+          "Campanhas"
+        ]
       },
       {
         "icon": "Radar",
         "title": "Inteligência de Mercado e Consultoria Estratégica",
         "desc": "Pesquisa de mercado, análise da concorrência, avaliação de oportunidades e diagnóstico estratégico para guiar decisões de crescimento.",
-        "tags": ["Pesquisa de Mercado", "Análise da Concorrência", "Diagnóstico", "Insights"]
+        "tags": [
+          "Pesquisa de Mercado",
+          "Análise da Concorrência",
+          "Diagnóstico",
+          "Insights"
+        ]
       }
     ]
   },
@@ -55,9 +80,21 @@
     "title": "Onde Atuamos",
     "subtitle": "A Alpha constrói estratégias de entrada e crescimento em três regiões.",
     "items": [
-      { "code": "USA", "name": "Estados Unidos", "desc": "Apoio na entrada de mercado e crescimento comercial para empresas em expansão nos EUA." },
-      { "code": "LAT", "name": "América Latina", "desc": "Expertise regional profunda em mercados latino-americanos emergentes e consolidados." },
-      { "code": "EUR", "name": "Europa", "desc": "Posicionamento e desenvolvimento de parcerias para empresas em expansão em mercados europeus." }
+      {
+        "code": "USA",
+        "name": "Estados Unidos",
+        "desc": "Apoio na entrada de mercado e crescimento comercial para empresas em expansão nos EUA."
+      },
+      {
+        "code": "LAT",
+        "name": "América Latina",
+        "desc": "Expertise regional profunda em mercados latino-americanos emergentes e consolidados."
+      },
+      {
+        "code": "EUR",
+        "name": "Europa",
+        "desc": "Posicionamento e desenvolvimento de parcerias para empresas em expansão em mercados europeus."
+      }
     ]
   },
   "about": {
@@ -66,13 +103,28 @@
     "body": "A Alpha Strategy Group LLC é uma firma internacional de consultoria especializada em desenvolvimento de negócios internacionais, expansão de mercados e estratégia comercial. Ajudamos empresas a identificar oportunidades, entrar em novos mercados, desenvolver parcerias estratégicas e construir sistemas de crescimento que fortaleçam sua competitividade internacional. Combinamos inteligência de mercado, estratégia, desenvolvimento comercial e marketing orientado a resultados para apoiar processos de expansão nos Estados Unidos, América Latina e Europa.",
     "pillarsTitle": "O Que Diferencia a Alpha",
     "pillars": [
-      { "label": "Entrada e Expansão de Mercado", "value": "Entre em novos mercados com a estratégia e as parcerias certas" },
-      { "label": "Crescimento Comercial", "value": "Construa sistemas e estratégias que escalam receita além das fronteiras" },
-      { "label": "Inteligência Estratégica", "value": "Fundamente cada decisão de expansão em pesquisa de mercado real" }
+      {
+        "label": "Entrada e Expansão de Mercado",
+        "value": "Entre em novos mercados com a estratégia e as parcerias certas"
+      },
+      {
+        "label": "Crescimento Comercial",
+        "value": "Construa sistemas e estratégias que escalam receita além das fronteiras"
+      },
+      {
+        "label": "Inteligência Estratégica",
+        "value": "Fundamente cada decisão de expansão em pesquisa de mercado real"
+      }
     ],
     "methodology": {
       "title": "Nossa Metodologia",
-      "steps": ["Diagnóstico", "Estratégia", "Execução", "Otimização", "Escalamento"]
+      "steps": [
+        "Diagnóstico",
+        "Estratégia",
+        "Execução",
+        "Otimização",
+        "Escalamento"
+      ]
     }
   },
   "contact": {
@@ -96,5 +148,9 @@
     "tagline": "Da oportunidade de mercado ao crescimento comercial.",
     "rights": "Todos os direitos reservados.",
     "academyNote": "Aulas de inglês e coaching de carreira agora fazem parte da Alpha Academy."
+  },
+  "promo": {
+    "title": "Veja como trabalhamos",
+    "subtitle": "Uma visão geral de 45 segundos de como a Alpha Strategy leva sua empresa a novos mercados."
   }
 }

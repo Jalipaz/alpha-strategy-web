@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { MapPin, Globe, Share2, Link2 } from 'lucide-react';
 
@@ -33,24 +34,7 @@ export default function Footer() {
             transition={{ duration: 0.5, ease: EASE_OUT }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <div
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  border: '1.5px solid var(--accent)',
-                  borderRadius: '7px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  color: 'var(--accent)',
-                  flexShrink: 0,
-                }}
-              >
-                A
-              </div>
+              <Image src="/logo-mark.png" alt="Alpha Strategy Group" width={38} height={34} priority style={{ width: '38px', height: 'auto', flexShrink: 0 }} />
               <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '15px', color: 'var(--ink)' }}>
                 ALPHA STRATEGY <span style={{ color: 'var(--ink-dim)' }}>GROUP</span>
               </span>

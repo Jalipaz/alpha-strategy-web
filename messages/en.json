@@ -23,31 +23,56 @@
         "icon": "Handshake",
         "title": "International Business Development",
         "desc": "Identifying international business opportunities, B2B commercial development, strategic partnership sourcing, and support through cross-border negotiations.",
-        "tags": ["B2B Development", "Partnerships", "Prospecting", "Negotiation"]
+        "tags": [
+          "B2B Development",
+          "Partnerships",
+          "Prospecting",
+          "Negotiation"
+        ]
       },
       {
         "icon": "Globe",
         "title": "Market Expansion & Internationalization",
         "desc": "Market analysis and selection, market-entry strategy, international expansion plans, and adapting your value proposition for the US, Latin America, and Europe.",
-        "tags": ["Market Entry", "Expansion Plans", "Market Analysis", "Internationalization"]
+        "tags": [
+          "Market Entry",
+          "Expansion Plans",
+          "Market Analysis",
+          "Internationalization"
+        ]
       },
       {
         "icon": "LineChart",
         "title": "Commercial Strategy & Growth",
         "desc": "Growth strategy design, commercial process optimization, demand-generation systems, and sales strategy with clear KPIs.",
-        "tags": ["Growth Strategy", "Sales Systems", "KPIs", "Optimization"]
+        "tags": [
+          "Growth Strategy",
+          "Sales Systems",
+          "KPIs",
+          "Optimization"
+        ]
       },
       {
         "icon": "Megaphone",
         "title": "Strategic Marketing for International Expansion",
         "desc": "Branding and positioning, marketing aligned to commercial goals, content strategy for market entry, and digital campaigns that support expansion.",
-        "tags": ["Branding", "Positioning", "Content Strategy", "Campaigns"]
+        "tags": [
+          "Branding",
+          "Positioning",
+          "Content Strategy",
+          "Campaigns"
+        ]
       },
       {
         "icon": "Radar",
         "title": "Market Intelligence & Strategic Consulting",
         "desc": "Market research, competitive analysis, opportunity assessment, and strategic diagnostics to guide growth decisions.",
-        "tags": ["Market Research", "Competitive Analysis", "Diagnostics", "Insights"]
+        "tags": [
+          "Market Research",
+          "Competitive Analysis",
+          "Diagnostics",
+          "Insights"
+        ]
       }
     ]
   },
@@ -55,9 +80,21 @@
     "title": "Where We Operate",
     "subtitle": "Alpha builds market-entry and growth strategies across three regions.",
     "items": [
-      { "code": "USA", "name": "United States", "desc": "Market entry and commercial growth support for companies expanding into the US." },
-      { "code": "LAT", "name": "Latin America", "desc": "Deep regional expertise across emerging and established Latin American markets." },
-      { "code": "EUR", "name": "Europe", "desc": "Positioning and partnership development for companies expanding into European markets." }
+      {
+        "code": "USA",
+        "name": "United States",
+        "desc": "Market entry and commercial growth support for companies expanding into the US."
+      },
+      {
+        "code": "LAT",
+        "name": "Latin America",
+        "desc": "Deep regional expertise across emerging and established Latin American markets."
+      },
+      {
+        "code": "EUR",
+        "name": "Europe",
+        "desc": "Positioning and partnership development for companies expanding into European markets."
+      }
     ]
   },
   "about": {
@@ -66,13 +103,28 @@
     "body": "Alpha Strategy Group is an international consulting firm specialized in international business development, market expansion, and commercial strategy. We help companies identify opportunities, enter new markets, build strategic partnerships, and create growth systems that strengthen their international competitiveness — combining market intelligence, strategy, business development, and results-driven marketing to support expansion across the United States, Latin America, and Europe.",
     "pillarsTitle": "What Sets Alpha Apart",
     "pillars": [
-      { "label": "Market Entry & Expansion", "value": "Enter new markets with the right strategy and partnerships" },
-      { "label": "Commercial Growth", "value": "Build systems and strategies that scale revenue across borders" },
-      { "label": "Strategic Intelligence", "value": "Ground every expansion decision in real market research" }
+      {
+        "label": "Market Entry & Expansion",
+        "value": "Enter new markets with the right strategy and partnerships"
+      },
+      {
+        "label": "Commercial Growth",
+        "value": "Build systems and strategies that scale revenue across borders"
+      },
+      {
+        "label": "Strategic Intelligence",
+        "value": "Ground every expansion decision in real market research"
+      }
     ],
     "methodology": {
       "title": "Our Methodology",
-      "steps": ["Diagnosis", "Strategy", "Execution", "Optimization", "Scaling"]
+      "steps": [
+        "Diagnosis",
+        "Strategy",
+        "Execution",
+        "Optimization",
+        "Scaling"
+      ]
     }
   },
   "contact": {
@@ -96,5 +148,9 @@
     "tagline": "From market opportunity to commercial growth.",
     "rights": "All rights reserved.",
     "academyNote": "Language training & career coaching now live under Alpha Academy."
+  },
+  "promo": {
+    "title": "See how we work",
+    "subtitle": "A 45-second overview of how Alpha Strategy takes your business across borders."
   }
 }

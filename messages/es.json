@@ -23,31 +23,56 @@
         "icon": "Handshake",
         "title": "Desarrollo de Negocios Internacionales",
         "desc": "Identificación de oportunidades de negocio internacionales, desarrollo comercial B2B, búsqueda de alianzas estratégicas y apoyo en negociaciones internacionales.",
-        "tags": ["Desarrollo B2B", "Alianzas", "Prospección", "Negociación"]
+        "tags": [
+          "Desarrollo B2B",
+          "Alianzas",
+          "Prospección",
+          "Negociación"
+        ]
       },
       {
         "icon": "Globe",
         "title": "Expansión e Internacionalización",
         "desc": "Análisis y selección de mercados, estrategias de entrada, planes de expansión internacional y adaptación de tu propuesta de valor para Estados Unidos, Latinoamérica y Europa.",
-        "tags": ["Entrada a Mercados", "Planes de Expansión", "Análisis de Mercado", "Internacionalización"]
+        "tags": [
+          "Entrada a Mercados",
+          "Planes de Expansión",
+          "Análisis de Mercado",
+          "Internacionalización"
+        ]
       },
       {
         "icon": "LineChart",
         "title": "Estrategia Comercial y Growth",
         "desc": "Diseño de estrategias de crecimiento, optimización de procesos comerciales, sistemas de generación de demanda y estrategia de ventas con indicadores claros.",
-        "tags": ["Estrategia de Crecimiento", "Sistemas de Venta", "KPIs", "Optimización"]
+        "tags": [
+          "Estrategia de Crecimiento",
+          "Sistemas de Venta",
+          "KPIs",
+          "Optimización"
+        ]
       },
       {
         "icon": "Megaphone",
         "title": "Marketing Estratégico para Expansión Internacional",
         "desc": "Branding y posicionamiento, marketing alineado a objetivos comerciales, estrategia de contenidos para apertura de mercados y campañas digitales que apoyan la expansión.",
-        "tags": ["Branding", "Posicionamiento", "Estrategia de Contenidos", "Campañas"]
+        "tags": [
+          "Branding",
+          "Posicionamiento",
+          "Estrategia de Contenidos",
+          "Campañas"
+        ]
       },
       {
         "icon": "Radar",
         "title": "Inteligencia de Mercado y Consultoría Estratégica",
         "desc": "Investigación de mercados, análisis de competencia, evaluación de oportunidades y diagnóstico estratégico para guiar decisiones de crecimiento.",
-        "tags": ["Investigación de Mercado", "Análisis de Competencia", "Diagnóstico", "Insights"]
+        "tags": [
+          "Investigación de Mercado",
+          "Análisis de Competencia",
+          "Diagnóstico",
+          "Insights"
+        ]
       }
     ]
   },
@@ -55,9 +80,21 @@
     "title": "Dónde Operamos",
     "subtitle": "Alpha construye estrategias de entrada y crecimiento en tres regiones.",
     "items": [
-      { "code": "USA", "name": "Estados Unidos", "desc": "Apoyo en entrada a mercado y crecimiento comercial para empresas que se expanden en EE. UU." },
-      { "code": "LAT", "name": "Latinoamérica", "desc": "Experiencia regional profunda en mercados latinoamericanos emergentes y consolidados." },
-      { "code": "EUR", "name": "Europa", "desc": "Posicionamiento y desarrollo de alianzas para empresas que se expanden en mercados europeos." }
+      {
+        "code": "USA",
+        "name": "Estados Unidos",
+        "desc": "Apoyo en entrada a mercado y crecimiento comercial para empresas que se expanden en EE. UU."
+      },
+      {
+        "code": "LAT",
+        "name": "Latinoamérica",
+        "desc": "Experiencia regional profunda en mercados latinoamericanos emergentes y consolidados."
+      },
+      {
+        "code": "EUR",
+        "name": "Europa",
+        "desc": "Posicionamiento y desarrollo de alianzas para empresas que se expanden en mercados europeos."
+      }
     ]
   },
   "about": {
@@ -66,13 +103,28 @@
     "body": "Alpha Strategy Group LLC es una firma internacional de consultoría especializada en desarrollo de negocios internacionales, expansión de mercados y estrategia comercial. Ayudamos a empresas a identificar oportunidades, ingresar a nuevos mercados, desarrollar alianzas estratégicas y construir sistemas de crecimiento que fortalezcan su competitividad internacional. Combinamos inteligencia de mercado, estrategia, desarrollo comercial y marketing orientado a resultados para acompañar procesos de expansión en Estados Unidos, Latinoamérica y Europa.",
     "pillarsTitle": "Qué Hace Diferente a Alpha",
     "pillars": [
-      { "label": "Entrada y Expansión de Mercado", "value": "Ingresa a nuevos mercados con la estrategia y las alianzas correctas" },
-      { "label": "Crecimiento Comercial", "value": "Construye sistemas y estrategias que escalan ingresos más allá de las fronteras" },
-      { "label": "Inteligencia Estratégica", "value": "Fundamenta cada decisión de expansión en investigación de mercado real" }
+      {
+        "label": "Entrada y Expansión de Mercado",
+        "value": "Ingresa a nuevos mercados con la estrategia y las alianzas correctas"
+      },
+      {
+        "label": "Crecimiento Comercial",
+        "value": "Construye sistemas y estrategias que escalan ingresos más allá de las fronteras"
+      },
+      {
+        "label": "Inteligencia Estratégica",
+        "value": "Fundamenta cada decisión de expansión en investigación de mercado real"
+      }
     ],
     "methodology": {
       "title": "Nuestra Metodología",
-      "steps": ["Diagnóstico", "Estrategia", "Ejecución", "Optimización", "Escalamiento"]
+      "steps": [
+        "Diagnóstico",
+        "Estrategia",
+        "Ejecución",
+        "Optimización",
+        "Escalamiento"
+      ]
     }
   },
   "contact": {
@@ -96,5 +148,9 @@
     "tagline": "De la oportunidad de mercado al crecimiento comercial.",
     "rights": "Todos los derechos reservados.",
     "academyNote": "Clases de inglés y coaching de carrera ahora bajo Alpha Academy."
+  },
+  "promo": {
+    "title": "Conoce cómo trabajamos",
+    "subtitle": "Un resumen de 45 segundos de cómo Alpha Strategy lleva tu empresa a nuevos mercados."
   }
 }

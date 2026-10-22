@@ -7,6 +7,20 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingEmail from '@/components/FloatingEmail';
 import '../globals.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Alpha Strategy Group',
+  description: 'International business development and market expansion from Miami: US, Spain, Brazil and Latin America.',
+  icons: { icon: '/icon.png', apple: '/apple-icon.png' },
+  openGraph: {
+    title: 'Alpha Strategy Group',
+    description: 'From market opportunity to commercial growth.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image', images: ['/og-image.png'] },
+};
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],

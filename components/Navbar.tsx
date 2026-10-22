@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { Menu, X } from 'lucide-react';
@@ -58,23 +59,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
           {/* Logo */}
           <Link href={`/${locale}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <div
-              style={{
-                width: '30px',
-                height: '30px',
-                border: '1.5px solid var(--accent)',
-                borderRadius: '7px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: 'var(--font-display)',
-                fontWeight: 700,
-                fontSize: '14px',
-                color: 'var(--accent)',
-              }}
-            >
-              A
-            </div>
+            <Image src="/logo-mark.png" alt="Alpha Strategy Group" width={38} height={34} priority style={{ width: '38px', height: 'auto', flexShrink: 0 }} />
             <span
               style={{
                 fontFamily: 'var(--font-display)',

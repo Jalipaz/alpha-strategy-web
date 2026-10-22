@@ -6,6 +6,9 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 import FlipStat from '../../components/FlipStat';
+import PromoVideo from '../../components/PromoVideo';
+import SlicedHeadline from '../../components/SlicedHeadline';
+import GlassShatter from '../../components/GlassShatter';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -41,32 +44,6 @@ const stagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
 };
-
-// Signature hero entrance — per-word reveal, used once.
-function KineticWords({ text, style }: { text: string; style?: React.CSSProperties }) {
-  const words = text.split(' ');
-  return (
-    <span style={{ display: 'inline', ...style }}>
-      {words.map((word, i) => (
-        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.26em' }}>
-          <motion.span
-            style={{ display: 'inline-block' }}
-            variants={{
-              hidden: { y: '108%', opacity: 0 },
-              show: {
-                y: '0%',
-                opacity: 1,
-                transition: { duration: 0.6, ease: EASE_OUT, delay: i * 0.045 },
-              },
-            }}
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-    </span>
-  );
-}
 
 function Reveal({
   children,
@@ -109,6 +86,7 @@ export default function HomePage() {
         />
         <HeroVideo />
         <AnimatedHeroBg />
+        <GlassShatter />
 
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '140px 24px 80px', position: 'relative', zIndex: 1, width: '100%' }}>
           <motion.div variants={stagger} initial="hidden" animate="show">
@@ -125,8 +103,8 @@ export default function HomePage() {
                 color: 'var(--ink)',
               }}
             >
-              <KineticWords text={t('hero.headline1')} style={{ display: 'block' }} />
-              <KineticWords text={t('hero.headline2')} style={{ display: 'block', color: 'var(--accent)' }} />
+              <SlicedHeadline text={t('hero.headline1')} />
+              <SlicedHeadline text={t('hero.headline2')} color="var(--accent)" delay={0.25} />
             </motion.h1>
 
             <motion.p
@@ -192,10 +170,9 @@ export default function HomePage() {
             {/* Stats — split-flap board */}
             <motion.div
               variants={stagger}
-              className="hero-stats"
+              className="hero-stats glass glass-shard"
               style={{
                 display: 'flex',
-                border: '1px solid var(--line)',
                 borderRadius: '14px',
                 maxWidth: '680px',
               }}
@@ -252,6 +229,27 @@ export default function HomePage() {
               {i < arr.length - 1 && <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--accent)' }} />}
             </span>
           ))}
+        </div>
+      </section>
+
+      {/* Promo video */}
+      <section style={{ padding: '110px 24px', background: 'var(--bg)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <Reveal>
+            <div style={{ marginBottom: '36px', maxWidth: '620px' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em', marginBottom: '12px' }}>
+                {t('promo.title')}
+              </h2>
+              <p className="measure" style={{ color: 'var(--ink-dim)', fontSize: '16px', lineHeight: 1.7 }}>
+                {t('promo.subtitle')}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className="glass glass-shard" style={{ borderRadius: '16px', padding: '10px' }}>
+              <PromoVideo />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -382,7 +380,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal>
-            <div className="markets-strip" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: '14px' }}>
+            <div className="markets-strip glass glass-shard" style={{ display: 'flex', borderRadius: '14px' }}>
               {markets.map((market, i) => (
                 <div
                   key={market.code}
@@ -457,9 +455,8 @@ export default function HomePage() {
               {pillars.map((pillar, i) => (
                 <div
                   key={i}
+                  className="glass glass-shard"
                   style={{
-                    background: 'var(--surface)',
-                    border: '1px solid var(--line)',
                     borderRadius: '14px',
                     padding: '22px',
                     display: 'flex',
@@ -476,8 +473,8 @@ export default function HomePage() {
               ))}
 
               <div
+                className="glass glass-shard"
                 style={{
-                  border: '1px solid var(--line)',
                   borderRadius: '14px',
                   padding: '22px',
                 }}

@@ -10,6 +10,7 @@ import '../globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.alphastrategygroupusa.com'),
   title: 'Alpha Strategy Group',
   description: 'International business development and market expansion from Miami: US, Spain, Brazil and Latin America.',
   icons: { icon: '/icon.png', apple: '/apple-icon.png' },

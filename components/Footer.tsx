@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { MapPin, Globe, Share2, Link2 } from 'lucide-react';
+import { MapPin, Globe, Mail, MessageCircle } from 'lucide-react';
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -44,26 +44,24 @@ export default function Footer() {
             </p>
             <div style={{ display: 'flex', gap: '14px' }}>
               <motion.a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:info@alphastrategygroupusa.com"
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
                 style={{ color: 'var(--ink-dim)', display: 'inline-flex' }}
-                aria-label="Instagram"
+                aria-label="Email"
               >
-                <Share2 size={19} strokeWidth={1.6} />
+                <Mail size={19} strokeWidth={1.6} />
               </motion.a>
               <motion.a
-                href="https://linkedin.com"
+                href="https://wa.me/59175025505"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
                 style={{ color: 'var(--ink-dim)', display: 'inline-flex' }}
-                aria-label="LinkedIn"
+                aria-label="WhatsApp"
               >
-                <Link2 size={19} strokeWidth={1.6} />
+                <MessageCircle size={19} strokeWidth={1.6} />
               </motion.a>
             </div>
           </motion.div>

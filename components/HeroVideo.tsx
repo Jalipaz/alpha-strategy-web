@@ -11,8 +11,15 @@ export default function HeroVideo() {
     if (!v) return;
     v.play().catch(() => {});
     const onCanPlay = () => setVisible(true);
-    v.addEventListener('canplaythrough', onCanPlay);
-    return () => v.removeEventListener('canplaythrough', onCanPlay);
+    // A cached video may already be ready before this effect runs, so its
+    // events have fired and would never reveal it.
+    if (v.readyState >= 3) setVisible(true);
+    v.addEventListener('canplay', onCanPlay);
+    v.addEventListener('playing', onCanPlay);
+    return () => {
+      v.removeEventListener('canplay', onCanPlay);
+      v.removeEventListener('playing', onCanPlay);
+    };
   }, []);
 
   return (
